@@ -1,0 +1,8 @@
+privátní i veřejné recepty
+hodnocení, komentáře
+ingredience, postup, článek okolo
+popisy ingrediencí, doporučení výrobců
+vyhledávání podle dostupných surovin - zahrnutá důležitost ingredience pro recept
+
+apetitonline
+twitter bootstrap - sada nástrojů pro web
