@@ -3,6 +3,7 @@ hodnocení, komentáře
 ingredience, postup, článek okolo
 popisy ingrediencí, doporučení výrobců
 vyhledávání podle dostupných surovin - zahrnutá důležitost ingredience pro recept
+možnost vkládat odkazy na podpostupy receptu
 
 apetitonline
 twitter bootstrap - sada nástrojů pro web
