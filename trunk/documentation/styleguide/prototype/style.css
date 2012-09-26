@@ -1,0 +1,90 @@
+body, html {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+div#container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    padding-left: 100px; /* menu padding */
+}
+
+div#menu {
+/*    float: left;*/
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    margin: 0px 30px 30px 0px;
+    width: 250px;
+}
+
+div#menu div.group {
+    overflow: hidden;
+    border: solid #000000 1px;
+    border-radius: 10px;
+}
+
+div#menu div.group * {
+    padding: 5px 10px 5px 10px;
+}
+
+div#menu div.group *:first-child {
+    padding-top: 10px;
+}
+
+div#menu div.group *:last-child {
+    padding-bottom: 10px;
+}
+
+div#menu div.group div.title {
+    background-color: #aaccff;
+    border-bottom: solid #000000 1px;
+    text-align: center;
+    cursor: pointer;
+}
+
+div#menu div.group div.item {
+    padding-left: 50px;
+    cursor: pointer;
+    background-image: none;
+    background-position-x: 20px;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+div#menu div.group div.item:hover {
+    background-image: url(example.png);
+    background-color: #efefef;
+}
+
+div#content {
+    position: relative;
+    display: inline-block;
+    overflow: scroll;
+    width: 50%;
+    height: 100%;
+}
+
+/*******************************************************************************
+ * INPUTS
+ ******************************************************************************/
+
+input[type=button] {
+    padding: 5px;
+    border: solid black 1px;
+    margin: 1px;
+    border-radius: 5px;
+}
+
+input:hover[type=button] {
+    border-width: 2px;
+    margin: 0px;
+    border-radius: 5px;
+}
