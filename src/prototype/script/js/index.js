@@ -21,6 +21,17 @@ function navigate(page, post) {
     AJAX.loadPage(params);
 }
 
+function  navigateToLightbox(page, post) {
+    var params = new AJAXParams(page.context, page.url, post,
+            function(request) {
+                var ce = document.createElement("div");
+                ce.innerHTML = request.responseText;
+                LightBox.createInstance(99999, Frames.CONTENT, ce);
+            },
+            function() {alert("AJAX - content loading error")});
+    AJAX.loadPage(params);
+}
+
 /*******************************************************************************
  * Inicializace jednotlivych stranek.
  ******************************************************************************/

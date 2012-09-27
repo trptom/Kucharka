@@ -3,7 +3,6 @@
  */
 var Menu = new function() {
     this.reload = function() {
-        alert("loading");
         AJAX.loadPage(new AJAXParams("script/php/", "menu.php", null, this.onAjaxLoadedOk, this.onAjaxLoadedError));
     }
 
