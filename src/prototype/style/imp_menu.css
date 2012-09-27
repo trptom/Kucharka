@@ -1,3 +1,33 @@
-#menu {
-    
+.menu-bar {
+    cursor: default;
+    width: 160px;
+    border: solid #000000 1px;
+}
+
+.menu-bar .menu-group .caption {
+    border-bottom: solid #000000 1px;
+    background-color: #bbddff;
+}
+
+.menu-bar .menu-group .content {
+    border-bottom: solid #000000 1px;
+}
+
+.menu-bar .menu-group:last-child .caption {
+    border-bottom: none;
+}
+
+.menu-bar .menu-group:last-child .content {
+    border-top: solid #000000 1px;
+    border-bottom: none;
+}
+
+.menu-bar .menu-group .content .menu-item {
+    cursor: pointer;
+    background-color: #ffffff;
+}
+
+.menu-bar .menu-group .content .menu-item:hover {
+    cursor: pointer;
+    background-color: #efefef;
 }
