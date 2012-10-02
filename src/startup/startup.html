@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Kuchařka STARTUP</title>
+        <link rel="stylesheet" type="text/css" href="style/style.css" />
+        <script type="text/javascript" src="script/js/jquery.min.js"></script>
+        <script type="text/javascript" src="script/js/ajax.js"></script>
+        <script type="text/javascript" src="script/js/startup.js"></script>
+    </head>
+    <body>
+        <h1>Kuchařka - STARTUP</h1>
+        <div id="project-url">
+            <div class="title">
+                Relativní adresa projektu (k souboru index.html):
+            </div>
+            <div class="content">
+                <input type="text" id="url" name="url" value="../prototype/" />
+            </div>
+        </div>
+        <div id="authorization">
+            <div class="title">
+                Autorizace uživatele
+            </div>
+            <div class="content">
+                <div class="title">
+                    Heslo:
+                </div>
+                <div class="content">
+                    <input type="text" id="password" name="password" value="" />
+                </div>
+            </div>
+        </div>
+        <div id="database">
+            <div class="title">
+                Připojení do DB
+            </div>
+            <div class="content">
+                <div class="title">
+                    Server:
+                </div>
+                <div class="content">
+                    <input type="text" id="db-server" name="db-server" value="" />
+                </div>
+                <div class="title">
+                    Databáze:
+                </div>
+                <div class="content">
+                    <input type="text" id="db-name" name="db-name" value="" />
+                </div>
+                <div class="title">
+                    Uživatel:
+                </div>
+                <div class="content">
+                    <input type="text" id="db-user" name="db-user" value="" />
+                </div>
+                <div class="title">
+                    Heslo:
+                </div>
+                <div class="content">
+                    <input type="password" id="db-password" name="db-password" value="" />
+                </div>
+            </div>
+        </div>
+        <div id="actions">
+            <div class="title">
+                Dostupné akce
+            </div>
+            <div class="content">
+                <input type="button" id="but-check-db" value="Zkontrolovat DB" />
+                <input type="button" id="but-reset-db" value="Resetovat DB" />
+                <input type="button" id="but-generate-conf" value="Generovat konfigurační soubor" />
+            </div>
+        </div>
+        <div id="output">
+            <div class="title">
+                Výstup
+            </div>
+            <div id="output-content" class="content">
+            </div>
+        </div>
+    </body>
+</html>
