@@ -1,0 +1,14 @@
+POS:
+-přiliš rozepisování o uživatelích, málo o receptech
+-kontextový model nemá definovat admin/jiné ale spíše typy lidí kteří to budou používat - neměnit, stačí komentář
+
+Analýza:
+-detailnější popis funkčních požadavků
+-nepsat požadavky na uživatele
+-dvě různé tabulky na kategorii pro ingredience a recepty
+-dostupnost -> důležitost pro recept
+-vazba recept-recept - podpostupy
+
+Use case:
+-můžou se používat mezery - není nutný camel case
+
