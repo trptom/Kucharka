@@ -1,0 +1,31 @@
+/* 
+    Document   : plus
+    Created on : 2012.10.22., 11:38:28
+    Author     : Android
+    Description:
+        Purpose of the stylesheet follows.
+*/
+header {
+    background: #26558b; /* Old browsers */
+background: -moz-linear-gradient(left,  #26558b 0%, #3a8bc2 16%, #4bb8f0 29%, #aac5de 83%, #cedbe9 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#26558b), color-stop(16%,#3a8bc2), color-stop(29%,#4bb8f0), color-stop(83%,#aac5de), color-stop(100%,#cedbe9)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #26558b 0%,#3a8bc2 16%,#4bb8f0 29%,#aac5de 83%,#cedbe9 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #26558b 0%,#3a8bc2 16%,#4bb8f0 29%,#aac5de 83%,#cedbe9 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #26558b 0%,#3a8bc2 16%,#4bb8f0 29%,#aac5de 83%,#cedbe9 100%); /* IE10+ */
+background: linear-gradient(to right,  #26558b 0%,#3a8bc2 16%,#4bb8f0 29%,#aac5de 83%,#cedbe9 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#26558b', endColorstr='#cedbe9',GradientType=1 ); /* IE6-9 */
+
+    color: white;
+    height: 150px;
+    text-align: left;
+    padding-top: 50px;
+    margin-bottom: 50px;
+}
+
+input {
+    max-width: 100%;
+}
+
+
+
+
