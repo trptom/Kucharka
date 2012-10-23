@@ -1,4 +1,8 @@
 Kucharka::Application.routes.draw do
+  get "help/index"
+
+  get "home/index"
+
   resources :users
 
   root :to => 'home#index'
