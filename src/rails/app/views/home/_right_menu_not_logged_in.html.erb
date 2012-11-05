@@ -1,0 +1,9 @@
+<%= form_tag user_sessions_path, :method => :post do %>
+            <legend>Přihlášení</legend>
+            <label>Uživatelské jméno</label>
+            <input class="input-medium" name="username" type="text" placeholder="Username" />
+            <label>Heslo</label>
+            <input class="input-medium" name="password" type="password" placeholder="Password" />
+            <input type="submit" class="btn btn-primary" value="Přihlásit se" />
+            <a href="#">Zapomněl jsem heslo</a>
+<% end %>
