@@ -27,5 +27,17 @@ input {
 }
 
 
+.spacer {
+    margin-top: 25px; /* define margin as you see fit */
+}
+
+.dark {
+    background-color: lavender;
+}
+
+textarea {
+    resize: none;
+}
+
 
 
