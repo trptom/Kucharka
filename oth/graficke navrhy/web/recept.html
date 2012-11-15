@@ -5,7 +5,7 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Kucharka</title>
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -21,9 +21,18 @@ and open the template in the editor.
                 <div class="container">
                     <div class="nav-collapse collapse">
                         <ul class="nav">
+                            <li style="margin-right: 50px;">
+                                <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> UĹľivatel <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Moje Ăşdaje</a></li>
+                                <li><a href="#">Moje recepty</a></li>
+                                <li><a href="#">Moje ÄŤlĂˇnky</a></li>
+                                <li><a href="#">OdhlĂˇĹˇenĂ­</a></li>
+                            </ul>
+                            </li>
                             <li><a href="#">Home</a></li>
-                            <li><a href="#">Nejnovsí recepty</a></li>
-                            <li><a href="#">Menu item 3</a></li>
+                            <li><a href="#">NejnovĹˇĂ­ recepty</a></li>
+                            <li><a href="#">NovĂ˝ recept</a></li>
                             <li><a href="#">Help</a></li>        
                         </ul>
                         <form class="navbar-search pull-right form-search">
@@ -39,9 +48,8 @@ and open the template in the editor.
 
         <header>
             <div class="container">
-                <h1>Kuchářka</h1>
+                <h1>KuchĂˇĹ™ka</h1>
                 <p>Strucny popis stranky, nejake motto; tento pozadi este zmenime</p>
-                <p><a class="btn btn-primary btn-large">Registrace <i class="icon-play icon-white"></i></a></p>
             </div>
         </header>
 
@@ -51,9 +59,9 @@ and open the template in the editor.
                 <div class="span3">
                     <div class="well">
                         <form>
-                            <legend>Lednička</legend>
+                            <legend>LedniÄŤka</legend>
                             <input type="text" placeholder="Ingredience">
-                            <button type="submit" class="btn">Přidat ingredience</button>
+                            <button type="submit" class="btn">PĹ™idat ingredience</button>
                         </form>
                         <form id="lednicka">
                             <span class="label">musime</span>
@@ -67,11 +75,25 @@ and open the template in the editor.
                             <button type="submit" class="btn">Vyhledat recept</button>
                         </form>
                     </div>
+                    
+                    <div class="well">
+                        <h4>Odkazy na podpostupy</h4>
+                        <ul class="unstyled">
+                            <li><a href="#">Jak zakoupit housku?</a></li>
+                        </ul>
+                        <legend></legend>
+                        <h4>ZajĂ­mavĂ© ÄŤlĂˇnky k receptu</h4>
+                        <ul class="unstyled">
+                            <li><a href="#">ZajĂ­mavĂ˝ ÄŤlĂˇnek</a></li>
+                            <li><a href="#">ZajĂ­mavejĹˇĂ­ ÄŤlĂˇnek</a></li>
+                            <li><a href="#">NejzajĂ­mavejĹˇĂ­ ÄŤlĂˇnek</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="span7">
+                <div class="span8">
                     <div class="well">
                         <h2>Sandwich</h2>
-                        <div class="row-fluid">
+                        <div class="row-fluid spacer">
                             <div class="span6">
                                 <img src="img/sample1.jpg" class="img-rounded">
                             </div>
@@ -89,25 +111,12 @@ and open the template in the editor.
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu tellus non diam blandit pretium. Morbi sed quam vitae lectus hendrerit bibendum sed sit amet lorem. Donec convallis, augue ut luctus auctor, nisl metus sagittis est, vitae iaculis quam tellus vitae metus. Quisque nec faucibus mauris. Vestibulum in nibh sit amet erat ultricies consequat nec a risus. Donec sit amet urna in ante iaculis feugiat. Nulla sed nunc orci. Suspendisse neque velit, viverra non facilisis non, tincidunt nec justo. Curabitur nec risus quis dolor euismod rutrum nec ornare lorem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas eget quam vitae libero pulvinar posuere. Aenean a erat ac metus accumsan luctus id in diam. Praesent pellentesque turpis at libero volutpat sed eleifend dui varius. Vestibulum semper, orci in laoreet sagittis, nunc eros molestie nibh, et vulputate nunc odio at leo. Sed mattis dictum sapien et convallis. Duis velit nunc, malesuada tristique venenatis eu, volutpat ut nisl.</p>
                             <p>In eu mi eget mauris congue gravida. Donec sed vehicula velit. Maecenas varius massa non est posuere vitae bibendum turpis scelerisque. Suspendisse id lacus at ante porta tempus. Etiam euismod, leo vitae gravida facilisis, neque arcu mollis turpis, et pellentesque purus tortor id neque. Nunc eleifend elit non velit fringilla iaculis. Maecenas tellus quam, pellentesque a interdum sed, rhoncus ac sem. Praesent tempus sagittis nibh viverra tincidunt. Donec ac tortor ligula. Pellentesque a sem leo. Pellentesque convallis magna at arcu semper imperdiet. Nam pulvinar elit vel neque rutrum tincidunt. Cras fermentum justo massa. Sed id fermentum mi.</p>
                         </div>
-                        <div class="pull-right">
-                            <h5>Hodnocení: xx </h5>
+                        <div>
+                            <h5>HodnocenĂ­: xx </h5>
                             <a class="btn"><i class="icon-star"></i> Hodnotit recept</a>
+                            <a class="btn pull-right" href="#"><i class="icon-pencil"></i> Napsat ÄŤlĂˇnek</a>
                         </div>
-                        <div class="spacer">
-                            <h4>Odkazy na podpostupy</h4>
-                            <ul class="unstyled">
-                                <li><a href="#">Jak zakoupit housku?</a></li>
-                            </ul>
-                        </div>
-                        <div class="spacer">
-                            <h4>Zajímavé články</h4>
-                            <ul class="unstyled">
-                                <li><a href="#">Zajímavý článek</a></li>
-                                <li><a href="#">Zajímavejší článek</a></li>
-                                <li><a href="#">Nejzajímavejší článek</a></li>
-                            </ul>
-                            <a class="btn" href="#"><i class="icon-pencil"></i> Napsat článek</a>
-                        </div>
+                        
                         <legend class="spacer"></legend>
                         <div>
                             <dl class="spacer">
@@ -117,19 +126,19 @@ and open the template in the editor.
                                         ^-^
                                     </div>
                                 </dd>
-                                <dt><i class="icon-user"></i> uživatel1 psal v hh:mm DD.MM.YYYY</dt>
+                                <dt><i class="icon-user"></i> uĹľivatel1 psal v hh:mm DD.MM.YYYY</dt>
                                 <dd>
                                     <div class="well dark">
                                         Vestibulum ac odio ante. Integer tincidunt, orci varius sodales pellentesque, neque lacus accumsan tellus, a vehicula mi erat sed nisi. Etiam tortor.
                                     </div>
                                 </dd>
-                                <dt><i class="icon-user"></i> uživatel22 psal v hh:mm DD.MM.YYYY</dt>
+                                <dt><i class="icon-user"></i> uĹľivatel22 psal v hh:mm DD.MM.YYYY</dt>
                                 <dd>
                                     <div class="well dark">
                                         Nulla lectus quam, consectetur id commodo id, porttitor in arcu. Nam mi neque, sollicitudin sed tempus non, venenatis vel felis. Vivamus non luctus felis. Curabitur faucibus dictum sapien, id gravida eros vulputate iaculis. Quisque nec magna libero. Pellentesque purus enim, cursus nec ultrices sit amet, sodales nec mi. Nam tempus consequat leo, quis ullamcorper neque malesuada.
                                     </div>
                                 </dd>
-                                <dt><i class="icon-user"></i> uživatel13 psal v hh:mm DD.MM.YYYY</dt>
+                                <dt><i class="icon-user"></i> uĹľivatel13 psal v hh:mm DD.MM.YYYY</dt>
                                 <dd>
                                     <div class="well dark">
                                         Donec eget libero lobortis leo ultricies posuere a quis orci. Sed tempor tortor sollicitudin elit porta viverra scelerisque felis scelerisque. Nullam lacinia pulvinar nisl, vitae tempor mi tempor.
@@ -138,28 +147,24 @@ and open the template in the editor.
                             </dl>
                         </div>
                         <div class="spacer">
-                            <h4>Napsat komentář</h4>
-                            <textarea rows="5" class="input-block-level">Bude viditelný jenom pro přihlášené uživatele...</textarea>
-                            <a class="btn">Odeslat komentář</a>
+                            <h4>Napsat komentĂˇĹ™</h4>
+                            <textarea rows="5" class="input-block-level">Bude viditelnĂ˝ jenom pro pĹ™ihlĂˇĹˇenĂ© uĹľivatele...</textarea>
+                            <a class="btn">Odeslat komentĂˇĹ™</a>
                         </div>
-                    </div>
-                </div>
-                <div class="span2">
-                    <div class="well">
-                        <form>
-                            <legend>Přihlášení</legend>
-                            <label>Uzivatelské jméno</label>
-                            <input class="input-medium" type="text" placeholder="Username">
-                            <label>Heslo</label>
-                            <input class="input-medium" type="text" placeholder="Password">
-                            <button type="submit" class="btn btn-primary">Přihlásit se</button>
-                            <a href="#">Zapoměl jsem heslo</a>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
 
+        
+      <legend class="spacer"></legend>
+      <footer class="footer spacer">
+        <div class="container">
+            <p class="pull-right"><a href="#">ZpÄ›t na zaÄŤĂˇtku</a></p>
+            <p>&copy KuchaĹ™ka</p>
+            <p>Kontaktujte nĂˇs <a href="mailto:kucharka@xyz.cz">kucharka@xyz.cz</a></p>
+        </div>
+      </footer>
 
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script src="bootstrap/js/bootstrap.js"></script>

@@ -1,0 +1,131 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Kucharka</title>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="bootstrap/css/plus.css" rel="stylesheet">
+  </head>
+  <body>
+      
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Nejnovší recepty</a></li>
+                        <li><a href="#">Help</a></li>        
+                    </ul>
+                    <form class="navbar-search pull-right form-search">
+                        <div class="input-append">
+                        <input type="text" class="search-query" placeholder="Search">
+                        <button type="submit" class="btn">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+      <header>
+          <div class="container">
+              <h1>Kuchářka</h1>
+              <p>Strucny popis stranky, nejake motto; tento pozadi este zmenime</p>
+              <p>
+                  <a class="btn btn-primary btn-large" href="#login" role="button" data-toggle="modal">Přihlášení</a>
+                  <a class="btn btn-large">Registrace <i class="icon-play"></i></a>
+              </p>
+          </div>
+      </header>
+      
+      
+      <div class="container-fluid">
+          <div class="row-fluid">
+              
+              
+              
+              <div class="span8 offset2">
+                  <div class="well">
+                      <h2>Registrace</h2>
+                      <form>
+                        <div class="row-fluid spacer">
+                            <div class="span5">
+                                <legend>Povinné údaje</legend>
+                                <label>Uživatelské jméno</label>
+                                <input type="text">
+                                <label>E-mail adresa</label>
+                                <input type="email">
+                                <label>Heslo</label>
+                                <input type="password">
+                                <label>Potvr. heslo</label>
+                                <input type="password">
+                            </div>
+                            <div class="span5 offset2">
+                                <legend>Další údaje</legend>
+                                <label>Príjmení</label>
+                                <input type="text">
+                                <label>Jméno</label>
+                                <input type="text">
+                                <label>Věk</label>
+                                <input type="number">
+                                <a class="btn btn-large spacer btn-primary" href="#">Registrovat</a>
+                            </div>
+                        </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      
+      <!--Modal window pro prihlaseni-->
+      <div id="login" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Přihlášení</h3>
+            </div>
+            <div class="modal-body">
+                <form>
+                    
+                    <div class="controls controls-row">
+                        <div class="span2 offset1">
+                            <label>Uživatelské jméno</label>
+                            <input type="text" placeholder="Username">
+                        </div>
+                        <div class="span2">
+                            <label>Heslo</label>
+                            <input type="password" placeholder="Password">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn">Zapoměl jsem heslo</button>
+                <button class="btn btn-primary" data-dismiss="modal">Přihlásit se</button>
+            </div>
+      </div>
+      
+      
+      <legend class="spacer"></legend>
+      <footer class="footer spacer">
+        <div class="container">
+            <p class="pull-right"><a href="#">Zpět na začátku</a></p>
+            <p>&copy Kuchařka</p>
+            <p>Kontaktujte nás <a href="mailto:kucharka@xyz.cz">kucharka@xyz.cz</a></p>
+        </div>
+      </footer>
+      
+      <script src="http://code.jquery.com/jquery-latest.js"></script>
+      <script src="bootstrap/js/bootstrap.js"></script>
+      <script src="bootstrap/js/lednicka.js"></script>
+  </body>
+</html>

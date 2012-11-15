@@ -5,7 +5,7 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Kucharka</title>
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -22,8 +22,7 @@ and open the template in the editor.
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">Nejnovs� recepty</a></li>
-                        <li><a href="#">Menu item 3</a></li>
+                        <li><a href="#">Nejnovší recepty</a></li>
                         <li><a href="#">Help</a></li>        
                     </ul>
                     <form class="navbar-search pull-right form-search">
@@ -39,9 +38,12 @@ and open the template in the editor.
       
       <header>
           <div class="container">
-              <h1>Kuch��ka</h1>
+              <h1>Kuchářka</h1>
               <p>Strucny popis stranky, nejake motto; tento pozadi este zmenime</p>
-              <p><a class="btn btn-primary btn-large">Registrace <i class="icon-play icon-white"></i></a></p>
+              <p>
+                  <a class="btn btn-primary btn-large" href="#login" role="button" data-toggle="modal">Přihlášení</a>
+                  <a class="btn btn-large">Registrace <i class="icon-play"></i></a>
+              </p>
           </div>
       </header>
       
@@ -51,9 +53,9 @@ and open the template in the editor.
               <div class="span3">
                   <div class="well">
                       <form>
-                          <legend>Ledni�ka</legend>
+                          <legend>Lednička</legend>
                           <input type="text" placeholder="Ingredience">
-                          <button type="submit" class="btn">P�idat ingredience</button>
+                          <button type="submit" class="btn">Přidat ingredience</button>
                       </form>
                       <form id="lednicka">
                           <span class="label">musime</span>
@@ -67,9 +69,11 @@ and open the template in the editor.
                           <legend></legend>
                           <button type="submit" class="btn">Vyhledat recept</button>
                       </form>
-                  </div>
+                  </div>      
               </div>
-              <div class="span7">
+              
+              
+              <div class="span8">
                   <div class="well">
                   <h2>Content</h2>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor pretium posuere. Aliquam erat volutpat. Nullam malesuada sagittis enim, vel rhoncus quam auctor et. Nunc luctus adipiscing fringilla. Mauris urna turpis, accumsan ut molestie non, elementum eu diam. Vestibulum vitae risus eu metus imperdiet mollis at at ante. Phasellus facilisis risus et velit tincidunt at tincidunt nisi porta. Nam lacinia ullamcorper lobortis. Curabitur tempus convallis sapien, id congue arcu porta nec. Nulla facilisi. Sed ultrices orci vel lacus mollis quis laoreet nisi tempus. Proin in felis mi, sit amet posuere magna. Nunc leo velit, commodo vel dignissim ut, malesuada eget eros.</p>
@@ -79,21 +83,47 @@ and open the template in the editor.
                   <p>Integer lacus elit, pulvinar non luctus ut, congue et augue. Duis tristique hendrerit ante mattis dapibus. Etiam vitae quam id ante varius vehicula. Integer vehicula volutpat nisi, at accumsan quam viverra lobortis. Nam justo leo, gravida eget fringilla quis, consequat at risus. Duis dapibus cursus magna, id imperdiet nulla mattis et. Mauris sem ligula, aliquam at posuere eget, ultricies eu justo. Nulla et metus accumsan lorem sollicitudin dapibus eget at justo.</p>
                   </div>
               </div>
-              <div class="span2">
-                  <div class="well">
-                      <form>
-                          <legend>P�ihl�en�</legend>
-                          <label>Uzivatelsk� jm�no</label>
-                          <input class="input-medium" type="text" placeholder="Username">
-                          <label>Heslo</label>
-                          <input class="input-medium" type="text" placeholder="Password">
-                          <button type="submit" class="btn btn-primary">P�ihl�sit se</button>
-                          <a href="#">Zapom�l jsem heslo</a>
-                      </form>
-                  </div>
-              </div>
           </div>
       </div>
+      
+      
+      
+      
+      <!--Modal window pro prihlaseni-->
+      <div id="login" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Přihlášení</h3>
+            </div>
+            <div class="modal-body">
+                <form>
+                    
+                    <div class="controls controls-row">
+                        <div class="span2 offset1">
+                            <label>Uživatelské jméno</label>
+                            <input type="text" placeholder="Username">
+                        </div>
+                        <div class="span2">
+                            <label>Heslo</label>
+                            <input type="password" placeholder="Password">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" tabindex="-1">Zapoměl jsem heslo</button>
+                <button class="btn btn-primary" data-dismiss="modal">Přihlásit se</button>
+            </div>
+      </div>
+      
+      <legend class="spacer"></legend>
+      <footer class="footer spacer">
+        <div class="container">
+            <p class="pull-right"><a href="#">Zpět na začátku</a></p>
+            <p>&copy Kuchařka</p>
+            <p>Kontaktujte nás <a href="mailto:kucharka@xyz.cz">kucharka@xyz.cz</a></p>
+        </div>
+      </footer>
       
       
       <script src="http://code.jquery.com/jquery-latest.js"></script>
