@@ -5,9 +5,10 @@ PokusSorcery::Application.routes.draw do
   get "user_sessions/create"
   get "user_sessions/destroy"
 
-  root :to => 'users#index'
+  root :to => 'home#index'
   resources :users
   resources :user_sessions
+  resources :roles
 
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout

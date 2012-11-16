@@ -1,3 +1,5 @@
+<p>Detail uživatele</p>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -11,15 +13,25 @@
 </p>
 
 <p>
-  <b>Crypted password:</b>
-  <%= @user.crypted_password %>
+  <b>Jméno:</b>
+  <%= @user.name %>
 </p>
 
 <p>
-  <b>Salt:</b>
-  <%= @user.salt %>
+  <b>Poznámka</b>
+  <%= get_att_str(@user.note) %>
 </p>
 
+<p>
+  <b>Role</b>
+  <%= @user.role != nil ? @user.role.name : "---" %>
+</p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<p>
+  <b>Aktivní</b>
+  <%= print_bool(:bool => @user.active) %>
+</p>
+
+<% render_edit_button(@user, nil, ' | ') %>
+<%= link_to 'Zpět', :back %>
+<% render_list_button(' | ', nil) %>

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  skip_before_filter :require_login, :only => [:index, :show, :new, :create]
+  before_filter :require_login, :except => [:index]
+  before_filter :require_role, :except => [:show]
+#  skip_before_filter :require_login, :only => [:index, :show, :new, :create]
   
   # GET /users
   # GET /users.json
@@ -43,6 +45,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
+    @user.role = Role.where(:name => :banned_user).first
 
     respond_to do |format|
       if @user.save
