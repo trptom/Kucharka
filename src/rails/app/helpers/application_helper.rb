@@ -22,4 +22,18 @@ module ApplicationHelper
   def print_bool(bool)
     return (bool ? "ano" : "ne")
   end
+
+  def show_fridge
+    # podminky, kdy se lednicka zobrazovat nebude - je jich jen par
+    if (params[:controller] == "users" && params[:action] == "new")
+      return false
+    end
+    # pokud nejsou splneny podminky pro skryti, je lednicka zobrazena
+    return true
+  end
+
+  def get_content_class
+    # trida obsahu zavisi na tom, zda je zobrazena lednicka. Pokud ne, je zleva odsazen
+    return show_fridge ? "span8" : "span8 offset2"
+  end
 end

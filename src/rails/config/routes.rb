@@ -1,12 +1,18 @@
 PokusSorcery::Application.routes.draw do
   get "home/index"
+  get "home/success"
+  get "home/error"
   get "index/home"
   get "user_sessions/new"
   get "user_sessions/create"
   get "user_sessions/destroy"
 
   root :to => 'home#index'
-  resources :users
+  resources :users do
+    member do
+      get :activate
+    end
+  end
   resources :user_sessions
   resources :roles
 

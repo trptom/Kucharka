@@ -1,0 +1,27 @@
+<!--Modal window pro prihlaseni-->
+<%= form_tag user_sessions_path, :method => :post do %>
+<div id="login" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Přihlášení</h3>
+  </div>
+  <div class="modal-body">
+      <div class="controls controls-row">
+        <div class="span2 offset1">
+          <label>Uživatelské jméno</label>
+          <%#*<input type="text" placeholder="Username" />%>
+          <%= text_field_tag :username %>
+        </div>
+        <div class="span2">
+          <label>Heslo</label>
+          <%#*<input type="password" placeholder="Password" />%>
+          <%= password_field_tag :password %>
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" tabindex="-1" disabled>Zapoměl jsem heslo</button>
+    <%= submit_tag "Přihlásit se", :class => "btn btn-primary" %>
+  </div>
+</div>
+<% end %>

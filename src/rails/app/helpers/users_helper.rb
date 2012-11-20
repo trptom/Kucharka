@@ -1,3 +1,5 @@
+# coding:utf-8
+
 module UsersHelper
   def can_edit(user)
     return (is_current_user(user) ||
@@ -21,7 +23,7 @@ module UsersHelper
   def render_list_button(prefix, suffix)
     if can_list()
       concat (prefix == nil) ? '' : prefix
-      concat (link_to 'Jit na prohlizeni uzivatelu', users_path)
+      concat (link_to 'Jit na prohlíženi uživatelů', users_path)
       concat (suffix == nil) ? '' : suffix
     end
   end
@@ -29,7 +31,7 @@ module UsersHelper
   def render_destroy_button(user, prefix, suffix)
     if can_edit(user)
       concat (prefix == nil) ? '' : prefix
-      concat (link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' })
+      concat (link_to 'Destroy', user, method: :delete, data: { confirm: 'Jste si jistý(á)?' })
       concat (suffix == nil) ? '' : suffix
     end
   end

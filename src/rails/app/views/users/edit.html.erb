@@ -1,38 +1,62 @@
-<h1>Editing user</h1>
+<h2>Moje údaje</h2>
 
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, :disabled => true %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :note %><br />
-    <%= f.text_area :note %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<div class="row-fluid spacer">
+  <div class="span5">
+    <%= form_for(@user) do |f| %>
+      <dl class="dl-horizontal">
+        <dt>Uživatelské jméno:</dt>
+        <dd>
+          <%= f.text_field :username, :disabled => true %>
+        </dd>
+        <dt>E-mail:</dt>
+        <dd>
+          <%= f.email_field :email, :disabled => true %>
+        </dd>
+        <dt>Jméno:</dt>
+        <dd>
+          <%= f.text_field :first_name %>
+        </dd>
+        <dt>Příjmení:</dt>
+        <dd>
+          <%= f.text_field :second_name %>
+        </dd>
+      </dl>
+      <%= f.submit "Změnit údaje", :class => "btn pull-right" %>
+    <% end %>
+  </div>
+
+  <div class="span5">
+    <%= form_for(@user) do |f| %>
+      <dl class="dl-horizontal">
+        <dt>Staré heslo: </dt>
+        <dd>
+          <%= f.password_field :password, :disabled => true %>
+        </dd>
+        <dt>Nové heslo: </dt>
+        <dd>
+          <%= f.password_field :password, :value => "" %>
+        </dd>
+        <dt>Nové heslo znova: </dt>
+        <dd>
+          <%= f.password_field :password_confirmation, :value => "" %>
+        </dd>
+      </dl>
+      <%= f.submit "Změnit heslo", :class => "btn pull-right" %>
+    <% end %>
+  </div>
+</div>
+
+<%#= link_to 'Show', @user %> |
+<%#= link_to 'Back', users_path %>

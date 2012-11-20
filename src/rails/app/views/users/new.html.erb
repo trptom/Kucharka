@@ -1,4 +1,4 @@
-<h1>Nový uživatel</h1>
+<h2>Registrace</h2>
 
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
@@ -12,38 +12,29 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    Užjvatelské jméno *<br />
-    <%= f.text_field :username %>
-  </div>
-  <div class="field">
-    E-mail *<br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    Heslo *<br />
-    <%= f.password_field :password %>
-    (alespoň 3 znaky)
-  </div>
-  <div class="field">
-    Potvrzení hesla *<br />
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="field">
-    Jméno<br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    Poznámka<br />
-    <%= f.text_area :note %>
-  </div>
-  <div class="field">
-    Role<br />
-    <%= @user.role %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="row-fluid spacer">
+    <div class="span5">
+      <legend>Povinné údaje</legend>
+      <label>Uživatelské jméno</label>
+      <%= f.text_field :username %>
+      <label>E-mail adresa</label>
+      <%= f.email_field :email %>
+      <label>Heslo</label>
+      <%= f.password_field :password %>
+      <label>Potvr. heslo</label>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <div class="span5 offset2">
+      <legend>Další údaje</legend>
+      <label>Príjmení</label>
+      <%= f.text_field :first_name %>
+      <label>Jméno</label>
+      <%= f.text_field :second_name %>
+      <label>Věk</label>
+      <%= f.number_field :second_name, :min => 0, :max => 100 %>
+      <%= f.submit "Registrovat", :class => "btn btn-large spacer btn-primary" %>
+      <%#*<a class="btn btn-large spacer btn-primary" href="#">Registrovat</a>%>
+    </div>
   </div>
 <% end %>
 

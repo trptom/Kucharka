@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115201154) do
+ActiveRecord::Schema.define(:version => 20121118214321) do
 
   create_table "roles", :force => true do |t|
     t.string   "name",        :null => false
@@ -23,16 +23,25 @@ ActiveRecord::Schema.define(:version => 20121115201154) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username",                           :null => false
-    t.string   "email"
-    t.string   "crypted_password"
+    t.string   "username",                                      :null => false
+    t.string   "email",                                         :null => false
+    t.string   "crypted_password",                              :null => false
     t.string   "salt"
     t.integer  "role_id"
-    t.string   "name"
+    t.string   "first_name"
+    t.string   "second_name"
+    t.string   "age"
     t.text     "note"
-    t.boolean  "active",           :default => true, :null => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.boolean  "active",                      :default => true, :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.string   "activation_state"
+    t.string   "activation_token"
+    t.datetime "activation_token_expires_at"
   end
+
+  add_index "users", ["activation_token"], :name => "index_users_on_activation_token"
+  add_index "users", ["email"], :name => "email", :unique => true
+  add_index "users", ["username"], :name => "username", :unique => true
 
 end

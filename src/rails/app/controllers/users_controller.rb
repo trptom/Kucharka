@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :require_login, :except => [:index]
-  before_filter :require_role, :except => [:show]
+#  before_filter :require_login, :except => [:new, :create]
+#  before_filter :require_role, :except => [:show, :new, :create]
 #  skip_before_filter :require_login, :only => [:index, :show, :new, :create]
   
   # GET /users
@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
+    @user.role = Role.where(:name => :admin).first
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,11 +46,11 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    @user.role = Role.where(:name => :banned_user).first
+    @user.role = Role.where(:name => :admin).first
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to "/", notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -83,6 +84,15 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
+    end
+  end
+
+  def activate
+    if (@user = User.load_from_activation_token(params[:id]))
+      @user.activate!
+      redirect_to(login_path, :notice => 'User was successfully activated.')
+    else
+      not_authenticated
     end
   end
 end

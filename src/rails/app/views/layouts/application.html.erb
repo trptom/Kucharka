@@ -2,21 +2,29 @@
 <html>
   <head>
     <title>Kuchařka</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- automatical scripts -->
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
+    
+    <%#= stylesheet_link_tag    "application" %>
+    <%#= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
+    <!-- manual scripts -->
+    <link href="<%=asset_path "bootstrap/css/bootstrap.css" %>" rel="stylesheet" />
+    <link href="<%=asset_path "bootstrap/css/bootstrap.min.css" %>" rel="stylesheet" />
+    <link href="<%=asset_path "bootstrap/css/bootstrap-responsive.css" %>" rel="stylesheet" />
+    <link href="<%=asset_path "bootstrap/css/bootstrap-responsive.min.css" %>" rel="stylesheet" />
+    <link href="<%=asset_path "bootstrap/css/plus.css" %>" rel="stylesheet" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="<%=asset_path "bootstrap/js/bootstrap.js" %>"></script>
+    <script type="text/javascript" src="<%=asset_path "bootstrap/js/lednicka.js" %>"></script>
   </head>
   <body>
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><%= link_to "Home", "/" %></li>
-              <li><%= link_to "Nejnovější recepty", "recipe" %></li>
-              <li><%= link_to "Help", "help/index" %></li>
+              <%= render ((!current_user) ? 'layouts/top_menu_not_logged_in' : 'layouts/top_menu_logged_in') %>
             </ul>
             <form class="navbar-search pull-right form-search" action="">
               <div class="input-append">
@@ -33,52 +41,39 @@
     <div class="container">
       <h1>Kuchařka</h1>
       <p>Stručný popis stránky, nějaké motto; toto pozadí ještě změníme</p>
-      <p><a href="/users/new/" class="btn btn-primary btn-large">Registrace <i class="icon-play icon-white"></i></a></p>
+      <% if !current_user  %>
+        <p>
+          <a class="btn btn-primary btn-large" href="#login" role="button" data-toggle="modal">Přihlášení</a>
+          <a class="btn btn-large" href="/users/new/">Registrace <i class="icon-play"></i></a>
+        </p>
+      <% end %>
     </div>
   </header>
 
   <div class="container-fluid">
     <div class="row-fluid">
-      <div class="span2">
-        <div class="well">
-          <% if current_user %>
-            <%= render 'home/menu_logged_in' %>
-            <%= link_to "Edit Profile", edit_user_path(current_user.id) %>
-            <%= link_to "Logout", :logout %>
-          <% else %>
-            <%= render 'home/menu_not_logged_in' %>
-            <%= link_to "Register", new_user_path %> |
-            <%= link_to "Login", :login %>
-          <% end %>
-        </div>
-      </div>
-      <div class="span3">
-        <div class="well">
-          <div>
-            <legend>Lednička</legend>
-            <input type="text" placeholder="Ingredience" />
-            <button type="submit" class="btn">Přidat ingredience</button>
-          </div>
-          <form id="lednicka" action="">
-            <span class="label">musime</span>
-            <span class="label">asi</span>
-            <span class="label">napsat</span>
-            <span class="label">javascript</span>
-            <span class="label">aby se dalo</span>
-            <span class="label">pridat</span>
-            <span class="label">ingredience</span>
-            <p></p>
-            <legend></legend>
-            <button type="submit" class="btn">Vyhledat recept</button>
-          </form>
-        </div>
-      </div>
-      <div class="span7">
+      <% if show_fridge %>
+        <%= render 'layouts/fridge' %>
+      <% end %>
+      <div class="<%= get_content_class %>">
         <div class="well">
           <%= yield %>
         </div>
       </div>
     </div>
   </div>
+
+  <% if !current_user  %>
+    <%= render 'layouts/login_form' %>
+  <% end %>
+
+  <legend class="spacer"></legend>
+  <footer class="footer spacer">
+    <div class="container">
+        <p class="pull-right"><a href="#">Zpět na začátku</a></p>
+        <p>&copy Kuchařka</p>
+        <p>Kontaktujte nás <a href="mailto:kucharka@xyz.cz">kucharka@xyz.cz</a></p>
+    </div>
+  </footer>
 </body>
 </html>
