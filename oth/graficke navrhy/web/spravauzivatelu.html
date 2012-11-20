@@ -1,0 +1,171 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Kucharka</title>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="bootstrap/css/plus.css" rel="stylesheet">
+  </head>
+  <body>
+      
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li style="margin-right: 50px;">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Uživatel <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Moje údaje</a></li>
+                                <li><a href="#">Moje recepty</a></li>
+                                <li><a href="#">Moje články</a></li>
+                                <li><a href="#">Odhlášení</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Nejnovší recepty</a></li>
+                        <li><a href="#">Nový recept</a></li>
+                        <li><a href="#">Help</a></li>        
+                    </ul>
+                    <form class="navbar-search pull-right form-search">
+                        <div class="input-append">
+                        <input type="text" class="search-query" placeholder="Search">
+                        <button type="submit" class="btn">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+      <header>
+          <div class="container">
+              <h1>Kuchářka</h1>
+              <p>Strucny popis stranky, nejake motto; tento pozadi este zmenime</p>
+          </div>
+      </header>
+      
+      
+      <div class="container-fluid">
+          <div class="row-fluid">
+              <div class="span3">
+                  <div class="well">
+                      <form>
+                          <legend>Lednička</legend>
+                          <input type="text" placeholder="Ingredience">
+                          <button type="submit" class="btn">Přidat ingredience</button>
+                      </form>
+                      <form id="lednicka">
+                          <span class="label">musime</span>
+                          <span class="label">asi</span>
+                          <span class="label">napsat</span>
+                          <span class="label">javascript</span>
+                          <span class="label">aby se dalo</span>
+                          <span class="label">pridat</span>
+                          <span class="label">ingredience</span>
+                          <p></p>
+                          <legend></legend>
+                          <button type="submit" class="btn">Vyhledat recept</button>
+                      </form>
+                  </div>
+              </div>
+              <div class="span8">
+                  <div class="well">
+                      <h2>Správa uživatelů</h2>
+                        
+                      <label class="spacer">Vyhledat uživatela: </label>
+                      <div class="input-append">
+                          <input type="text" placeholder="Uživatelské jméno"/>
+                          <button class="btn">Vyhledat</button>
+                      </div>
+
+                        <table class="table table-hower spacer">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Uživatelsé jméno</th>
+                                    <th>E-mail adresa</th>
+                                    <th>Příjmení</th>
+                                    <th>Jméno</th>
+                                    <th>Blokovat/Odblokovat účet</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>uživatel22</td>
+                                    <td>asd@freemail.com</td>
+                                    <td>Asqwe</td>
+                                    <td>Elkjmnh</td>
+                                    <td><button class="btn">Zablokovat</button></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>uživa10</td>
+                                    <td>asdasdasd@freemail.com</td>
+                                    <td>Asqweqwe</td>
+                                    <td>Elkj</td>
+                                    <td><button class="btn">Zablokovat</button></td>
+                                </tr>
+                                <tr class="error">
+                                    <td>3</td>
+                                    <td>Ilikesandwich</td>
+                                    <td>asd@gmail.com</td>
+                                    <td>Olkowe</td>
+                                    <td>Elmnh</td>
+                                    <td><button class="btn">Odblokovat</button></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>uživatel13</td>
+                                    <td>qwerfd@seznam.cz</td>
+                                    <td>Asqliko</td>
+                                    <td>Elokiah</td>
+                                    <td><button class="btn">Zablokovat</button></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>uživatel2</td>
+                                    <td>xxxxxxd@freemail.com</td>
+                                    <td>Asqxxx</td>
+                                    <td>Elkjxxxxh</td>
+                                    <td><button class="btn">Zablokovat</button></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>6</td>
+                                    <td>Admin2</td>
+                                    <td>admin@kucharka.com</td>
+                                    <td>Admin</td>
+                                    <td>Admin</td>
+                                    <td><button class="btn disabled">Zablokovat</button></td>
+                                </tr>
+                            </tbody>
+                        </table>                      
+                  </div>
+              </div>
+              
+          </div>
+      </div>
+      
+      <legend class="spacer"></legend>
+      <footer class="footer spacer">
+        <div class="container">
+            <p class="pull-right"><a href="#">Zpět na začátku</a></p>
+            <p>&copy Kuchařka</p>
+            <p>Kontaktujte nás <a href="mailto:kucharka@xyz.cz">kucharka@xyz.cz</a></p>
+        </div>
+      </footer>
+      
+      <script src="http://code.jquery.com/jquery-latest.js"></script>
+      <script src="bootstrap/js/bootstrap.js"></script>
+      <script src="bootstrap/js/lednicka.js"></script>
+  </body>
+</html>

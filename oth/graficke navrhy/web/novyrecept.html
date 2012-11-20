@@ -1,0 +1,141 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Kucharka</title>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="bootstrap/css/plus.css" rel="stylesheet">
+  </head>
+  <body>
+      
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li style="margin-right: 50px;">
+                            <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Uživatel <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Moje údaje</a></li>
+                                <li><a href="#">Moje recepty</a></li>
+                                <li><a href="#">Moje články</a></li>
+                                <li><a href="#">Odhlášení</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Nejnovší recepty</a></li>
+                        <li><a href="#">Nový recept</a></li>
+                        <li><a href="#">Help</a></li>        
+                    </ul>
+                    <form class="navbar-search pull-right form-search">
+                        <div class="input-append">
+                        <input type="text" class="search-query" placeholder="Search">
+                        <button type="submit" class="btn">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+      <header>
+          <div class="container">
+              <h1>Kuchářka</h1>
+              <p>Strucny popis stranky, nejake motto; tento pozadi este zmenime</p>
+          </div>
+      </header>
+      
+      
+      <div class="container-fluid">
+          <div class="row-fluid">
+              <div class="span3">
+                  <div class="well">
+                      <form>
+                          <legend>Lednička</legend>
+                          <input type="text" placeholder="Ingredience">
+                          <button type="submit" class="btn">Přidat ingredience</button>
+                      </form>
+                      <form id="lednicka">
+                          <span class="label">musime</span>
+                          <span class="label">asi</span>
+                          <span class="label">napsat</span>
+                          <span class="label">javascript</span>
+                          <span class="label">aby se dalo</span>
+                          <span class="label">pridat</span>
+                          <span class="label">ingredience</span>
+                          <p></p>
+                          <legend></legend>
+                          <button type="submit" class="btn">Vyhledat recept</button>
+                      </form>
+                  </div>
+                  
+                  <div class="well">
+                        <legend>Podat žádost na ingredienci</legend>
+                        <form>
+                            <input type="text" placeholder="Název"/>
+                            <label>Jednotka</label>
+                            <select>
+                                <option>litr</option>
+                                <option>dkg</option>
+                                <option>dalsi</option>
+                            </select> 
+                            <textarea rows="5" class="input-block-level">Komentář</textarea>
+                            <button class="btn">Podat žádost</button>
+                        </form>                    
+                  </div>
+              </div>
+              <div class="span8">
+                  <div class="well">
+                      <h2>Nový recept</h2>
+                      <form>
+                        <div class="row-fluid spacer">
+                            <div class="span4">
+                                <input type="text" placeholder="Název receptu"/>
+                            </div>
+                            <div class="span4">
+                                <p>obrazek <button class="btn">Načíst obrázek</button></p>
+                            </div>
+                            <div class="span4">
+                                <input type="text" placeholder="Ingredience">
+                                <button type="submit" class="btn">Přidat ingredience</button>
+                            </div>
+                        </div>
+                        <dl class="dl-horizontal spacer">
+                            <dt>Ingredience 1</dt><dd><input type="number" class="input-mini"/></dd>
+                            <dt>Ingredience 1</dt><dd><input type="number" class="input-mini"/></dd>
+                            <dt>Ingredience 1</dt><dd><input type="number" class="input-mini"/></dd>
+                            <dt>Ingredience 1</dt><dd><input type="number" class="input-mini"/></dd>
+                            <dt>Ingredience 1</dt><dd><input type="number" class="input-mini"/></dd>
+                        </dl>
+                        <label class="spacer">Popis receptu</label>
+                        <textarea rows="10" class="input-block-level"></textarea>
+                        <button class="btn">Vytvořit recept</button>
+                      </form>
+                  </div>
+              </div>
+              
+          </div>
+      </div>
+      
+      <legend class="spacer"></legend>
+      <footer class="footer spacer">
+        <div class="container">
+            <p class="pull-right"><a href="#">Zpět na začátku</a></p>
+            <p>&copy Kuchařka</p>
+            <p>Kontaktujte nás <a href="mailto:kucharka@xyz.cz">kucharka@xyz.cz</a></p>
+        </div>
+      </footer>
+      
+      <script src="http://code.jquery.com/jquery-latest.js"></script>
+      <script src="bootstrap/js/bootstrap.js"></script>
+      <script src="bootstrap/js/lednicka.js"></script>
+  </body>
+</html>
