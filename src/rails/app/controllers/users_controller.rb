@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id] ? params[:id] : current_user.id)
 
     @users = User.all
     @links_title = "Další uživatelé"
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(params[:id] ? params[:id] : current_user.id)
   end
 
   # POST /users
@@ -104,6 +104,16 @@ class UsersController < ApplicationController
       redirect_to(login_path, :notice => 'User was successfully activated.')
     else
       not_authenticated
+    end
+  end
+
+  def recipes
+    @user = User.find(params[:id] ? params[:id] : current_user.id)
+    @recipes = @user.recipes;
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @recipes }
     end
   end
 end

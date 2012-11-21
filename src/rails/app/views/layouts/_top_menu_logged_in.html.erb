@@ -4,13 +4,12 @@
 <li style="margin-right: 50px;">
     <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Uživatel <span class="caret"></span></button>
     <ul class="dropdown-menu">
-        <li><%= link_to "Moje údaje",  user_path(current_user) %></li>
-        <li><a href="#">Moje recepty</a></li>
-        <li><a href="#">Moje články</a></li>
-        <li><a href="/user_sessions/destroy">Odhlášení</a></li>
+        <li><%= link_to "Moje údaje", "my_profile" %></li>
+        <li><%= link_to "Moje recepty", "my_recipes" %></li>
+        <li><%= link_to "Moje články", "my_articles" %></li>
+        <li><%= link_to "Odhlášení", "logout" %></li>
     </ul>
 </li>
 <li><%= link_to "Home", "/" %></li>
 <li><%= link_to "Nejnovější recepty", "recipe" %></li>
 <li><%= link_to "Help", "help/index" %></li>
-<li><a href="#">Help</a></li>

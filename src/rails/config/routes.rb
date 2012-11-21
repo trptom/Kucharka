@@ -15,9 +15,15 @@ PokusSorcery::Application.routes.draw do
   end
   resources :user_sessions
   resources :roles
+  resources :recipes
 
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
+
+  match 'my_profile' => 'users#show'
+  match 'my_recipes' => 'users#recipes'
+
+  match 'users/:id/recipes' => 'users#recipes'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
