@@ -12,7 +12,7 @@
 
 <p>
   <b>Jméno:</b>
-  <%= @user.first_name + " " + @user.second_name %>
+  <%= (@user.first_name ? @user.first_name : "") + " " + (@user.second_name ? @user.second_name : "") %>
 </p>
 
 <p>
