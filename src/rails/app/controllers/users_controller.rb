@@ -1,3 +1,5 @@
+# coding:utf-8
+
 class UsersController < ApplicationController
 #  before_filter :require_login, :except => [:new, :create]
 #  before_filter :require_role, :except => [:show, :new, :create]
@@ -18,6 +20,15 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+
+    @users = User.all
+    @links_title = "Další uživatelé"
+    @links = []
+    for user in @users
+      if (user != @user)
+        @links.push([user.username, user_path(user)])
+      end
+    end
 
     respond_to do |format|
       format.html # show.html.erb

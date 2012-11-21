@@ -1,0 +1,13 @@
+<h4>Odkazy na podpostupy</h4>
+<ul class="unstyled">
+  <% @links_sub.each do |link| %>
+    <%= link_to link.title, link.url %><br />
+  <% end %>
+</ul>
+<legend></legend>
+<h4>Zajímavé články k receptu</h4>
+<ul class="unstyled">
+  <% @links_interesting.each do |link| %>
+    <%= link_to link[0], link[1] %><br />
+  <% end %>
+</ul>

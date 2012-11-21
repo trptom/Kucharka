@@ -52,9 +52,14 @@
 
   <div class="container-fluid">
     <div class="row-fluid">
-      <% if show_fridge %>
-        <%= render 'layouts/fridge' %>
+      <% if show_left_panel %>
+        <div class="span3">
+          <%= render 'layouts/fridge' %>
+
+          <%= render_self_than_global 'links' %>
+        </div>
       <% end %>
+
       <div class="<%= get_content_class %>">
         <div class="well">
           <%= yield %>
@@ -70,7 +75,7 @@
   <legend class="spacer"></legend>
   <footer class="footer spacer">
     <div class="container">
-        <p class="pull-right"><a href="#">Zpět na začátku</a></p>
+        <p class="pull-right"><a href="#">Zpět na začátek</a></p>
         <p>&copy Kuchařka</p>
         <p>Kontaktujte nás <a href="mailto:kucharka@xyz.cz">kucharka@xyz.cz</a></p>
     </div>
