@@ -116,4 +116,14 @@ class UsersController < ApplicationController
       format.json { render json: @recipes }
     end
   end
+
+  def articles
+    @user = User.find(params[:id] ? params[:id] : current_user.id)
+    @articles = @user.articles;
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @articles }
+    end
+  end
 end

@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
   has_many :recipes
+  has_many :articles
 
   attr_accessible :username, :email, :password, :password_confirmation, :first_name, :second_name, :age, :note, :active, :role_id, :activation_state, :activation_token, :activation_token_expires_at
 

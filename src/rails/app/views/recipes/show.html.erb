@@ -1,1 +1,21 @@
-<p>Detail Receptu</p>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Název:</b>
+  <%= @recipe.name %>
+</p>
+
+<p>
+  <b>Anotace:</b>
+  <%= @recipe.annotation %>
+</p>
+
+<p>
+  <b>Obsah:</b>
+  <%= @recipe.content %>
+</p>
+
+<p>
+  <b>Autor:</b>
+  <%= link_to @recipe.user.username, @recipe.user %>
+</p>

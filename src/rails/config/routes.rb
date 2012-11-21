@@ -1,4 +1,6 @@
 PokusSorcery::Application.routes.draw do
+  resources :articles
+
   get "home/index"
   get "home/success"
   get "home/error"
@@ -16,14 +18,17 @@ PokusSorcery::Application.routes.draw do
   resources :user_sessions
   resources :roles
   resources :recipes
+  resources :articles
 
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
 
   match 'my_profile' => 'users#show'
   match 'my_recipes' => 'users#recipes'
+  match 'my_articles' => 'users#articles'
 
   match 'users/:id/recipes' => 'users#recipes'
+  match 'users/:id/articles' => 'users#articles'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
