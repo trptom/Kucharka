@@ -1,25 +1,35 @@
-<h1>Listing users</h1>
+<h2>Správa uživatelů</h2>
 
-<table>
-  <tr>
-    <th>Username</th>
-    <th>Email</th>
-    <th>Role</th>
-    <th>Manipulace</th>
-  </tr>
+<label class="spacer">Vyhledat uživatele: </label>
+<div class="input-append">
+  <input type="text" placeholder="Uživatelské jméno"/>
+  <%= button_to "Vyhledat", "/", {:method => "get", :class => "btn"} %>
+  <button class="btn">Vyhledat</button>
+</div>
 
+<table class="table table-hower spacer">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Uživatelské jméno</th>
+      <th>E-mailová adresa</th>
+      <th>Příjmení</th>
+      <th>Jméno</th>
+      <th>Blokovat/Odblokovat účet</th>
+    </tr>
+  </thead>
+  <tbody>
 <% @users.each do |user| %>
-  <tr>
-    <td><%= user.username %></td>
-    <td><%= user.email %></td>
-    <td><%= user.role != nil ? user.role.name : "---" %></td>
-    <td><%
-      concat link_to "Detail", user_path(user)
-      render_edit_button(user, ' | ', nil)
-      render_destroy_button(user, ' | ', nil)
-    %></td>
-  </tr>
+    <tr class="<%= index_get_row_class user %>">
+      <td><%= user.id %></td>
+      <td><%= user.username %></td>
+      <td><%= user.email %></td>
+      <td><%= user.second_name %></td>
+      <td><%= user.first_name %></td>
+      <td><%= index_get_action_button user %></td>
+    </tr>
 <% end %>
+  </tbody>
 </table>
 
 <br />

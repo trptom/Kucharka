@@ -35,4 +35,24 @@ module UsersHelper
       concat (suffix == nil) ? '' : suffix
     end
   end
+
+  def index_get_row_class(user)
+    if (is_admin(user))
+      return "info"
+    end
+
+    return user.active ? "" : "error"
+  end
+
+  def index_get_action_button(user)
+    if (is_admin(user))
+      return button_to "Zablokovat", users_path, {:method => "get", :class => "btn disabled", :disabled => true}
+    end
+
+    if (user.active)
+      return button_to "Zablokovat", { :controller => 'users', :action => 'block', :id => user.id}, {:method => "get", :class => "btn"}
+    else
+      return button_to "Odblokovat", { :controller => 'users', :action => 'unblock', :id => user.id}, {:method => "get", :class => "btn"}
+    end
+  end
 end

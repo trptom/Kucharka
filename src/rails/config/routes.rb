@@ -29,6 +29,8 @@ PokusSorcery::Application.routes.draw do
 
   match 'users/:id/recipes' => 'users#recipes'
   match 'users/:id/articles' => 'users#articles'
+  match 'users/:id/block' => 'users#block'
+  match 'users/:id/unblock' => 'users#unblock'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

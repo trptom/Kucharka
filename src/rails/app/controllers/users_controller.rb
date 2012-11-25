@@ -8,7 +8,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if (params[:name])
+      @users = User.where("username like ?", "%" + params[:name] +"%")
+    else
+      @users = User.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -125,5 +129,37 @@ class UsersController < ApplicationController
       format.html
       format.json { render json: @articles }
     end
+  end
+
+  def block
+    @user = User.find(params[:id])
+    state = NIL;
+    if (!is_admin(@user) && !is_current_user(@user))
+      @user.active = false
+      if !@user.save
+        state = "Blokování uživatele selhalo!"
+      end
+    else
+      state = "Nelze blokovat administrátorský účet ani aktuálního uživatele!"
+    end
+
+    redirect_to users_path, notice: state
+  end
+
+  def unblock
+    @user = User.find(params[:id])
+    state = NIL;
+    # jen pro jistotu. Admin by nemel byt nikdy zablokovany a blokovany uzivatel
+    # by se neprihlasil (nebyl by current).
+    if (!is_admin(@user) && !is_current_user(@user))
+      @user.active = true
+      if !@user.save
+        state = "Odblokování uživatele selhalo!"
+      end
+    else
+      state = "Nelze odblokovat administrátorský účet ani aktuálního uživatele!"
+    end
+
+    redirect_to users_path, notice: state
   end
 end
