@@ -25,15 +25,26 @@ ActiveRecord::Schema.define(:version => 20121121183220) do
   add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
 
   create_table "recipes", :force => true do |t|
-    t.string   "name",       :null => false
-    t.text     "annotation", :null => false
-    t.text     "content",    :null => false
-    t.integer  "user_id",    :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "name",                           :null => false
+    t.text     "annotation",                     :null => false
+    t.text     "content",                        :null => false
+    t.integer  "level",          :default => 0,  :null => false
+    t.integer  "estimated_time", :default => 60, :null => false
+    t.integer  "user_id",                        :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   add_index "recipes", ["user_id"], :name => "index_recipes_on_user_id"
+
+  create_table "roles", :force => true do |t|
+    t.string   "name",        :null => false
+    t.string   "title",       :null => false
+    t.text     "description", :null => false
+    t.text     "the_role",    :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "username",                                      :null => false

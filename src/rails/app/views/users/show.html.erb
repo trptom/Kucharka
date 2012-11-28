@@ -21,15 +21,13 @@
 </p>
 
 <p>
-  <b>Role</b>
-  <%= @user.role != nil ? @user.role.name : "---" %>
+  <b>Práva</b>
+  <%= @user.self_ruleset %>
+  ,
+  <%= @user.others_ruleset %>
 </p>
 
 <p>
   <b>Aktivní</b>
   <%= print_bool(:bool => @user.active) %>
 </p>
-
-<% render_edit_button(@user, nil, ' | ') %>
-<%= link_to 'Zpět', :back %>
-<% render_list_button(' | ', nil) %>
