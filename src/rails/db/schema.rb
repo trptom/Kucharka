@@ -14,10 +14,10 @@
 ActiveRecord::Schema.define(:version => 20121121183220) do
 
   create_table "articles", :force => true do |t|
-    t.string   "title"
-    t.text     "annotation"
-    t.text     "content"
-    t.integer  "user_id"
+    t.string   "title",      :null => false
+    t.text     "annotation", :null => false
+    t.text     "content",    :null => false
+    t.integer  "user_id",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -25,31 +25,23 @@ ActiveRecord::Schema.define(:version => 20121121183220) do
   add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
 
   create_table "recipes", :force => true do |t|
-    t.string   "name"
-    t.text     "annotation"
-    t.text     "content"
-    t.integer  "user_id"
+    t.string   "name",       :null => false
+    t.text     "annotation", :null => false
+    t.text     "content",    :null => false
+    t.integer  "user_id",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   add_index "recipes", ["user_id"], :name => "index_recipes_on_user_id"
 
-  create_table "roles", :force => true do |t|
-    t.string   "name",        :null => false
-    t.string   "title",       :null => false
-    t.text     "description", :null => false
-    t.text     "the_role",    :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "users", :force => true do |t|
     t.string   "username",                                      :null => false
     t.string   "email",                                         :null => false
     t.string   "crypted_password",                              :null => false
     t.string   "salt"
-    t.integer  "role_id"
+    t.integer  "self_ruleset",                :default => 0,    :null => false
+    t.integer  "others_ruleset",              :default => 0,    :null => false
     t.string   "first_name"
     t.string   "second_name"
     t.string   "age"

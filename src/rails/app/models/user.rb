@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :recipes
   has_many :articles
 
-  attr_accessible :username, :email, :password, :password_confirmation, :first_name, :second_name, :age, :note, :active, :role_id, :activation_state, :activation_token, :activation_token_expires_at
+  attr_accessible :username, :email, :password, :password_confirmation, :first_name, :second_name, :age, :note, :active, :self_ruleset, :others_ruleset, :activation_state, :activation_token, :activation_token_expires_at
 
   validates_length_of :username, :minimum => 3, :message => "minimální delka uživatelského jména: 3 znaky", :if => :username
   validates_length_of :password, :minimum => 3, :message => "minimální délka hesla: 3 znaky", :if => :password

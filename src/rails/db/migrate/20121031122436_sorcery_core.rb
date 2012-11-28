@@ -5,7 +5,8 @@ class SorceryCore < ActiveRecord::Migration
       t.string :email,            :null => false
       t.string :crypted_password, :null => false
       t.string :salt,             :default => nil
-      t.integer :role_id,         :default => nil
+      t.integer :self_ruleset,    :default => 0, :null => false
+	  t.integer :others_ruleset,  :default => 0, :null => false
       t.string :first_name,       :default => nil
       t.string :second_name,      :default => nil
       t.string :age,              :default => nil
