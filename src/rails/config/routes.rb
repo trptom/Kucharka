@@ -16,7 +16,6 @@ PokusSorcery::Application.routes.draw do
     end
   end
   resources :user_sessions
-  resources :roles
   resources :recipes
   resources :articles
 

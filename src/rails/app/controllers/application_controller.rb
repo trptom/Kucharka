@@ -3,7 +3,6 @@ require "#{Rails.root}/app/helpers/application_helper"
 include ApplicationHelper
 
 class ApplicationController < ActionController::Base
-  include TheRole::Requires # pracuju s rolemi
 
   protect_from_forgery
 
