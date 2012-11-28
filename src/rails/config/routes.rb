@@ -1,4 +1,8 @@
 PokusSorcery::Application.routes.draw do
+  resources :comments
+
+  resources :ingrediences
+
   resources :articles
 
   get "home/index"

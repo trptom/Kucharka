@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @ingredience.name %>
+</p>
+
+<p>
+  <b>Annotation:</b>
+  <%= @ingredience.annotation %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @ingredience.content %>
+</p>
+
+<p>
+  <b>Avaliability:</b>
+  <%= @ingredience.avaliability %>
+</p>
+
+<p>
+  <b>Autor:</b>
+  <%= @ingredience.user.username %>
+</p>
+
+
+<%= link_to 'Edit', edit_ingredience_path(@ingredience) %> |
+<%= link_to 'Back', ingrediences_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121121183220) do
+ActiveRecord::Schema.define(:version => 20121128202438) do
 
   create_table "articles", :force => true do |t|
     t.string   "title",      :null => false
@@ -23,6 +23,35 @@ ActiveRecord::Schema.define(:version => 20121121183220) do
   end
 
   add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
+
+  create_table "comments", :force => true do |t|
+    t.string   "title",          :null => false
+    t.text     "content",        :null => false
+    t.integer  "user_id",        :null => false
+    t.integer  "comment_type",   :null => false
+    t.integer  "recipe_id"
+    t.integer  "ingredience_id"
+    t.integer  "article_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "comments", ["article_id"], :name => "index_comments_on_article_id"
+  add_index "comments", ["ingredience_id"], :name => "index_comments_on_ingredience_id"
+  add_index "comments", ["recipe_id"], :name => "index_comments_on_recipe_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "ingrediences", :force => true do |t|
+    t.string   "name",                        :null => false
+    t.text     "annotation",                  :null => false
+    t.text     "content",                     :null => false
+    t.integer  "avaliability", :default => 1, :null => false
+    t.integer  "user_id",                     :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  add_index "ingrediences", ["user_id"], :name => "index_ingrediences_on_user_id"
 
   create_table "recipes", :force => true do |t|
     t.string   "name",                           :null => false

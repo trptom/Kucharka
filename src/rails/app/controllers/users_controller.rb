@@ -114,6 +114,11 @@ class UsersController < ApplicationController
   def recipes
     @user = User.find(params[:id] ? params[:id] : current_user.id)
     @recipes = @user.recipes;
+    @commented = Recipe.all
+    @marked = Recipe.all
+    #Question.all(:select => "id, name",
+    #:conditions => ["id not in (select question_id from levels_questions where level_id=15)"])
+    #@commented = Recipe.find(:user_id => @iser.id)
 
     respond_to do |format|
       format.html

@@ -1,0 +1,25 @@
+<%
+# vyzaduje mit nastavene @comments. Pokud ano, vypise komentare.
+%>
+
+<legend class="spacer"></legend>
+<div>
+  <dl class="spacer">
+    <% @comments.each do |comment| %>
+      <dt>
+        <i class="icon-user"></i>
+        <td>
+          <%= comment.user.username %>
+        </td>
+        psal v
+        <%= comment.created_at %>
+        <%= button_to "×", comment, method: :delete, data: { confirm: 'Are you sure?' }, :class => "close" %>
+      </dt><!--pro odstraneni komentáru-->
+      <dd>
+        <div class="well dark">
+          <td><%= comment.content %></td>
+        </div>
+      </dd>
+    <% end %>
+  </dl>
+</div>

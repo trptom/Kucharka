@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @comment.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @comment.content %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @comment.user %>
+</p>
+
+<p>
+  <b>Recipe:</b>
+  <%= @comment.recipe %>
+</p>
+
+<p>
+  <b>Ingredience:</b>
+  <%= @comment.ingredience %>
+</p>
+
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= link_to 'Back', comments_path %>

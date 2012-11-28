@@ -19,3 +19,6 @@
   <b>Autor:</b>
   <%= link_to @recipe.user.username, @recipe.user %>
 </p>
+
+<%= render "comments/list" %>
+<%= render "comments/form" %>

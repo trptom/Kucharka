@@ -1,0 +1,19 @@
+<%= form_for(@comment) do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="spacer">
+    <h4>Napsat komentář</h4>
+    <%= f.text_area :content, :class => "input-block-level", :rows => "5" %>
+    <%= f.submit "Odeslat komentář", :class => "btn" %>
+  </div>
+<% end %>
