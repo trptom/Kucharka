@@ -19,3 +19,8 @@
   <b>Autor:</b>
   <%= link_to @article.user.username, @article.user %>
 </p>
+
+<legend class="spacer"></legend>
+
+<%= render "comments/list" %>
+<%= render "comments/form" %>

@@ -25,6 +25,7 @@
   <%= @ingredience.user.username %>
 </p>
 
+<legend class="spacer"></legend>
 
-<%= link_to 'Edit', edit_ingredience_path(@ingredience) %> |
-<%= link_to 'Back', ingrediences_path %>
+<%= render "comments/list" %>
+<%= render "comments/form" %>

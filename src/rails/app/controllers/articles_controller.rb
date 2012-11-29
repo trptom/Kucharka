@@ -15,6 +15,15 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
 
+    # seznam komentaru pro clanek
+    @comments = Comment.where(:comment_type => COMMENT_TYPE['articles'], :article_id => @article.id)
+
+    # entita na pridani noveho komentare
+    @comment = Comment.new
+    @comment.comment_type = COMMENT_TYPE['articles']
+    @comment.user = current_user
+    @comment.article = @article
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @article }
@@ -41,6 +50,7 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(params[:article])
+    @article.user = current_user
 
     respond_to do |format|
       if @article.save

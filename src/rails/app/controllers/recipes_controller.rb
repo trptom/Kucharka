@@ -13,8 +13,15 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+
+    # seznam komentaru pto recept
     @comments = Comment.where(:comment_type => COMMENT_TYPE['recipes'], :recipe_id => @recipe.id)
-    @comment = Comment.new # entita na pridani noveho komentare
+
+    # entita na pridani noveho komentare
+    @comment = Comment.new
+    @comment.comment_type = COMMENT_TYPE['recipes']
+    @comment.user = current_user
+    @comment.recipe = @recipe
 
     respond_to do |format|
       format.html # show.html.erb

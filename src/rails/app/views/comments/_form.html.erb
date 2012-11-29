@@ -13,6 +13,11 @@
 
   <div class="spacer">
     <h4>Napsat komentář</h4>
+    <%= f.hidden_field :comment_type %>
+    <%= f.hidden_field :user_id %>
+    <%= f.hidden_field :recipe_id %>
+    <%= f.hidden_field :article_id %>
+    <%= f.hidden_field :ingredience_id %>
     <%= f.text_area :content, :class => "input-block-level", :rows => "5" %>
     <%= f.submit "Odeslat komentář", :class => "btn" %>
   </div>

@@ -1,8 +1,6 @@
 <%
 # vyzaduje mit nastavene @comments. Pokud ano, vypise komentare.
 %>
-
-<legend class="spacer"></legend>
 <div>
   <dl class="spacer">
     <% @comments.each do |comment| %>
@@ -13,7 +11,12 @@
         </td>
         psal v
         <%= comment.created_at %>
-        <%= button_to "×", comment, method: :delete, data: { confirm: 'Are you sure?' }, :class => "close" %>
+        <button class="close" </button>
+        <%= form_for(comment, method: :delete) do |f| %>
+          <% content_tag(:button, :type => :submit, :class => "close") do %>
+             ×
+          <% end %>
+        <% end %>
       </dt><!--pro odstraneni komentáru-->
       <dd>
         <div class="well dark">

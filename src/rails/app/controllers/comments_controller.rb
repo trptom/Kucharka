@@ -41,12 +41,6 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(params[:comment])
-    @comment.comment_type = COMMENT_TYPE['recipes']
-    @comment.user = current_user
-    @comment.recipe = Recipe.find(1)
-    
-    #TODO odstranit - yatim nemam navrh na obrazovku s title
-    @comment.title = @comment.title ? @comment.title : ""
 
     respond_to do |format|
       if @comment.save

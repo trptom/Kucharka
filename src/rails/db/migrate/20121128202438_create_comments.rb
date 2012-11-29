@@ -1,7 +1,6 @@
 class CreateComments < ActiveRecord::Migration
   def self.up
     create_table :comments do |t|
-      t.string :title,            :null => false
       t.text :content,            :null => false
       t.references :user,         :null => false
       t.integer :comment_type,    :null => false
