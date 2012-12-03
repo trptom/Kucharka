@@ -46,4 +46,15 @@ body {
     background-color: rgb(245,155,56);
 }
 
+.x{
+    color: grey;
+    font-weight: lighter;
+    
+}
 
+.x:hover{
+    cursor: pointer;
+    color: grey;
+    font-weight: bolder;
+    text-decoration: none;
+}
