@@ -1685,7 +1685,8 @@
 
       this.$menu.css({
         top: pos.top + pos.height
-      , left: pos.left
+      , left: pos.left,
+      'z-index': 9999
       })
 
       this.$menu.show()

@@ -4,100 +4,140 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Kucharka</title>
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="bootstrap/css/plus.css" rel="stylesheet">
-  </head>
-  <body>
-      
-      <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Nejnovší recepty</a></li>
-                        <li><a href="#">Help</a></li>        
-                    </ul>
-                    <form class="navbar-search pull-right form-search">
-                        <div class="input-append">
-                        <input type="text" class="search-query" placeholder="Search">
-                        <button type="submit" class="btn">Search</button>
-                        </div>
-                    </form>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Kucharka</title>
+        <!-- Bootstrap -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="bootstrap/css/plus.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Nejnovší recepty</a></li>
+                            <li><a href="#">Help</a></li>        
+                        </ul>
+                        <form class="navbar-search pull-right form-search">
+                            <div class="input-append">
+                                <input type="text" class="search-query" placeholder="Search">
+                                <button type="submit" class="btn">Search</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-      </div>
-      
-      <header>
-          <div class="container">
-              <h1>Kuchářka</h1>
-              <p>Strucny popis stranky, nejake motto; tento pozadi este zmenime</p>
-              <p>
-                  <a class="btn btn-primary btn-large" href="#login" role="button" data-toggle="modal">Přihlášení</a>
-                  <a class="btn btn-large">Registrace <i class="icon-play"></i></a>
-              </p>
-          </div>
-      </header>
-      
-      
-      <div class="container-fluid">
-          <div class="row-fluid">
-              <div class="span3">
-                  <div class="well">
-                      <form>
-                          <legend>Lednička</legend>
-                          <input type="text" placeholder="Ingredience">
-                          <button type="submit" class="btn">Přidat ingredience</button>
-                      </form>
-                      <form id="lednicka">
-                          <span class="label">musime</span>
-                          <span class="label">asi</span>
-                          <span class="label">napsat</span>
-                          <span class="label">javascript</span>
-                          <span class="label">aby se dalo</span>
-                          <span class="label">pridat</span>
-                          <span class="label">ingredience</span>
-                          <p></p>
-                          <legend></legend>
-                          <button type="submit" class="btn">Vyhledat recept</button>
-                      </form>
-                  </div>      
-              </div>
-              
-              
-              <div class="span8">
-                  <div class="well">
-                  <h2>Content</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor pretium posuere. Aliquam erat volutpat. Nullam malesuada sagittis enim, vel rhoncus quam auctor et. Nunc luctus adipiscing fringilla. Mauris urna turpis, accumsan ut molestie non, elementum eu diam. Vestibulum vitae risus eu metus imperdiet mollis at at ante. Phasellus facilisis risus et velit tincidunt at tincidunt nisi porta. Nam lacinia ullamcorper lobortis. Curabitur tempus convallis sapien, id congue arcu porta nec. Nulla facilisi. Sed ultrices orci vel lacus mollis quis laoreet nisi tempus. Proin in felis mi, sit amet posuere magna. Nunc leo velit, commodo vel dignissim ut, malesuada eget eros.</p>
-                  <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam cursus sem quis libero consequat eget dignissim mi sagittis. Suspendisse a orci non purus aliquet faucibus et sed mi. Nunc at est id magna congue sagittis. Integer hendrerit, quam id aliquam pellentesque, quam arcu venenatis massa, quis blandit magna augue nec mauris. Integer augue massa, vulputate vitae dapibus bibendum, tincidunt quis ipsum. Praesent porttitor augue ac orci dignissim et fermentum tortor pretium. Sed nisl sem, sodales at bibendum dictum, aliquam auctor eros. Donec sit amet nunc purus. Integer malesuada libero sed massa adipiscing a adipiscing nisl commodo. Sed posuere auctor adipiscing. Quisque nec odio ante, eget tempus turpis.</p>
-                  <p>Proin interdum lacinia libero, ac blandit metus pretium non. Nam lacinia sagittis ante, id eleifend ante vestibulum at. Nulla sit amet lorem eget tellus molestie dictum. In vulputate purus nec mi euismod ut auctor odio commodo. Etiam et erat eleifend ligula vehicula laoreet nec id nibh. Nam imperdiet rhoncus accumsan. Aenean id purus mauris. Donec mollis leo eget mi vehicula nec commodo erat aliquam. Sed eu risus nulla, vehicula fermentum lacus. Cras accumsan aliquam rutrum. Aliquam sit amet erat non urna pharetra mollis.</p>
-                  <p>In imperdiet, arcu et congue rutrum, leo lacus pulvinar sapien, at tempus purus ligula aliquam ipsum. Sed a adipiscing justo. Ut id justo mauris, quis dignissim velit. Sed vulputate felis erat. Donec tincidunt enim ac odio mattis sit amet condimentum risus ultricies. Morbi porta lectus ut purus venenatis porttitor. Aenean tincidunt scelerisque quam et hendrerit. Donec purus quam, malesuada non dapibus vitae, tempus ac eros. Integer ut dui ut justo aliquet consectetur id vel nunc. Donec vulputate dictum felis eget tristique. Cras gravida ligula a enim porttitor placerat. Vestibulum fermentum suscipit aliquet. Praesent id elit ac quam porttitor sagittis non ac leo. Duis felis tellus, ultrices at lobortis eu, consequat et ante. Ut tempor adipiscing leo, nec porta dui tincidunt eu. Suspendisse blandit malesuada tortor, vehicula tempor sem sagittis eu.</p>
-                  <p>Integer lacus elit, pulvinar non luctus ut, congue et augue. Duis tristique hendrerit ante mattis dapibus. Etiam vitae quam id ante varius vehicula. Integer vehicula volutpat nisi, at accumsan quam viverra lobortis. Nam justo leo, gravida eget fringilla quis, consequat at risus. Duis dapibus cursus magna, id imperdiet nulla mattis et. Mauris sem ligula, aliquam at posuere eget, ultricies eu justo. Nulla et metus accumsan lorem sollicitudin dapibus eget at justo.</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-      
-      
-      
-      
-      <!--Modal window pro prihlaseni-->
-      <div id="login" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-header">
+
+        <header>
+            <div class="container">
+                <h1>Kuchářka</h1>
+                <p><strong>Chcete vařit? Nemusíte jít ani do obchodu. Vyzkoušejte naše ledničku.</strong></p>
+                <p>
+                    <a href="#lednicka" role="button" class="btn btn-large btn-primary" data-toggle="modal">Lednička</a>
+                    <a class="btn btn-large" href="#login" role="button" data-toggle="modal">Přihlášení</a>
+                    <a class="btn btn-large">Registrace <i class="icon-play"></i></a>
+                </p>
+            </div>
+        </header>
+
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+
+
+
+                <div class="span10 offset1">
+                    <div class="well">
+                        <h2>Content</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor pretium posuere. Aliquam erat volutpat. Nullam malesuada sagittis enim, vel rhoncus quam auctor et. Nunc luctus adipiscing fringilla. Mauris urna turpis, accumsan ut molestie non, elementum eu diam. Vestibulum vitae risus eu metus imperdiet mollis at at ante. Phasellus facilisis risus et velit tincidunt at tincidunt nisi porta. Nam lacinia ullamcorper lobortis. Curabitur tempus convallis sapien, id congue arcu porta nec. Nulla facilisi. Sed ultrices orci vel lacus mollis quis laoreet nisi tempus. Proin in felis mi, sit amet posuere magna. Nunc leo velit, commodo vel dignissim ut, malesuada eget eros.</p>
+                        <p>Nulla viverra magna ut eros semper eget luctus lectus egestas. Praesent diam ante, ultrices eget feugiat vitae, consectetur non augue. Praesent in tellus a justo consequat pharetra eu vel diam. Etiam odio enim, pulvinar in iaculis eu, bibendum id eros. Curabitur pharetra sagittis nisl in euismod. Donec interdum egestas ante nec hendrerit. Phasellus fringilla eros ut metus ornare non consectetur nisl rhoncus. Nulla risus dolor, ornare sit amet semper at, facilisis eu eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel arcu vel sapien mollis luctus. Phasellus non eros sem, laoreet aliquet orci. Vestibulum in velit mauris, id congue mauris. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris lacinia pulvinar magna vitae iaculis. Morbi tellus tortor, varius in interdum sit amet, vestibulum in quam. Morbi nibh risus, porta vitae fringilla at, accumsan quis eros. </p>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span4 well">
+                            <h3>Nejnovší recepty</h3>
+                            <div class="spacer">
+                                <img src="img/minisandwich.png" alt=""/>
+                                <p>Stručný popis receptu: blablal bla blaa bla bla bla bla labla balkfa jkbsamjasd asd</p>
+                                <a href="#">Dále >></a>
+                            </div>
+                            <div class="spacer">
+                                <img src="img/minisandwich.png" alt=""/>
+                                <p>Stručný popis receptu: blablal bla blaa bla bla bla bla labla balkfa jkbsamjasd asd</p>
+                                <a href="#">Dále >></a>
+                            </div>
+                            <div class="spacer">
+                                <img src="img/minisandwich.png" alt=""/>
+                                <p>Stručný popis receptu: blablal bla blaa bla bla bla bla labla balkfa jkbsamjasd asd</p>
+                                <a href="#">Dále >></a>
+                            </div>
+                        </div>
+
+                        <div class="span4 well">
+                            <h3>Sezonní recepty</h3>
+                            <div class="spacer">
+                                <img src="img/minisandwich.png" alt=""/>
+                                <p>Stručný popis receptu: blablal bla blaa bla bla bla bla labla balkfa jkbsamjasd asd</p>
+                                <a href="#">Dále >></a>
+                            </div>
+                            <div class="spacer">
+                                <img src="img/minisandwich.png" alt=""/>
+                                <p>Stručný popis receptu: blablal bla blaa bla bla bla bla labla balkfa jkbsamjasd asd</p>
+                                <a href="#">Dále >></a>
+                            </div>
+                            <div class="spacer">
+                                <img src="img/minisandwich.png" alt=""/>
+                                <p>Stručný popis receptu: blablal bla blaa bla bla bla bla labla balkfa jkbsamjasd asd</p>
+                                <a href="#">Dále >></a>
+                            </div>
+                        </div>
+
+                        <div class="span4 well">
+                            <h3>Nejlepší recepty</h3>
+                            <div class="spacer">
+                                <img src="img/minisandwich.png" alt=""/>
+                                <p>Stručný popis receptu: blablal bla blaa bla bla bla bla labla balkfa jkbsamjasd asd</p>
+                                <a href="#">Dále >></a>
+                            </div>
+                            <div class="spacer">
+                                <img src="img/minisandwich.png" alt=""/>
+                                <p>Stručný popis receptu: blablal bla blaa bla bla bla bla labla balkfa jkbsamjasd asd</p>
+                                <a href="#">Dále >></a>
+                            </div>
+                            <div class="spacer">
+                                <img src="img/minisandwich.png" alt=""/>
+                                <p>Stručný popis receptu: blablal bla blaa bla bla bla bla labla balkfa jkbsamjasd asd</p>
+                                <a href="#">Dále >></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+        <!--Modal window pro prihlaseni-->
+        <div id="login" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3 id="myModalLabel">Přihlášení</h3>
             </div>
             <div class="modal-body">
                 <form>
-                    
+
                     <div class="controls controls-row">
                         <div class="span2 offset1">
                             <label>Uživatelské jméno</label>
@@ -114,20 +154,48 @@ and open the template in the editor.
                 <button class="btn" tabindex="-1">Zapoměl jsem heslo</button>
                 <button class="btn btn-primary" data-dismiss="modal">Přihlásit se</button>
             </div>
-      </div>
-      
-      <legend class="spacer"></legend>
-      <footer class="footer spacer">
+        </div>
+
+        <div id="lednicka" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mylednicka" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>Lednička</h3>
+
+            </div>
+            <div class="modal-body">
+                <p>Přidejte suroviny, co máte doma, a my vyhledáme za Vás recept.</p>
+                <form>
+                    <input type="text" placeholder="Ingredience" data-provide="typeahead" data-items="4" data-source='["Ax","Ay","Bx","By","Cx","Cy","Dx"]'>
+                    <p></p>
+                    <button type="submit" class="btn">Přidat ingredience</button>
+                </form>
+                <form id="ingredience">
+                    <span class="label">musime</span>
+                    <span class="label">asi</span>
+                    <span class="label">napsat</span>
+                    <span class="label">javascript</span>
+                    <span class="label">aby se dalo</span>
+                    <span class="label">pridat</span>
+                    <span class="label">ingredience</span>
+                    <legend class="spacer"></legend>
+                    <button type="submit" class="btn">Vyhledat recept</button>
+                </form>
+            </div>
+        </div>
+
+
+
+    <footer class="footer">
         <div class="container">
             <p class="pull-right"><a href="#">Zpět na začátku</a></p>
             <p>&copy Kuchařka</p>
             <p>Kontaktujte nás <a href="mailto:kucharka@xyz.cz">kucharka@xyz.cz</a></p>
         </div>
-      </footer>
-      
-      
-      <script src="http://code.jquery.com/jquery-latest.js"></script>
-      <script src="bootstrap/js/bootstrap.js"></script>
-      <script src="bootstrap/js/lednicka.js"></script>
-  </body>
+    </footer>
+
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="bootstrap/js/lednicka.js"></script>
+</body>
 </html>

@@ -47,35 +47,18 @@ and open the template in the editor.
       </div>
       
       <header>
-          <div class="container">
-              <h1>Kuchářka</h1>
-              <p>Strucny popis stranky, nejake motto; tento pozadi este zmenime</p>
-          </div>
-      </header>
+            <div class="container">
+                <h1>Kuchářka</h1>
+                <p><strong>Chcete vařit? Nemusíte jít ani do obchodu. Vyzkoušejte naše ledničku.</strong></p>
+                <a href="#lednicka" role="button" class="btn btn-large btn-primary" data-toggle="modal">Lednička</a>
+            </div>
+        </header>
       
       
       <div class="container-fluid">
           <div class="row-fluid">
               <div class="span3">
-                  <div class="well">
-                      <form>
-                          <legend>Lednička</legend>
-                          <input type="text" placeholder="Ingredience">
-                          <button type="submit" class="btn">Přidat ingredience</button>
-                      </form>
-                      <form id="lednicka">
-                          <span class="label">musime</span>
-                          <span class="label">asi</span>
-                          <span class="label">napsat</span>
-                          <span class="label">javascript</span>
-                          <span class="label">aby se dalo</span>
-                          <span class="label">pridat</span>
-                          <span class="label">ingredience</span>
-                          <p></p>
-                          <legend></legend>
-                          <button type="submit" class="btn">Vyhledat recept</button>
-                      </form>
-                  </div>
+                  
                   
                   <div class="well">
                         <legend>Podat žádost na ingredienci</legend>
@@ -117,6 +100,19 @@ and open the template in the editor.
                         </dl>
                         <label class="spacer">Popis receptu</label>
                         <textarea rows="10" class="input-block-level"></textarea>
+                        
+                        <label>Vybrat složitost</label>
+                        <select>
+                            <option>Nejjednodušší</option>
+                            <option>Jednoduchý</option>
+                            <option>Střední</option>
+                            <option>Složitý</option>
+                            <option>Killer</option>
+                        </select>
+                        
+                        <label>Potřebný čas</label>
+                        <input type="time"/>
+                        <p></p>
                         <button class="btn">Vytvořit recept</button>
                       </form>
                   </div>
@@ -125,8 +121,35 @@ and open the template in the editor.
           </div>
       </div>
       
-      <legend class="spacer"></legend>
-      <footer class="footer spacer">
+      <div id="lednicka" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mylednicka" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>Lednička</h3>
+                
+            </div>
+            <div class="modal-body">
+                <p>Přidejte suroviny, co máte doma, a my vyhledáme za Vás recept.</p>
+                <form>
+                    <input type="text" placeholder="Ingredience" data-provide="typeahead" data-items="4" data-source='["Ax","Ay","Bx","By","Cx","Cy","Dx"]'>
+                    <p></p>
+                    <button type="submit" class="btn">Přidat ingredience</button>
+                </form>
+                <form id="ingredience">
+                    <span class="label">musime</span>
+                    <span class="label">asi</span>
+                    <span class="label">napsat</span>
+                    <span class="label">javascript</span>
+                    <span class="label">aby se dalo</span>
+                    <span class="label">pridat</span>
+                    <span class="label">ingredience</span>
+                    <legend class="spacer"></legend>
+                    <button type="submit" class="btn">Vyhledat recept</button>
+                </form>
+            </div>
+        </div>
+
+      
+      <footer class="footer">
         <div class="container">
             <p class="pull-right"><a href="#">Zpět na začátku</a></p>
             <p>&copy Kuchařka</p>
