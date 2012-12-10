@@ -5,13 +5,28 @@
 
 $(document).ready(function(){
     $('#addButton').click(function(){
-        var text = $('#inputIngr').val();
-        if(text != ""){
-        $('#ingredience').append('<a class="x"><span class ="label">'+ text +'</span><i class="icon-remove"></a>');
-        $('#inputIngr').val("");
+        var text = $('#toAdd').val();
+        
+        var exists = false;
+        
+        $('#toRemove option').each(function(){
+           if(this.value == text){
+               exists = true;
+           } 
+        });
+        
+        if(!exists){
+            $('#toRemove').append('<option>' + text + '</option>');
         }
     });
 });
+
+$(document).ready(function(){
+    $('#removeButton').click(function(){
+        $('#toRemove option:selected').remove();
+    });
+});
+
 
 $(document).ready(function(){
     $('.x').live('click', function(){
