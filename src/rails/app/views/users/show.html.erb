@@ -1,33 +1,37 @@
-<p>Detail uživatele</p>
+<div class="span10 offset1">
+  <div class="well">
+    <p>Detail uživatele</p>
 
-<p>
-  <b>Username:</b>
-  <%= @user.username %>
-</p>
+    <p>
+      <b>Username:</b>
+      <%= @user.username %>
+    </p>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+    <p>
+      <b>Email:</b>
+      <%= @user.email %>
+    </p>
 
-<p>
-  <b>Jméno:</b>
-  <%= (@user.first_name ? @user.first_name : "") + " " + (@user.second_name ? @user.second_name : "") %>
-</p>
+    <p>
+      <b>Jméno:</b>
+      <%= (@user.first_name ? @user.first_name : "") + " " + (@user.second_name ? @user.second_name : "") %>
+    </p>
 
-<p>
-  <b>Poznámka</b>
-  <%= get_att_str(@user.note) %>
-</p>
+    <p>
+      <b>Poznámka</b>
+      <%= get_att_str(@user.note) %>
+    </p>
 
-<p>
-  <b>Práva</b>
-  <%= @user.self_ruleset %>
-  ,
-  <%= @user.others_ruleset %>
-</p>
+    <p>
+      <b>Práva</b>
+      <%= @user.self_ruleset %>
+      ,
+      <%= @user.others_ruleset %>
+    </p>
 
-<p>
-  <b>Aktivní</b>
-  <%= print_bool(:bool => @user.active) %>
-</p>
+    <p>
+      <b>Aktivní</b>
+      <%= print_bool(:bool => @user.active) %>
+    </p>
+  </div>
+</div>

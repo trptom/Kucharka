@@ -1,19 +1,42 @@
-<div class="well">
-  <div>
-    <legend>Lednička</legend>
-    <input type="text" placeholder="Ingredience" />
-    <button type="submit" class="btn">Přidat ingredience</button>
+<div id="lednicka" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mylednicka" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Lednička</h3>
   </div>
-  <form id="lednicka" action="">
-    <span class="label">musime</span>
-    <span class="label">asi</span>
-    <span class="label">napsat</span>
-    <span class="label">javascript</span>
-    <span class="label">aby se dalo</span>
-    <span class="label">pridat</span>
-    <span class="label">ingredience</span>
-    <p></p>
-    <legend></legend>
-    <button type="submit" class="btn">Vyhledat recept</button>
-  </form>
+  <div class="modal-body">
+    <p>Přidejte suroviny, co máte doma, a my vyhledáme za Vás recept.</p>
+    <form>
+      <div class="input-append">
+        <input class="span2" id="appendedInputButton" type="text" />
+        <button class="btn" type="button">Vyhledat</button>
+      </div>
+      <p></p>
+      <div class="row-fluid">
+        <div class="span5">
+          <h5>Výsledky hledání</h5>
+          <select id="toAdd" multiple="multiple" style="height: 100px;">
+            <option>jedna</option>
+            <option>dva</option>
+            <option>tri</option>
+            <option>ctyry</option>
+          </select>
+          <button class="btn" id="addButton" type="button">Přidat ingredience</button>
+        </div>
+        <div class="span5 offset1">
+          <h5>Co máte doma</h5>
+          <select id="toRemove" multiple="multiple" style="height: 100px;">
+
+          </select>
+          <button class="btn" id="removeButton" type="button">Odebrat ingredience</button>
+        </div>
+      </div>
+    </form>
+    <form>
+      <div id="ingredience">
+
+      </div>
+      <legend class="spacer"></legend>
+      <button type="submit" class="btn">Vyhledat recept</button>
+    </form>
+  </div>
 </div>

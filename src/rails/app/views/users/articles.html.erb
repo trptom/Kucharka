@@ -1,19 +1,25 @@
-<h2>Moje recepty</h2>
-<div class="row-fluid spacer">
-  <div class="span5">
-    <legend>Napsané články</legend>
-    <ul class="unstyled">
-      <% @articles.each do |article| %>
-        <li><%= link_to article.title, article_path(article) %> - <%= article.created_at  %></li>
-      <% end %>
-    </ul>
-    <a class="btn spacer" href="<%= new_article_path %> "><i class="icon-pencil"></i> Napsat nový článek</a>
-  </div>
+<div class="span10 offset1">
+  <div class="span10 offset1">
+    <div class="well">
+      <h2>Moje recepty</h2>
+      <div class="row-fluid spacer">
+        <div class="span5">
+          <legend>Napsané články</legend>
+          <ul class="unstyled">
+            <% @articles.each do |article| %>
+              <li><%= link_to article.title, article_path(article) %> - <%= article.created_at  %></li>
+            <% end %>
+          </ul>
+          <a class="btn spacer" href="<%= new_article_path %> "><i class="icon-pencil"></i> Napsat nový článek</a>
+        </div>
 
-  <div class="span6 pull-right">
-    <legend>Komentované články</legend>
-    <ul class="unstyled">
-      <li><a href="#">Komentovaný článek 1</a></li>
-    </ul>
+        <div class="span6 pull-right">
+          <legend>Komentované články</legend>
+          <ul class="unstyled">
+            <li><a href="#">Komentovaný článek 1</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

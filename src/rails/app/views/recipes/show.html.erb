@@ -1,26 +1,73 @@
-<p id="notice"><%= notice %></p>
+<div class="span3">
+  <div class="well">
+    <h4>Odkazy na podpostupy</h4>
+    <ul class="unstyled">
+      <% if @links_sub != nil %>
+        <% @links_sub.each do |link| %>
+          <%= link_to link.title, link.url %><br />
+        <% end %>
+      <% else %>
+        Žádné
+      <% end %>
+    </ul>
+    <legend></legend>
+    <h4>Zajímavé články k receptu</h4>
+    <ul class="unstyled">
+      <% if @links_interesting != nil %>
+          <% @links_interesting.each do |link| %>
+            <%= link_to link[0], link[1] %><br />
+          <% end %>
+      <% else %>
+        Žádné
+      <% end %>
+    </ul>
+  </div>
+</div>
 
-<p>
-  <b>Název:</b>
-  <%= @recipe.name %>
-</p>
+<div class="span8">
+  <div class="well">
+    <h2><%= @recipe.name %></h2>
+    <div class="row-fluid spacer">
+      <div class="span6">
+        <img src="img/sample1.jpg" class="img-rounded" alt="Náhled" />
+      </div>
+      <div class="span6">
+        <dl class="dl-horizontal">
+          <dt>Ingredience 1</dt><dd>Popis ingredience 1</dd>
+          <dt>Ingredience 2</dt><dd>Popis ingredience 2</dd>
+          <dt>Ingredience 3</dt><dd>Popis ingredience 3</dd>
+          <dt>Ingredience 4</dt><dd>Popis ingredience 4</dd>
+          <dt>Ingredience 5</dt><dd>Popis ingredience 5</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="spacer">
+      <p>Složitost:
+        <span class="badge <%= LEVEL_CLASS[@recipe.level] %>"><%= LEVEL_TEXT[@recipe.level] %></span>
+      </p>
+      <p>Odhadovaný čas: <%= @recipe.estimated_time %> min</p>
+      <p><%= @recipe.annotation %></p>
+      <p><%= @recipe.content %></p>
+    </div>
+    <div>
+      <h5>Hodnocení: xx</h5>
+      <div id="star">
+        <a id="star1" class="btn btn-small" href="#"><i class="icon-star"></i></a>
+        <a id="star2" class="btn btn-small" href="#"><i class="icon-star"></i></a>
+        <a id="star3" class="btn btn-small" href="#"><i class="icon-star"></i></a>
+        <a id="star4" class="btn btn-small" href="#"><i class="icon-star"></i></a>
+        <a id="star5" class="btn btn-small" href="#"><i class="icon-star"></i></a>
+      </div>
 
-<p>
-  <b>Anotace:</b>
-  <%= @recipe.annotation %>
-</p>
+      <label></label>
+      
+      <button class="btn">Upravit recept</button>
+      <a class="btn pull-right" href="#"><i class="icon-pencil"></i> Napsat článek</a>
+    </div>
 
-<p>
-  <b>Obsah:</b>
-  <%= @recipe.content %>
-</p>
+    <legend class="spacer"></legend>
 
-<p>
-  <b>Autor:</b>
-  <%= link_to @recipe.user.username, @recipe.user %>
-</p>
-
-<legend class="spacer"></legend>
-
-<%= render "comments/list" %>
-<%= render "comments/form" %>
+    <%= render "comments/list" %>
+    <%= render "comments/form" %>
+  </div>
+</div>

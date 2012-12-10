@@ -1,8 +1,0 @@
-<% if @links %>
-  <% if @links_title %>
-    <h4><%= @links_title %></h4>
-  <% end %>
-  <% @links.each do |link| %>
-    <%= link_to link[0], link[1] %><br />
-  <% end %>
-<% end %>

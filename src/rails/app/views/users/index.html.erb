@@ -1,37 +1,41 @@
-<h2>Správa uživatelů</h2>
+<div class="span10 offset1">
+  <div class="well">
+    <h2>Správa uživatelů</h2>
 
-<label class="spacer">Vyhledat uživatele: </label>
-<div class="input-append">
-  <input type="text" placeholder="Uživatelské jméno"/>
-  <%= button_to "Vyhledat", "/", {:method => "get", :class => "btn"} %>
-  <button class="btn">Vyhledat</button>
+    <label class="spacer">Vyhledat uživatele: </label>
+    <div class="input-append">
+      <input type="text" placeholder="Uživatelské jméno"/>
+      <%= button_to "Vyhledat", "/", {:method => "get", :class => "btn"} %>
+      <button class="btn">Vyhledat</button>
+    </div>
+
+    <table class="table table-hower spacer">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Uživatelské jméno</th>
+          <th>E-mailová adresa</th>
+          <th>Příjmení</th>
+          <th>Jméno</th>
+          <th>Blokovat/Odblokovat účet</th>
+        </tr>
+      </thead>
+      <tbody>
+    <% @users.each do |user| %>
+        <tr class="<%= index_get_row_class user %>">
+          <td><%= user.id %></td>
+          <td><%= user.username %></td>
+          <td><%= user.email %></td>
+          <td><%= user.second_name %></td>
+          <td><%= user.first_name %></td>
+          <td><%= index_get_action_button user %></td>
+        </tr>
+    <% end %>
+      </tbody>
+    </table>
+
+    <br />
+
+    <%= link_to 'New User', new_user_path %>
+  </div>
 </div>
-
-<table class="table table-hower spacer">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Uživatelské jméno</th>
-      <th>E-mailová adresa</th>
-      <th>Příjmení</th>
-      <th>Jméno</th>
-      <th>Blokovat/Odblokovat účet</th>
-    </tr>
-  </thead>
-  <tbody>
-<% @users.each do |user| %>
-    <tr class="<%= index_get_row_class user %>">
-      <td><%= user.id %></td>
-      <td><%= user.username %></td>
-      <td><%= user.email %></td>
-      <td><%= user.second_name %></td>
-      <td><%= user.first_name %></td>
-      <td><%= index_get_action_button user %></td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<br />
-
-<%= link_to 'New User', new_user_path %>

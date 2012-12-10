@@ -24,17 +24,17 @@ module ApplicationHelper
   end
 
   def show_left_panel
-    # podminky, kdy se leve menu zobrazovat nebude - je jich jen par
-    if (params[:controller] == "users" && params[:action] == "new")
-      return false
+    # podminky, kdy se leve menu zobrazovat bude - je jich jen par
+    if (params[:controller] == "recipe" && params[:action] == "show")
+      return true
     end
-    # pokud nejsou splneny podminky pro skryti, je leve menu zobrazeno
-    return true
+    # pokud nejsou splneny podminky pro zobrazeni, je leve menu schovano
+    return false
   end
 
   def get_content_class
     # trida obsahu zavisi na tom, zda je zobrazeno leve menu. Pokud ne, je zleva odsazen
-    return show_left_panel ? "span8" : "span8 offset2"
+    return show_left_panel ? "span8 offset2" : "span10 offset1"
   end
 
   def render_self_than_global(template)

@@ -40,37 +40,26 @@
   <header>
     <div class="container">
       <h1>Kuchařka</h1>
-      <p>Chcete vařit? Nemusíte jít ani do obchodu. Vyzkoušejte naši ledničku.</p>
-      <% if !current_user  %>
-        <p>
-          <a class="btn btn-primary btn-large" href="#login" role="button" data-toggle="modal">Přihlášení</a>
-          <a class="btn btn-large" href="/users/new/">Registrace <i class="icon-play"></i></a>
-        </p>
-      <% end %>
+      <p>
+        <strong>Chcete vařit? Nemusíte jít ani do obchodu. Vyzkoušejte naši ledničku.</strong>
+      </p>
+      <p>
+          <a href="#lednicka" role="button" class="btn btn-large btn-primary" data-toggle="modal">Lednička</a>
+      </p>
     </div>
   </header>
 
   <div class="container-fluid">
     <div class="row-fluid">
-      <% if show_left_panel %>
-        <div class="span3">
-          <%= render 'layouts/fridge' %>
-
-          <%= render_self_than_global 'links' %>
-        </div>
-      <% end %>
-
-      <div class="<%= get_content_class %>">
-        <div class="well">
-          <%= yield %>
-        </div>
-      </div>
+      <%= yield %>
     </div>
   </div>
 
   <% if !current_user  %>
     <%= render 'layouts/login_form' %>
   <% end %>
+
+  <%= render 'layouts/fridge' %>
 
   <legend class="spacer"></legend>
   <footer class="footer spacer">

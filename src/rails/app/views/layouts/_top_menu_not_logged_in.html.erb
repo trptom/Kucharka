@@ -1,12 +1,9 @@
-<%#= form_tag user_sessions_path, :method => :post do %>
-            <%#*<legend>Přihlášení</legend>%>
-            <%#*<label>Uživatelské jméno</label>%>
-            <%#*<input class="input-medium" name="username" type="text" placeholder="Username" />%>
-            <%#*<label>Heslo</label>%>
-            <%#*<input class="input-medium" name="password" type="password" placeholder="Password" />%>
-            <%#*<input type="submit" class="btn btn-primary" value="Přihlásit se" />%>
-            <%#*<a href="#">Zapomněl jsem heslo</a>%>
-<%# end %>
+<li>
+  <button class="btn" href="#login" role="button" data-toggle="modal">Přihlášení</button>
+</li>
+<li style="margin-left: 10px; margin-right: 10px;">
+  <button class="btn" onclick="location.href='/users/new/'">Registrace <i class="icon-play"></i></button>
+</li>
 <li><%= link_to "Home", "/" %></li>
 <li><%= link_to "Nejnovější recepty", "recipe" %></li>
 <li><%= link_to "Help", "help/index" %></li>
