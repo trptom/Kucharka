@@ -1,9 +1,9 @@
 class CreateIngredienceCategoryLinks < ActiveRecord::Migration
   def change
     create_table :ingredience_category_links do |t|
-      t.references :ingredience,          :null => false
-      t.references :ingredienceCategory,  :null => false
-      t.text :note,                       :null => true,  :default => nil
+      t.references :ingredience
+      t.references :ingredienceCategory
+      t.text; :note
 
       t.timestamps
     end

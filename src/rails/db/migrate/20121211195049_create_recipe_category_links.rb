@@ -1,9 +1,9 @@
 class CreateRecipeCategoryLinks < ActiveRecord::Migration
   def change
     create_table :recipe_category_links do |t|
-      t.references :recipe,         :null => false
-      t.references :recipeCategory, :null => false
-      t.text :note,                 :null => true,  :default => nil
+      t.references :recipe
+      t.references :recipeCategory
+      t.text; :note
 
       t.timestamps
     end

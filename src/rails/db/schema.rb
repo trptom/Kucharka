@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211201712) do
+ActiveRecord::Schema.define(:version => 20121211195049) do
 
   create_table "articles", :force => true do |t|
     t.string   "title",      :null => false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20121211201712) do
   add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
 
   create_table "comments", :force => true do |t|
+    t.string   "title",          :null => false
     t.text     "content",        :null => false
     t.integer  "user_id",        :null => false
     t.integer  "comment_type",   :null => false
@@ -41,16 +42,14 @@ ActiveRecord::Schema.define(:version => 20121211201712) do
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "ingredience_categories", :force => true do |t|
-    t.string   "name",                      :null => false
-    t.integer  "type",       :default => 0, :null => false
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "ingredience_category_links", :force => true do |t|
-    t.integer  "ingredience_id",         :null => false
-    t.integer  "ingredienceCategory_id", :null => false
-    t.text     "note"
+    t.integer  "ingredience_id"
+    t.integer  "ingredienceCategory_id"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
   end
@@ -70,59 +69,21 @@ ActiveRecord::Schema.define(:version => 20121211201712) do
 
   add_index "ingrediences", ["user_id"], :name => "index_ingrediences_on_user_id"
 
-  create_table "marks", :force => true do |t|
-    t.integer  "recipe_id",  :null => false
-    t.integer  "user_id",    :null => false
-    t.integer  "value",      :null => false
-    t.text     "note"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "marks", ["recipe_id"], :name => "index_marks_on_recipe_id"
-  add_index "marks", ["user_id"], :name => "index_marks_on_user_id"
-
-  create_table "recipe_article_links", :force => true do |t|
-    t.integer  "recipe_id",  :null => false
-    t.integer  "article_id", :null => false
-    t.text     "note"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "recipe_article_links", ["article_id"], :name => "index_recipe_article_links_on_article_id"
-  add_index "recipe_article_links", ["recipe_id"], :name => "index_recipe_article_links_on_recipe_id"
-
   create_table "recipe_categories", :force => true do |t|
-    t.string   "name",                      :null => false
-    t.integer  "type",       :default => 0, :null => false
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "recipe_category_links", :force => true do |t|
-    t.integer  "recipe_id",         :null => false
-    t.integer  "recipeCategory_id", :null => false
-    t.text     "note"
+    t.integer  "recipe_id"
+    t.integer  "recipeCategory_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end
 
   add_index "recipe_category_links", ["recipeCategory_id"], :name => "index_recipe_category_links_on_recipeCategory_id"
   add_index "recipe_category_links", ["recipe_id"], :name => "index_recipe_category_links_on_recipe_id"
-
-  create_table "recipe_ingredience_links", :force => true do |t|
-    t.integer  "recipe_id",                     :null => false
-    t.integer  "ingredience_id",                :null => false
-    t.integer  "importance",     :default => 1, :null => false
-    t.integer  "quantity",       :default => 1, :null => false
-    t.text     "note"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-  end
-
-  add_index "recipe_ingredience_links", ["ingredience_id"], :name => "index_recipe_ingredience_links_on_ingredience_id"
-  add_index "recipe_ingredience_links", ["recipe_id"], :name => "index_recipe_ingredience_links_on_recipe_id"
 
   create_table "recipes", :force => true do |t|
     t.string   "name",                           :null => false

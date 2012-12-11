@@ -1,10 +1,4 @@
 PokusSorcery::Application.routes.draw do
-  resources :marks
-
-  resources :recipe_ingredience_links
-
-  resources :recipe_article_links
-
   resources :recipe_category_links
 
   resources :ingredience_category_links
