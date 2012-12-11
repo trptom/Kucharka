@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128202438) do
+ActiveRecord::Schema.define(:version => 20121211195049) do
 
   create_table "articles", :force => true do |t|
     t.string   "title",      :null => false
@@ -41,6 +41,22 @@ ActiveRecord::Schema.define(:version => 20121128202438) do
   add_index "comments", ["recipe_id"], :name => "index_comments_on_recipe_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
+  create_table "ingredience_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "ingredience_category_links", :force => true do |t|
+    t.integer  "ingredience_id"
+    t.integer  "ingredienceCategory_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  add_index "ingredience_category_links", ["ingredienceCategory_id"], :name => "index_ingredience_category_links_on_ingredienceCategory_id"
+  add_index "ingredience_category_links", ["ingredience_id"], :name => "index_ingredience_category_links_on_ingredience_id"
+
   create_table "ingrediences", :force => true do |t|
     t.string   "name",                        :null => false
     t.text     "annotation",                  :null => false
@@ -52,6 +68,22 @@ ActiveRecord::Schema.define(:version => 20121128202438) do
   end
 
   add_index "ingrediences", ["user_id"], :name => "index_ingrediences_on_user_id"
+
+  create_table "recipe_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "recipe_category_links", :force => true do |t|
+    t.integer  "recipe_id"
+    t.integer  "recipeCategory_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "recipe_category_links", ["recipeCategory_id"], :name => "index_recipe_category_links_on_recipeCategory_id"
+  add_index "recipe_category_links", ["recipe_id"], :name => "index_recipe_category_links_on_recipe_id"
 
   create_table "recipes", :force => true do |t|
     t.string   "name",                           :null => false

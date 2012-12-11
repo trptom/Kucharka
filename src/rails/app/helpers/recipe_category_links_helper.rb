@@ -1,0 +1,2 @@
+module RecipeCategoryLinksHelper
+end

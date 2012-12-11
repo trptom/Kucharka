@@ -1,0 +1,27 @@
+<h1>Listing recipe_category_links</h1>
+
+<table>
+  <tr>
+    <th>Recipe</th>
+    <th>Recipecategory</th>
+    <th>Note</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @recipe_category_links.each do |recipe_category_link| %>
+  <tr>
+    <td><%= recipe_category_link.recipe %></td>
+    <td><%= recipe_category_link.recipeCategory %></td>
+    <td><%= recipe_category_link.note %></td>
+    <td><%= link_to 'Show', recipe_category_link %></td>
+    <td><%= link_to 'Edit', edit_recipe_category_link_path(recipe_category_link) %></td>
+    <td><%= link_to 'Destroy', recipe_category_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Recipe category link', new_recipe_category_link_path %>

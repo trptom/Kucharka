@@ -1,0 +1,2 @@
+module IngredienceCategoryLinksHelper
+end
