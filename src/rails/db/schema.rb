@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128202438) do
+ActiveRecord::Schema.define(:version => 20121211231401) do
 
   create_table "articles", :force => true do |t|
     t.string   "title",      :null => false
@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(:version => 20121128202438) do
   add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
 
   create_table "comments", :force => true do |t|
-    t.string   "title",          :null => false
     t.text     "content",        :null => false
     t.integer  "user_id",        :null => false
     t.integer  "comment_type",   :null => false
@@ -41,6 +40,14 @@ ActiveRecord::Schema.define(:version => 20121128202438) do
   add_index "comments", ["recipe_id"], :name => "index_comments_on_recipe_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
+  create_table "ingredience_categories", :force => true do |t|
+    t.string   "name",                       :null => false
+    t.text     "descirption",                :null => false
+    t.integer  "type",        :default => 0, :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
   create_table "ingrediences", :force => true do |t|
     t.string   "name",                        :null => false
     t.text     "annotation",                  :null => false
@@ -52,6 +59,25 @@ ActiveRecord::Schema.define(:version => 20121128202438) do
   end
 
   add_index "ingrediences", ["user_id"], :name => "index_ingrediences_on_user_id"
+
+  create_table "marks", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "recipe_id"
+    t.integer  "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "marks", ["recipe_id"], :name => "index_marks_on_recipe_id"
+  add_index "marks", ["user_id"], :name => "index_marks_on_user_id"
+
+  create_table "recipe_categories", :force => true do |t|
+    t.string   "name",                       :null => false
+    t.text     "descirption",                :null => false
+    t.integer  "type",        :default => 0, :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
 
   create_table "recipes", :force => true do |t|
     t.string   "name",                           :null => false
@@ -65,15 +91,6 @@ ActiveRecord::Schema.define(:version => 20121128202438) do
   end
 
   add_index "recipes", ["user_id"], :name => "index_recipes_on_user_id"
-
-  create_table "roles", :force => true do |t|
-    t.string   "name",        :null => false
-    t.string   "title",       :null => false
-    t.text     "description", :null => false
-    t.text     "the_role",    :null => false
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
 
   create_table "users", :force => true do |t|
     t.string   "username",                                      :null => false

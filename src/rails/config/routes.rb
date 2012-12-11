@@ -1,4 +1,10 @@
 PokusSorcery::Application.routes.draw do
+  resources :ingredience_categories
+
+  resources :recipe_categories
+
+  resources :marks
+
   resources :comments
 
   resources :ingrediences
