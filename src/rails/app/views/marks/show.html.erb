@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Recipe:</b>
+  <%= @mark.recipe %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @mark.user %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @mark.value %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%= @mark.note %>
+</p>
+
+
+<%= link_to 'Edit', edit_mark_path(@mark) %> |
+<%= link_to 'Back', marks_path %>

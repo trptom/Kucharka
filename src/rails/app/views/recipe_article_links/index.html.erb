@@ -1,0 +1,27 @@
+<h1>Listing recipe_article_links</h1>
+
+<table>
+  <tr>
+    <th>Recipe</th>
+    <th>Article</th>
+    <th>Note</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @recipe_article_links.each do |recipe_article_link| %>
+  <tr>
+    <td><%= recipe_article_link.recipe %></td>
+    <td><%= recipe_article_link.article %></td>
+    <td><%= recipe_article_link.note %></td>
+    <td><%= link_to 'Show', recipe_article_link %></td>
+    <td><%= link_to 'Edit', edit_recipe_article_link_path(recipe_article_link) %></td>
+    <td><%= link_to 'Destroy', recipe_article_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Recipe article link', new_recipe_article_link_path %>

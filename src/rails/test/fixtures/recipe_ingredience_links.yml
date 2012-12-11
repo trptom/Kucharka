@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  recipe: 
+  ingredience: 
+  importance: 1
+  quantity: 1
+  note: MyText
+
+two:
+  recipe: 
+  ingredience: 
+  importance: 1
+  quantity: 1
+  note: MyText
