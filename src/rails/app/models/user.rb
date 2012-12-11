@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   has_many :articles
   has_many :ingrediences
   has_many :comments
-  has_many :marks
 
   attr_accessible :username, :email, :password, :password_confirmation, :first_name, :second_name, :age, :note, :active, :self_ruleset, :others_ruleset, :activation_state, :activation_token, :activation_token_expires_at
 
