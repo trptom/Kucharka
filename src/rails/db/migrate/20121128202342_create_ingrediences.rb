@@ -5,6 +5,7 @@ class CreateIngrediences < ActiveRecord::Migration
       t.text :annotation,       :null => false
       t.text :content,          :null => false
       t.integer :avaliability,  :null => false, :default => 1
+      t.string :units,          :null => false
       t.references :user,       :null => false
 
       t.timestamps

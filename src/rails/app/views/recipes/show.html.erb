@@ -33,11 +33,13 @@
       </div>
       <div class="span6">
         <dl class="dl-horizontal">
-          <dt>Ingredience 1</dt><dd>Popis ingredience 1</dd>
-          <dt>Ingredience 2</dt><dd>Popis ingredience 2</dd>
-          <dt>Ingredience 3</dt><dd>Popis ingredience 3</dd>
-          <dt>Ingredience 4</dt><dd>Popis ingredience 4</dd>
-          <dt>Ingredience 5</dt><dd>Popis ingredience 5</dd>
+          <% @recipe.ingredienceRecipeConnectors.each do |ingredienceConn| %>
+            <dt><%= ingredienceConn.ingredience.name %></dt>
+            <dd>
+              <%= ingredienceConn.quantity %>
+              <%= ingredienceConn.ingredience.units %>
+            </dd>
+          <% end %>
         </dl>
       </div>
     </div>
@@ -50,7 +52,7 @@
       <p><%= @recipe.content %></p>
     </div>
     <div>
-      <h5>Hodnocení: xx</h5>
+      <h5>Hodnocení: <%= get_mark_str @recipe %></h5>
       <div id="star">
         <a id="star1" class="btn btn-small" href="#"><i class="icon-star"></i></a>
         <a id="star2" class="btn btn-small" href="#"><i class="icon-star"></i></a>

@@ -42,6 +42,27 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(params[:recipe])
     @recipe.user = current_user
 
+    @cat = RecipeCategory.new
+    @cat.name = "Nova kategorie"
+    @cat.save
+    @recipe.recipeCategories << @cat
+
+    @article = Article.new()
+    @article.user = current_user
+    @article.title = "Automaticky generovany clanek"
+    @article.annotation = "Nejaka ta anotace"
+    @article.content = "A taky obsah: " + @recipe.content
+    @article.save
+
+    @ingredience = Ingredience.find(1)
+    @ir = IngredienceRecipeConnector.new
+    @ir.ingredience = @ingredience
+    @ir.importance = 10;
+    @ir.quantity = 5
+    @recipe.ingredienceRecipeConnectors << @ir
+    
+    @recipe.articles << @article
+
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }

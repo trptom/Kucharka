@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211231401) do
+ActiveRecord::Schema.define(:version => 20121212143903) do
 
   create_table "articles", :force => true do |t|
     t.string   "title",      :null => false
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(:version => 20121211231401) do
   end
 
   add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
+
+  create_table "articles_recipes", :id => false, :force => true do |t|
+    t.integer "article_id"
+    t.integer "recipe_id"
+  end
+
+  add_index "articles_recipes", ["article_id", "recipe_id"], :name => "index_articles_recipes_on_article_id_and_recipe_id"
+  add_index "articles_recipes", ["recipe_id", "article_id"], :name => "index_articles_recipes_on_recipe_id_and_article_id"
 
   create_table "comments", :force => true do |t|
     t.text     "content",        :null => false
@@ -48,11 +56,26 @@ ActiveRecord::Schema.define(:version => 20121211231401) do
     t.datetime "updated_at",                 :null => false
   end
 
+  create_table "ingredience_categories_ingrediences", :id => false, :force => true do |t|
+    t.integer "ingredience_category_id"
+    t.integer "ingredience_id"
+  end
+
+  create_table "ingredience_recipe_connectors", :force => true do |t|
+    t.integer  "ingredience_id"
+    t.integer  "recipe_id"
+    t.integer  "quantity",       :default => 1, :null => false
+    t.integer  "importance",     :default => 1, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
   create_table "ingrediences", :force => true do |t|
     t.string   "name",                        :null => false
     t.text     "annotation",                  :null => false
     t.text     "content",                     :null => false
     t.integer  "avaliability", :default => 1, :null => false
+    t.string   "units",                       :null => false
     t.integer  "user_id",                     :null => false
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
@@ -77,6 +100,11 @@ ActiveRecord::Schema.define(:version => 20121211231401) do
     t.integer  "type",        :default => 0, :null => false
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "recipe_categories_recipes", :id => false, :force => true do |t|
+    t.integer "recipe_category_id"
+    t.integer "recipe_id"
   end
 
   create_table "recipes", :force => true do |t|
