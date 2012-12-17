@@ -49,11 +49,12 @@ ActiveRecord::Schema.define(:version => 20121212143903) do
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "ingredience_categories", :force => true do |t|
-    t.string   "name",                       :null => false
-    t.text     "descirption",                :null => false
-    t.integer  "type",        :default => 0, :null => false
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.string   "name",                         :null => false
+    t.text     "descirption",                  :null => false
+    t.integer  "category_type", :default => 0, :null => false
+    t.integer  "user_id",                      :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "ingredience_categories_ingrediences", :id => false, :force => true do |t|
@@ -95,11 +96,12 @@ ActiveRecord::Schema.define(:version => 20121212143903) do
   add_index "marks", ["user_id"], :name => "index_marks_on_user_id"
 
   create_table "recipe_categories", :force => true do |t|
-    t.string   "name",                       :null => false
-    t.text     "descirption",                :null => false
-    t.integer  "type",        :default => 0, :null => false
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.string   "name",                         :null => false
+    t.text     "descirption",                  :null => false
+    t.integer  "category_type", :default => 0, :null => false
+    t.integer  "user_id",                      :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "recipe_categories_recipes", :id => false, :force => true do |t|

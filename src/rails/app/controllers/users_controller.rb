@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
 #  before_filter :require_login, :except => [:new, :create]
-#  before_filter :require_role, :except => [:show, :new, :create]
+  before_filter :user_rights_filter
 #  skip_before_filter :require_login, :only => [:index, :show, :new, :create]
   
   # GET /users
@@ -103,7 +103,8 @@ class UsersController < ApplicationController
   def activate
     if (@user = User.load_from_activation_token(params[:id]))
       @user.activate!
-      redirect_to(login_path, :notice => 'User was successfully activated.')
+      # presmeruju na seznam uzivatelu, pokud neni zdrojem aktivace email
+      redirect_to(params[:src] == "email" ? "/home/success" : "/users", :notice => 'User was successfully activated.')
     else
       not_authenticated
     end

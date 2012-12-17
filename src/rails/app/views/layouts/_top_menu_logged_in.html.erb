@@ -1,12 +1,64 @@
 <li style="margin-right: 50px;">
     <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Uživatel <span class="caret"></span></button>
     <ul class="dropdown-menu">
-        <li><%= link_to "Moje údaje", "/my_profile" %></li>
-        <li><%= link_to "Moje recepty", "/my_recipes" %></li>
-        <li><%= link_to "Moje články", "/my_articles" %></li>
-        <li><%= link_to "Odhlášení", "/logout" %></li>
+        <li>
+          <% if users_filter("show", nil) %>
+            <%= link_to "Moje údaje", "/my_profile" %>
+          <% end %>
+        </li>
+        <li>
+          <% if users_filter("recipes", nil) %>
+            <%= link_to "Moje recepty", "/my_recipes" %>
+          <% end %>
+        </li>
+        <li>
+          <% if users_filter("articles", nil) %>
+            <%= link_to "Moje články", "/my_articles" %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "Odhlášení", "/logout" %>
+        </li>
     </ul>
 </li>
-<li><%= link_to "Home", "/" %></li>
-<li><%= link_to "Nejnovější recepty", "recipe" %></li>
-<li><%= link_to "Help", "help/index" %></li>
+<% if show_lists_dropdown %>
+  <li style="margin-right: 50px;">
+      <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Seznamy <span class="caret"></span></button>
+      <ul class="dropdown-menu" style="left:155px">
+          <li>
+            <% if show_list_users %>
+              <%= link_to "Uživatelé", "/users" %>
+            <% end %>
+          </li>
+          <li>
+            <% if show_list_marks %>
+              <%= link_to "Známky", "/marks" %>
+            <% end %>
+          </li>
+          <li>
+            <% if show_list_ingrediences %>
+              <%= link_to "Ingredience", "/ingrediences" %>
+            <% end %>
+          </li>
+          <li>
+            <% if show_list_recipe_categories %>
+              <%= link_to "Kategorie receptů", "/recipe_categories" %>
+            <% end %>
+          </li>
+          <li>
+            <% if show_list_ingredience_categories %>
+              <%= link_to "Kategorie ingrediencí", "/ingredience_categories" %>
+            <% end %>
+          </li>
+      </ul>
+  </li>
+<% end %>
+<li>
+  <%= link_to "Home", "/" %>
+</li>
+<li>
+  <%= link_to "Nejnovější recepty", "/recipes" %>
+</li>
+<li>
+  <%= link_to "Help", "help/index" %>
+</li>
