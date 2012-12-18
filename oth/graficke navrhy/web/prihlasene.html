@@ -21,15 +21,27 @@ and open the template in the editor.
             <div class="container">
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li style="margin-right: 50px;">
-                            <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Uživatel <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
+                        <li style="margin-right: 10px;">
+                            <button id="d1" class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Uživatel <span class="caret"></span></button>
+                            <ul class="dropdown-menu" aria-labelledby="d1">
                                 <li><a href="#">Moje údaje</a></li>
                                 <li><a href="#">Moje recepty</a></li>
                                 <li><a href="#">Moje články</a></li>
                                 <li><a href="#">Odhlášení</a></li>
                             </ul>
                         </li>
+                        
+                        <li style="margin-right: 50px;" class="dropdown">
+                            <a href="#" id="d2" class="dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-list-alt"></i> Seznamy <span class="caret"></span></a>
+                            <ul id="lists" class="dropdown-menu" aria-labelledby="d2">
+                                <li><a href="#">Uživatele</a></li>
+                                <li><a href="#">Známky</a></li>
+                                <li><a href="#">Ingredience</a></li>
+                                <li><a href="#">Kategorie receptů</a></li>
+                                <li><a href="#">Kategorie ingrediencí</a></li>
+                            </ul>
+                        </li>
+                        
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Nejnovší recepty</a></li>
                         <li><a href="#">Nový recept</a></li>
