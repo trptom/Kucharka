@@ -46,6 +46,7 @@ class RecipesController < ApplicationController
 
     @cat = RecipeCategory.new
     @cat.name = "Nova kategorie"
+    @cat.user = current_user
     @cat.save
     @recipe.recipeCategories << @cat
 

@@ -148,7 +148,9 @@ module PermissionsHelper
     end
     # pokud neni nastavena zadna DB entita, nactu ji podle id z parametru
     if (entity == nil &&
-        action != "index")
+        action != "index" &&
+        action != "new" &&
+        action != "create")
       # musim mit id
       if (p[:id] == nil)
         return false
@@ -168,7 +170,7 @@ module PermissionsHelper
     end
 
     if action == "new" || action == "create"
-      return has_permission_self_other(uid, ROLE['recipes']['create'])
+      return has_permission(ROLE['recipes']['create'], nil)
     end
 
     if action == "destroy"

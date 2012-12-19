@@ -3,8 +3,6 @@ PokusSorcery::Application.routes.draw do
 
   resources :recipe_categories
 
-  resources :marks
-
   resources :comments
 
   resources :ingrediences
@@ -18,6 +16,8 @@ PokusSorcery::Application.routes.draw do
   get "user_sessions/new"
   get "user_sessions/create"
   get "user_sessions/destroy"
+  get "marks/create_mark"
+  get "marks/index"
 
   root :to => 'home#index'
   resources :users do

@@ -12,62 +12,26 @@ class MarksController < ApplicationController
     end
   end
 
-  # GET /marks/1
-  # GET /marks/1.json
-  def show
-    @mark = Mark.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @mark }
+  def create_mark
+    @mark = Mark.where(:recipe_id => params["recipe"]).where(:user_id => current_user.id).first;
+    if (@mark == nil)
+      @new = true
+      @mark = Mark.new
+      @mark.recipe_id = params["recipe"]
+      @mark.user_id = current_user.id
+      @mark.value = params["value"]
+    else
+      @new = false
     end
-  end
 
-  # GET /marks/new
-  # GET /marks/new.json
-  def new
-    @mark = Mark.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @mark }
-    end
-  end
-
-  # GET /marks/1/edit
-  def edit
-    @mark = Mark.find(params[:id])
-  end
-
-  # POST /marks
-  # POST /marks.json
-  def create
-    @mark = Mark.new(params[:mark])
-
-    respond_to do |format|
-      if @mark.save
-        format.html { redirect_to @mark, notice: 'Mark was successfully created.' }
-        format.json { render json: @mark, status: :created, location: @mark }
+    if @mark.save!
+      if @new
+        @state = "INSERTED"
       else
-        format.html { render action: "new" }
-        format.json { render json: @mark.errors, status: :unprocessable_entity }
+        @state = "UPDATED"
       end
-    end
-  end
-
-  # PUT /marks/1
-  # PUT /marks/1.json
-  def update
-    @mark = Mark.find(params[:id])
-
-    respond_to do |format|
-      if @mark.update_attributes(params[:mark])
-        format.html { redirect_to @mark, notice: 'Mark was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @mark.errors, status: :unprocessable_entity }
-      end
+    else
+      @state = "ERROR"
     end
   end
 
