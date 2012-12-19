@@ -2,39 +2,38 @@
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3>Lednička</h3>
+
   </div>
   <div class="modal-body">
-    <p>Přidejte suroviny, co máte doma, a my vyhledáme za Vás recept.</p>
+    <p>Přidejte suroviny, co máte doma, a my za Vás vyhledáme recept.</p>
     <form>
       <div class="input-append">
-        <input class="span2" id="appendedInputButton" type="text" />
-        <button class="btn" type="button">Vyhledat</button>
+        <input class="span2" id="fridge_filter_input" type="text" />
+        <button class="btn" type="button" onclick="Fridge.filter()">Vyhledat</button>
       </div>
       <p></p>
       <div class="row-fluid">
         <div class="span5">
-          <h5>Výsledky hledání</h5>
-          <select id="toAdd" multiple="multiple" style="height: 100px;">
-            <option>jedna</option>
-            <option>dva</option>
-            <option>tri</option>
-            <option>ctyry</option>
+          <h5>Seznam ingrediencí</h5>
+          <select id="fridge_select" multiple="multiple" style="height: 100px;">
+            <% Ingredience.all.each do |ingredience| %>
+              <option value="<%= ingredience.id.to_s + "|" + ingredience.units %>"><%= ingredience.name %></option>
+            <% end %>
           </select>
-          <button class="btn" id="addButton" type="button">Přidat ingredience</button>
+          <button class="btn" id="addButton" type="button" onclick="Fridge.addSelected()">Přidat ingredience</button>
         </div>
         <div class="span5 offset1">
           <h5>Co máte doma</h5>
-          <select id="toRemove" multiple="multiple" style="height: 100px;">
+          <select id="fridge_selected" multiple="multiple" style="height: 100px;">
 
           </select>
-          <button class="btn" id="removeButton" type="button">Odebrat ingredience</button>
+          <button class="btn" id="removeButton" type="button" onclick="Fridge.removeAll()">Odebrat ingredience</button>
         </div>
       </div>
     </form>
-    <form>
-      <div id="ingredience">
-
-      </div>
+    <form action="/" method="post" onsubmit="return Fridge.validateSubmit()">
+      <select id="fridge_hidden" name="ingredience" class="hidden" multiple>
+      </select>
       <legend class="spacer"></legend>
       <button type="submit" class="btn">Vyhledat recept</button>
     </form>

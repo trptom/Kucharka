@@ -1,3 +1,5 @@
+# coding:utf-8
+
 class CreateIngrediences < ActiveRecord::Migration
   def self.up
     create_table :ingrediences do |t|
@@ -11,6 +13,23 @@ class CreateIngrediences < ActiveRecord::Migration
       t.timestamps
     end
     add_index :ingrediences, :user_id
+
+    def addItem(name, annotation, content, avaliability, units, userId)
+      @newInstance = Ingredience.new
+      @newInstance.name = name;
+      @newInstance.annotation = annotation
+      @newInstance.content = content
+      @newInstance.avaliability = avaliability
+      @newInstance.units = units;
+      @newInstance.user_id = userId;
+
+      @newInstance.save
+    end
+
+    addItem("cukr", "", "", 1000, "kg", 1)
+    addItem("sůl", "", "", 1000, "kg", 1)
+    addItem("pepř", "", "", 1000, "kg", 1)
+    addItem("mléko", "", "", 1000, "l", 1)
   end
 
   def self.down
