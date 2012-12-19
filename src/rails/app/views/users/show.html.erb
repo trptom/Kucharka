@@ -33,5 +33,13 @@
       <b>Aktivní</b>
       <%= print_bool(:bool => @user.active) %>
     </p>
+
+    <br />
+
+    <p>
+      <% get_action_buttons(@user).each do |button| %>
+        <%= button %>
+      <% end %>
+    </p>
   </div>
 </div>

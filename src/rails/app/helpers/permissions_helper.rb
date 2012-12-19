@@ -1,12 +1,16 @@
 # coding:utf-8
 
 module PermissionsHelper
+  def user_has_permission(user, permission_self, permission_other)
+    return (((permission_self == nil) || ((permission_self & user.self_ruleset) > 0)) &&
+          ((permission_other == nil) || ((permission_other & user.others_ruleset) > 0)))
+  end
+
   def has_permission(permission_self, permission_other)
     if current_user == nil
       return false
     end
-    return (((permission_self == nil) || ((permission_self & current_user.self_ruleset) > 0)) &&
-          ((permission_other == nil) || ((permission_other & current_user.others_ruleset) > 0)))
+    return user_has_permission(current_user, permission_self, permission_other)
   end
 
   def has_permission_both(permission)
@@ -64,7 +68,7 @@ module PermissionsHelper
     end
 
     if (!has_access)
-      redirect_to "/home/error", notice: "Stránka neexistuje, nebo byl přístup na požadovanou stránku odepřen!";
+      redirect_to "/home/error", notice: "Stránka neexistuje, nebo byl přístup na požadovanou stránku odepřen!"
     end
   end
 
@@ -104,13 +108,15 @@ module PermissionsHelper
 
     if action == "show"
       return has_permission_self_other(
-          (current_user != nil && (p[:id] == nil || p[:id] == current_user.id)),
+          (current_user != nil && (p[:id] == nil || (p[:id].to_i == current_user.id))),
           ROLE['users']['show'])
     end
 
     if action == "destroy"
-      # musi mit delete podle toho, zda upravuje sebe nebo ciziho
-      return has_permission_self_other(p[:id], ROLE['users']['delete'])
+      # musi mit delete podle toho, zda upravuje sebe nebo ciziho. NEjde smazat admina a sebe sama.
+      return !is_admin(p[:id]) &&
+        !is_current_user(p[:id]) &&
+        has_permission_self_other(p[:id], ROLE['users']['delete'])
     end
 
     if action == "block"

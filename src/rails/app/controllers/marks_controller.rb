@@ -1,4 +1,6 @@
 class MarksController < ApplicationController
+  before_filter :user_rights_filter
+
   # GET /marks
   # GET /marks.json
   def index

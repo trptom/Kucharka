@@ -37,14 +37,13 @@ ROLE['comments']['delete'] = 1 << 17
 ROLE['marks']['index'] =  1 << 18
 ROLE['marks']['create'] =  1 << 19
 ROLE['marks']['show'] =   1 << 20
-ROLE['marks']['edit'] =   1 << 21
-ROLE['marks']['delete'] = 1 << 22
+ROLE['marks']['delete'] = 1 << 21
 
-ROLE['ingrediences']['create_delete'] =  1 << 23
-ROLE['ingrediences']['edit'] =   1 << 24
+ROLE['ingrediences']['create_delete'] =  1 << 22
+ROLE['ingrediences']['edit'] =   1 << 23
 
-ROLE['recipeCategories']['create_delete'] =  1 << 25
-ROLE['recipeCategories']['edit'] =   1 << 26
+ROLE['recipeCategories']['create_delete'] =  1 << 24
+ROLE['recipeCategories']['edit'] =   1 << 25
 
-ROLE['ingredienceCategories']['create_delete'] = 27
-ROLE['ingredienceCategories']['edit'] = 28
+ROLE['ingredienceCategories']['create_delete'] = 1 << 26
+ROLE['ingredienceCategories']['edit'] = 1 << 27

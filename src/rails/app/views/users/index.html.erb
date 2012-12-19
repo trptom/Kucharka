@@ -4,9 +4,10 @@
 
     <label class="spacer">Vyhledat uživatele: </label>
     <div class="input-append">
-      <input type="text" placeholder="Uživatelské jméno"/>
-      <%= button_to "Vyhledat", "/", {:method => "get", :class => "btn"} %>
-      <button class="btn">Vyhledat</button>
+      <form action="/users">
+        <input type="text" name="filter[username]" placeholder="Uživatelské jméno" value="<%= get_filter "username" %>" />
+        <button class="btn" type="submit">Vyhledat</button>
+      </form>
     </div>
 
     <table class="table table-hower spacer">
@@ -25,19 +26,19 @@
     <% @users.each do |user| %>
         <tr class="<%= index_get_row_class user %>">
           <td><%= user.id %></td>
-          <td><%= user.username %></td>
+          <td><%= index_get_username user %></td>
           <td><%= user.email %></td>
           <td><%= user.second_name %></td>
           <td><%= user.first_name %></td>
           <td><%= user.activation_state %></td>
-          <td><%= index_get_action_button user %></td>
+          <td>
+            <% get_action_buttons(user).each do |button| %>
+              <%= button %>
+            <% end %>
+          </td>
         </tr>
     <% end %>
       </tbody>
     </table>
-
-    <br />
-
-    <%= link_to 'New User', new_user_path %>
   </div>
 </div>

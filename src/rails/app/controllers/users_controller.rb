@@ -1,15 +1,14 @@
 # coding:utf-8
 
 class UsersController < ApplicationController
-#  before_filter :require_login, :except => [:new, :create]
   before_filter :user_rights_filter
-#  skip_before_filter :require_login, :only => [:index, :show, :new, :create]
   
   # GET /users
   # GET /users.json
   def index
-    if (params[:name])
-      @users = User.where("username like ?", "%" + params[:name] +"%")
+    filter = get_filter("username")
+    if (filter != nil)
+      @users = User.where("username like ?", "%" + filter +"%").all
     else
       @users = User.all
     end

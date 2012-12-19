@@ -1,4 +1,6 @@
 class RecipeCategoriesController < ApplicationController
+  before_filter :user_rights_filter
+
   # GET /recipe_categories
   # GET /recipe_categories.json
   def index

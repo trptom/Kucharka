@@ -58,6 +58,11 @@ module ApplicationHelper
     return render template rescue render ("layouts/" + template)
   end
 
+  def get_filter(name)
+    return params["filter"] != nil && params["filter"][name] != nil ?
+      params["filter"][name] : nil
+  end
+
   ###################
   # FUNKCE PRO MENU #
   ###################

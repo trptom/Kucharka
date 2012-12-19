@@ -1,4 +1,6 @@
 class IngrediencesController < ApplicationController
+  before_filter :user_rights_filter
+
   # GET /ingrediences
   # GET /ingrediences.json
   def index

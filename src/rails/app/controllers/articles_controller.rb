@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  before_filter :user_rights_filter
+
   # GET /articles
   # GET /articles.json
   def index

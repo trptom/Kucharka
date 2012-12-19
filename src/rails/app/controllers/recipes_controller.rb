@@ -1,6 +1,8 @@
 # coding:utf-8
 
 class RecipesController < ApplicationController
+  before_filter :user_rights_filter
+
   def index
     @recipes = session[:recipes] ? session[:recipes] : Recipe.all
     session[:recipes] = nil
