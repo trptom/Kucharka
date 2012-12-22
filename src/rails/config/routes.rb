@@ -16,7 +16,7 @@ PokusSorcery::Application.routes.draw do
   get "user_sessions/new"
   get "user_sessions/create"
   get "user_sessions/destroy"
-  get "marks/create_mark"
+  get "marks/create"
   get "marks/index"
 
   root :to => 'home#index'

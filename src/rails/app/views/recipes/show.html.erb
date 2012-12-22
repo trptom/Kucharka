@@ -54,17 +54,19 @@
     <div>
       <h5>Hodnocení: <%= get_mark_str @recipe %></h5>
       <div id="star">
-        <a id="star1" class="btn btn-small" href="#"><i class="icon-star"></i></a>
-        <a id="star2" class="btn btn-small" href="#"><i class="icon-star"></i></a>
-        <a id="star3" class="btn btn-small" href="#"><i class="icon-star"></i></a>
-        <a id="star4" class="btn btn-small" href="#"><i class="icon-star"></i></a>
-        <a id="star5" class="btn btn-small" href="#"><i class="icon-star"></i></a>
+        <a id="star1" class="btn btn-small" href="/marks/create?value=1&recipe=<%= @recipe.id %>"><i class="icon-star"></i></a>
+        <a id="star1" class="btn btn-small" href="/marks/create?value=2&recipe=<%= @recipe.id %>"><i class="icon-star"></i></a>
+        <a id="star1" class="btn btn-small" href="/marks/create?value=3&recipe=<%= @recipe.id %>"><i class="icon-star"></i></a>
+        <a id="star1" class="btn btn-small" href="/marks/create?value=4&recipe=<%= @recipe.id %>"><i class="icon-star"></i></a>
+        <a id="star1" class="btn btn-small" href="/marks/create?value=5&recipe=<%= @recipe.id %>"><i class="icon-star"></i></a>
       </div>
 
       <label></label>
-      
-      <button class="btn">Upravit recept</button>
-      <a class="btn pull-right" href="#"><i class="icon-pencil"></i> Napsat článek</a>
+
+      <%= recipes_filter("edit", nil, @recipe) ? button_to("Upravit recept", { :controller => "recipes", :action => "edit", :id => @recipe.id}, { :class => "btn"}) : nil %>
+      <% if articles_filter("new", nil, nil) # neresim pres renderovaci funkci, protoze s vnorenym elementem je to neefektivni %>
+        <a class="btn pull-right" href="/articles/new"><i class="icon-pencil"></i> Napsat článek</a>
+      <% end %>
     </div>
 
     <legend class="spacer"></legend>

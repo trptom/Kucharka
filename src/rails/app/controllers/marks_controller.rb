@@ -12,26 +12,31 @@ class MarksController < ApplicationController
     end
   end
 
-  def create_mark
+  def create
     @mark = Mark.where(:recipe_id => params["recipe"]).where(:user_id => current_user.id).first;
     if (@mark == nil)
       @new = true
       @mark = Mark.new
-      @mark.recipe_id = params["recipe"]
+      @mark.recipe_id = params["recipe"].to_i
       @mark.user_id = current_user.id
-      @mark.value = params["value"]
+      @mark.value = params["value"].to_i
     else
+      @mark.value = params["value"].to_i
       @new = false
     end
 
-    if @mark.save!
-      if @new
+    if @new
+      if @mark.save!
         @state = "INSERTED"
       else
-        @state = "UPDATED"
+        @state = "ERROR"
       end
     else
-      @state = "ERROR"
+      if @mark.update_attribute(:value, params["value"].to_i)
+        @state = "UPDATED"
+      else
+        @state = "ERROR"
+      end
     end
   end
 

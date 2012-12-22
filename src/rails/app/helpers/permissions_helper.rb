@@ -161,12 +161,10 @@ module PermissionsHelper
       if entity == nil
         return false;
       end
-      # nastavim uid
-      uid = entity.user_id
     end
 
     if action == "edit" || action == "update"
-      return has_permission_self_other(uid, ROLE['recipes']['edit'])
+      return has_permission_self_other(entity.user_id, ROLE['recipes']['edit'])
     end
 
     if action == "new" || action == "create"
@@ -174,11 +172,11 @@ module PermissionsHelper
     end
 
     if action == "destroy"
-      return has_permission_self_other(uid, ROLE['recipes']['delete'])
+      return has_permission_self_other(entity.user_id, ROLE['recipes']['delete'])
     end
 
     if action == "show"
-      return has_permission_self_other(uid, ROLE['recipes']['show'])
+      return has_permission_self_other(entity.user_id, ROLE['recipes']['show'])
     end
 
     # na index se dostanu vzdycky, jen se to tam trochu vyfiltruje
@@ -193,7 +191,9 @@ module PermissionsHelper
     end
     # pokud neni nastavena zadna DB entita, nactu ji podle id z parametru
     if (entity == nil &&
-        action != "index")
+        action != "index" &&
+        action != "create" &&
+        action != "new")
       # musim mit id
       if (p[:id] == nil)
         return false
@@ -204,8 +204,6 @@ module PermissionsHelper
       if entity == nil
         return false;
       end
-      # nastavim uid
-      uid = entity.user_id
     end
 
     return true;
@@ -229,8 +227,6 @@ module PermissionsHelper
       if entity == nil
         return false;
       end
-      # nastavim uid
-      uid = entity.user_id
     end
 
     return true;
@@ -254,8 +250,6 @@ module PermissionsHelper
       if entity == nil
         return false;
       end
-      # nastavim uid
-      uid = entity.user_id
     end
 
     if action == "index"
@@ -284,8 +278,6 @@ module PermissionsHelper
       if entity == nil
         return false;
       end
-      # nastavim uid
-      uid = entity.user_id
     end
 
     if action == "index"
@@ -314,8 +306,6 @@ module PermissionsHelper
       if entity == nil
         return false;
       end
-      # nastavim uid
-      uid = entity.user_id
     end
 
     if action == "index"
@@ -329,23 +319,19 @@ module PermissionsHelper
   def marks_filter(action, p, entity)
     # aby to nechcipalo, pokud p nenastavim
     if (p == nil)
-      p = Hash.new
+      return false;
     end
-    # pokud neni nastavena zadna DB entita, nactu ji podle id z parametru
-    if (entity == nil &&
-        action != "index")
-      # musim mit id
-      if (p[:id] == nil)
-        return false
-      else
-        entity = Mark.find(p[:id])
-      end
-      # zadna entita s danym id neexistuje
-      if entity == nil
-        return false;
-      end
-      # nastavim uid
-      uid = entity.user_id
+
+    if action == "create"
+      return has_permission(ROLE['marks']['create'], nil)
+    end
+
+    if action == "show"
+      return has_permission_both(ROLE['marks']['show'])
+    end
+
+    if action == "delete"
+      return has_permission(ROLE['marks']['delete'], nil)
     end
 
     return true;
