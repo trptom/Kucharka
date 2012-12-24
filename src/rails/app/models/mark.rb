@@ -1,3 +1,5 @@
+# coding:utf-8
+
 class Mark < ActiveRecord::Base
   belongs_to :user
   belongs_to :recipe

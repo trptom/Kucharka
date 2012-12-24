@@ -1,3 +1,5 @@
+# coding:utf-8
+
 class IngredienceRecipeConnector < ActiveRecord::Base
   belongs_to :ingredience
   belongs_to :recipe
