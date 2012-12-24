@@ -31,8 +31,8 @@
         </div>
       </div>
     </form>
-    <form action="/" method="post" onsubmit="return Fridge.validateSubmit()">
-      <select id="fridge_hidden" name="ingredience" class="hidden" multiple>
+    <form action="/fridge" method="post" onsubmit="return Fridge.validateSubmit()">
+      <select id="fridge_hidden" name="ingrediences[]" class="hidden" multiple>
       </select>
       <legend class="spacer"></legend>
       <button type="submit" class="btn">Vyhledat recept</button>

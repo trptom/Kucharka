@@ -1,15 +1,8 @@
-<h1>Listing recipes</h1>
-
-<table>
-  <tr>
-    <th>Titulek</th>
-    <th>Anotace</th>
-  </tr>
-
+<div class="span10 offset1">
 <% @recipes.each do |recipe| %>
-  <tr>
-    <td><%= recipe.name %></td>
-    <td><%= recipe.annotation %></td>
-  </tr>
+  <div class="well">
+    <h2><%= recipe.name %></h2>
+    <p><%= recipe.annotation %></p>
+  </div>
 <% end %>
-</table>
+</div>

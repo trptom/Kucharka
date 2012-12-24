@@ -22,6 +22,20 @@ module RecipesHelper
     return mark != nil ? mark.to_s : "žádné";
   end
 
+  def get_recipe_koef_for_fridge(recipe, p, ingrediences)
+    koef = 0.0;
+    sum = 0.0;
+    for recipe_ingredience in recipe.ingredienceRecipeConnectors
+      sum += recipe_ingredience.importance
+      for ingredience in p
+        if (ingredience[:id] == recipe_ingredience.ingredience_id)
+          koef += [1, ingredience[:quantity]/recipe_ingredience.quantity].min * recipe_ingredience.importance
+        end
+      end
+    end
+    return koef / sum;
+  end
+
   #############
   # DB FILTRY #
   #############
@@ -54,5 +68,53 @@ module RecipesHelper
     end
 
     return @ret
+  end
+
+  def get_recipes_by_fridge(p)
+    if (p == nil || p[:ingrediences] == nil || !(p[:ingrediences].length > 0))
+      return nil
+    end
+
+    recipes = Recipe.all;
+    parsedP = Array.new
+    inStr = "" # string pro WHERE ? IN (.....)
+
+
+    for str in p[:ingrediences].each
+      tmp = str.split("|");
+      parsedP << { :id => tmp[0].to_i, :quantity => tmp[1].to_f }
+      if (inStr != "")
+        inStr += ","
+      end
+      inStr += tmp[0] # tohle je string, tak abych to nemusel znova prevedet, neberu z parsedP
+    end
+
+    # TODO - yatim neimplementuju dostupnost ingredienci
+    #ingrediences = Ingredience.where("id IN (" + inStr + ")").all
+    #concat("id IN (" + inStr + ")")
+
+    # pocitani koeficienu
+    list = Array.new
+    for recipe in recipes
+      koef = get_recipe_koef_for_fridge(recipe, parsedP, nil)
+      if (koef >= 0.5)
+        list << { :recipe => recipe, :koef => koef}
+      end
+    end
+
+    #razeni
+    ret = Array.new
+    while list.length > 0
+      max_item = nil
+      for item in list
+        if max_item == nil || item[:koef] > max_item[:koef]
+          max_item = item
+        end
+      end
+      ret << max_item[:recipe]
+      list.delete(max_item)
+    end
+
+    return ret
   end
 end

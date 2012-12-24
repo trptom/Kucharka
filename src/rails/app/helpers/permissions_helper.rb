@@ -150,7 +150,9 @@ module PermissionsHelper
     if (entity == nil &&
         action != "index" &&
         action != "new" &&
-        action != "create")
+        action != "create" &&
+        action != "fridge" &&
+        action != "newest")
       # musim mit id
       if (p[:id] == nil)
         return false
@@ -179,6 +181,7 @@ module PermissionsHelper
       return has_permission_self_other(entity.user_id, ROLE['recipes']['show'])
     end
 
+    # na lednicku se dostanu vzdycky, jen se to tam trochu vyfiltruje
     # na index se dostanu vzdycky, jen se to tam trochu vyfiltruje
 
     return true;

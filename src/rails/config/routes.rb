@@ -18,6 +18,8 @@ PokusSorcery::Application.routes.draw do
   get "user_sessions/destroy"
   get "marks/create"
   get "marks/index"
+  get "recipes/fridge"
+  get "recipes/newest"
 
   root :to => 'home#index'
   resources :users do
@@ -40,6 +42,7 @@ PokusSorcery::Application.routes.draw do
   match 'users/:id/articles' => 'users#articles'
   match 'users/:id/block' => 'users#block'
   match 'users/:id/unblock' => 'users#unblock'
+  match 'fridge' => 'recipes#fridge'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

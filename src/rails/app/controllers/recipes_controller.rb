@@ -4,8 +4,7 @@ class RecipesController < ApplicationController
   before_filter :user_rights_filter
 
   def index
-    @recipes = session[:recipes] ? session[:recipes] : Recipe.all
-    session[:recipes] = nil
+    @recipes = Recipe.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -103,5 +102,13 @@ class RecipesController < ApplicationController
       format.html { redirect_to recipes_url }
       format.json { head :no_content }
     end
+  end
+
+  def fridge
+    @recipes = get_recipes_by_fridge(params)
+  end
+
+  def newest
+    @recipes = Recipe.get_recipes_sorted_by_date(params[:count] == nil ? 10 : params[:count].to_i)
   end
 end

@@ -62,7 +62,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to "/", notice: 'User was successfully created.' }
+        UserMailer.activation_needed_email(@user).deliver
+
+        format.html { redirect_to  "/home/success", notice: 'Na email, zadaný při registraci byl zaslán kontrolní mail. Účet aktivujete kliknutím na odkaz uvnitř mailu.' }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -102,6 +104,7 @@ class UsersController < ApplicationController
   def activate
     if (@user = User.load_from_activation_token(params[:id]))
       @user.activate!
+      UserMailer.activation_success_email(@user).deliver
       # presmeruju na seznam uzivatelu, pokud neni zdrojem aktivace email
       redirect_to(params[:src] == "email" ? "/home/success" : "/users", :notice => 'User was successfully activated.')
     else
