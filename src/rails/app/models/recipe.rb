@@ -26,10 +26,10 @@ class Recipe < ActiveRecord::Base
   :if => :content
 
   validates :level,
-    :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 , :less_than  => LEVEL_TEXT.length, :message => "level není celé číslo 0.."+(LEVEL_TEXT.length-1).to_s },
+    :numericality => { :only_integer => true, :greater_than_or_equal_to => 0, :less_than  => LEVEL_TEXT.length, :message => "level není celé číslo 0.."+(LEVEL_TEXT.length-1).to_s },
   :if => :level
 
   validates :estimated_time,
-    :numericality => { :greater_than => 0 , :message => "level není číslo > 0" },
+    :numericality => { :only_integer => true, :greater_than => 0, :message => "level není celé číslo > 0" },
   :if => :estimated_time
 end
