@@ -1,3 +1,5 @@
+# coding:utf-8
+
 class MarksController < ApplicationController
   before_filter :user_rights_filter
 
@@ -26,18 +28,16 @@ class MarksController < ApplicationController
     end
 
     if @new
-      if @mark.save!
-        @state = "INSERTED"
-      else
-        @state = "ERROR"
+      if !(@mark.save!)
+        redirect_to "/home/error", notice: "známku se nepodařilo vložit"
       end
     else
-      if @mark.update_attribute(:value, params["value"].to_i)
-        @state = "UPDATED"
-      else
-        @state = "ERROR"
+      if !(@mark.update_attribute(:value, params["value"].to_i))
+        redirect_to "/home/error", notice: "známku se nepodařilo aktualizovat"
       end
     end
+
+    redirect_to recipe_path(@mark.recipe_id)
   end
 
   # DELETE /marks/1
