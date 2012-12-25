@@ -88,12 +88,22 @@ module RecipesHelper
 
   def get_recipes_by_random(count)
     @id = Recipe.last
-    @ret = Array.new
+    @ret = Recipe.find(:all, :order => 'rand()')
 
-    for a in 1..count
-      @tmp = SecureRandom.random_number(@id.id) + 1;
-      @ret << Recipe.find(@tmp)
-    end
+    return @ret
+  end
+
+  def get_recipes_by_mark(count)
+    @id = Recipe.last
+    @ret = Recipe.all(
+      :select => "
+        recipes.*,
+        AVG(marks.value) as avg_value,
+        MIN(marks.value) as min_value,
+        MAX(marks.value) as max_value",
+      :joins => :marks,
+      :group => 'recipes.id'
+    )
 
     return @ret
   end

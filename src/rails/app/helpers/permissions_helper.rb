@@ -165,7 +165,9 @@ module PermissionsHelper
       end
     end
 
-    if action == "edit" || action == "update" || action == "add_subrecipe" || action == "add_connected_article"
+    if action == "edit" || action == "update" ||
+        action == "add_subrecipe" || action == "add_connected_article" ||
+        action == "remove_subrecipe" || action == "remove_connected_article"
       return has_permission_self_other(entity.user_id, ROLE['recipes']['edit'])
     end
 

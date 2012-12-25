@@ -20,3 +20,7 @@
 .not-accepted {
     background-color: #ffaaaa;
 }
+
+.link-cursor {
+    cursor: pointer;
+}

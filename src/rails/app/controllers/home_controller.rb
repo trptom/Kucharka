@@ -6,8 +6,8 @@ class HomeController < ApplicationController
 
   def index
     @newest = get_recipes_sorted_by_date(5)
-    @season = get_recipes_by_random(3)
-    @best = Recipe.order("created_at DESC").limit(2).all
+    @random = get_recipes_by_random(5)
+    @best = get_recipes_by_mark(5)
   end
 
   def error

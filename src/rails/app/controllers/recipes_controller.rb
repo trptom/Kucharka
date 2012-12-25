@@ -126,6 +126,17 @@ class RecipesController < ApplicationController
     end
   end
 
+  def remove_subrecipe
+    @msg = "false";
+    if params[:parent_recipe_id] != nil && params[:child_recipe_id] != nil
+      @child_recipe = Recipe.find(params[:child_recipe_id])
+      @parent_recipe = Recipe.find(params[:parent_recipe_id])
+      if (@child_recipe != nil && @parent_recipe != nil)
+        #TODO
+      end
+    end
+  end
+
   def add_connected_article
     @msg = "false";
     if params[:id] != nil && params[:article_id] != nil
@@ -133,6 +144,20 @@ class RecipesController < ApplicationController
       @article = Article.find(params[:article_id])
       if (@recipe != nil && @article != nil)
         @recipe.articles << @article
+        if @recipe.save
+          @msg = "true\n" + @article.id.to_s + "\n" + @article.title
+        end
+      end
+    end
+  end
+
+  def remove_connected_article
+    @msg = "false";
+    if params[:id] != nil && params[:article_id] != nil
+      @recipe = Recipe.find(params[:id])
+      @article = Article.find(params[:article_id])
+      if @recipe != nil && @article != nil
+        @recipe.articles.delete(@article)
         if @recipe.save
           @msg = "true"
         end

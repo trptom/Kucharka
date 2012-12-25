@@ -41,6 +41,7 @@ PokusSorcery::Application.routes.draw do
   match 'my_articles' => 'users#articles'
 
   match 'recipes/:id/add_connected_article' => 'recipes#add_connected_article'
+  match 'recipes/:id/remove_connected_article' => 'recipes#remove_connected_article'
   match 'users/:id/recipes' => 'users#recipes'
   match 'users/:id/articles' => 'users#articles'
   match 'users/:id/block' => 'users#block'

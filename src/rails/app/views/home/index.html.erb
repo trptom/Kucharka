@@ -13,14 +13,15 @@
           <img src="<%=asset_path "minisandwich.png" %>" alt=""/>
           <b><%= item.name %></b>
           <p><%= item.annotation %></p>
+          <p>Přidáno: <%= item.created_at %></p>
           <%= link_to "Dále >>", recipe_path(item.id) %>
         </div>
       <% end %>
     </div>
 
     <div class="span4 well">
-      <h3>Sezonní recepty</h3>
-      <% @season.each do |item| %>
+      <h3>Náhodné recepty</h3>
+      <% @random.each do |item| %>
         <div class="spacer">
           <img src="<%=asset_path "minisandwich.png" %>" alt=""/>
           <b><%= item.name %></b>
@@ -31,12 +32,13 @@
     </div>
 
     <div class="span4 well">
+      <h3>Nejlepší recepty</h3>
       <% @best.each do |item| %>
-        <h3>Nejlepší recepty</h3>
         <div class="spacer">
           <img src="<%=asset_path "minisandwich.png" %>" alt=""/>
           <b><%= item.name %></b>
           <p><%= item.annotation %></p>
+          <p>Známka: <%= item.avg_value %></p>
           <%= link_to "Dále >>", recipe_path(item.id) %>
         </div>
       <% end %>

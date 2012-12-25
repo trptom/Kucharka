@@ -4,6 +4,8 @@
       <div class="well">
         <h2><%= recipe.name %></h2>
         <p><%= recipe.annotation %></p>
+        <p>Přidáno: <%= recipe.created_at %></p>
+        <%= link_to "Dále >>", recipe_path(recipe.id) %>
       </div>
     <% end %>
   <% end %>

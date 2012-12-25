@@ -5,7 +5,7 @@
 <div class="span3">
   <div class="well">
     <h4>Odkazy na podpostupy</h4>
-    <ul class="unstyled">
+    <ul id="subrecipes" class="unstyled">
       <% if @links_sub != nil %>
         <% @links_sub.each do |link| %>
           <%= link_to link.title, link.url %><br />
@@ -20,14 +20,20 @@
     <% end %>
     <legend></legend>
     <h4>Zajímavé články k receptu</h4>
-    <ul class="unstyled">
-      <% if @recipe.articles.length > 0 %>
-          <% @recipe.articles.each do |article| %>
-            <%= link_to article.title, article_path(article) %><br />
+    <ul id="articles" class="unstyled">
+      <% @recipe.articles.each do |article| %>
+        <span>
+          <%= link_to article.title, article_path(article) %>
+          <% if recipes_filter("edit", nil, @recipe) %>
+          <input type="button" value="X" onclick="ConnectedArticles.remove(<%= article.id %>, this.parentNode)" />
           <% end %>
-      <% else %>
-        Žádné
+          <br />
+        </span>
       <% end %>
+      <span id="articles_empty" class="<%= @recipe.articles.length == 0 ? nil : "hidden" %>">
+        Žádné
+        <br />
+      </span>
     </ul>
     <% if recipes_filter("edit", nil, @recipe) %>
       <input type="text" id="connected_articles_url" placeholder="URL článku k propojení" />
