@@ -1,45 +1,62 @@
-<h2>Nový recept</h2>
-<%= form_for(@recipe) do |f| %>
-  <% if @recipe.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% @recipe.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="row-fluid spacer">
-    <div class="span4">
-      <%= f.text_field :name, :placeholder => "Název receptu" %>
-    </div>
-    <div class="span4">
-      <p>obrazek (TODO)
-        <button class="btn" disabled>
-          Načíst obrázek
-        </button>
-      </p>
-    </div>
-    <div class="span4">
-      <input type="text" placeholder="Ingredience" />
-      <button type="submit" class="btn">
-        Přidat ingredienci (TODO)
-      </button>
-    </div>
+<script type="text/javascript" src="<%=asset_path "recipes.js" %>"></script>
+<div class="span3">
+  <div class="well">
+    <legend>Podat žádost na ingredienci</legend>
+    <input id="new_ingredience_name" type="text" placeholder="Název" />
+    <input id="new_ingredience_units" type="text" placeholder="Jednotky" />
+    <label>Anotace</label>
+    <textarea id="new_ingredience_annotation" cols="" rows="3" class="input-block-level"></textarea>
+    <label>Popis</label>
+    <textarea id="new_ingredience_content" cols="" rows="5" class="input-block-level"></textarea>
+    <button class="btn" onclick="IngredienceRequest.submit()">Podat žádost</button>
   </div>
-  <dl class="dl-horizontal spacer">
-    TODO
-    <dt>Ingredience 1</dt><dd><input type="number" class="input-mini"/></dd>
-  </dl>
-  <label class="spacer">Náročnost</label>
-  <%= render "level_component"  %>
-  <label class="spacer">Odhadovaný čas přípravy (minuty)</label>
-  <%= f.number_field :estimated_time %>
-  <label class="spacer">Anotace</label>
-  <%= f.text_area :annotation, :class => "input-block-level", :rows => "10" %>
-  <label class="spacer">Popis receptu</label>
-  <%= f.text_area :content, :class => "input-block-level", :rows => "10" %>
-  <%= f.submit "Vytvořit recept", :class => "btn" %>
-<% end %>
+</div>
+<div class="span8">
+  <div class="well">
+    <h2>Nový recept</h2>
+    <%= form_for(@recipe) do |f| %>
+      <% if @recipe.errors.any? %>
+        <div id="error_explanation">
+          <h2>Recept nebyl uložen z následujících důvodů:</h2>
+          <ul>
+            <% @recipe.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="row-fluid spacer">
+        <div class="span4">
+          <%= f.text_field :name, :placeholder => "Název receptu" %>
+        </div>
+        <div class="span4">
+          <p>obrazek <button class="btn">Načíst obrázek</button></p>
+        </div>
+        <div class="span4">
+          <select id="ingredience_select" class="span8">
+            <optgroup id="ingrediences_accepted_group" label="Schválené"></optgroup>
+            <optgroup id="ingrediences_not_accepted_group" label="Neschválené"></optgroup>
+          </select>
+          <input id="ingMn" type="number" class="span4" placeholder="Množství" />
+          <button id="addIngKR" type="button" class="btn">Přidat ingredience</button>
+        </div>
+      </div>
+
+      <div id="ingKR">
+      </div>
+
+      <label class="spacer">Anotace receptu</label>
+      <%= f.text_area :annotation, :class => "input-block-level", :rows => "3" %>
+
+      <label class="spacer">Popis receptu</label>
+      <%= f.text_area :content, :class => "input-block-level", :rows => "10" %>
+
+      <label>Složitost přípravy</label>
+      <%= render "level_component"  %>
+      <label>Odhadovaný čas přípravy (minuty)</label>
+      <%= f.number_field :estimated_time %>
+      <p></p>
+      <%= f.submit "Vytvořit recept", :class => "btn" %>
+    <% end %>
+  </div>
+</div>

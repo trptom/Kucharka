@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212143903) do
+ActiveRecord::Schema.define(:version => 20121225131999) do
 
   create_table "articles", :force => true do |t|
     t.string   "title",      :null => false
@@ -72,14 +72,15 @@ ActiveRecord::Schema.define(:version => 20121212143903) do
   end
 
   create_table "ingrediences", :force => true do |t|
-    t.string   "name",                        :null => false
-    t.text     "annotation",                  :null => false
-    t.text     "content",                     :null => false
-    t.integer  "avaliability", :default => 1, :null => false
-    t.string   "units",                       :null => false
-    t.integer  "user_id",                     :null => false
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.string   "name",                            :null => false
+    t.text     "annotation",                      :null => false
+    t.text     "content",                         :null => false
+    t.integer  "avaliability",     :default => 1, :null => false
+    t.string   "units",                           :null => false
+    t.integer  "user_id",                         :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "activation_state", :default => 0, :null => false
   end
 
   add_index "ingrediences", ["user_id"], :name => "index_ingrediences_on_user_id"

@@ -16,3 +16,7 @@
      display: none;
      visibility: hidden;
 }
+
+.not-accepted {
+    background-color: #ffaaaa;
+}

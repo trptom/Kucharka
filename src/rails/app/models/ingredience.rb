@@ -13,14 +13,17 @@ class Ingredience < ActiveRecord::Base
 
   validates :name,
     :length => { :minimum => 3, :maximum => 50, :message => "špatná délka názvu (3-50)" },
+    :uniqueness => { :case_sensitive => false, :message => "ingredience s daným názvem již existuje" },
   :if => :name
 
   validates :annotation,
     :length => { :minimum => 50, :maximum => 255, :message => "špatná délka anotace (50-255)" },
+    :allow_blank => true,
   :if => :annotation
 
   validates :content,
     :length => { :minimum => 100, :message => "špatná délka obsahu (alespoň 100 znaků)" },
+    :allow_blank => true,
   :if => :content
 
   validates :avaliability,

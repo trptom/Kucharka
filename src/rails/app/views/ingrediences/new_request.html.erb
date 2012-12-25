@@ -1,0 +1,8 @@
+<%= @msg %>
+<% if @ingredience.errors.any? %>
+
+Důvody jsou následující:
+<% @ingredience.errors.full_messages.each do |msg| %>
+- <%= msg %>
+<% end %>
+<% end %>

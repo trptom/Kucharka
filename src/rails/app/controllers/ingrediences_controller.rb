@@ -92,4 +92,23 @@ class IngrediencesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def new_request
+    @ingredience = Ingredience.new
+    @ingredience.name = params[:name]
+    @ingredience.units = params[:units]
+    @ingredience.annotation = params[:annotation]
+    @ingredience.content = params[:content]
+    @ingredience.user = current_user
+
+    if @ingredience.save
+      @msg = "true"
+    else
+      @msg = "false"
+    end
+  end
+
+  def plain_list
+    @ingrediences = Ingredience.order(:name).all
+  end
 end

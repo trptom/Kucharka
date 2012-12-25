@@ -5,8 +5,6 @@ PokusSorcery::Application.routes.draw do
 
   resources :comments
 
-  resources :ingrediences
-
   resources :articles
 
   get "home/index"
@@ -20,6 +18,8 @@ PokusSorcery::Application.routes.draw do
   get "marks/index"
   get "recipes/fridge"
   get "recipes/newest"
+  get "ingrediences/new_request"
+  get "ingrediences/plain_list"
 
   root :to => 'home#index'
   resources :users do
@@ -30,6 +30,7 @@ PokusSorcery::Application.routes.draw do
   resources :user_sessions
   resources :recipes
   resources :articles
+  resources :ingrediences
 
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
