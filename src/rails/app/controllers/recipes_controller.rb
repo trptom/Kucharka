@@ -31,6 +31,10 @@ class RecipesController < ApplicationController
   end
 
   def new
+    #nastaveni textaci
+    @title = "Nový recept"
+    @submit_title = "Vytvořit recept"
+
     @recipe = Recipe.new
 
     respond_to do |format|
@@ -45,7 +49,7 @@ class RecipesController < ApplicationController
 
     @saved = false
     ActiveRecord::Base.transaction do
-      @recipe.ingredienceRecipeConnectors = get_ingrediences_ary_from_params
+      @recipe.ingredienceRecipeConnectors = get_ingrediences_ary_from_params(nil)
       @saved = @recipe.save
     end
 
@@ -68,7 +72,7 @@ class RecipesController < ApplicationController
       if !@recipe.update_attributes(params[:recipe])
         @saved = false;
       end
-      @recipe.ingredienceRecipeConnectors = get_ingrediences_ary_from_params
+      @recipe.ingredienceRecipeConnectors = get_ingrediences_ary_from_params(@recipe.id)
       if !@recipe.save
         @saved = false;
       end
@@ -86,6 +90,10 @@ class RecipesController < ApplicationController
   end
 
   def edit
+    #nastaveni textaci
+    @title = "Editace receptu"
+    @submit_title = "Upravit recept"
+
     @recipe = Recipe.find(params[:id])
   end
 
@@ -105,5 +113,30 @@ class RecipesController < ApplicationController
 
   def newest
     @recipes = Recipe.get_recipes_sorted_by_date(params[:count] == nil ? 10 : params[:count].to_i)
+  end
+
+  def add_subrecipe
+    @msg = "false";
+    if params[:parent_recipe_id] != nil && params[:child_recipe_id] != nil
+      @child_recipe = Recipe.find(params[:child_recipe_id])
+      @parent_recipe = Recipe.find(params[:parent_recipe_id])
+      if (@child_recipe != nil && @parent_recipe != nil)
+        #TODO
+      end
+    end
+  end
+
+  def add_connected_article
+    @msg = "false";
+    if params[:id] != nil && params[:article_id] != nil
+      @recipe = Recipe.find(params[:id])
+      @article = Article.find(params[:article_id])
+      if (@recipe != nil && @article != nil)
+        @recipe.articles << @article
+        if @recipe.save
+          @msg = "true"
+        end
+      end
+    end
   end
 end

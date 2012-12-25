@@ -18,6 +18,7 @@ PokusSorcery::Application.routes.draw do
   get "marks/index"
   get "recipes/fridge"
   get "recipes/newest"
+  get "recipes/add_subrecipe"
   get "ingrediences/new_request"
   get "ingrediences/plain_list"
 
@@ -39,6 +40,7 @@ PokusSorcery::Application.routes.draw do
   match 'my_recipes' => 'users#recipes'
   match 'my_articles' => 'users#articles'
 
+  match 'recipes/:id/add_connected_article' => 'recipes#add_connected_article'
   match 'users/:id/recipes' => 'users#recipes'
   match 'users/:id/articles' => 'users#articles'
   match 'users/:id/block' => 'users#block'

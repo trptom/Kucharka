@@ -1,3 +1,7 @@
+<% if recipes_filter("edit", nil, @recipe) %>
+<script type="text/javascript" src="<%=asset_path "recipes_show.js" %>"></script>
+<input type="hidden" id="connected_items_recipe_id" value="<%= @recipe.id %>" />
+<% end %>
 <div class="span3">
   <div class="well">
     <h4>Odkazy na podpostupy</h4>
@@ -10,17 +14,25 @@
         Žádné
       <% end %>
     </ul>
+    <% if recipes_filter("edit", nil, @recipe) %>
+      <input type="text" id="connected_recipes_url" placeholder="URL podpostupu k propojení" disabled />
+      <input type="button" class="btn" value="Přidat podpostup" onclick="ConnectedArticles.add()" disabled />
+    <% end %>
     <legend></legend>
     <h4>Zajímavé články k receptu</h4>
     <ul class="unstyled">
-      <% if @links_interesting != nil %>
-          <% @links_interesting.each do |link| %>
-            <%= link_to link[0], link[1] %><br />
+      <% if @recipe.articles.length > 0 %>
+          <% @recipe.articles.each do |article| %>
+            <%= link_to article.title, article_path(article) %><br />
           <% end %>
       <% else %>
         Žádné
       <% end %>
     </ul>
+    <% if recipes_filter("edit", nil, @recipe) %>
+      <input type="text" id="connected_articles_url" placeholder="URL článku k propojení" />
+      <input type="button" class="btn" value="Přidat článek" onclick="ConnectedArticles.add()" />
+    <% end %>
   </div>
 </div>
 

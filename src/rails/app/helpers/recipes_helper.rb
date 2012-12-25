@@ -22,15 +22,28 @@ module RecipesHelper
     return mark != nil ? mark.to_s : "žádné";
   end
 
-  def get_ingrediences_ary_from_params
+  def get_ingrediences_ary_from_params(recipe_id)
     ret = Array.new
     if params[:ingrediences] != nil
       for ingredience in params[:ingrediences]
         tmp = ingredience.split("|");
-        irc = IngredienceRecipeConnector.new
-        irc.ingredience_id = tmp[0].to_i
-        irc.quantity = tmp[1].to_f
-        irc.importance = tmp[2].to_i
+        
+        #najdu existujici vazbu pro recept x ingredience (pokud uz recept existoval)
+        if recipe_id != nil
+          irc = IngredienceRecipeConnector.where(:recipe_id => recipe_id).where(:ingredience_id => tmp[0].to_i).first
+          irc.update_attribute(:quantity, tmp[1].to_f)
+          irc.update_attribute(:importance, tmp[1].to_i)
+        end
+        # a pokud jsem vazbu nenasel, vytvarim novou (je to tadz, aby v DB nehnily stary zaznamy)
+        if irc == nil
+          irc = IngredienceRecipeConnector.new
+          #nasetuju potrebne promenne
+          irc.ingredience_id = tmp[0].to_i
+          irc.quantity = tmp[1].to_f
+          irc.importance = tmp[2].to_i
+        end
+
+        #pridam do vystupu
         ret << irc
       end
     end
