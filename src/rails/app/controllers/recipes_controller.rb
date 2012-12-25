@@ -43,30 +43,14 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(params[:recipe])
     @recipe.user = current_user
 
-    @cat = RecipeCategory.new
-    @cat.name = "Nova kategorie"
-    @cat.user = current_user
-    @cat.save
-    @recipe.recipeCategories << @cat
-
-    @article = Article.new()
-    @article.user = current_user
-    @article.title = "Automaticky generovany clanek"
-    @article.annotation = "Nejaka ta anotace"
-    @article.content = "A taky obsah: " + @recipe.content
-    @article.save
-
-    @ingredience = Ingredience.find(1)
-    @ir = IngredienceRecipeConnector.new
-    @ir.ingredience = @ingredience
-    @ir.importance = 10;
-    @ir.quantity = 5
-    @recipe.ingredienceRecipeConnectors << @ir
-    
-    @recipe.articles << @article
+    @saved = false
+    ActiveRecord::Base.transaction do
+      @recipe.ingredienceRecipeConnectors = get_ingrediences_ary_from_params
+      @saved = @recipe.save
+    end
 
     respond_to do |format|
-      if @recipe.save
+      if @saved
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
         format.json { render json: @recipe, status: :created, location: @recipe }
       else
@@ -79,8 +63,19 @@ class RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
 
+    @saved = true
+    ActiveRecord::Base.transaction do
+      if !@recipe.update_attributes(params[:recipe])
+        @saved = false;
+      end
+      @recipe.ingredienceRecipeConnectors = get_ingrediences_ary_from_params
+      if !@recipe.save
+        @saved = false;
+      end
+    end
+
     respond_to do |format|
-      if @recipe.update_attributes(params[:recipe])
+      if @saved
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
         format.json { head :no_content }
       else

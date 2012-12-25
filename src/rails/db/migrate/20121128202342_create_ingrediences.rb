@@ -9,6 +9,7 @@ class CreateIngrediences < ActiveRecord::Migration
       t.integer :avaliability,  :null => false, :default => 1
       t.string :units,          :null => false
       t.references :user,       :null => false
+      t.integer :activation_state,  :null => false, :default => 0
 
       t.timestamps
     end

@@ -22,6 +22,21 @@ module RecipesHelper
     return mark != nil ? mark.to_s : "žádné";
   end
 
+  def get_ingrediences_ary_from_params
+    ret = Array.new
+    if params[:ingrediences] != nil
+      for ingredience in params[:ingrediences]
+        tmp = ingredience.split("|");
+        irc = IngredienceRecipeConnector.new
+        irc.ingredience_id = tmp[0].to_i
+        irc.quantity = tmp[1].to_f
+        irc.importance = tmp[2].to_i
+        ret << irc
+      end
+    end
+    return ret
+  end
+
   def get_recipe_koef_for_fridge(recipe, p, ingrediences)
     koef = 0.0;
     sum = 0.0;

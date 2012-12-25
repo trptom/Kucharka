@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121225131999) do
+ActiveRecord::Schema.define(:version => 20121212143903) do
 
   create_table "articles", :force => true do |t|
     t.string   "title",      :null => false
@@ -65,10 +65,10 @@ ActiveRecord::Schema.define(:version => 20121225131999) do
   create_table "ingredience_recipe_connectors", :force => true do |t|
     t.integer  "ingredience_id"
     t.integer  "recipe_id"
-    t.integer  "quantity",       :default => 1, :null => false
-    t.integer  "importance",     :default => 1, :null => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.float    "quantity",       :default => 1.0, :null => false
+    t.integer  "importance",     :default => 1,   :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "ingrediences", :force => true do |t|
@@ -78,11 +78,12 @@ ActiveRecord::Schema.define(:version => 20121225131999) do
     t.integer  "avaliability",     :default => 1, :null => false
     t.string   "units",                           :null => false
     t.integer  "user_id",                         :null => false
+    t.integer  "activation_state", :default => 0, :null => false
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
-    t.integer  "activation_state", :default => 0, :null => false
   end
 
+  add_index "ingrediences", ["name"], :name => "name", :unique => true
   add_index "ingrediences", ["user_id"], :name => "index_ingrediences_on_user_id"
 
   create_table "marks", :force => true do |t|

@@ -63,7 +63,7 @@
 
       <label></label>
 
-      <%= recipes_filter("edit", nil, @recipe) ? button_to("Upravit recept", { :controller => "recipes", :action => "edit", :id => @recipe.id}, { :class => "btn"}) : nil %>
+      <%= recipes_filter("edit", nil, @recipe) ? button_to("Upravit recept", { :controller => "recipes", :action => "edit", :id => @recipe.id}, { :method => :get, :class => "btn"}) : nil %>
       <% if articles_filter("new", nil, nil) # neresim pres renderovaci funkci, protoze s vnorenym elementem je to neefektivni %>
         <a class="btn pull-right" href="/articles/new"><i class="icon-pencil"></i> Napsat článek</a>
       <% end %>

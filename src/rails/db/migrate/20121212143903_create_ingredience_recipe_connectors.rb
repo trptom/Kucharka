@@ -3,7 +3,7 @@ class CreateIngredienceRecipeConnectors < ActiveRecord::Migration
     create_table :ingredience_recipe_connectors do |t|
       t.references :ingredience
       t.references :recipe
-      t.integer :quantity,        :null => false, :default => 1
+      t.float :quantity,        :null => false, :default => 1
       t.integer :importance,      :null => false, :default => 1
 
       t.timestamps
