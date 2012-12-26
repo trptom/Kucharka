@@ -106,6 +106,8 @@ class IngrediencesController < ApplicationController
     else
       @msg = "false"
     end
+
+    redirect_to "/home/plain_message", notice: @msg
   end
 
   def plain_list

@@ -117,6 +117,7 @@ class RecipesController < ApplicationController
 
   def add_subrecipe
     @msg = "false";
+
     if params[:parent_recipe_id] != nil && params[:child_recipe_id] != nil
       @child_recipe = Recipe.find(params[:child_recipe_id])
       @parent_recipe = Recipe.find(params[:parent_recipe_id])
@@ -124,10 +125,13 @@ class RecipesController < ApplicationController
         #TODO
       end
     end
+
+    render "/home/plain_message"
   end
 
   def remove_subrecipe
     @msg = "false";
+
     if params[:parent_recipe_id] != nil && params[:child_recipe_id] != nil
       @child_recipe = Recipe.find(params[:child_recipe_id])
       @parent_recipe = Recipe.find(params[:parent_recipe_id])
@@ -135,10 +139,13 @@ class RecipesController < ApplicationController
         #TODO
       end
     end
+
+    render "/home/plain_message"
   end
 
   def add_connected_article
     @msg = "false";
+
     if params[:id] != nil && params[:article_id] != nil
       @recipe = Recipe.find(params[:id])
       @article = Article.find(params[:article_id])
@@ -149,10 +156,13 @@ class RecipesController < ApplicationController
         end
       end
     end
+
+    redirect_to "/home/plain_message", notice: @msg
   end
 
   def remove_connected_article
     @msg = "false";
+
     if params[:id] != nil && params[:article_id] != nil
       @recipe = Recipe.find(params[:id])
       @article = Article.find(params[:article_id])
@@ -163,5 +173,7 @@ class RecipesController < ApplicationController
         end
       end
     end
+
+    redirect_to "/home/plain_message", notice: @msg
   end
 end

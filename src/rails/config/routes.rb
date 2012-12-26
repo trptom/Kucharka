@@ -10,6 +10,7 @@ PokusSorcery::Application.routes.draw do
   get "home/index"
   get "home/success"
   get "home/error"
+  get "home/plain_message"
   get "index/home"
   get "user_sessions/new"
   get "user_sessions/create"

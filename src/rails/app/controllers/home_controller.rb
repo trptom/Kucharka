@@ -15,4 +15,7 @@ class HomeController < ApplicationController
 
   def success
   end
+
+  def plain_message
+  end
 end

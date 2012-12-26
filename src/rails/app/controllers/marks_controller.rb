@@ -15,7 +15,9 @@ class MarksController < ApplicationController
   end
 
   def create
+    @msg = "true"
     @mark = Mark.where(:recipe_id => params["recipe"]).where(:user_id => current_user.id).first;
+    
     if (@mark == nil)
       @new = true
       @mark = Mark.new
@@ -29,15 +31,15 @@ class MarksController < ApplicationController
 
     if @new
       if !(@mark.save!)
-        redirect_to "/home/error", notice: "známku se nepodařilo vložit"
+        @msg = "false"
       end
     else
       if !(@mark.update_attribute(:value, params["value"].to_i))
-        redirect_to "/home/error", notice: "známku se nepodařilo aktualizovat"
+        @msg = "false"
       end
     end
 
-    redirect_to recipe_path(@mark.recipe_id)
+    render "/home/plain_message"
   end
 
   # DELETE /marks/1
