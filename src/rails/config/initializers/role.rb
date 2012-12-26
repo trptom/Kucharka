@@ -21,12 +21,12 @@ ROLE['users']['block'] = 1 << 5
 ROLE['users']['unblock'] = 1 << 6
 
 ROLE['recipes']['create'] =  1 << 7
-ROLE['recipes']['show'] =   1 << 8
+#ROLE['recipes']['show'] =   1 << 8 - muzou vsichni
 ROLE['recipes']['edit'] =   1 << 9
 ROLE['recipes']['delete'] = 1 << 10
 
 ROLE['articles']['create'] =  1 << 11
-ROLE['articles']['show'] =   1 << 12
+#ROLE['articles']['show'] =   1 << 12 - muzou vsichni
 ROLE['articles']['edit'] =   1 << 13
 ROLE['articles']['delete'] = 1 << 14
 

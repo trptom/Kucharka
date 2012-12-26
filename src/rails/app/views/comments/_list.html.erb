@@ -4,25 +4,29 @@
 <div>
   <dl class="spacer">
     <% @comments.each do |comment| %>
-      <dt>
-        <i class="icon-user"></i>
-        <td>
-          <%= comment.user.username %>
-        </td>
-        psal v
-        <%= comment.created_at %>
-        <button class="close" </button>
-        <%= form_for(comment, method: :delete) do |f| %>
-          <% content_tag(:button, :type => :submit, :class => "close") do %>
-             ×
+      <% if comments_filter("show", nil, comment) %>
+        <dt>
+          <i class="icon-user"></i>
+          <td>
+            <%= comment.user.username %>
+          </td>
+          psal v
+          <%= comment.created_at %>
+          <% if comments_filter("destroy", nil, comment) %>
+            <button class="close"></button>
+            <%= form_for(comment, method: :delete) do |f| %>
+              <% content_tag(:button, :type => :submit, :class => "close") do %>
+                 ×
+              <% end %>
+            <% end %>
           <% end %>
-        <% end %>
-      </dt><!--pro odstraneni komentáru-->
-      <dd>
-        <div class="well dark">
-          <td><%= comment.content %></td>
-        </div>
-      </dd>
+        </dt><!--pro odstraneni komentáru-->
+        <dd>
+          <div class="well dark">
+            <td><%= comment.content %></td>
+          </div>
+        </dd>
+      <% end %>
     <% end %>
   </dl>
 </div>

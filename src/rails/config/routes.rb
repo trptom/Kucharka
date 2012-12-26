@@ -17,6 +17,7 @@ PokusSorcery::Application.routes.draw do
   get "user_sessions/destroy"
   get "marks/create"
   get "marks/index"
+  get "marks/destroy"
   get "recipes/fridge"
   get "recipes/newest"
   get "recipes/add_subrecipe"

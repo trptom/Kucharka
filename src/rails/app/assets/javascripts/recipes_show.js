@@ -1,7 +1,7 @@
 var ConnectedArticles = new function() {
     this.init = function() {
         this.urlElement = document.getElementById("connected_articles_url");
-        this.recipeId = document.getElementById("connected_items_recipe_id");
+        this.recipeId = document.getElementById("recipe_id");
         this.list = document.getElementById("articles");
         this.emptyEcho = document.getElementById("articles_empty");
     }

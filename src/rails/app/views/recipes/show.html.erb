@@ -1,7 +1,7 @@
 <% if recipes_filter("edit", nil, @recipe) %>
 <script type="text/javascript" src="<%=asset_path "recipes_show.js" %>"></script>
-<input type="hidden" id="connected_items_recipe_id" value="<%= @recipe.id %>" />
 <% end %>
+<input type="hidden" id="recipe_id" value="<%= @recipe.id %>" />
 <div class="span3">
   <div class="well">
     <h4>Odkazy na podpostupy</h4>
@@ -70,21 +70,29 @@
       <p><%= @recipe.content %></p>
     </div>
     <div>
-      <h5>Hodnocení: <%= get_mark_str @recipe %></h5>
-      <div id="star">
-        <a id="star1" class="btn btn-small" href="/marks/create?value=1&recipe=<%= @recipe.id %>"><i class="icon-star"></i></a>
-        <a id="star1" class="btn btn-small" href="/marks/create?value=2&recipe=<%= @recipe.id %>"><i class="icon-star"></i></a>
-        <a id="star1" class="btn btn-small" href="/marks/create?value=3&recipe=<%= @recipe.id %>"><i class="icon-star"></i></a>
-        <a id="star1" class="btn btn-small" href="/marks/create?value=4&recipe=<%= @recipe.id %>"><i class="icon-star"></i></a>
-        <a id="star1" class="btn btn-small" href="/marks/create?value=5&recipe=<%= @recipe.id %>"><i class="icon-star"></i></a>
-      </div>
+      <% if marks_filter("show", nil, nil) %>
+        <h5>
+          Hodnocení: <span id="recipe_mark"><%= get_mark_str @recipe %></span>
+          <% if @my_mark != nil %>
+          (moje: <span id="recipe_mark_2"><%= @my_mark.value %></span>)
+          <% end %>
+        </h5>
+      <% end %>
+      <% if marks_filter("create", nil, nil) %>
+        <script type="text/javascript" src="<%=asset_path "recipes_mark.js" %>"></script>
+        <div id="star">
+          <div id="star1" class="btn btn-small" onclick="Mark.submit(1)"><i class="icon-star"></i></div>
+          <div id="star2" class="btn btn-small" onclick="Mark.submit(2)"><i class="icon-star"></i></div>
+          <div id="star3" class="btn btn-small" onclick="Mark.submit(3)"><i class="icon-star"></i></div>
+          <div id="star4" class="btn btn-small" onclick="Mark.submit(4)"><i class="icon-star"></i></div>
+          <div id="star5" class="btn btn-small" onclick="Mark.submit(5)"><i class="icon-star"></i></div>
+        </div>
+      <% end %>
 
       <label></label>
 
+      <%= @my_mark != nil && marks_filter("delete", nil, @my_mark) ? button_to("Smazat mojí známku", { :controller => "marks", :action => "destroy", :id => @my_mark.id }, { :method => :get, :class => "btn"}) : nil %>
       <%= recipes_filter("edit", nil, @recipe) ? button_to("Upravit recept", { :controller => "recipes", :action => "edit", :id => @recipe.id}, { :method => :get, :class => "btn"}) : nil %>
-      <% if articles_filter("new", nil, nil) # neresim pres renderovaci funkci, protoze s vnorenym elementem je to neefektivni %>
-        <a class="btn pull-right" href="/articles/new"><i class="icon-pencil"></i> Napsat článek</a>
-      <% end %>
     </div>
 
     <legend class="spacer"></legend>

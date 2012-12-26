@@ -50,11 +50,11 @@
                   <%= edit_get_rule_checkbox(@user, ROLE["users"]["edit"], 0) %> uživatel: editovat
                   <%= edit_get_rule_checkbox(@user, ROLE["users"]["edit_rights"], 0) %> uživatel: editovat práva
                   <%= edit_get_rule_checkbox(@user, ROLE["recipes"]["create"], 0) %> recept: vytvářet
-                  <%= edit_get_rule_checkbox(@user, ROLE["recipes"]["show"], 0) %> recept: zobrazovat
+                  <input type="checkbox" checked disabled /> recept: zobrazovat
                   <%= edit_get_rule_checkbox(@user, ROLE["recipes"]["edit"], 0) %> recept: editovat
                   <%= edit_get_rule_checkbox(@user, ROLE["recipes"]["delete"], 0) %> recept: mazat
                   <%= edit_get_rule_checkbox(@user, ROLE["articles"]["create"], 0) %> článek: vytvářet
-                  <%= edit_get_rule_checkbox(@user, ROLE["articles"]["show"], 0) %> článek: zobrazovat
+                  <input type="checkbox" checked disabled /> článek: zobrazovat
                   <%= edit_get_rule_checkbox(@user, ROLE["articles"]["edit"], 0) %> článek: editovat
                   <%= edit_get_rule_checkbox(@user, ROLE["articles"]["delete"], 0) %> článek: mazat
                   <%= edit_get_rule_checkbox(@user, ROLE["comments"]["create"], 0) %> komentáře: vytvářet
@@ -79,10 +79,10 @@
                   <%= edit_get_rule_checkbox(@user, ROLE["users"]["edit_rights"], 1) %> uživatel: editovat práva
                   <%= edit_get_rule_checkbox(@user, ROLE["users"]["block"], 1) %> uživatel: blokovat (vyjma admina)
                   <%= edit_get_rule_checkbox(@user, ROLE["users"]["unblock"], 1) %> uživatel: odblokovávat (vyjma admina)
-                  <%= edit_get_rule_checkbox(@user, ROLE["recipes"]["show"], 1) %> recept: zobrazovat
+                  <input type="checkbox" checked disabled /> recept: zobrazovat
                   <%= edit_get_rule_checkbox(@user, ROLE["recipes"]["edit"], 1) %> recept: editovat
                   <%= edit_get_rule_checkbox(@user, ROLE["recipes"]["delete"], 1) %> recept: mazat
-                  <%= edit_get_rule_checkbox(@user, ROLE["articles"]["show"], 1) %> článek: zobrazovat
+                  <input type="checkbox" checked disabled /> článek: zobrazovat
                   <%= edit_get_rule_checkbox(@user, ROLE["articles"]["edit"], 1) %> článek: editovat
                   <%= edit_get_rule_checkbox(@user, ROLE["articles"]["delete"], 1) %> článek: mazat
                   <%= edit_get_rule_checkbox(@user, ROLE["comments"]["edit"], 1) %> komentáře: editovat
@@ -100,7 +100,8 @@
               <dd>
                 <div id="defined_rules_global">
                   <%= edit_get_rule_checkbox(@user, ROLE["users"]["index"], 2) %> zobrazování seznamu uživatelů
-                  <%= edit_get_rule_checkbox(@user, ROLE["marks"]["index"], 2) %> zobrazování seznamu hodnocení
+                  <%= edit_get_rule_checkbox(@user, ROLE["marks"]["index"], 2) %> zobrazování seznamu známek
+                  <%= edit_get_rule_checkbox(@user, ROLE["marks"]["show"], 2) %> zobrazování známek
                 </div>
               </dd>
               <% end %>

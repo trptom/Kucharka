@@ -39,7 +39,12 @@ class MarksController < ApplicationController
       end
     end
 
-    render "/home/plain_message"
+    if @msg == "true" && marks_filter("show", nil, nil)
+      @msg += "\n" + get_mark_str(@mark.recipe)
+      @msg += "\n" + @mark.value.to_s
+    end
+
+    redirect_to "/home/plain_message", notice: @msg
   end
 
   # DELETE /marks/1

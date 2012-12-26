@@ -2,8 +2,8 @@
 
 module PermissionsHelper
   def user_has_permission(user, permission_self, permission_other)
-    return (((permission_self == nil) || ((permission_self & user.self_ruleset) > 0)) &&
-          ((permission_other == nil) || ((permission_other & user.others_ruleset) > 0)))
+    return (((permission_self == nil) || ((user) && ((permission_self & user.self_ruleset) > 0))) &&
+          ((permission_other == nil) || ((user) && ((permission_other & user.others_ruleset) > 0))))
   end
 
   def has_permission(permission_self, permission_other)
@@ -28,10 +28,18 @@ module PermissionsHelper
       return false
     end
     if condition.kind_of? Numeric
-      condition = (current_user.id == condition)
+      if current_user
+        condition = (current_user.id == condition)
+      else
+        return false
+      end
     end
     if condition.kind_of? String
-      condition =  (current_user.id == condition.to_i)
+      if current_user
+        condition =  (current_user.id == condition.to_i)
+      else
+        return false
+      end
     end
 
     return has_permission_self_other_diff(condition, permission, permission)
@@ -67,6 +75,30 @@ module PermissionsHelper
       has_access = recipes_filter(params[:action], params, nil)
     end
 
+    if params[:controller] == "articles"
+      has_access = articles_filter(params[:action], params, nil)
+    end
+
+    if params[:controller] == "comments"
+      has_access = comments_filter(params[:action], params, nil)
+    end
+
+    if params[:controller] == "marks"
+      has_access = marks_filter(params[:action], params, nil)
+    end
+
+    if params[:controller] == "ingrediences"
+      has_access = ingrediences_filter(params[:action], params, nil)
+    end
+
+    if params[:controller] == "recipeCategories"
+      has_access = recipe_categories_filter(params[:action], params, nil)
+    end
+
+    if params[:controller] == "ingredienceCategories"
+      has_access = ingredience_categories_filter(params[:action], params, nil)
+    end
+
     if (!has_access)
       redirect_to "/home/error", notice: "Stránka neexistuje, nebo byl přístup na požadovanou stránku odepřen!"
     end
@@ -82,7 +114,7 @@ module PermissionsHelper
       # Kontroluje, zda jde o pozadavek pro aktualniho uzivatele.
       # Pokud neni uvedeno id, zobrazuje to aktualniho uzivatele.
       # Teprv pokud neni ani ten, vraci false.
-      return (p[:id] == nil && current_user != nil) || is_current_user(p[:id])
+      return (p[:id] == nil && current_user) || is_current_user(p[:id])
     end
 
     if action == "edit" || action == "update"
@@ -103,12 +135,12 @@ module PermissionsHelper
       # Kontroluje, zda jde o pozadavek pro aktualniho uzivatele.
       # Pokud neni uvedeno id, zobrazuje to aktualniho uzivatele.
       # Teprv pokud neni ani ten, vraci false.
-      return (p[:id] == nil && current_user != nil) || is_current_user(p[:id])
+      return (p[:id] == nil && current_user) || is_current_user(p[:id])
     end
 
     if action == "show"
       return has_permission_self_other(
-          (current_user != nil && (p[:id] == nil || (p[:id].to_i == current_user.id))),
+          (current_user && (p[:id] == nil || (p[:id].to_i == current_user.id))),
           ROLE['users']['show'])
     end
 
@@ -152,7 +184,8 @@ module PermissionsHelper
         action != "new" &&
         action != "create" &&
         action != "fridge" &&
-        action != "newest")
+        action != "newest" &&
+        action != "show")
       # musim mit id
       if (p[:id] == nil)
         return false
@@ -179,12 +212,9 @@ module PermissionsHelper
       return has_permission_self_other(entity.user_id, ROLE['recipes']['delete'])
     end
 
-    if action == "show"
-      return has_permission_self_other(entity.user_id, ROLE['recipes']['show'])
-    end
-
     # na lednicku se dostanu vzdycky, jen se to tam trochu vyfiltruje
     # na index se dostanu vzdycky, jen se to tam trochu vyfiltruje
+    # na show se dostanou vzdycky
 
     return true;
   end
@@ -197,6 +227,7 @@ module PermissionsHelper
     # pokud neni nastavena zadna DB entita, nactu ji podle id z parametru
     if (entity == nil &&
         action != "index" &&
+        action != "show" &&
         action != "create" &&
         action != "new")
       # musim mit id
@@ -211,6 +242,21 @@ module PermissionsHelper
       end
     end
 
+    if action == "edit" || action == "update"
+      return has_permission_self_other(entity.user_id, ROLE['articles']['edit'])
+    end
+
+    if action == "new" || action == "create"
+      return has_permission(ROLE['articles']['create'], nil)
+    end
+
+    if action == "destroy"
+      return has_permission_self_other(entity.user_id, ROLE['articles']['delete'])
+    end
+
+    # na index se dostanu vzdycky, jen se to tam trochu vyfiltruje
+    # na show se dostanou vzdycky
+
     return true;
   end
 
@@ -221,7 +267,7 @@ module PermissionsHelper
     end
     # pokud neni nastavena zadna DB entita, nactu ji podle id z parametru
     if (entity == nil &&
-        action != "index")
+        action != "create")
       # musim mit id
       if (p[:id] == nil)
         return false
@@ -234,6 +280,18 @@ module PermissionsHelper
       end
     end
 
+    if action == "create"
+      return has_permission(ROLE['comments']['create'], nil)
+    end
+
+    if action == "update"
+      return has_permission_self_other(entity.user_id, ROLE['comments']['update'])
+    end
+
+    if action == "destroy"
+      return has_permission_self_other(entity.user_id, ROLE['comments']['delete'])
+    end
+
     return true;
   end
 
@@ -244,7 +302,10 @@ module PermissionsHelper
     end
     # pokud neni nastavena zadna DB entita, nactu ji podle id z parametru
     if (entity == nil &&
-        action != "index")
+        action != "index" &&
+        action != "create" &&
+        action != "new" &&
+        action != "new_request")
       # musim mit id
       if (p[:id] == nil)
         return false
@@ -257,10 +318,29 @@ module PermissionsHelper
       end
     end
 
+    # jen pokud muze delat nejakou akci
     if action == "index"
       return has_permission_one(ROLE['ingrediences']['create_delete']) ||
           has_permission_one(ROLE['ingrediences']['edit'])
     end
+
+    if action == "create" || action == "new"
+      return has_permission(ROLE['ingrediences']['create_delete'], nil)
+    end
+
+    if action == "edit" || action == "update"
+      return has_permission_self_other(entity.user_id, ROLE['ingrediences']['edit']);
+    end
+
+    if action == "destroy"
+      return has_permission_self_other(entity.user_id, ROLE['ingrediences']['create_delete']);
+    end
+
+    if action == "new_request"
+      return (true && current_user) # aby to vzdycky vracelo boolean
+    end
+
+    # show je dostupne vzdy
 
     return true;
   end
@@ -272,7 +352,9 @@ module PermissionsHelper
     end
     # pokud neni nastavena zadna DB entita, nactu ji podle id z parametru
     if (entity == nil &&
-        action != "index")
+        action != "index" &&
+        action != "create" &&
+        action != "new")
       # musim mit id
       if (p[:id] == nil)
         return false
@@ -290,6 +372,18 @@ module PermissionsHelper
           has_permission_one(ROLE['ingredienceCategories']['edit'])
     end
 
+    if action == "create" || action == "new"
+      return has_permission(ROLE['ingredienceCategories']['create_delete'], nil)
+    end
+
+    if action == "edit" || action == "update"
+      return has_permission_self_other(entity.user_id, ROLE['ingredienceCategories']['edit']);
+    end
+
+    if action == "destroy"
+      return has_permission_self_other(entity.user_id, ROLE['ingredienceCategories']['create_delete']);
+    end
+
     return true;
   end
 
@@ -300,7 +394,9 @@ module PermissionsHelper
     end
     # pokud neni nastavena zadna DB entita, nactu ji podle id z parametru
     if (entity == nil &&
-        action != "index")
+        action != "index" &&
+        action != "create" &&
+        action != "new")
       # musim mit id
       if (p[:id] == nil)
         return false
@@ -318,15 +414,48 @@ module PermissionsHelper
           has_permission_one(ROLE['recipeCategories']['edit'])
     end
 
+    if action == "create" || action == "new"
+      return has_permission(ROLE['recipeCategories']['create_delete'], nil)
+    end
+
+    if action == "edit" || action == "update"
+      return has_permission_self_other(entity.user_id, ROLE['recipeCategories']['edit']);
+    end
+
+    if action == "destroy"
+      return has_permission_self_other(entity.user_id, ROLE['recipeCategories']['create_delete']);
+    end
+
     return true;
   end
 
   def marks_filter(action, p, entity)
     # aby to nechcipalo, pokud p nenastavim
     if (p == nil)
-      return false;
+      p = Hash.new
     end
 
+    # pokud neni nastavena zadna DB entita, nactu ji podle id z parametru
+    if (entity == nil &&
+        action != "index" &&
+        action != "create" &&
+        action != "show")
+      # musim mit id
+      if (p[:id] == nil)
+        return false
+      else
+        entity = RecipeCategory.find(p[:id])
+      end
+      # zadna entita s danym id neexistuje
+      if entity == nil
+        return false;
+      end
+    end
+
+    if action == "index"
+      return has_permission_both(ROLE['marks']['index'])
+    end
+    
     if action == "create"
       return has_permission(ROLE['marks']['create'], nil)
     end
@@ -336,7 +465,7 @@ module PermissionsHelper
     end
 
     if action == "delete"
-      return has_permission(ROLE['marks']['delete'], nil)
+      return has_permission_self_other(entity.user_id, ROLE['marks']['delete'])
     end
 
     return true;

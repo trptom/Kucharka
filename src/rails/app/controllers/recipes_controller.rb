@@ -15,6 +15,10 @@ class RecipesController < ApplicationController
   def show
     @recipe = Recipe.find(params[:id])
 
+    if current_user
+      @my_mark = @recipe.marks.where(:user_id => current_user.id).first
+    end
+
     # seznam komentaru pto recept
     @comments = Comment.where(:comment_type => COMMENT_TYPE['recipes'], :recipe_id => @recipe.id)
 
