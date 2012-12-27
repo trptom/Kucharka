@@ -1,25 +1,52 @@
-<h1>Seznam ingrediencí</h1>
-
-<table>
-  <tr>
-    <th>Název</th>
-    <th>Autor</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @ingrediences.each do |ingredience| %>
-  <tr>
-    <td><%= ingredience.name %></td>
-    <td><%= ingredience.user.username %></td>
-    <td><%= link_to 'Zobrazit', ingredience %></td>
-    <td><%= link_to 'Editovat', edit_ingredience_path(ingredience) %></td>
-    <td><%= link_to 'Smazat', ingredience, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
+<div class="span10 offset1">
+  <div class="well">
+    <h2>Ingredience - schválené</h2>
+    <table class="table table-hower spacer">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Název</th>
+          <th>Autor</th>
+          <th>Akce</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ingrediences_accepted.each do |ingredience| %>
+          <tr>
+            <td><%= ingredience.id %></td>
+            <td><%= ingredience.name %></td>
+            <td><%= ingredience.user.username %></td>
+            <td><%= link_to 'Zobrazit', ingredience %></td>
+            <td><%= link_to 'Editovat', edit_ingredience_path(ingredience) %></td>
+            <td><%= link_to 'Smazat', ingredience, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <h2>Ingredience - neschválené</h2>
+    <table class="table table-hower spacer">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Název</th>
+          <th>Autor</th>
+          <th>Akce</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ingrediences_pending.each do |ingredience| %>
+          <tr>
+            <td><%= ingredience.id %></td>
+            <td><%= ingredience.name %></td>
+            <td><%= ingredience.user.username %></td>
+            <td><%= link_to 'Zobrazit', ingredience %></td>
+            <td><%= link_to 'Editovat', edit_ingredience_path(ingredience) %></td>
+            <td><%= link_to 'Smazat', ingredience, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <%= link_to 'Nová ingredience', new_ingredience_path %>

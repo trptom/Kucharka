@@ -9,7 +9,7 @@ class Ingredience < ActiveRecord::Base
 
   has_and_belongs_to_many :ingredienceCategories
 
-  attr_accessible :name, :annotation, :content, :avaliability, :units
+  attr_accessible :name, :annotation, :content, :avaliability, :units, :activation_state
 
   validates :name,
     :length => { :minimum => 3, :maximum => 50, :message => "špatná délka názvu (3-50)" },
@@ -29,6 +29,10 @@ class Ingredience < ActiveRecord::Base
   validates :avaliability,
     :numericality => { :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 1000, :message => "chybná dostupnost (musí být v rozmezí 1-1000)" },
   :if => :avaliability
+
+  validates :activation_state,
+    :numericality => { :only_integer => true, :greater_than_or_equal_to => 0, :less_than_or_equal_to => 1, :message => "chybný aktivační status (musí být v rozmezí 0-1)" },
+  :if => :activation_state
 
   #validates :units,
   #:if => :units
