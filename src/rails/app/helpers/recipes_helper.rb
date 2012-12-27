@@ -108,6 +108,37 @@ module RecipesHelper
     return @ret
   end
 
+  def get_recipes_by_filter(filter)
+    if (filter == nil)
+      return Recipe.order(:name).all
+    end
+
+    ret = Recipe.order(:name);
+
+    if (filter[:text] && filter[:text] != "")
+      tmp = "(name like '%#{filter[:text]}%')"
+      if filter[:text_type] == "1"
+        tmp += "OR(annotation LIKE \"%" + filter[:text] + "%\")"
+        tmp += "OR(content LIKE \"%" + filter[:text] + "%\")"
+      end
+      ret = ret.where(tmp)
+    end
+
+    if (filter[:level] && filter[:level] != "")
+      ret = ret.where("level = " + filter[:level])
+    end
+
+    if (filter[:time_min] && filter[:time_min] != "")
+      ret = ret.where("estimated_time >= " + filter[:time_min])
+    end
+
+    if (filter[:time_max] && filter[:time_max] != "")
+      ret = ret.where("estimated_time <= " + filter[:time_max])
+    end
+
+    return ret.all
+  end
+
   def get_recipes_by_fridge(p)
     if (p == nil || p[:ingrediences] == nil || !(p[:ingrediences].length > 0))
       return nil

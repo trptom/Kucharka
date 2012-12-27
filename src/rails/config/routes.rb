@@ -1,4 +1,6 @@
 PokusSorcery::Application.routes.draw do
+  get "help/index"
+
   resources :ingredience_categories
 
   resources :recipe_categories
@@ -49,6 +51,8 @@ PokusSorcery::Application.routes.draw do
   match 'users/:id/block' => 'users#block'
   match 'users/:id/unblock' => 'users#unblock'
   match 'fridge' => 'recipes#fridge'
+  match 'filter' => 'recipes#filter'
+  match 'search' => 'home#search'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -184,6 +184,7 @@ module PermissionsHelper
         action != "new" &&
         action != "create" &&
         action != "fridge" &&
+        action != "filter" &&
         action != "newest" &&
         action != "show")
       # musim mit id
@@ -212,7 +213,7 @@ module PermissionsHelper
       return has_permission_self_other(entity.user_id, ROLE['recipes']['delete'])
     end
 
-    # na lednicku se dostanu vzdycky, jen se to tam trochu vyfiltruje
+    # na lednicku a filtr se dostanu vzdycky, jen se to tam trochu vyfiltruje
     # na index se dostanu vzdycky, jen se to tam trochu vyfiltruje
     # na show se dostanou vzdycky
 

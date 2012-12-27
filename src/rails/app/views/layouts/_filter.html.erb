@@ -1,0 +1,36 @@
+<div id="filtr" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mylednicka" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Filtr receptů</h3>
+  </div>
+
+  <div class="modal-body">
+    <form action="/filter" method="get">
+      <div>
+        <h5>Klíčová slova</h5>
+        <input type="text" name="filter[text]" value="<%= get_filter("text") %>" />
+        <select name="filter[text_type]">
+          <option value="0"<%= get_filter("text_type") == "0" ? " selected" : nil %>>Prohledat pouze titulky</option>
+          <option value="1"<%= get_filter("text_type") == "1" ? " selected" : nil %>>Prohledat titulky a obsah</option>
+        </select>
+      </div>
+      <div>
+        <h5>Náročnost</h5>
+        <select name="filter[level]">
+          <option value=""></option>
+          <% for i in 0..(LEVEL_TEXT.length-1) %>
+          <option value="<%= i %>"<%= get_filter("level") == i.to_s ? " selected" : nil %>><%= LEVEL_TEXT[i] %></option>
+          <% end %>
+        </select>
+      </div>
+      <div>
+        <h5>Odhadovaná doba přípravy (minuty)</h5>
+        <input type="number" name="filter[time_min]" value="<%= get_filter("time_min") %>" />
+        -
+        <input type="number" name="filter[time_max]" value="<%= get_filter("time_max") %>" />
+      </div>
+      <legend class="spacer"></legend>
+      <button class="btn">Vyhledat recept</button>
+    </form>
+  </div>
+</div>

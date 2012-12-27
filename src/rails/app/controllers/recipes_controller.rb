@@ -115,6 +115,10 @@ class RecipesController < ApplicationController
     @recipes = get_recipes_by_fridge(params)
   end
 
+  def filter
+    @recipes = get_recipes_by_filter(params[:filter])
+  end
+
   def newest
     @recipes = Recipe.get_recipes_sorted_by_date(params[:count] == nil ? 10 : params[:count].to_i)
   end
