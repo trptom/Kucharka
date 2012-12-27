@@ -4,7 +4,8 @@ class IngrediencesController < ApplicationController
   # GET /ingrediences
   # GET /ingrediences.json
   def index
-    @ingrediences = Ingredience.all
+    @ingrediences_accepted = Ingredience.where(:activation_state => 1).all
+    @ingrediences_pending = Ingredience.where(:activation_state => 0).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,6 @@ class IngrediencesController < ApplicationController
   end
 
   # GET /ingrediences/1
-  # GET /ingrediences/1.json
   def show
     @ingredience = Ingredience.find(params[:id])
 
@@ -25,22 +25,11 @@ class IngrediencesController < ApplicationController
     @comment.comment_type = COMMENT_TYPE['ingrediences']
     @comment.user = current_user
     @comment.ingredience = @ingredience
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @ingredience }
-    end
   end
 
   # GET /ingrediences/new
-  # GET /ingrediences/new.json
   def new
     @ingredience = Ingredience.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @ingredience }
-    end
   end
 
   # GET /ingrediences/1/edit
@@ -49,48 +38,34 @@ class IngrediencesController < ApplicationController
   end
 
   # POST /ingrediences
-  # POST /ingrediences.json
   def create
     @ingredience = Ingredience.new(params[:ingredience])
     @ingredience.user = current_user
 
-    respond_to do |format|
-      if @ingredience.save
-        format.html { redirect_to @ingredience, notice: 'Ingredience was successfully created.' }
-        format.json { render json: @ingredience, status: :created, location: @ingredience }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @ingredience.errors, status: :unprocessable_entity }
-      end
+    if @ingredience.save
+      redirect_to @ingredience, notice: 'Ingredience was successfully created.'
+    else
+      render action: "new"
     end
   end
 
   # PUT /ingrediences/1
-  # PUT /ingrediences/1.json
   def update
     @ingredience = Ingredience.find(params[:id])
 
-    respond_to do |format|
-      if @ingredience.update_attributes(params[:ingredience])
-        format.html { redirect_to @ingredience, notice: 'Ingredience was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @ingredience.errors, status: :unprocessable_entity }
-      end
+    if @ingredience.update_attributes(params[:ingredience])
+      redirect_to @ingredience, notice: 'Ingredience was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
   # DELETE /ingrediences/1
-  # DELETE /ingrediences/1.json
   def destroy
     @ingredience = Ingredience.find(params[:id])
     @ingredience.destroy
 
-    respond_to do |format|
-      format.html { redirect_to ingrediences_url }
-      format.json { head :no_content }
-    end
+    redirect_to ingrediences_url
   end
 
   def new_request
