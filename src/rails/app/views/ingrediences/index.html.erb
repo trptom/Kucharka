@@ -16,9 +16,11 @@
             <td><%= ingredience.id %></td>
             <td><%= ingredience.name %></td>
             <td><%= ingredience.user.username %></td>
-            <td><%= link_to 'Zobrazit', ingredience %></td>
-            <td><%= link_to 'Editovat', edit_ingredience_path(ingredience) %></td>
-            <td><%= link_to 'Smazat', ingredience, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td>
+              <%= ingrediences_filter("show", nil, ingredience) ? link_to('Zobrazit', ingredience, :method => :get, :class => "btn") : nil %>
+              <%= ingrediences_filter("edit", nil, ingredience) ? link_to('Editovat', edit_ingredience_path(ingredience), :method => :get, :class => "btn") : nil %>
+              <%= ingrediences_filter("destroy", nil, ingredience) ? link_to('Smazat', ingredience, method: :delete, data: { confirm: 'Jste si jistý(á)?' }, :method => :get, :class => "btn") : nil %>
+            </td>
           </tr>
         <% end %>
       </tbody>
@@ -39,14 +41,15 @@
             <td><%= ingredience.id %></td>
             <td><%= ingredience.name %></td>
             <td><%= ingredience.user.username %></td>
-            <td><%= link_to 'Zobrazit', ingredience %></td>
-            <td><%= link_to 'Editovat', edit_ingredience_path(ingredience) %></td>
-            <td><%= link_to 'Smazat', ingredience, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td>
+              <%= ingrediences_filter("show", nil, ingredience) ? link_to('Zobrazit', ingredience, :method => :get, :class => "btn") : nil %>
+              <%= ingrediences_filter("edit", nil, ingredience) ? link_to('Editovat', edit_ingredience_path(ingredience), :method => :get, :class => "btn") : nil %>
+              <%= ingrediences_filter("destroy", nil, ingredience) ? link_to('Smazat', ingredience, method: :delete, data: { confirm: 'Jste si jistý(á)?' }, :method => :get, :class => "btn") : nil %>
+            </td>
           </tr>
         <% end %>
       </tbody>
     </table>
+    <%= ingrediences_filter("new", nil, nil) ? button_to('Nová ingredience', new_ingredience_path, {:class => "btn"}) : nil %>
   </div>
 </div>
-
-<%= link_to 'Nová ingredience', new_ingredience_path %>

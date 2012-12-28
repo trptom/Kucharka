@@ -306,7 +306,8 @@ module PermissionsHelper
         action != "index" &&
         action != "create" &&
         action != "new" &&
-        action != "new_request")
+        action != "new_request" &&
+        action != "plain_list")
       # musim mit id
       if (p[:id] == nil)
         return false
@@ -341,7 +342,7 @@ module PermissionsHelper
       return (true && current_user) # aby to vzdycky vracelo boolean
     end
 
-    # show je dostupne vzdy
+    # show je dostupne vzdy, plain_list taky
 
     return true;
   end

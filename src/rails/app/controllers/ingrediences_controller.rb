@@ -4,13 +4,8 @@ class IngrediencesController < ApplicationController
   # GET /ingrediences
   # GET /ingrediences.json
   def index
-    @ingrediences_accepted = Ingredience.where(:activation_state => 1).all
-    @ingrediences_pending = Ingredience.where(:activation_state => 0).all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @ingrediences }
-    end
+    @ingrediences_accepted = Ingredience.where(:activation_state => 1).order(:name).all
+    @ingrediences_pending = Ingredience.where(:activation_state => 0).order(:name).all
   end
 
   # GET /ingrediences/1

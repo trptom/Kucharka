@@ -11,27 +11,35 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
+  <p>
+    Název
     <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :annotation %><br />
+  </p>
+  <p>
+    Anotace<br />
     <%= f.text_area :annotation %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br />
+  </p>
+  <p>
+    Obsah<br />
     <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :avaliability %><br />
+  </p>
+  <p>
+    Dostupnost
     <%= f.number_field :avaliability, :min => 1, :max => 1000 %>
-  </div>
-  <div class="field">
-    <%= f.label :units %><br />
+  </p>
+  <p>
+    Jednotky
     <%= f.text_field :units %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  </p>
+  <p>
+    Schválená
+    <%= f.check_box :activation_state %>
+  </p>
+  <p>
+    <%= f.submit 'Nastavit', :class => "btn" %>
+  </p>
+<% end %>
+
+<% if ingrediences_filter("index", nil, @ingredience) %>
+  <%= button_to('Seznam', ingrediences_path, :method => :get, :class => "btn") %>
 <% end %>

@@ -52,7 +52,10 @@
       <div class="span6">
         <dl class="dl-horizontal">
           <% @recipe.ingredienceRecipeConnectors.each do |ingredienceConn| %>
-            <dt><%= ingredienceConn.ingredience.name %></dt>
+            <dt>
+              <%= ingrediences_filter("show", nil, ingredienceConn.ingredience) ?
+                link_to(ingredienceConn.ingredience.name, ingredience_path(ingredienceConn.ingredience)) : ingredienceConn.ingredience.name %>
+            </dt>
             <dd>
               <%= ingredienceConn.quantity %>
               <%= ingredienceConn.ingredience.units %>
