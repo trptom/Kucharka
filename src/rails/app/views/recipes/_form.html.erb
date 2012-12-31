@@ -30,41 +30,59 @@
           <%= f.text_field :name, :placeholder => "Název receptu" %>
         </div>
         <div class="span4">
-          <p>obrazek <button class="btn">Načíst obrázek</button></p>
-        </div>
-        <div class="span4">
-          <div id="ingrediences_selected">
-          </div>
-          <select id="ingredience_select" class="span8">
-            <optgroup id="ingrediences_accepted_group" label="Schválené"></optgroup>
-            <optgroup id="ingrediences_not_accepted_group" label="Neschválené"></optgroup>
-          </select>
-          <input id="ingredience_quantity" type="number" min="0" step="0.1" class="span8" placeholder="Množství" />
-          <input id="ingredience_importance" type="number" min="1" max="1000" class="span8" placeholder="Důležitost" />
-          <input type="button" class="btn" onclick="Ingrediences.add()" value="Přidat ingredienci" />
-          <select id="ingrediences_select" name="ingrediences[]" class="" multiple></select>
-          <span id="ingrediences_list" class="">
-            <% for connector in @recipe.ingredienceRecipeConnectors %>
-              <%= connector.ingredience_id.to_s + "|" + connector.quantity.to_s + "|" + connector.importance.to_s %>
-            <% end %>
-          </span>
+          <p>obrazek <button class="btn" disabled>Načíst obrázek</button></p>
         </div>
       </div>
-
-      <div id="ingKR">
+      <hr />
+      <h4>Ingredience</h4>
+      <div class="row-fluid spacer">
+        <h5>Aktuální</h5>
+        <div id="ingrediences_selected">
+        </div>
+        <h5>Přidat</h5>
+        <select id="ingredience_select" class="span3">
+          <optgroup id="ingrediences_accepted_group" label="Schválené"></optgroup>
+          <optgroup id="ingrediences_not_accepted_group" label="Neschválené"></optgroup>
+        </select>
+        <input id="ingredience_quantity" type="number" min="0" step="0.1" class="span3" placeholder="Množství" />
+        <input id="ingredience_importance" type="number" min="1" max="1000" class="span3" placeholder="Důležitost" />
+        <input type="button" class="btn" onclick="Ingrediences.add()" value="Přidat ingredienci" />
+        <select id="ingrediences_select" name="ingrediences[]" class="hidden" multiple></select>
+        <span id="ingrediences_list" class="hidden">
+          <% for connector in @recipe.ingredienceRecipeConnectors %>
+            <%= connector.ingredience_id.to_s + "|" + connector.quantity.to_s + "|" + connector.importance.to_s %>
+          <% end %>
+        </span>
       </div>
 
-      <label class="spacer">Anotace receptu</label>
-      <%= f.text_area :annotation, :class => "input-block-level", :rows => "3" %>
+      <hr />
 
-      <label class="spacer">Popis receptu</label>
-      <%= f.text_area :content, :class => "input-block-level", :rows => "10" %>
+      <h4>Kategorie</h4>
+      <div class="row-fluid spacer">
+          Kategorie - TODO
+      </div>
+
+      <hr />
+
+      <h4>Popis</h4>
+      <div class="row-fluid spacer">
+        <label class="spacer">Anotace receptu</label>
+        <%= f.text_area :annotation, :class => "input-block-level", :rows => "3" %>
+
+        <label class="spacer">Popis receptu</label>
+        <%= f.text_area :content, :class => "input-block-level", :rows => "10" %>
+      </div>
+
+      <hr />
 
       <label>Složitost přípravy</label>
       <%= render "level_component"  %>
+
       <label>Odhadovaný čas přípravy (minuty)</label>
       <%= f.number_field :estimated_time %>
+      
       <p></p>
+
       <%= f.submit @submit_title, :class => "btn" %>
     <% end %>
   </div>

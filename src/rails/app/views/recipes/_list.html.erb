@@ -1,12 +1,20 @@
-<div class="span10 offset1">
-  <% if @recipes != nil %>
-    <% @recipes.each do |recipe| %>
-      <div class="well">
-        <h2><%= recipe.name %></h2>
-        <p><%= recipe.annotation %></p>
-        <p>Přidáno: <%= recipe.created_at %></p>
-        <%= link_to "Dále >>", recipe_path(recipe.id) %>
-      </div>
+<div class="span2"></div>
+<div class="span8">
+  <div class="well">
+    <h2>Výsledky hledání</h2>
+    <% if @recipes != nil %>
+      <% @recipes.each do |recipe| %>
+        <div class="spacer">
+          <img src="" alt="TODO" />
+          <h5>
+            <%= recipe.name %> -
+            <%= link_to recipe.user.username, user_path(recipe.user) %> -
+            <%= recipe.created_at %>
+          </h5>
+          <p><%= recipe.annotation %></p>
+          <%= link_to "Dále >>", recipe_path(recipe.id) %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
