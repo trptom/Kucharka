@@ -11,8 +11,8 @@ header {
     background-image: url('../../img/collage.jpg');
     background-repeat: repeat-x;
 
-    -webkit-box-shadow: inset 450px 20px 100px 20px rgba(0, 0, 0, 0.8);
-    box-shadow: inset 450px 20px 100px 20px rgba(0, 0, 0, 0.8);
+    -webkit-box-shadow: inset 600px 20px 100px 20px rgba(0, 0, 0, 0.8);
+    box-shadow: inset 600px 20px 100px 20px rgba(0, 0, 0, 0.8);
     color: white;
     height: 150px;
     text-align: left;
@@ -42,9 +42,7 @@ footer {
     background-color: white;
 }
 
-body {
-    background-color: rgb(245,155,56);
-}
+
 
 .x{
     color: grey;
