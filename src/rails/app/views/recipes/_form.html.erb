@@ -30,7 +30,10 @@
           <%= f.text_field :name, :placeholder => "Název receptu" %>
         </div>
         <div class="span4">
-          <p>obrazek <button class="btn" disabled>Načíst obrázek</button></p>
+          <p>
+            Obrázek: 
+            <%= f.file_field :image %>
+          </p>
         </div>
       </div>
       <hr />

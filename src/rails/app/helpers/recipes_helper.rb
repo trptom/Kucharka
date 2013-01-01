@@ -17,6 +17,10 @@ module RecipesHelper
     return count > 0 ? (sum/count).round(1) : nil;
   end
 
+  def xxx
+    
+  end
+
   def get_mark_str(recipe)
     mark = get_mark(recipe);
     return mark != nil ? mark.to_s : "žádné";
@@ -31,8 +35,10 @@ module RecipesHelper
         #najdu existujici vazbu pro recept x ingredience (pokud uz recept existoval)
         if recipe_id != nil
           irc = IngredienceRecipeConnector.where(:recipe_id => recipe_id).where(:ingredience_id => tmp[0].to_i).first
-          irc.update_attribute(:quantity, tmp[1].to_f)
-          irc.update_attribute(:importance, tmp[1].to_i)
+          if irc != nil
+            irc.update_attribute(:quantity, tmp[1].to_f)
+            irc.update_attribute(:importance, tmp[1].to_i)
+          end
         end
         # a pokud jsem vazbu nenasel, vytvarim novou (je to tadz, aby v DB nehnily stary zaznamy)
         if irc == nil

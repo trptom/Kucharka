@@ -46,9 +46,11 @@
   <div class="well">
     <h2><%= @recipe.name %></h2>
     <div class="row-fluid spacer">
-      <div class="span6">
-        <img src="img/sample1.jpg" class="img-rounded" alt="Náhled" />
-      </div>
+      <% if @recipe.image != nil %>
+        <div class="span6">
+          <img src="<%= @recipe.image %>" class="img-rounded" alt="Náhled" />
+        </div>
+      <% end %>
       <div class="span6">
         <dl class="dl-horizontal">
           <% @recipe.ingredienceRecipeConnectors.each do |ingredienceConn| %>
