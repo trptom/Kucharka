@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130101230700) do
+ActiveRecord::Schema.define(:version => 20130102001500) do
 
   create_table "articles", :force => true do |t|
     t.string   "title",      :null => false
@@ -109,6 +109,11 @@ ActiveRecord::Schema.define(:version => 20130101230700) do
   create_table "recipe_categories_recipes", :id => false, :force => true do |t|
     t.integer "recipe_category_id"
     t.integer "recipe_id"
+  end
+
+  create_table "recipe_recipe_connectors", :id => false, :force => true do |t|
+    t.integer "recipe_id",    :null => false
+    t.integer "subrecipe_id", :null => false
   end
 
   create_table "recipes", :force => true do |t|
