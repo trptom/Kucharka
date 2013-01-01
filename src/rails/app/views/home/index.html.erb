@@ -12,7 +12,7 @@
           <img src="<%=asset_path "minisandwich.png" %>" alt=""/>
           <h5><%= item.name %></h5>
           <p><%= item.annotation %></p>
-          <p>Přidáno: <%= item.created_at %></p>
+          <p>Přidáno: <%= l item.created_at %><%#= t :hello %></p>
           <%= link_to "Zobrazit recept", recipe_path(item.id) %>
         </div>
       <% end %>
