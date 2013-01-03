@@ -126,29 +126,37 @@ class RecipesController < ApplicationController
   def add_subrecipe
     @msg = "false";
 
-    if params[:parent_recipe_id] != nil && params[:child_recipe_id] != nil
-      @child_recipe = Recipe.find(params[:child_recipe_id])
-      @parent_recipe = Recipe.find(params[:parent_recipe_id])
-      if (@child_recipe != nil && @parent_recipe != nil)
-        #TODO
+    if params[:id] != nil && params[:recipe_id] != nil
+      @recipe = Recipe.find(params[:id])
+      @subrecipe = Recipe.find(params[:recipe_id])
+      if (@recipe != nil && @subrecipe != nil)
+        @connector = RecipeRecipeConnector.new
+        @connector.recipe = @recipe;
+        @connector.subrecipe = @subrecipe;
+        @recipe.subrecipes << @connector
+        if @recipe.save
+          @msg = "true\n" + @subrecipe.id.to_s + "\n" + @subrecipe.name
+        end
       end
     end
 
-    render "/home/plain_message"
+    redirect_to "/home/plain_message", notice: @msg
   end
 
   def remove_subrecipe
     @msg = "false";
 
-    if params[:parent_recipe_id] != nil && params[:child_recipe_id] != nil
-      @child_recipe = Recipe.find(params[:child_recipe_id])
-      @parent_recipe = Recipe.find(params[:parent_recipe_id])
-      if (@child_recipe != nil && @parent_recipe != nil)
-        #TODO
+    if params[:id] != nil && params[:recipe_id] != nil
+      @recipe = Recipe.find(params[:id])
+      @connector = @recipe.subrecipes.find_by_subrecipe_id(params[:recipe_id]);
+      if @connector
+        if @recipe.subrecipes.delete(@connector);
+          @msg = "true"
+        end
       end
     end
 
-    render "/home/plain_message"
+    redirect_to "/home/plain_message", notice: @msg
   end
 
   def add_connected_article

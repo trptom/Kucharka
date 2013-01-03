@@ -111,10 +111,15 @@ ActiveRecord::Schema.define(:version => 20130102001500) do
     t.integer "recipe_id"
   end
 
-  create_table "recipe_recipe_connectors", :id => false, :force => true do |t|
-    t.integer "recipe_id",    :null => false
-    t.integer "subrecipe_id", :null => false
+  create_table "recipe_recipe_connectors", :force => true do |t|
+    t.integer  "recipe_id",    :null => false
+    t.integer  "subrecipe_id", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
+
+  add_index "recipe_recipe_connectors", ["recipe_id"], :name => "index_recipe_recipe_connectors_on_recipe_id"
+  add_index "recipe_recipe_connectors", ["subrecipe_id"], :name => "index_recipe_recipe_connectors_on_subrecipe_id"
 
   create_table "recipes", :force => true do |t|
     t.string   "name",                           :null => false

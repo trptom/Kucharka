@@ -10,7 +10,7 @@
         <span>
           <%= link_to subrecipe.subrecipe.name, recipe_path(subrecipe.subrecipe) %>
           <% if recipes_filter("edit", nil, @recipe) %>
-          <input type="button" value="X" onclick="//ConnectedRecipes.remove(<%= subrecipe.subrecipe.id %>, this.parentNode)" />
+          <input type="button" value="X" onclick="ConnectedRecipes.remove(<%= subrecipe.subrecipe.id %>, this.parentNode)" />
           <% end %>
           <br />
         </span>
@@ -21,8 +21,8 @@
       </span>
     </ul>
     <% if recipes_filter("edit", nil, @recipe) %>
-      <input type="text" id="connected_recipes_url" placeholder="URL podpostupu k propojení" disabled />
-      <input type="button" class="btn" value="Přidat podpostup" onclick="ConnectedArticles.add()" disabled />
+      <input type="text" id="connected_recipes_url" placeholder="URL podpostupu k propojení" />
+      <input type="button" class="btn" value="Přidat podpostup" onclick="ConnectedRecipes.add()" />
     <% end %>
     <legend></legend>
     <h4>Zajímavé články k receptu</h4>
