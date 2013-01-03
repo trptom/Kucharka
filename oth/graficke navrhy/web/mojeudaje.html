@@ -4,100 +4,171 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Kucharka</title>
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="bootstrap/css/plus.css" rel="stylesheet">
-  </head>
-  <body>
-      
-      <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li style="margin-right: 50px;">
-                            <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Uživatel <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Moje údaje</a></li>
-                                <li><a href="#">Moje recepty</a></li>
-                                <li><a href="#">Moje články</a></li>
-                                <li><a href="#">Odhlášení</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Nejnovší recepty</a></li>
-                        <li><a href="#">Nový recept</a></li>
-                        <li><a href="#">Help</a></li>        
-                    </ul>
-                    <form class="navbar-search pull-right form-search">
-                        <div class="input-append">
-                        <input type="text" class="search-query" placeholder="Search">
-                        <button type="submit" class="btn">Search</button>
-                        </div>
-                    </form>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Kucharka</title>
+        <!-- Bootstrap -->
+        <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="bootstrap/css/plus.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li style="margin-right: 50px;">
+                                <button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Uživatel <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Moje údaje</a></li>
+                                    <li><a href="#">Moje recepty</a></li>
+                                    <li><a href="#">Moje články</a></li>
+                                    <li><a href="#">Odhlášení</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Nejnovší recepty</a></li>
+                            <li><a href="#">Nový recept</a></li>
+                            <li><a href="#">Help</a></li>        
+                        </ul>
+                        <form class="navbar-search pull-right form-search">
+                            <div class="input-append">
+                                <input type="text" class="search-query" placeholder="Search">
+                                <button type="submit" class="btn">Search</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-      </div>
-      
-      <header>
+
+        <header>
             <div class="container">
                 <h1>Kuchářka</h1>
                 <p><strong>Chcete vařit? Nemusíte jít ani do obchodu. Vyzkoušejte naše ledničku.</strong></p>
                 <a href="#lednicka" role="button" class="btn btn-large btn-primary" data-toggle="modal">Lednička</a>
             </div>
         </header>
-      
-      
-      <div class="container-fluid">
-          <div class="row-fluid">
-              <div class="span2">
-                  
-              </div>
-              <div class="span8">
-                  <div class="well">
-                    <h2>Moje údaje</h2>
-                    <div class="row-fluid spacer">
-                        <div class="span5">
-                            <form>
-                                <dl class="dl-horizontal">
-                                    <dt>Uživatelské jéno:</dt><dd><input type="text" placeholder="uživatel1"></dd>
-                                    <dt>E-mail:</dt><dd><input type="email" placeholder="xyz@asd.com"></dd>
-                                    <dt>Jméno:</dt><dd><input type="text" placeholder="jmeno"></dd>
-                                    <dt>Příjmení:</dt><dd><input type="text" placeholder="prijmeni"></dd>
-                                </dl>
-                                <a class="btn pull-right" href="#">Změnit údaje</a>
-                            </form>
+
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span2">
+
+                </div>
+                <div class="span8">
+                    <div class="well">
+                        <h2>Moje údaje</h2>
+                        <div class="row-fluid spacer">
+                            <div class="span5">
+                                <form>
+                                    <dl class="dl-horizontal">
+                                        <dt>Uživatelské jéno:</dt><dd><input type="text" placeholder="uživatel1" disabled="true"></dd>
+                                        <dt>E-mail:</dt><dd><input type="email" placeholder="xyz@asd.com"></dd>
+                                        <dt>Jméno:</dt><dd><input type="text" placeholder="jmeno"></dd>
+                                        <dt>Příjmení:</dt><dd><input type="text" placeholder="prijmeni"></dd>
+                                        <dt>Aktivační status</dt><dd>active *</dd>
+                                    </dl>
+                                </form>
+                            </div>
+
+                            <div class="span5">
+                                <form>
+                                    <dl class="dl-horizontal">
+                                        <dt>Staré heslo: </dt><dd><input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"></dd>
+                                        <dt>Nové heslo: </dt><dd><input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"></dd>
+                                        <dt>Nové heslo znova: </dt><dd><input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"></dd>
+                                    </dl>
+                                    <a class="btn pull-right" href="#">Změnit heslo</a>
+                                </form>
+                            </div>
                         </div>
-                        
-                        <div class="span5">
-                            <form>
-                                <dl class="dl-horizontal">
-                                    <dt>Staré heslo: </dt><dd><input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"></dd>
-                                    <dt>Nové heslo: </dt><dd><input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"></dd>
-                                    <dt>Nové heslo znova: </dt><dd><input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"></dd>
-                                </dl>
-                                <a class="btn pull-right" href="#">Změnit heslo</a>
-                            </form>
+                        <div class="row-fluid spacer">
+                            <div class="span4">
+                                <h5>Oprávnění (vlastní)</h5>
+                                <table class="table table-condensed">
+                                    <tbody>
+                                        <tr><td><input type="checkbox"></td><td>uživatel: zobrazit</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>uživatel: editovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>uživatel: editovat práva</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>recept: vytvářet</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>recept: zobrazovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>recept: editovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>recept: mazat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>článek: vytvářet</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>článek: zobrazovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>článek: editovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>článek: mazat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>komentáře: vytvářet</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>komentáře: editovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>komentáře: mazat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>ingredience: vytvářet/mazat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>ingredience: editovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>kategorie receptu: vytvářet/mazat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>kategorie receptu: editovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>kategorie ingrediencí: vytvářet/mazat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>kategorie ingrediencí: editovat</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="span4">
+                                <h5>Oprávnění (cizí)</h5>
+                                <table class="table table-condensed">
+                                    <tbody>
+                                        <tr><td><input type="checkbox"></td><td>uživatel: zobrazit</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>uživatel: editovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>uživatel: mazat (vyjma admina)</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>uživatel: editovat práva</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>uživatel: blokovat (vyjma admina)</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>uživatel: odblokovávat (vyjma admina)</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>recept: zobrazovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>recept: editovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>recept: mazat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>článek: zobrazovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>článek: editovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>článek: mazat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>komentáře: editovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>komentáře: mazat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>známky: mazat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>ingredience: mazat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>ingredience: editovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>kategorie receptu: mazat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>kategorie receptu: editovat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>kategorie ingrediencí: mazat</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>kategorie ingrediencí: editovat</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="span4">
+                                <h5>Oprávnění (globální)</h5>
+                                <table class="table table-condensed">
+                                    <tbody>
+                                        <tr><td><input type="checkbox"></td><td>zobrazování seznamu uživatelů</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>zobrazování seznamu známek</td></tr>
+                                        <tr><td><input type="checkbox"></td><td>zobrazování známek</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                  </div>
-              </div>
-              
-          </div>
-      </div>
-      
-      <div id="lednicka" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mylednicka" aria-hidden="true">
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+        <div id="lednicka" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mylednicka" aria-hidden="true">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3>Lednička</h3>
-                
+
             </div>
             <div class="modal-body">
                 <p>Přidejte suroviny, co máte doma, a my vyhledáme za Vás recept.</p>
@@ -108,27 +179,27 @@ and open the template in the editor.
                 </form>
                 <form>
                     <div id="ingredience">
-                        
+
                     </div>
                     <legend class="spacer"></legend>
                     <button type="submit" class="btn">Vyhledat recept</button>
                 </form>
             </div>
         </div>
-      
-      <footer class="footer">
-        <div class="container">
-            <p class="pull-right"><a href="#">Zpět na začátku</a></p>
-            <p>&copy Kuchařka</p>
-            <p>Kontaktujte nás <a href="mailto:kucharka@xyz.cz">kucharka@xyz.cz</a></p>
-        </div>
-      </footer>
-      
-      <script src="http://code.jquery.com/jquery-latest.js"></script>
-      <script src="bootstrap/js/bootstrap.js"></script>
-      <script src="bootstrap/js/lednicka.js"></script>
-      
-      
-      
-  </body>
+
+        <footer class="footer">
+            <div class="container">
+                <p class="pull-right"><a href="#">Zpět na začátku</a></p>
+                <p>&copy Kuchařka</p>
+                <p>Kontaktujte nás <a href="mailto:kucharka@xyz.cz">kucharka@xyz.cz</a></p>
+            </div>
+        </footer>
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="bootstrap/js/bootstrap.js"></script>
+        <script src="bootstrap/js/lednicka.js"></script>
+
+
+
+    </body>
 </html>

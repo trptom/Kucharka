@@ -6,13 +6,19 @@
   <div class="well">
     <h4>Odkazy na podpostupy</h4>
     <ul id="subrecipes" class="unstyled">
-      <% if @links_sub != nil %>
-        <% @links_sub.each do |link| %>
-          <%= link_to link.title, link.url %><br />
-        <% end %>
-      <% else %>
-        Žádné
+      <% @recipe.subrecipes.each do |subrecipe| %>
+        <span>
+          <%= link_to subrecipe.subrecipe.name, recipe_path(subrecipe.subrecipe) %>
+          <% if recipes_filter("edit", nil, @recipe) %>
+          <input type="button" value="X" onclick="//ConnectedRecipes.remove(<%= subrecipe.subrecipe.id %>, this.parentNode)" />
+          <% end %>
+          <br />
+        </span>
       <% end %>
+      <span id="recipes_empty" class="<%= @recipe.subrecipes.length == 0 ? nil : "hidden" %>">
+        Žádné
+        <br />
+      </span>
     </ul>
     <% if recipes_filter("edit", nil, @recipe) %>
       <input type="text" id="connected_recipes_url" placeholder="URL podpostupu k propojení" disabled />
@@ -46,9 +52,11 @@
   <div class="well">
     <h2><%= @recipe.name %></h2>
     <div class="row-fluid spacer">
-      <div class="span6">
-        <img src="img/sample1.jpg" class="img-rounded" alt="Náhled" />
-      </div>
+      <% if @recipe.image != nil %>
+        <div class="span6">
+          <img src="<%= @recipe.image %>" class="img-rounded" alt="Náhled" />
+        </div>
+      <% end %>
       <div class="span6">
         <dl class="dl-horizontal">
           <% @recipe.ingredienceRecipeConnectors.each do |ingredienceConn| %>
