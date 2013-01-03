@@ -43,6 +43,7 @@ class RecipeCategoriesController < ApplicationController
   # POST /recipe_categories.json
   def create
     @recipe_category = RecipeCategory.new(params[:recipe_category])
+    @recipe_category.user = current_user
 
     respond_to do |format|
       if @recipe_category.save

@@ -1,15 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="span8 offset2">
+  <div class="well">
+    <h2><%= @ingredience_category.name %></h2>
+    <div class="spacer">
+      <p>
+        <%= @ingredience_category.descirption %>
+      </p>
+      <div class="btn-group">
+        <% if ingredience_categories_filter("edit", nil, @ingredience_category) %>
+          <%= link_to('Editovat', edit_ingredience_category_path(@ingredience_category), :class => "btn") %>
+        <% end %>
 
-<p>
-  <b>Name:</b>
-  <%= @ingredience_category.name %>
-</p>
+        <% if ingredience_categories_filter("destroy", nil, @ingredience_category) %>
+          <%= link_to('Smazat', @ingredience_category, method: :delete, data: { confirm: 'Jste si jistý(á)?' }, :class => "btn") %>
+        <% end %>
 
-<p>
-  <b>Descirption:</b>
-  <%= @ingredience_category.descirption %>
-</p>
-
-
-<%= link_to 'Edit', edit_ingredience_category_path(@ingredience_category) %> |
-<%= link_to 'Back', ingredience_categories_path %>
+        <% if ingredience_categories_filter("index", nil, @ingredience_category) %>
+          <%= link_to('Seznam', ingredience_categories_path, :class => "btn") %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

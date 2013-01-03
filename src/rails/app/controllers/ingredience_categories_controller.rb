@@ -43,6 +43,7 @@ class IngredienceCategoriesController < ApplicationController
   # POST /ingredience_categories.json
   def create
     @ingredience_category = IngredienceCategory.new(params[:ingredience_category])
+    @ingredience_category.user = current_user
 
     respond_to do |format|
       if @ingredience_category.save

@@ -1,25 +1,39 @@
-<div class="span10 offset1">
+<div class="span8 offset2">
   <div class="well">
     <h2><%= @ingredience.name %></h2>
-    <div class="spacer">
-      <p>Autor: <%= @ingredience.user.username %></p>
-      <p>Jednotky: <%= @ingredience.user.username %></p>
-      <p>Dostupnost: <%= @ingredience.avaliability %></p>
-      <p><%= @ingredience.annotation %></p>
-      <p><%= @ingredience.content %></p>
+    <div class="row-fluid spacer">
+      <div class="span6">
+        <label><strong>Autor: </strong><%= link_to @ingredience.user.username, user_path(@ingredience.user) %></label>
+        <label><strong>Jednotky: </strong><%= @ingredience.units %></label>
+        <label><strong>Dostupnost: </strong><%= @ingredience.avaliability %></label>
+      </div>
+      <div class="span6">
+      </div>
     </div>
 
-    <% if ingrediences_filter("edit", nil, @ingredience) %>
-      <%= button_to('Editovat', edit_ingredience_path(@ingredience), :method => :get, :class => "btn") %>
-    <% end %>
+    <div class="row-fluid">
+      <h4>Popis</h4>
+      <p>
+        <%= @ingredience.annotation %>
+      </p>
+      <p>
+        <%= @ingredience.content %>
+      </p>
 
-    <% if ingrediences_filter("destroy", nil, @ingredience) %>
-      <%= button_to('Smazat', @ingredience, method: :delete, data: { confirm: 'Jste si jistý(á)?' }, :method => :get, :class => "btn") %>
-    <% end %>
+      <div class="btn-group">
+        <% if ingrediences_filter("edit", nil, @ingredience) %>
+          <%= link_to('Editovat', edit_ingredience_path(@ingredience), :class => "btn") %>
+        <% end %>
 
-    <% if ingrediences_filter("index", nil, @ingredience) %>
-      <%= button_to('Seznam', ingrediences_path, :method => :get, :class => "btn") %>
-    <% end %>
+        <% if ingrediences_filter("destroy", nil, @ingredience) %>
+          <%= link_to('Smazat', @ingredience, method: :delete, data: { confirm: 'Jste si jistý(á)?' }, :class => "btn") %>
+        <% end %>
+
+        <% if ingrediences_filter("index", nil, @ingredience) %>
+          <%= link_to('Seznam', ingrediences_path, :class => "btn") %>
+        <% end %>
+      </div>
+    </div>
 
     <legend class="spacer"></legend>
 
