@@ -65,3 +65,11 @@ PokusSorcery::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 end
+
+# Konfigurace emailu
+ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+  :address  => "smtp-out.xnet.cz",
+  :port => 25,
+  :domain => "www.zmente-na-domenu-vasi-aplikace.cz" 
+}
