@@ -4,6 +4,6 @@
 <li style="margin-left: 10px; margin-right: 10px;">
   <button class="btn" onclick="location.href='/users/new/'">Registrace <i class="icon-play"></i></button>
 </li>
-<li><%= link_to "Úvodní stránka", "/" %></li>
+<li><%= link_to "Home", "/" %></li>
 <li><%= link_to "Nejnovější recepty", "/recipes/newest" %></li>
 <li><%= link_to "Nápověda", "/help/index" %></li>
