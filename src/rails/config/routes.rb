@@ -7,8 +7,6 @@ PokusSorcery::Application.routes.draw do
 
   resources :comments
 
-  resources :articles
-
   get "home/index"
   get "home/success"
   get "home/error"
@@ -32,6 +30,7 @@ PokusSorcery::Application.routes.draw do
       get :activate
     end
   end
+  
   resources :user_sessions
   resources :recipes
   resources :articles

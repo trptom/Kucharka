@@ -50,6 +50,6 @@
         <% end %>
       </tbody>
     </table>
-    <%= ingrediences_filter("new", nil, nil) ? button_to('Nová ingredience', new_ingredience_path, {:class => "btn"}) : nil %>
+    <%= ingrediences_filter("new", nil, nil) ? button_to('Nová ingredience', new_ingredience_path, {:class => "btn", :method => :get}) : nil %>
   </div>
 </div>

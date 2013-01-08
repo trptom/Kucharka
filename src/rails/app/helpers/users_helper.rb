@@ -1,7 +1,6 @@
 # coding:utf-8
 
 module UsersHelper
-
   def index_get_row_class(user)
     if (is_admin(user))
       return "info"

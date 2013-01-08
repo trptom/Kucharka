@@ -15,11 +15,8 @@
       <div class="span6 pull-right">
         <legend>Hodnocené a komentované recepty</legend>
         <ul class="unstyled">
-          <% @commented.each do |commented| %>
-            <li><%= link_to commented.name, recipe_path(commented) %></li>
-          <% end %>
-          <% @marked.each do |marked| %>
-            <li><%= link_to marked.name, recipe_path(marked) %></li>
+          <% @splitted.each do |splitted| %>
+            <li><%= link_to splitted.name, recipe_path(splitted) %></li>
           <% end %>
         </ul>
       </div>
