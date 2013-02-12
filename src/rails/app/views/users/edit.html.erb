@@ -2,20 +2,8 @@
 <div class="span2"></div>
 <div class="span8">
   <div class="well">
+    <%= render "layouts/errors" %>
     <h2>Moje údaje</h2>
-
-    <% if @user.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-        <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-
     <div class="row-fluid spacer">
       <div class="span5">
         <%= form_for(@user) do |f| %>

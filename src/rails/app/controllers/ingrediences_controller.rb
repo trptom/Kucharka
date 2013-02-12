@@ -40,6 +40,7 @@ class IngrediencesController < ApplicationController
     if @ingredience.save
       redirect_to @ingredience, notice: 'Ingredience was successfully created.'
     else
+      @errors = @ingredience.errors
       render action: "new"
     end
   end
@@ -51,6 +52,7 @@ class IngrediencesController < ApplicationController
     if @ingredience.update_attributes(params[:ingredience])
       redirect_to @ingredience, notice: 'Ingredience was successfully updated.'
     else
+      @errors = @ingredience.errors
       render action: "edit"
     end
   end

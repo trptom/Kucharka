@@ -1,23 +1,14 @@
-<%= form_for(@comment) do |f| %>
-  <% if @comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-      <ul>
-      <% @comment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<% if comments_filter 'create', nil, nil %>
+  <%= form_for(@comment) do |f| %>
+    <%= render "layouts/errors" %>
+    <div class="spacer">
+      <h4>Napsat komentář</h4>
+      <%= f.hidden_field :comment_type %>
+      <%= f.hidden_field :recipe_id %>
+      <%= f.hidden_field :article_id %>
+      <%= f.hidden_field :ingredience_id %>
+      <%= f.text_area :content, :class => "input-block-level", :rows => "5" %>
+      <%= f.submit "Odeslat komentář", :class => "btn" %>
     </div>
   <% end %>
-
-  <div class="spacer">
-    <h4>Napsat komentář</h4>
-    <%= f.hidden_field :comment_type %>
-    <%= f.hidden_field :recipe_id %>
-    <%= f.hidden_field :article_id %>
-    <%= f.hidden_field :ingredience_id %>
-    <%= f.text_area :content, :class => "input-block-level", :rows => "5" %>
-    <%= f.submit "Odeslat komentář", :class => "btn" %>
-  </div>
 <% end %>

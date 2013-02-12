@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to :back
     else
+      @errors = @comment.errors
       redirect_to :back, notice: "Komentář se nepodařilo přidat!"
     end
   end
@@ -21,14 +22,11 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
 
-    respond_to do |format|
-      if @comment.update_attributes(params[:comment])
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    if @comment.update_attributes(params[:comment])
+      redirect_to @comment, notice: 'Comment was successfully updated.'
+    else
+      @errors = @comment.errors
+      render action: "edit"
     end
   end
 
@@ -38,9 +36,6 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy
 
-    respond_to do |format|
-      format.html { redirect_to :back }
-      format.json { head :no_content }
-    end
+    redirect_to :back
   end
 end

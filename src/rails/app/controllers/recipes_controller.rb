@@ -5,11 +5,6 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @recipes }
-    end
   end
 
   def show
@@ -27,11 +22,6 @@ class RecipesController < ApplicationController
     @comment.comment_type = COMMENT_TYPE['recipes']
     @comment.user = current_user
     @comment.recipe = @recipe
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @recipe }
-    end
   end
 
   def new
@@ -40,11 +30,6 @@ class RecipesController < ApplicationController
     @submit_title = "Vytvořit recept"
 
     @recipe = Recipe.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @recipe }
-    end
   end
 
   def create
@@ -57,14 +42,11 @@ class RecipesController < ApplicationController
       @saved = @recipe.save
     end
 
-    respond_to do |format|
-      if @saved
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
-        format.json { render json: @recipe, status: :created, location: @recipe }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
-      end
+    if @saved
+      redirect_to @recipe, notice: 'Recipe was successfully created.'
+    else
+      @errors = @recipe.errors
+      render action: "new"
     end
   end
 
@@ -82,14 +64,11 @@ class RecipesController < ApplicationController
       end
     end
 
-    respond_to do |format|
-      if @saved
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
-      end
+    if @saved
+      redirect_to @recipe, notice: 'Recipe was successfully updated.'
+    else
+      @errors = @recipe.errors
+      render action: "edit"
     end
   end
 
@@ -105,10 +84,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @recipe.destroy
 
-    respond_to do |format|
-      format.html { redirect_to recipes_url }
-      format.json { head :no_content }
-    end
+    redirect_to recipes_url
   end
 
   def fridge

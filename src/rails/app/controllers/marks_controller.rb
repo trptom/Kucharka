@@ -7,11 +7,6 @@ class MarksController < ApplicationController
   # GET /marks.json
   def index
     @marks = Mark.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @marks }
-    end
   end
 
   def create
@@ -53,9 +48,6 @@ class MarksController < ApplicationController
     @mark = Mark.find(params[:id])
     @mark.destroy
 
-    respond_to do |format|
-      format.html { redirect_to marks_url }
-      format.json { head :no_content }
-    end
+    redirect_to marks_url
   end
 end

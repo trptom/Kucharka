@@ -5,11 +5,6 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @articles }
-    end
   end
 
   # GET /articles/1
@@ -25,22 +20,12 @@ class ArticlesController < ApplicationController
     @comment.comment_type = COMMENT_TYPE['articles']
     @comment.user = current_user
     @comment.article = @article
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @article }
-    end
   end
 
   # GET /articles/new
   # GET /articles/new.json
   def new
     @article = Article.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @article }
-    end
   end
 
   # GET /articles/1/edit
@@ -54,14 +39,11 @@ class ArticlesController < ApplicationController
     @article = Article.new(params[:article])
     @article.user = current_user
 
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render json: @article, status: :created, location: @article }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    if @article.save
+      redirect_to @article, notice: 'Article was successfully created.'
+    else
+      @errors = @article.errors
+      render action: "new"
     end
   end
 
@@ -70,14 +52,11 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
 
-    respond_to do |format|
-      if @article.update_attributes(params[:article])
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    if @article.update_attributes(params[:article])
+      redirect_to @article, notice: 'Article was successfully updated.'
+    else
+      @errors = @article.errors
+      render action: "edit"
     end
   end
 
@@ -87,9 +66,6 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.destroy
 
-    respond_to do |format|
-      format.html { redirect_to articles_url }
-      format.json { head :no_content }
-    end
+    redirect_to articles_url
   end
 end

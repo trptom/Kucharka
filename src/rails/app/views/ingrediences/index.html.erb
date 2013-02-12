@@ -19,7 +19,7 @@
             <td>
               <%= ingrediences_filter("show", nil, ingredience) ? link_to('Zobrazit', ingredience, :method => :get, :class => "btn") : nil %>
               <%= ingrediences_filter("edit", nil, ingredience) ? link_to('Editovat', edit_ingredience_path(ingredience), :method => :get, :class => "btn") : nil %>
-              <%= ingrediences_filter("destroy", nil, ingredience) ? link_to('Smazat', ingredience, method: :delete, data: { confirm: 'Jste si jistý(á)?' }, :method => :get, :class => "btn") : nil %>
+              <%= ingrediences_filter("destroy", nil, ingredience) ? link_to('Smazat', ingredience, :method => :delete, data: { confirm: 'Jste si jistý(á)?' }, :class => "btn") : nil %>
             </td>
           </tr>
         <% end %>
@@ -44,7 +44,7 @@
             <td>
               <%= ingrediences_filter("show", nil, ingredience) ? link_to('Zobrazit', ingredience, :method => :get, :class => "btn") : nil %>
               <%= ingrediences_filter("edit", nil, ingredience) ? link_to('Editovat', edit_ingredience_path(ingredience), :method => :get, :class => "btn") : nil %>
-              <%= ingrediences_filter("destroy", nil, ingredience) ? link_to('Smazat', ingredience, method: :delete, data: { confirm: 'Jste si jistý(á)?' }, :method => :get, :class => "btn") : nil %>
+              <%= ingrediences_filter("destroy", nil, ingredience) ? link_to('Smazat',ingredience, :method => :delete, data: { confirm: 'Jste si jistý(á)?' }, :class => "btn") : nil %>
             </td>
           </tr>
         <% end %>
