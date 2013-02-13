@@ -1,0 +1,50 @@
+<div class="span2"></div>
+<div class="span8">
+  <div class="well">
+    <h2>Výsledky hledání - recepty</h2>
+    <% if @recipes.length > 0 %>
+      <% @recipes.each do |item| %>
+        <% if recipes_filter("show", nil, item) %>
+          <div class="spacer">
+            <img src="" alt="TODO" />
+            <h5>
+              <%= item.name %> -
+              <%= link_to item.user.username, user_path(item.user) %> -
+              <%= item.created_at %>
+            </h5>
+            <p><%= item.annotation %></p>
+            <%= link_to "Dále >>", recipe_path(item.id) %>
+          </div>
+        <% end %>
+      <% end %>
+    <% else # recipes.length == 0 %>
+      <div class="spacer">
+        <h5>
+          Žádné recepty
+        </h5>
+      </div>
+    <% end %>
+    <h2>Výsledky hledání - články</h2>
+    <% if @articles.length > 0 %>
+      <% @articles.each do |item| %>
+        <% if articles_filter("show", nil, item) %>
+          <div class="spacer">
+            <h5>
+              <%= item.title %> -
+              <%= link_to item.user.username, user_path(item.user) %> -
+              <%= item.created_at %>
+            </h5>
+            <p><%= item.annotation %></p>
+            <%= link_to "Dále >>", article_path(item.id) %>
+          </div>
+        <% end %>
+      <% end %>
+    <% else # articles.length == 0 %>
+      <div class="spacer">
+        <h5>
+          Žádné články
+        </h5>
+      </div>
+    <% end %>
+  </div>
+</div>

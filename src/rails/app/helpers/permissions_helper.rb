@@ -185,6 +185,7 @@ module PermissionsHelper
         action != "create" &&
         action != "fridge" &&
         action != "filter" &&
+        action != "search" &&
         action != "newest" &&
         action != "show")
       # musim mit id

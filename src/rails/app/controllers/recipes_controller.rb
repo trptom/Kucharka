@@ -168,4 +168,8 @@ class RecipesController < ApplicationController
 
     redirect_to "/home/plain_message", notice: @msg
   end
+
+  def search
+    
+  end
 end

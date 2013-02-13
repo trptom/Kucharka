@@ -8,6 +8,7 @@ PokusSorcery::Application.routes.draw do
   resources :comments
 
   get "home/index"
+  get "home/search"
   get "home/success"
   get "home/error"
   get "home/plain_message"
