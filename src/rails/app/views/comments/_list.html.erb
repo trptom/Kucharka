@@ -15,7 +15,6 @@
               psal v
               <%= comment.created_at %>
               <% if comments_filter("destroy", nil, comment) %>
-                <button class="close"></button>
                 <%= form_for(comment, method: :delete) do |f| %>
                   <% content_tag(:button, :type => :submit, :class => "close") do %>
                      ×

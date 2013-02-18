@@ -1,12 +1,6 @@
 PokusSorcery::Application.routes.draw do
   get "help/index"
 
-  resources :ingredience_categories
-
-  resources :recipe_categories
-
-  resources :comments
-
   get "home/index"
   get "home/search"
   get "home/success"
@@ -36,6 +30,9 @@ PokusSorcery::Application.routes.draw do
   resources :recipes
   resources :articles
   resources :ingrediences
+  resources :ingredience_categories
+  resources :recipe_categories
+  resources :comments
 
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout

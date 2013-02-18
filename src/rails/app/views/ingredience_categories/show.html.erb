@@ -11,9 +11,9 @@
         <% end %>
 
         <% if ingredience_categories_filter("destroy", nil, @ingredience_category) %>
-          <%= link_to('Smazat', @ingredience_category, method: :delete, data: { confirm: 'Jste si jistý(á)?' }, :class => "btn") %>
+          <%= link_to('Destroy', @ingredience_category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn") %>
         <% end %>
-
+        
         <% if ingredience_categories_filter("index", nil, @ingredience_category) %>
           <%= link_to('Seznam', ingredience_categories_path, :class => "btn") %>
         <% end %>
