@@ -16,7 +16,13 @@
         <div class="span6 pull-right">
           <legend>Komentované články</legend>
           <ul class="unstyled">
-            <li><a href="#">Komentovaný článek 1</a></li>
+            <% for commented in @commented %>
+            <li>
+              <a href="#">
+                <%= commented.article.title %>
+              </a>
+            </li>
+            <% end %>
           </ul>
         </div>
       </div>

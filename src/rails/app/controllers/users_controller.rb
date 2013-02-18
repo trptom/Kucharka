@@ -90,7 +90,7 @@ class UsersController < ApplicationController
   def recipes
     @user = User.find(params[:id] ? params[:id] : current_user.id)
     @recipes = @user.recipes;
-    @commented = @user.comments.where("recipe_id IS NOT NULL")
+    @commented = @user.comments.where("recipe_id IS NOT NULL").group("recipe_id")
     @marked = @user.marks
     @splitted = Array.new
     @commented.each do |item|
@@ -106,7 +106,7 @@ class UsersController < ApplicationController
   def articles
     @user = User.find(params[:id] ? params[:id] : current_user.id)
     @articles = @user.articles;
-    @commented = @user.comments.where("article_id IS NOT NULL")
+    @commented = @user.comments.where("article_id IS NOT NULL").group("article_id")
   end
 
   def block
