@@ -18,7 +18,7 @@ class RecipeCategoriesControllerTest < ActionController::TestCase
 
   test "should create recipe_category" do
     assert_difference('RecipeCategory.count') do
-      post :create, recipe_category: { descirption: @recipe_category.descirption, name: @recipe_category.name }
+      post :create, recipe_category: { description: @recipe_category.description, name: @recipe_category.name }
     end
 
     assert_redirected_to recipe_category_path(assigns(:recipe_category))
@@ -35,7 +35,7 @@ class RecipeCategoriesControllerTest < ActionController::TestCase
   end
 
   test "should update recipe_category" do
-    put :update, id: @recipe_category, recipe_category: { descirption: @recipe_category.descirption, name: @recipe_category.name }
+    put :update, id: @recipe_category, recipe_category: { description: @recipe_category.description, name: @recipe_category.name }
     assert_redirected_to recipe_category_path(assigns(:recipe_category))
   end
 

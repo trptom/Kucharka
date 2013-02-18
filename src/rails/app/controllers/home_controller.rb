@@ -1,4 +1,4 @@
-require "#{Rails.root}/app/helpers/recipes_helper"
+include RecipesHelper
 include HomeHelper
 
 class HomeController < ApplicationController

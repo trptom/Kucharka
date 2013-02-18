@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Descirption</th>
+    <th>description</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,7 +12,7 @@
 <% @ingredience_categories.each do |ingredience_category| %>
   <tr>
     <td><%= ingredience_category.name %></td>
-    <td><%= ingredience_category.descirption %></td>
+    <td><%= ingredience_category.description %></td>
     <td><%= link_to 'Show', ingredience_category %></td>
     <td><%= link_to 'Edit', edit_ingredience_category_path(ingredience_category) %></td>
     <td><%= link_to 'Destroy', ingredience_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,5 +1,5 @@
 class CreateMarks < ActiveRecord::Migration
-  def change
+  def self.up
     create_table :marks do |t|
       t.references :user
       t.references :recipe
@@ -9,5 +9,9 @@ class CreateMarks < ActiveRecord::Migration
     end
     add_index :marks, :user_id
     add_index :marks, :recipe_id
+  end
+
+  def self.down
+    drop_table :marks
   end
 end

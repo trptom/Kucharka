@@ -30,6 +30,7 @@ class RecipesController < ApplicationController
     @submit_title = "Vytvořit recept"
 
     @recipe = Recipe.new
+    @categories = RecipeCategory.order(:name).all
   end
 
   def create
@@ -38,6 +39,11 @@ class RecipesController < ApplicationController
 
     @saved = false
     ActiveRecord::Base.transaction do
+      #upraveni kategorii
+      for category in params[:categories]
+        @recipe.recipeCategories << RecipeCategory.find(category.to_i)
+      end
+      # upraveni ingredienci
       @recipe.ingredienceRecipeConnectors = get_ingrediences_ary_from_params(nil)
       @saved = @recipe.save
     end
@@ -58,6 +64,14 @@ class RecipesController < ApplicationController
       if !@recipe.update_attributes(params[:recipe])
         @saved = false;
       end
+      #upraveni kategorii
+      for category in params[:categories]
+        tmp = @recipe.recipeCategories.where(:id => category.to_i)
+        if tmp.length == 0
+          @recipe.recipeCategories << RecipeCategory.find(category.to_i)
+        end
+      end
+      # upraveni ingredienci
       @recipe.ingredienceRecipeConnectors = get_ingrediences_ary_from_params(@recipe.id)
       if !@recipe.save
         @saved = false;
@@ -78,6 +92,7 @@ class RecipesController < ApplicationController
     @submit_title = "Upravit recept"
 
     @recipe = Recipe.find(params[:id])
+    @categories = RecipeCategory.order(:name).all
   end
 
   def destroy

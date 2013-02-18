@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20130102001500) do
 
   create_table "ingredience_categories", :force => true do |t|
     t.string   "name",                         :null => false
-    t.text     "descirption",                  :null => false
+    t.text     "description",                  :null => false
     t.integer  "category_type", :default => 0, :null => false
     t.integer  "user_id",                      :null => false
     t.datetime "created_at",                   :null => false
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(:version => 20130102001500) do
 
   create_table "recipe_categories", :force => true do |t|
     t.string   "name",                         :null => false
-    t.text     "descirption",                  :null => false
+    t.text     "description",                  :null => false
     t.integer  "category_type", :default => 0, :null => false
     t.integer  "user_id",                      :null => false
     t.datetime "created_at",                   :null => false

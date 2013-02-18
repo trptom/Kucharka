@@ -73,10 +73,16 @@
       </div>
     </div>
     <div class="spacer">
-      <p>Složitost:
+      <p><b>Složitost:</b>
         <span class="badge <%= LEVEL_CLASS[@recipe.level] %>"><%= LEVEL_TEXT[@recipe.level] %></span>
       </p>
-      <p>Odhadovaný čas: <%= @recipe.estimated_time %> min</p>
+      <p><b>Odhadovaný čas:</b> <%= @recipe.estimated_time %> min</p>
+      <p>
+        <b>Kiategorie:</b>
+        <% for category in @recipe.recipeCategories %>
+          <%= category.name + (category != @recipe.recipeCategories.last ? ", " : "") %>
+        <% end %>
+      </p>
       <p><%= @recipe.annotation %></p>
       <p><%= @recipe.content %></p>
     </div>

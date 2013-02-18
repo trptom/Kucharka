@@ -52,9 +52,32 @@
 
       <hr />
 
-      <h4>Kategorie</h4>
-      <div class="row-fluid spacer">
-          Kategorie - TODO
+      <h4 onclick="$('#categories').toggle(500)" title="Klikněte pro schování/zobrazení kategorií">
+        Kategorie
+      </h4>
+      <div id="categories" class="row-fluid spacer">
+        <div class="control-group">
+          <div class="controls span4">
+            <%
+              next_separator = (@categories.length.to_f/3).ceil
+              a = -1
+              for category in @categories
+                a += 1
+                if (next_separator == a)
+                  next_separator += (@categories.length.to_f/3).ceil
+            %>
+              </div>
+              <div class="controls span4">
+            <%
+                end
+            %>
+            <label class="checkbox">
+              <input type="checkbox" id="cat-<%= category.id %>-chb" name="categories[]" value="<%= category.id %>"<%= @recipe.recipeCategories.where(:id => category.id).length > 0 ? " checked" : "" %>/>
+              <%= category.name %>
+            </label>
+            <% end %>
+          </div>
+        </div>
       </div>
 
       <hr />
