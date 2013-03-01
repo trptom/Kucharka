@@ -1,12 +1,6 @@
 class ArticlesController < ApplicationController
   before_filter :user_rights_filter
 
-  # GET /articles
-  # GET /articles.json
-  def index
-    @articles = Article.all
-  end
-
   # GET /articles/1
   # GET /articles/1.json
   def show

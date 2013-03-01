@@ -1,26 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="span8 offset2">
+  <div class="well">
+    <h2><%= @article.title %></h2>
+    <div class="spacer">
+      <p>
+        <b>Autor:</b>
+        <%= link_to @article.user.username, @article.user %>
+      </p>
+      <p><%= @article.annotation %></p>
+      <p><%= @article.content %></p>
+    </div>
 
-<p>
-  <b>Nadpis:</b>
-  <%= @article.title %>
-</p>
+    <div class="row-fluid">
+      <div class="btn-group">
+        <% if articles_filter("edit", nil, @article) %>
+          <%= link_to('Editovat', edit_article_path(@article), :class => "btn") %>
+        <% end %>
 
-<p>
-  <b>Anotace:</b>
-  <%= @article.annotation %>
-</p>
+        <% if articles_filter("destroy", nil, @article) %>
+          <%= link_to('Smazat', { :controller => 'articles', :action => 'destroy', :id => @article.id}, data: { confirm: 'Jste si jistý(á)?' }, :class => "btn") %>
+        <% end %>
 
-<p>
-  <b>Obsah:</b>
-  <%= @article.content %>
-</p>
+        <% if articles_filter("index", nil, @article) %>
+          <%= link_to('Seznam', articles_path, :class => "btn") %>
+        <% end %>
+      </div>
+    </div>
 
-<p>
-  <b>Autor:</b>
-  <%= link_to @article.user.username, @article.user %>
-</p>
+    <legend class="spacer"></legend>
 
-<legend class="spacer"></legend>
-
-<%= render "comments/list" %>
-<%= render "comments/form" %>
+    <%= render "comments/list" %>
+    <%= render "comments/form" %>
+  </div>
+</div>

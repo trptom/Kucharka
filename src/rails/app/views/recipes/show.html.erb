@@ -78,7 +78,7 @@
       </p>
       <p><b>Odhadovaný čas:</b> <%= @recipe.estimated_time %> min</p>
       <p>
-        <b>Kiategorie:</b>
+        <b>Kategorie:</b>
         <% for category in @recipe.recipeCategories %>
           <%= category.name + (category != @recipe.recipeCategories.last ? ", " : "") %>
         <% end %>
