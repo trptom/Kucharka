@@ -103,6 +103,10 @@ class RecipesController < ApplicationController
   end
 
   def fridge
+    @ingrediences = Hash.new
+    @ingrediences[:accepted] = Ingredience.where(:activation_state => 1).order(:name).all
+    @ingrediences[:not_accepted] = Ingredience.where(:activation_state => 0).order(:name).all
+
     @recipes = get_recipes_by_fridge(params)
   end
 
