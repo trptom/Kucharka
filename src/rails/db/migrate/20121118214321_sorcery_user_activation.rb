@@ -9,16 +9,17 @@ class SorceryUserActivation < ActiveRecord::Migration
     add_index :users, :activation_token
 
     # pridani admina pri migraci po vytvoreni roli a jeho ulozeni
-    @user = User.new(
-      :username => "admin",
-      :email => "root@kucharka.cz",
-      :password => "root",
-      :password_confirmation => "root",
-      :note => "Administrátorský účet, automaticky vytvořený při migraci DB.",
-      :self_ruleset => -1,
-	  :others_ruleset => -1)
-    @user.save
-    @user.activate!
+#    @user = User.new(
+#      :username => "admin",
+#      :email => "tpraslicak@seznam.cz",
+#      :password => "root",
+#      :password_confirmation => "root",
+#      :note => "Administrátorský účet, automaticky vytvořený při migraci DB.",
+#      :active => true,
+#      :self_ruleset => -1,
+#      :others_ruleset => -1)
+#    @user.save
+#    @user.activate!
   end
 
   def self.down

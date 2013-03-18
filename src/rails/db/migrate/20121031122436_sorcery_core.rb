@@ -17,8 +17,8 @@ class SorceryCore < ActiveRecord::Migration
     end
 
     # primary keys
-    execute "ALTER TABLE users ADD UNIQUE KEY (username);"
-    execute "ALTER TABLE users ADD UNIQUE KEY (email);"
+#    execute "ALTER TABLE users ADD UNIQUE KEY (username);"
+#    execute "ALTER TABLE users ADD UNIQUE KEY (email);"
   end
 
   def self.down

@@ -13,8 +13,9 @@ test:
   host: localhost
 
 production:
-  adapter: mysql2
-  database: Kucharka_Production
-  username: root
-  password:
-  host: localhost
+  adapter: postgresql
+  database: d54frbpm3nj1l7
+  username: ctrljzruxyubgr
+  password: fkjjx3x75d-BcGAtGPvXETeLB5
+  host: ec2-23-21-91-29.compute-1.amazonaws.com
+  port: 5432

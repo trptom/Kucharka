@@ -94,7 +94,7 @@ module RecipesHelper
 
   def get_recipes_by_random(count)
     @id = Recipe.last
-    @ret = Recipe.find(:all, :order => 'rand()')
+    @ret = Recipe.find(:all, :order => 'random()')
 
     return @ret
   end

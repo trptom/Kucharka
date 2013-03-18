@@ -14,7 +14,7 @@ class CreateIngrediences < ActiveRecord::Migration
       t.timestamps
     end
     add_index :ingrediences, :user_id
-    execute "ALTER TABLE ingrediences ADD UNIQUE KEY (name);"
+#    execute "ALTER TABLE ingrediences ADD UNIQUE KEY (name);"
 
     def add_item(name, annotation, content, avaliability, units, userId)
       @newInstance = Ingredience.new
