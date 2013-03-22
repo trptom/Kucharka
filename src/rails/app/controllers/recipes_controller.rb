@@ -40,8 +40,10 @@ class RecipesController < ApplicationController
     @saved = false
     ActiveRecord::Base.transaction do
       #upraveni kategorii
-      for category in params[:categories]
-        @recipe.recipeCategories << RecipeCategory.find(category.to_i)
+      if params[:categories]
+        for category in params[:categories]
+          @recipe.recipeCategories << RecipeCategory.find(category.to_i)
+        end
       end
       # upraveni ingredienci
       @recipe.ingredienceRecipeConnectors = get_ingrediences_ary_from_params(nil)

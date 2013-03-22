@@ -1,3 +1,5 @@
+# coding:utf-8
+
 class UserMailer < ActionMailer::Base
   default from: "info@kucharka.com"
 
@@ -8,9 +10,9 @@ class UserMailer < ActionMailer::Base
   #
   def activation_needed_email(user)
     @user = user
-    @url  = "/users/#{user.activation_token}/activate?src=email"
+    @url  = "http://kucharka-pilot.herokuapp.com/users/#{user.activation_token}/activate?src=email"
     mail(:to => user.email,
-         :subject => "Welcome to Kucharka")
+         :subject => "Vítejte v aplikaci Kuchařka")
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -20,8 +22,8 @@ class UserMailer < ActionMailer::Base
   #
   def activation_success_email(user)
     @user = user
-    @url  = "/"
+    @url  = "http://kucharka-pilot.herokuapp.com"
     mail(:to => user.email,
-         :subject => "Your account is now activated")
+         :subject => "Účet aktivován")
   end
 end

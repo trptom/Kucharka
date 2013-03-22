@@ -62,5 +62,7 @@ module PokusSorcery
     config.assets.initialize_on_precompile = false
     config.assets.precompile += %w( *.js *.css )
     config.action_mailer.raise_delivery_errors = true
+
+    config.action_mailer.delivery_method = :smtp
   end
 end
