@@ -1,12 +1,18 @@
 CookBook::Application.routes.draw do
   # resources
-  resources :users
+  
   resources :user_sessions
   resources :articles
   resources :ingredience_categories
   resources :recipe_categories
   resources :comments
-  
+
+  resources :users do
+    member do
+      get :activate
+    end
+  end
+
   resources :recipes do
     member do
       get "add_ingredience"
@@ -31,6 +37,9 @@ CookBook::Application.routes.draw do
       get "plain_list"
     end
   end
+
+  # help
+  get "help/index"
 
   # home pages
   get "home/index"

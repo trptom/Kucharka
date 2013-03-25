@@ -90,11 +90,13 @@ class UsersController < ApplicationController
   def recipes
     @user = User.find(params[:id] ? params[:id] : current_user.id)
     @recipes = @user.recipes;
-    @commented = @user.comments.where("recipe_id IS NOT NULL").group("recipe_id")
+    @commented = @user.comments.where("recipe_id IS NOT NULL")
     @marked = @user.marks
     @splitted = Array.new
     @commented.each do |item|
-      @splitted << item.recipe
+      if !@splitted.include?(item.recipe)
+        @splitted << item.recipe
+      end
     end
     @marked.each do |item|
       if !@splitted.include?(item.recipe)
@@ -106,7 +108,13 @@ class UsersController < ApplicationController
   def articles
     @user = User.find(params[:id] ? params[:id] : current_user.id)
     @articles = @user.articles;
-    @commented = @user.comments.where("article_id IS NOT NULL").group("article_id")
+    @commented_all = @user.comments.where("article_id IS NOT NULL")
+    @commented = Array.new
+    @commented_all.each do |item|
+      if !@commented.include?(item.article)
+        @commented << item.article
+      end
+    end
   end
 
   def block

@@ -18,9 +18,7 @@
           <ul class="unstyled">
             <% for commented in @commented %>
             <li>
-              <a href="#">
-                <%= commented.article.title %>
-              </a>
+                <%= link_to commented.title, commented %>
             </li>
             <% end %>
           </ul>
