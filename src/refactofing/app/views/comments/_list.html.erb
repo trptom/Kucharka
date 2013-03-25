@@ -1,0 +1,37 @@
+<%
+# vyzaduje mit nastavene @comments. Pokud ano, vypise komentare.
+%>
+<% if (@comments != nil) %>
+  <div>
+    <dl class="spacer">
+      <% if @comments.length > 0 %>
+        <% @comments.each do |comment| %>
+          <% if comments_filter("show", nil, comment) %>
+            <dt>
+              <i class="icon-user"></i>
+              <td>
+                <%= comment.user.username %>
+              </td>
+              psal v
+              <%= comment.created_at %>
+              <% if comments_filter("destroy", nil, comment) %>
+                <%= form_for(comment, method: :delete) do |f| %>
+                  <% content_tag(:button, :type => :submit, :class => "close") do %>
+                     ×
+                  <% end %>
+                <% end %>
+              <% end %>
+            </dt><!--pro odstraneni komentáru-->
+            <dd>
+              <div class="well dark">
+                <td><%= comment.content %></td>
+              </div>
+            </dd>
+          <% end %>
+        <% end %>
+      <% else # podminka na nenulovy pocet %>
+        <dt>Zatím nebyly přidány žádné komentáře...</dt>
+      <% end %>
+    </dl>
+  </div>
+<% end %>

@@ -1,0 +1,3 @@
+<% for ingredience in @ingrediences %>
+  <%= ingredience.id.to_s + "|" + ingredience.activation_state.to_s + "|" + ingredience.units + "|" + ingredience.name %>
+<% end %>

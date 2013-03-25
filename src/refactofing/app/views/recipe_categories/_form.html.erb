@@ -1,0 +1,9 @@
+<%= form_for(@recipe_category) do |f| %>
+  <%= render "layouts/errors" %>
+
+  <label>Název</label>
+  <%= f.text_field :name %>
+  <label>Popis</label>
+  <%= f.text_area :description, :class => "input-block-level", :rows => "6" %>
+  <%= f.submit :value => "Vytvořit", :class => "btn" %>
+<% end %>

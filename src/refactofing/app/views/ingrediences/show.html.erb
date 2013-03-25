@@ -1,0 +1,43 @@
+<div class="span8 offset2">
+  <div class="well">
+    <h2><%= @ingredience.name %></h2>
+    <div class="row-fluid spacer">
+      <div class="span6">
+        <label><strong>Autor: </strong><%= link_to @ingredience.user.username, user_path(@ingredience.user) %></label>
+        <label><strong>Jednotky: </strong><%= @ingredience.units %></label>
+        <label><strong>Dostupnost: </strong><%= @ingredience.avaliability %></label>
+      </div>
+      <div class="span6">
+      </div>
+    </div>
+
+    <div class="row-fluid">
+      <h4>Popis</h4>
+      <p>
+        <%= @ingredience.annotation %>
+      </p>
+      <p>
+        <%= @ingredience.content %>
+      </p>
+
+      <div class="btn-group">
+        <% if ingrediences_filter("edit", nil, @ingredience) %>
+          <%= link_to('Editovat', edit_ingredience_path(@ingredience), :class => "btn") %>
+        <% end %>
+
+        <% if ingrediences_filter("destroy", nil, @ingredience) %>
+          <%= link_to('Smazat', { :controller => 'ingrediences', :action => 'destroy', :id => @ingredience.id}, data: { confirm: 'Jste si jistý(á)?' }, :class => "btn") %>
+        <% end %>
+
+        <% if ingrediences_filter("index", nil, @ingredience) %>
+          <%= link_to('Seznam', ingrediences_path, :class => "btn") %>
+        <% end %>
+      </div>
+    </div>
+
+    <legend class="spacer"></legend>
+
+    <%= render "comments/list" %>
+    <%= render "comments/form" %>
+  </div>
+</div>

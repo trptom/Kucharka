@@ -1,0 +1,15 @@
+<%= form_for(@article) do |f| %>
+  <%= render "layouts/errors" %>
+
+  <div class="row-fluid spacer">
+    <label><strong>Název</strong></label>
+    <%= f.text_field :title, :class => "text4" %>
+    <label>Anotace</label>
+    <%= f.text_area :annotation, :rows => 5, :class => "input-block-level" %>
+    <label>Obsah</label>
+    <%= f.text_area :content, :rows => 5, :class => "input-block-level" %>
+    <div class="btn-group spacer">
+      <%= f.submit 'Nastavit', :class => "btn" %>
+    </div>
+  </div>
+<% end %>

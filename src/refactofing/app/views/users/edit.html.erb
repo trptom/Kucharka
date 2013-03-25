@@ -1,0 +1,125 @@
+<script type="text/javascript" src="<%=asset_path "users.js" %>"></script>
+<div class="span2"></div>
+<div class="span8">
+  <div class="well">
+    <%= render "layouts/errors" %>
+    <h2>Moje údaje</h2>
+    <div class="row-fluid spacer">
+      <div class="span5">
+        <%= form_for(@user) do |f| %>
+          <dl class="dl-horizontal">
+            <dt>Uživatelské jméno:</dt>
+            <dd>
+              <%= f.text_field :username, :disabled => true %>
+            </dd>
+            <dt>E-mail:</dt>
+            <dd>
+              <%= f.email_field :email, :disabled => true %>
+            </dd>
+            <dt>Jméno:</dt>
+            <dd>
+              <%= f.text_field :first_name %>
+            </dd>
+            <dt>Příjmení:</dt>
+            <dd>
+              <%= f.text_field :second_name %>
+            </dd>
+            <dt>Aktivační status</dt>
+            <dd>
+              <span title="Aktivační status lze měnit pomocí tlačítek v seznamu uživatelů/detailu uživatele.">
+                <%= @user.activation_state %> *
+              </span>
+            </dd>
+            <% if has_permission_self_other(is_current_user(@user.id), ROLE["users"]["edit_rights"]) %>
+              <dt>Oprávnění (vlastní):</dt>
+              <dd>
+                <div id="defined_rules_self">
+                  <%= edit_get_rule_checkbox(@user, ROLE["users"]["show"], 0) %> uživatel: zobrazit
+                  <%= edit_get_rule_checkbox(@user, ROLE["users"]["edit"], 0) %> uživatel: editovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["users"]["edit_rights"], 0) %> uživatel: editovat práva
+                  <%= edit_get_rule_checkbox(@user, ROLE["recipes"]["create"], 0) %> recept: vytvářet
+                  <input type="checkbox" checked disabled /> recept: zobrazovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["recipes"]["edit"], 0) %> recept: editovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["recipes"]["delete"], 0) %> recept: mazat
+                  <%= edit_get_rule_checkbox(@user, ROLE["articles"]["create"], 0) %> článek: vytvářet
+                  <input type="checkbox" checked disabled /> článek: zobrazovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["articles"]["edit"], 0) %> článek: editovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["articles"]["delete"], 0) %> článek: mazat
+                  <%= edit_get_rule_checkbox(@user, ROLE["comments"]["create"], 0) %> komentáře: vytvářet
+                  <%= edit_get_rule_checkbox(@user, ROLE["comments"]["edit"], 0) %> komentáře: editovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["comments"]["delete"], 0) %> komentáře: mazat
+                  <%= edit_get_rule_checkbox(@user, ROLE["marks"]["create"], 0) %> známky: vytvářet
+                  <%= edit_get_rule_checkbox(@user, ROLE["marks"]["delete"], 0) %> známky: mazat
+                  <%= edit_get_rule_checkbox(@user, ROLE["ingrediences"]["create_delete"], 0) %> ingredience: vytvářet / mazat
+                  <%= edit_get_rule_checkbox(@user, ROLE["ingrediences"]["edit"], 0) %> ingredience: editovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["recipeCategories"]["create_delete"], 0) %> kategorie receptu: vytvářet / mazat
+                  <%= edit_get_rule_checkbox(@user, ROLE["recipeCategories"]["edit"], 0) %> kategorie receptu: editovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["ingredienceCategories"]["create_delete"], 0) %> kategorie ingrediencí: mazat
+                  <%= edit_get_rule_checkbox(@user, ROLE["ingredienceCategories"]["edit"], 0) %> kategorie ingrediencí: editovat
+                </div>
+              </dd>
+              <dt>Oprávnění (cizí):</dt>
+              <dd>
+                <div id="defined_rules_other">
+                  <%= edit_get_rule_checkbox(@user, ROLE["users"]["show"], 1) %> uživatel: zobrazit
+                  <%= edit_get_rule_checkbox(@user, ROLE["users"]["edit"], 1) %> uživatel: editovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["users"]["delete"], 1) %> uživatel: mazat (vyjma admina)
+                  <%= edit_get_rule_checkbox(@user, ROLE["users"]["edit_rights"], 1) %> uživatel: editovat práva
+                  <%= edit_get_rule_checkbox(@user, ROLE["users"]["block"], 1) %> uživatel: blokovat (vyjma admina)
+                  <%= edit_get_rule_checkbox(@user, ROLE["users"]["unblock"], 1) %> uživatel: odblokovávat (vyjma admina)
+                  <input type="checkbox" checked disabled /> recept: zobrazovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["recipes"]["edit"], 1) %> recept: editovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["recipes"]["delete"], 1) %> recept: mazat
+                  <input type="checkbox" checked disabled /> článek: zobrazovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["articles"]["edit"], 1) %> článek: editovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["articles"]["delete"], 1) %> článek: mazat
+                  <%= edit_get_rule_checkbox(@user, ROLE["comments"]["edit"], 1) %> komentáře: editovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["comments"]["delete"], 1) %> komentáře: mazat
+                  <%= edit_get_rule_checkbox(@user, ROLE["marks"]["delete"], 1) %> známky: mazat
+                  <%= edit_get_rule_checkbox(@user, ROLE["ingrediences"]["create_delete"], 1) %> ingredience: mazat
+                  <%= edit_get_rule_checkbox(@user, ROLE["ingrediences"]["edit"], 1) %> ingredience: editovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["recipeCategories"]["create_delete"], 1) %> kategorie receptu: mazat
+                  <%= edit_get_rule_checkbox(@user, ROLE["recipeCategories"]["edit"], 1) %> kategorie receptu: editovat
+                  <%= edit_get_rule_checkbox(@user, ROLE["ingredienceCategories"]["create_delete"], 1) %> kategorie ingrediencí: mazat
+                  <%= edit_get_rule_checkbox(@user, ROLE["ingredienceCategories"]["edit"], 1) %> kategorie ingrediencí: editovat
+                </div>
+              </dd>
+              <dt>Oprávnění (globální):</dt>
+              <dd>
+                <div id="defined_rules_global">
+                  <%= edit_get_rule_checkbox(@user, ROLE["users"]["index"], 2) %> zobrazování seznamu uživatelů
+                  <%= edit_get_rule_checkbox(@user, ROLE["marks"]["index"], 2) %> zobrazování seznamu známek
+                  <%= edit_get_rule_checkbox(@user, ROLE["marks"]["show"], 2) %> zobrazování známek
+                </div>
+              </dd>
+              <% end %>
+            </dl>
+
+          <%= f.hidden_field :self_ruleset, {:id => "self_ruleset"} %>
+          <%= f.hidden_field :others_ruleset, {:id => "others_ruleset"} %>
+          <%= f.submit "Změnit údaje", :class => "btn pull-right" %>
+        <% end %>
+      </div>
+
+      <div class="span5">
+        <%= form_for(@user) do |f| %>
+          <dl class="dl-horizontal">
+            <dt>Staré heslo: </dt>
+            <dd>
+              <%= f.password_field :password, :disabled => true %>
+            </dd>
+            <dt>Nové heslo: </dt>
+            <dd>
+              <%= f.password_field :password, :value => "" %>
+            </dd>
+            <dt>Nové heslo znova: </dt>
+            <dd>
+              <%= f.password_field :password_confirmation, :value => "" %>
+            </dd>
+          </dl>
+          <%= f.submit "Změnit heslo", :class => "btn pull-right" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

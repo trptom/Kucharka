@@ -1,0 +1,107 @@
+<script type="text/javascript" src="<%=asset_path "recipes_form.js" %>"></script>
+<div class="span3">
+  <div class="well">
+    <legend>Podat žádost na ingredienci</legend>
+    <input id="new_ingredience_name" type="text" placeholder="Název" />
+    <input id="new_ingredience_units" type="text" placeholder="Jednotky" />
+    <label>Anotace</label>
+    <textarea id="new_ingredience_annotation" cols="" rows="3" class="input-block-level"></textarea>
+    <label>Popis</label>
+    <textarea id="new_ingredience_content" cols="" rows="5" class="input-block-level"></textarea>
+    <button class="btn" onclick="IngredienceRequest.submit()">Podat žádost</button>
+  </div>
+</div>
+<div class="span8">
+  <div class="well">
+    <h2><%= @title %></h2>
+    <%= form_for(@recipe) do |f| %>
+      <%= render "layouts/errors" %>
+    
+      <div class="row-fluid spacer">
+        <div class="span4">
+          <%= f.text_field :name, :placeholder => "Název receptu" %>
+        </div>
+        <div class="span4">
+          <p>
+            Obrázek: 
+            <%= f.file_field :image %>
+          </p>
+        </div>
+      </div>
+      <hr />
+      <h4>Ingredience</h4>
+      <div class="row-fluid spacer">
+        <h5>Aktuální</h5>
+        <div id="ingrediences_selected">
+        </div>
+        <h5>Přidat</h5>
+        <select id="ingredience_select" class="span3">
+          <optgroup id="ingrediences_accepted_group" label="Schválené"></optgroup>
+          <optgroup id="ingrediences_not_accepted_group" label="Neschválené"></optgroup>
+        </select>
+        <input id="ingredience_quantity" type="number" min="0" step="0.1" class="span3" placeholder="Množství" />
+        <input id="ingredience_importance" type="number" min="1" max="1000" class="span3" placeholder="Důležitost" />
+        <input type="button" class="btn" onclick="Ingrediences.add()" value="Přidat ingredienci" />
+        <select id="ingrediences_select" name="ingrediences[]" class="hidden" multiple></select>
+        <span id="ingrediences_list" class="hidden">
+          <% for connector in @recipe.ingredienceRecipeConnectors %>
+            <%= connector.ingredience_id.to_s + "|" + connector.quantity.to_s + "|" + connector.importance.to_s %>
+          <% end %>
+        </span>
+      </div>
+
+      <hr />
+
+      <h4 onclick="$('#categories').toggle(500)" title="Klikněte pro schování/zobrazení kategorií">
+        Kategorie
+      </h4>
+      <div id="categories" class="row-fluid spacer">
+        <div class="control-group">
+          <div class="controls span4">
+            <%
+              next_separator = (@categories.length.to_f/3).ceil
+              a = -1
+              for category in @categories
+                a += 1
+                if (next_separator == a)
+                  next_separator += (@categories.length.to_f/3).ceil
+            %>
+              </div>
+              <div class="controls span4">
+            <%
+                end
+            %>
+            <label class="checkbox">
+              <input type="checkbox" id="cat-<%= category.id %>-chb" name="categories[]" value="<%= category.id %>"<%= @recipe.recipeCategories.where(:id => category.id).length > 0 ? " checked" : "" %>/>
+              <%= category.name %>
+            </label>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <h4>Popis</h4>
+      <div class="row-fluid spacer">
+        <label class="spacer">Anotace receptu</label>
+        <%= f.text_area :annotation, :class => "input-block-level", :rows => "3" %>
+
+        <label class="spacer">Popis receptu</label>
+        <%= f.text_area :content, :class => "input-block-level", :rows => "10" %>
+      </div>
+
+      <hr />
+
+      <label>Složitost přípravy</label>
+      <%= render "level_component"  %>
+
+      <label>Odhadovaný čas přípravy (minuty)</label>
+      <%= f.number_field :estimated_time %>
+      
+      <p></p>
+
+      <%= f.submit @submit_title, :class => "btn" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="span10 offset1">
+  <div class="well">
+    <h2>Ingredience - schválené</h2>
+    <table class="table table-hower spacer">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Název</th>
+          <th>Autor</th>
+          <th>Akce</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ingrediences_accepted.each do |ingredience| %>
+          <tr>
+            <td><%= ingredience.id %></td>
+            <td><%= ingredience.name %></td>
+            <td><%= ingredience.user.username %></td>
+            <td>
+              <%= ingrediences_filter("show", nil, ingredience) ? link_to('Zobrazit', ingredience, :method => :get, :class => "btn") : nil %>
+              <%= ingrediences_filter("edit", nil, ingredience) ? link_to('Editovat', edit_ingredience_path(ingredience), :method => :get, :class => "btn") : nil %>
+              <%= ingrediences_filter("destroy", nil, ingredience) ? link_to('Smazat', ingredience, :method => :delete, data: { confirm: 'Jste si jistý(á)?' }, :class => "btn") : nil %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <h2>Ingredience - neschválené</h2>
+    <table class="table table-hower spacer">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Název</th>
+          <th>Autor</th>
+          <th>Akce</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ingrediences_pending.each do |ingredience| %>
+          <tr>
+            <td><%= ingredience.id %></td>
+            <td><%= ingredience.name %></td>
+            <td><%= ingredience.user.username %></td>
+            <td>
+              <%= ingrediences_filter("show", nil, ingredience) ? link_to('Zobrazit', ingredience, :method => :get, :class => "btn") : nil %>
+              <%= ingrediences_filter("edit", nil, ingredience) ? link_to('Editovat', edit_ingredience_path(ingredience), :method => :get, :class => "btn") : nil %>
+              <%= ingrediences_filter("destroy", nil, ingredience) ? link_to('Smazat',ingredience, :method => :delete, data: { confirm: 'Jste si jistý(á)?' }, :class => "btn") : nil %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= ingrediences_filter("new", nil, nil) ? button_to('Nová ingredience', new_ingredience_path, {:class => "btn", :method => :get}) : nil %>
+  </div>
+</div>

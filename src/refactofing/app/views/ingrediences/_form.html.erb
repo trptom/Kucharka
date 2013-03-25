@@ -1,0 +1,26 @@
+<%= form_for(@ingredience) do |f| %>
+  <%= render "layouts/errors" %>
+
+  <div class="row-fluid spacer">
+    <label><strong>Název</strong></label>
+    <%= f.text_field :name, :class => "text4" %>
+    <label>Anotace</label>
+    <%= f.text_area :annotation, :rows => 5, :class => "input-block-level" %>
+    <label>Obsah</label>
+    <%= f.text_area :content, :rows => 5, :class => "input-block-level" %>
+    <label>Dostupnost</label>
+    <%= f.number_field :avaliability, :min => 1, :max => 1000 %>
+    <label>Jednotky</label>
+    <%= f.text_field :units %>
+    <label>
+      Schválená
+      <%= f.check_box :activation_state %>
+    </label>
+    <div class="btn-group spacer">
+      <%= f.submit 'Nastavit', :class => "btn" %>
+      <% if ingrediences_filter("index", nil, @ingredience) %>
+        <%= link_to('Seznam', ingrediences_path, :class => "btn") %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

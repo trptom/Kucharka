@@ -1,0 +1,34 @@
+<div class="span8 offset2">
+  <div class="well">
+    <h2><%= @article.title %></h2>
+    <div class="spacer">
+      <p>
+        <b>Autor:</b>
+        <%= link_to @article.user.username, @article.user %>
+      </p>
+      <p><%= @article.annotation %></p>
+      <p><%= @article.content %></p>
+    </div>
+
+    <div class="row-fluid">
+      <div class="btn-group">
+        <% if articles_filter("edit", nil, @article) %>
+          <%= link_to('Editovat', edit_article_path(@article), :class => "btn") %>
+        <% end %>
+
+        <% if articles_filter("destroy", nil, @article) %>
+          <%= link_to('Smazat', { :controller => 'articles', :action => 'destroy', :id => @article.id}, data: { confirm: 'Jste si jistý(á)?' }, :class => "btn") %>
+        <% end %>
+
+        <% if articles_filter("index", nil, @article) %>
+          <%= link_to('Seznam', articles_path, :class => "btn") %>
+        <% end %>
+      </div>
+    </div>
+
+    <legend class="spacer"></legend>
+
+    <%= render "comments/list" %>
+    <%= render "comments/form" %>
+  </div>
+</div>

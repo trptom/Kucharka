@@ -1,0 +1,44 @@
+<div class="span10 offset1">
+  <div class="well">
+    <h2>Správa uživatelů</h2>
+
+    <label class="spacer">Vyhledat uživatele: </label>
+    <div class="input-append">
+      <form action="/users">
+        <input type="text" name="filter[username]" placeholder="Uživatelské jméno" value="<%= get_filter "username" %>" />
+        <button class="btn" type="submit">Vyhledat</button>
+      </form>
+    </div>
+
+    <table class="table table-hower spacer">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Uživatelské jméno</th>
+          <th>E-mailová adresa</th>
+          <th>Příjmení</th>
+          <th>Jméno</th>
+          <th>Aktivován</th>
+          <th>Akce</th>
+        </tr>
+      </thead>
+      <tbody>
+    <% @users.each do |user| %>
+        <tr class="<%= index_get_row_class user %>">
+          <td><%= user.id %></td>
+          <td><%= index_get_username user %></td>
+          <td><%= user.email %></td>
+          <td><%= user.second_name %></td>
+          <td><%= user.first_name %></td>
+          <td><%= user.activation_state %></td>
+          <td>
+            <% get_action_buttons(user).each do |button| %>
+              <%= button %>
+            <% end %>
+          </td>
+        </tr>
+    <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

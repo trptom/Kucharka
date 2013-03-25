@@ -1,0 +1,125 @@
+<input type="hidden" id="recipe_id" value="<%= @recipe.id %>" />
+<div class="span3">
+  <div class="well">
+    <h4>Odkazy na podpostupy</h4>
+    <ul id="subrecipes" class="unstyled">
+      <% @recipe.subrecipes.each do |subrecipe| %>
+        <span>
+          <%= link_to subrecipe.subrecipe.name, recipe_path(subrecipe.subrecipe) %>
+          <% if recipes_filter("edit", nil, @recipe) %>
+            <% form_for(subrecipe, :action => "/recipes/"+@recipe.id.to_s+"/remove_subrecipe") do |f| %>
+              <% f.hidden_field :id  %>
+              <% f.submit :class => "btn", :value => "X" %>
+            <% end %>
+          <% end %>
+          <br />
+        </span>
+      <% end %>
+      <span id="recipes_empty" class="<%= @recipe.subrecipes.length == 0 ? nil : "hidden" %>">
+        Žádné
+        <br />
+      </span>
+    </ul>
+    <% if recipes_filter("edit", nil, @recipe) %>
+      <form action="/recipes/<%= @recipe.id.to_s %>/add_subrecipe" method="get">
+        <input name="new_item_url" type="text" />
+        <input type="submit" class="btn" value="Přidat podpostup" />
+      </form>
+    <% end %>
+    <legend></legend>
+    <h4>Zajímavé články k receptu</h4>
+    <ul id="articles" class="unstyled">
+      <% @recipe.articles.each do |article| %>
+        <span>
+          <%= link_to article.title, article_path(article) %>
+          <% if recipes_filter("edit", nil, @recipe) %>
+            <% form_for(article, :action => "/recipes/"+@recipe.id.to_s+"/remove_connected_article") do |f| %>
+              <% f.hidden_field :id  %>
+              <% f.submit :class => "btn", :value => "X" %>
+            <% end %>
+          <% end %>
+          <br />
+        </span>
+      <% end %>
+      <% if @recipe.articles.length == 0 %>
+        <span>Žádné<br /></span>
+      <% end %>
+    </ul>
+    <% if recipes_filter("edit", nil, @recipe) %>
+      <form action="/recipes/<%= @recipe.id.to_s %>/add_connected_article" method="get">
+        <input name="new_item_url" type="text" />
+        <input type="submit" class="btn" value="Přidat článek" />
+      </form>
+    <% end %>
+  </div>
+</div>
+
+<div class="span8">
+  <div class="well">
+    <h2><%= @recipe.name %></h2>
+    <div class="row-fluid spacer">
+      <% if @recipe.image != nil %>
+        <div class="span6">
+          <img src="<%= @recipe.image %>" class="img-rounded" alt="Náhled" />
+        </div>
+      <% end %>
+      <div class="span6">
+        <dl class="dl-horizontal">
+          <% @recipe.ingredienceRecipeConnectors.each do |ingredienceConn| %>
+            <dt>
+              <%= ingrediences_filter("show", nil, ingredienceConn.ingredience) ?
+                link_to(ingredienceConn.ingredience.name, ingredience_path(ingredienceConn.ingredience)) : ingredienceConn.ingredience.name %>
+            </dt>
+            <dd>
+              <%= ingredienceConn.quantity %>
+              <%= ingredienceConn.ingredience.units %>
+            </dd>
+          <% end %>
+        </dl>
+      </div>
+    </div>
+    <div class="spacer">
+      <p><b>Složitost:</b>
+        <span class="badge <%= LEVEL_CLASS[@recipe.level] %>"><%= LEVEL_TEXT[@recipe.level] %></span>
+      </p>
+      <p><b>Odhadovaný čas:</b> <%= @recipe.estimated_time %> min</p>
+      <p>
+        <b>Kategorie:</b>
+        <% for category in @recipe.recipeCategories %>
+          <%= category.name + (category != @recipe.recipeCategories.last ? ", " : "") %>
+        <% end %>
+      </p>
+      <p><%= @recipe.annotation %></p>
+      <p><%= @recipe.content %></p>
+    </div>
+    <div>
+      <% if marks_filter("show", nil, nil) %>
+        <h5>
+          Hodnocení: <span id="recipe_mark"><%= get_mark_str @recipe %></span>
+          <% if @my_mark != nil %>
+          (moje: <span id="recipe_mark_2"><%= @my_mark.value %></span>)
+          <% end %>
+        </h5>
+      <% end %>
+      <% if marks_filter("create", nil, nil) %>
+        <div id="star">
+          <div id="star1" class="btn btn-small" onclick="Mark.submit(1)"><i class="icon-star"></i></div>
+          <div id="star2" class="btn btn-small" onclick="Mark.submit(2)"><i class="icon-star"></i></div>
+          <div id="star3" class="btn btn-small" onclick="Mark.submit(3)"><i class="icon-star"></i></div>
+          <div id="star4" class="btn btn-small" onclick="Mark.submit(4)"><i class="icon-star"></i></div>
+          <div id="star5" class="btn btn-small" onclick="Mark.submit(5)"><i class="icon-star"></i></div>
+        </div>
+      <% end %>
+
+      <label></label>
+
+      <%= @my_mark != nil && marks_filter("delete", nil, @my_mark) ? button_to("Smazat mojí známku", { :controller => "marks", :action => "destroy", :id => @my_mark.id }, { :method => :get, :class => "btn"}) : nil %>
+      <%= recipes_filter("edit", nil, @recipe) ? button_to("Upravit recept", { :controller => "recipes", :action => "edit", :id => @recipe.id}, { :method => :get, :class => "btn"}) : nil %>
+    </div>
+
+    <legend class="spacer"></legend>
+
+    <%= render "comments/list" %>
+    <%= render "comments/form" %>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<script type="text/javascript" src="<%=asset_path "recipes_fridge.js" %>"></script>
+<div class="span2"></div>
+<div class="span8">
+  <div class="well">
+    <h2>Filtr</h2>
+    <div id="filter-previous-request">
+      <% for param in params[:ingrediences] %>
+        <span><%= param %></span>
+      <% end %>
+    </div>
+    <div>
+      <h5>Seznam ingrediencí</h5>
+      <div>
+        <div>
+          <div class="span2">Filtr:</div>
+          <input id="filter-new-ingredience-filter" type="text" />
+        </div>
+        <div>
+          <div class="span2">Vybraná ingredience</div>
+          <select id="filter-new-ingredience-name">
+            <optgroup id="filter-new-ingredience-name-allowed" label="Schválené">
+              <% if @ingrediences[:accepted].length > 0 %>
+                <% for ingredience in @ingrediences[:accepted] %>
+                  <option value="<%= ingredience.id.to_s + "|" + ingredience.units %>"><%= ingredience.name %></option>
+                <% end %>
+              <% else %>
+                  <option value="" disabled>Žádné</option>
+              <% end %>
+            </optgroup>
+            <optgroup id="filter-new-ingredience-name-not-allowed" label="Schválené">
+              <% if @ingrediences[:not_accepted].length > 0 %>
+                <% for ingredience in @ingrediences[:not_accepted] %>
+                  <option value="<%= ingredience.id.to_s + "|" + ingredience.units %>"><%= ingredience.name %></option>
+                <% end %>
+              <% else %>
+                  <option value="" disabled>Žádné</option>
+              <% end %>
+            </optgroup>
+          </select>
+          <input id="filter-new-ingredience-quantity" type="number" min="0.001" max="1000000" />
+          <span id="filter-new-ingredience-units"></span>
+        </div>
+        <div>
+          <input id="filter-new-ingredience-add" type="button" class="btn" value="Přidat" />
+        </div>
+      </div>
+      <form action="/fridge" method="get" onsubmit="//return FridgeExtendedFilter.validateSubmit()">
+        <h5>Co máte doma</h5>
+        <div id="filter-ingrediences-home"></div>
+        <button class="btn">Vyhledat recept</button>
+      </form>
+    </div>
+  </div>
+
+  <%= render 'list' %>
+</div>

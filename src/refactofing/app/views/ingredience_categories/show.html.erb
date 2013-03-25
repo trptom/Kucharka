@@ -1,0 +1,23 @@
+<div class="span8 offset2">
+  <div class="well">
+    <h2><%= @ingredience_category.name %></h2>
+    <div class="spacer">
+      <p>
+        <%= @ingredience_category.description %>
+      </p>
+      <div class="btn-group">
+        <% if ingredience_categories_filter("edit", nil, @ingredience_category) %>
+          <%= link_to('Editovat', edit_ingredience_category_path(@ingredience_category), :class => "btn") %>
+        <% end %>
+
+        <% if ingredience_categories_filter("destroy", nil, @ingredience_category) %>
+          <%= link_to('Destroy', @ingredience_category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn") %>
+        <% end %>
+        
+        <% if ingredience_categories_filter("index", nil, @ingredience_category) %>
+          <%= link_to('Seznam', ingredience_categories_path, :class => "btn") %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
