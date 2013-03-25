@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation, :first_name, :second_name, :age, :note, :active, :self_ruleset, :others_ruleset, :activation_state, :activation_token, :activation_token_expires_at
 
   validates :username,
-    :format => { :with => /^[a-zA-Z0-9]{3,30}$/, :message => "chybný formát uživatelského jména (může obsahovat znaky a čísla, délka 3-30)" },
+    :format => { :with => /^[a-zA-Z0-9\-\.\_]{3,30}$/, :message => "chybný formát uživatelského jména (může obsahovat znaky A-Z (bez diakritiky), čísla a znaky ._-, délka 3-30)" },
     :uniqueness => { :case_sensitive => false, :message => "uživatel s daným uživatelským jménem již existuje" },
   :if => :username
 
@@ -29,11 +29,11 @@ class User < ActiveRecord::Base
   :if => :password
 
   validates :first_name,
-    :format => { :with => /^(|[a-zA-Z\-]{2,})$/, :message => "chybný formát jména (alespoň 2 znaky)" },
+    :format => { :with => /^(|.{2,})$/, :message => "chybný formát jména (alespoň 2 znaky)" },
   :if => :first_name
 
   validates :second_name,
-    :format => { :with => /^(|[a-zA-Z\-]{2,})$/, :message => "chybný formát příjmení (alespoň 2 znaky)" },
+    :format => { :with => /^(|.{2,})$/, :message => "chybný formát příjmení (alespoň 2 znaky)" },
   :if => :second_name
 
   validates :age, 
