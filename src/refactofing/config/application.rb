@@ -9,7 +9,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module CookBook
+module PokusSorcery
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -61,7 +61,6 @@ module CookBook
 
     config.assets.initialize_on_precompile = false
     config.assets.precompile += %w( *.js *.css )
-    config.action_mailer.raise_delivery_errors = true
 
     config.action_mailer.delivery_method = :smtp
   end

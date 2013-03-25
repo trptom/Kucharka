@@ -26,40 +26,42 @@
       </div>
     </div>
 
-  <header>
-    <div class="container">
-      <h1>Kuchařka</h1>
-      <p>
-        <strong>Chcete vařit? Nemusíte jít ani do obchodu. Vyzkoušejte naši ledničku.</strong>
-      </p>
-      <p>
+    <header>
+      <div class="container">
+        <h1>Kuchařka</h1>
+        <p>
+          <strong>Chcete vařit? Nemusíte jít ani do obchodu. Vyzkoušejte naši ledničku.</strong>
+        </p>
+        <p>
           <a href="#filtr" role="button" class="btn btn-large btn-warning" data-toggle="modal">Filtr</a>
           <a href="#lednicka" role="button" class="btn btn-large btn-warning" data-toggle="modal">Lednička</a>
-          <a href="/recipes/new" role="button" class="btn btn-large btn-warning" data-toggle="modal">Vytvořit nový recept</a>
-      </p>
+          <% if recipes_filter("new", nil, nil) %>
+            <a href="/recipes/new" role="button" class="btn btn-large btn-warning" data-toggle="modal">Vytvořit nový recept</a>
+          <% end %>
+        </p>
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <%= yield %>
+      </div>
     </div>
-  </header>
 
-  <div class="container-fluid">
-    <div class="row-fluid">
-      <%= yield %>
-    </div>
-  </div>
+    <% if !current_user  %>
+      <%= render 'layouts/login_form' %>
+    <% end %>
 
-  <% if !current_user  %>
-    <%= render 'layouts/login_form' %>
-  <% end %>
+    <%= render 'layouts/filter' %>
+    <%= render 'layouts/fridge' %>
 
-  <%= render 'layouts/filter' %>
-  <%= render 'layouts/fridge' %>
-
-  <legend class="spacer"></legend>
-  <footer class="footer spacer">
-    <div class="container">
+    <legend class="spacer"></legend>
+    <footer class="footer spacer">
+      <div class="container">
         <p class="pull-right"><a href="#">Zpět na začátek</a></p>
         <p>&copy Kuchařka</p>
         <p>Kontaktujte nás <a href="mailto:kucharka@xyz.cz">kucharka@xyz.cz</a></p>
-    </div>
-  </footer>
-</body>
+      </div>
+    </footer>
+  </body>
 </html>

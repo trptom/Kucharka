@@ -5,9 +5,9 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-#databaze - na produkci je postgreSQL, na vyvoji MySQL
+#databaze - na produkci je postgreSQL, na vyvoji SQLite
 gem 'pg'
-gem 'mysql2'
+gem 'sqlite3'
 # autentizace
 gem 'sorcery'
 # uploading obrazku
