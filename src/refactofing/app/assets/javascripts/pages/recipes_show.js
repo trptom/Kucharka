@@ -1,184 +1,151 @@
 /*******************************************************************************
- * PROPOJENE CLANKY
+ * INGREDIENCE
  ******************************************************************************/
 
-var ConnectedArticles = new function() {
-    this.init = function() {
-        this.urlElement = document.getElementById("connected_articles_url");
-        this.recipeId = document.getElementById("recipe_id");
-        this.list = document.getElementById("articles");
-        this.emptyEcho = document.getElementById("articles_empty");
-    }
+var RecipeIngredience = {
+    component: {
+        list: {
+            all: null,
+            accepted: null,
+            pending: null
+        },
+        quantity: null,
+        importance: null
+    },
+    validateForm: function() {
+        var msg = "";
 
-    this.parseUrl = function(url) {
-        if (!url.match(/\/articles?\/[0-9]+/)) {
-            return null;
+        if (!RecipeIngredience.component.quantity.value.match(/^([0-9]+\.)?[0-9]+$/) ||
+                parseFloat(RecipeIngredience.component.quantity.value) <= 0) {
+            msg += "Množství musí být celé číslo > 0!\n";
         }
-        var tmp = url.split(/\/articles?\//);
-        return tmp[1].split("/")[0].replace(/[^0-9]+$/, "");
-    }
 
-    this.add = function() {
-        var id = this.parseUrl(this.urlElement.value);
-        var request = "article_id=" + encodeURIComponent(id);
+        if (!RecipeIngredience.component.importance.value.match(/^[0-9]+$/) ||
+                parseInt(RecipeIngredience.importance.quantity.value) <= 0) {
+            msg += "Důležitost musí být celé číslo > 0!\n";
+        }
 
-        Ajax.loadPage("/recipes/" + this.recipeId.value + "/add_connected_article?" + request,
-                "GET",
-                null,
-                function(request) {ConnectedArticles.addOnSuccess(request, id)},
-                this.addOnError,
-                false);
-    }
+        if (msg !== "") {
+            alert(msg);
+        }
 
-    this.addOnSuccess = function(request, id) {
-        if (request.responseText.indexOf("true") == 0) {
-            var tmp = request.responseText.split("\n")
-            var newElement = document.createElement("span");
-            newElement.link = document.createElement("a");
-            newElement.link.href = "/articles/" + tmp[1];
-            newElement.link.innerHTML = tmp[2];
-            newElement.button = document.createElement("input");
-            newElement.button.type = "button";
-            newElement.button.value = "X";
-            newElement.button.onclick = function() {
-                ConnectedArticles.remove(parseInt(tmp[1]), newElement);
+        return msg === "";
+    },
+    reloadList: function() {
+        $.ajax({
+            url: "/ingrediences.json",
+            type: "GET",
+            dataType: "json",
+            success: function(response) {
+                RecipeIngredience.setItems(response[0], response[1]);
+            },
+            error: function(response) {
+                alert(response);
             }
-
-            newElement.appendChild(newElement.link);
-            newElement.appendChild(document.createTextNode(" "));
-            newElement.appendChild(newElement.button);
-            newElement.appendChild(document.createTextNode(" "));
-            newElement.appendChild(document.createElement("br"));
-
-            ConnectedArticles.list.appendChild(newElement);
-            $(ConnectedArticles.emptyEcho).addClass("hidden");
-        } else {
-            alert("Chyba při přidávání článku!");
+        });
+    },
+    setItems: function(acceptedAry, pendingAry) {
+        while (RecipeIngredience.component.list.accepted.childNodes.length > 0) {
+            RecipeIngredience.component.list.accepted.removeChild(RecipeIngredience.component.list.accepted.firstChild);
         }
-    }
-
-    this.addOnError = function(request) {
-        alert("Chyba při přidávání článku (AJAX)!");
-    }
-
-    this.remove = function(articleId, element) {
-        var request = "article_id=" + encodeURIComponent(articleId);
-        
-        Ajax.loadPage("/recipes/" + this.recipeId.value + "/remove_connected_article?" + request,
-                "GET",
-                null,
-                function(request) {ConnectedArticles.removeOnSuccess(request, element)},
-                this.removeOnError,
-                false);
-    }
-
-    this.removeOnSuccess = function(request, elementToRemove) {
-        if (request.responseText.indexOf("true") == 0) {
-            ConnectedArticles.list.removeChild(elementToRemove);
-            if (ConnectedArticles.list.getElementsByTagName("span").length == 1) {
-                $(ConnectedArticles.emptyEcho).removeClass("hidden");
-            }
-        } else {
-            alert("Chyba při odebírání článku!");
+        while (RecipeIngredience.component.list.pending.childNodes.length > 0) {
+            RecipeIngredience.component.list.pending.removeChild(RecipeIngredience.component.list.pending.firstChild);
         }
-    }
-
-    this.removeOnError = function(request) {
-        alert("Chyba při odebírání článku (AJAX)!");
+        var index;
+        for (index in acceptedAry) {
+            var newOption = document.createElement("option");
+            newOption.text = acceptedAry[index].name + " (" + acceptedAry[index].units + ")";
+            newOption.value = acceptedAry[index].id;
+            newOption.title = acceptedAry[index].annotation;
+            newOption.units = acceptedAry[index].units;
+            RecipeIngredience.component.list.accepted.appendChild(newOption);
+        }
+        for (index in pendingAry) {
+            var newOption = document.createElement("option");
+            newOption.text = pendingAry[index].name + " (" + pendingAry[index].units + ")";
+            newOption.value = pendingAry[index].id;
+            newOption.title = pendingAry[index].annotation;
+            newOption.units = pendingAry[index].units;
+            RecipeIngredience.component.list.pending.appendChild(newOption);
+        }
+    },
+    init: function() {
+        RecipeIngredience.component.list.all = document.getElementById("new_ingredience_list");
+        RecipeIngredience.component.list.accepted = document.getElementById("new_ingredience_list_accepted");
+        RecipeIngredience.component.list.pending = document.getElementById("new_ingredience_list_pending");
+        RecipeIngredience.component.quantity = document.getElementById("new_ingredience_quantity");
+        RecipeIngredience.component.importance = document.getElementById("new_ingredience_importance");
     }
 }
+
+$(document).ready(function() {
+    RecipeIngredience.init();
+    RecipeIngredience.reloadList();
+});
 
 /*******************************************************************************
- * PROPOJENE RECEPTY
+ * ZADOST O INGREDIENCI
  ******************************************************************************/
 
-var ConnectedRecipes = new function() {
-    this.init = function() {
-        this.urlElement = document.getElementById("connected_recipes_url");
-        this.recipeId = document.getElementById("recipe_id");
-        this.list = document.getElementById("subrecipes");
-        this.emptyEcho = document.getElementById("recipes_empty");
-    }
-
-    this.parseUrl = function(url) {
-        if (!url.match(/\/recipes?\/[0-9]+/)) {
-            return null;
+var IngredienceRequest = {
+    component: {
+        name: null,
+        units: null,
+        annotation: null,
+        content: null
+    },
+    validateForm: function() {
+        var ret = "";
+        if (IngredienceRequest.component.name.value === "") {
+            ret += "Musíte uvést název ingredience!\n";
         }
-        var tmp = url.split(/\/recipes?\//);
-        return tmp[1].split("/")[0].replace(/[^0-9]+$/, "");
-    }
+        if (IngredienceRequest.component.units.value === "") {
+            ret += "Musíte uvést jednotky ingredience!\n";
+        }
 
-    this.add = function() {
-        var id = this.parseUrl(this.urlElement.value);
-        var request = "recipe_id=" + encodeURIComponent(id);
-
-        Ajax.loadPage("/recipes/" + this.recipeId.value + "/add_subrecipe?" + request,
-                "GET",
-                null,
-                function(request) {ConnectedRecipes.addOnSuccess(request, id)},
-                this.addOnError,
-                false);
-    }
-
-    this.addOnSuccess = function(request, id) {
-        if (request.responseText.indexOf("true") == 0) {
-            var tmp = request.responseText.split("\n")
-            var newElement = document.createElement("span");
-            newElement.link = document.createElement("a");
-            newElement.link.href = "/recipes/" + tmp[1];
-            newElement.link.innerHTML = tmp[2];
-            newElement.button = document.createElement("input");
-            newElement.button.type = "button";
-            newElement.button.value = "X";
-            newElement.button.onclick = function() {
-                ConnectedRecipes.remove(parseInt(tmp[1]), newElement);
-            }
-
-            newElement.appendChild(newElement.link);
-            newElement.appendChild(document.createTextNode(" "));
-            newElement.appendChild(newElement.button);
-            newElement.appendChild(document.createTextNode(" "));
-            newElement.appendChild(document.createElement("br"));
-
-            ConnectedRecipes.list.appendChild(newElement);
-            $(ConnectedRecipes.emptyEcho).addClass("hidden");
+        return (ret === "") ? true : ret;
+    },
+    submit: function() {
+        var validationResult = IngredienceRequest.validateForm();
+        if (validationResult === true) {
+            $.ajax({
+                url: "/ingrediences/new_request/",
+                type: "GET",
+                dataType: "text",
+                data: "name=" + encodeURIComponent(IngredienceRequest.component.name.value) +
+                    "&units=" + encodeURIComponent(IngredienceRequest.component.units.value) +
+                    "&annotation=" + encodeURIComponent(IngredienceRequest.component.annotation.value) +
+                    "&content=" + encodeURIComponent(IngredienceRequest.component.content.value),
+                success: function(response) {
+                    if (response.indexOf("true") === 0) {
+                        IngredienceRequest.component.name.value = "";
+                        IngredienceRequest.component.units.value = "";
+                        IngredienceRequest.component.annotation.value = "";
+                        IngredienceRequest.component.content.value = "";
+                        alert("Požadavek na přídání ingredience odeslán...");
+                        // aktualizuju seznam
+                        RecipeIngredience.reloadList();
+                    } else {
+                        var msg = response.replace(/^false/, "");
+                        alert("Požadavek na přídání ingredience se nepodeřilo odeslat! " + msg);
+                    }
+                },
+                error: function() {
+                    alert("Požadavek na přídání ingredience se nepodeřilo odeslat (AJAX chyba)!");
+                }
+            });
         } else {
-            alert("Chyba při přidávání článku!");
+            alert(validationResult);
         }
-    }
-
-    this.addOnError = function(request) {
-        alert("Chyba při přidávání receptu (AJAX)!");
-    }
-
-    this.remove = function(recipeId, element) {
-        var request = "recipe_id=" + encodeURIComponent(recipeId);
-
-        Ajax.loadPage("/recipes/" + this.recipeId.value + "/remove_subrecipe?" + request,
-                "GET",
-                null,
-                function(request) {ConnectedRecipes.removeOnSuccess(request, element)},
-                this.removeOnError,
-                false);
-    }
-
-    this.removeOnSuccess = function(request, elementToRemove) {
-        if (request.responseText.indexOf("true") == 0) {
-            ConnectedRecipes.list.removeChild(elementToRemove);
-            if (ConnectedRecipes.list.getElementsByTagName("span").length == 1) {
-                $(ConnectedRecipes.emptyEcho).removeClass("hidden");
-            }
-        } else {
-            alert("Chyba při odebírání článku!");
-        }
-    }
-
-    this.removeOnError = function(request) {
-        alert("Chyba při odebírání článku (AJAX)!");
+    },
+    init: function() {
+        IngredienceRequest.component.name = document.getElementById("ingredience_request_name");
+        IngredienceRequest.component.units = document.getElementById("ingredience_request_units");
+        IngredienceRequest.component.annotation = document.getElementById("ingredience_request_annotation");
+        IngredienceRequest.component.content = document.getElementById("ingredience_request_content");
     }
 }
 
-$(document).ready(function(){
-    ConnectedArticles.init();
-    ConnectedRecipes.init();
+$(document).ready(function() {
+    IngredienceRequest.init();
 });

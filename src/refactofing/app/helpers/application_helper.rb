@@ -78,4 +78,16 @@ module ApplicationHelper
   def show_list_ingredience_categories
     return ingredience_categories_filter("index", nil, nil)
   end
+
+  ##############################################################################
+  # pro komponenty
+  ##############################################################################
+
+  def get_recipe_level_options
+    ret = Array.new
+    for i in 0..(LEVEL_TEXT.length-1)
+      ret << [LEVEL_TEXT[i], i.to_s]
+    end
+    return ret;
+  end
 end

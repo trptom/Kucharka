@@ -24,6 +24,7 @@ class Recipe < ActiveRecord::Base
 
   validates :annotation,
     :length => { :minimum => 50, :maximum => 255, :message => "špatná délka anotace (50-255)" },
+    :allow_blank => true,
   :if => :annotation
 
   validates :content,

@@ -1,6 +1,7 @@
 # coding:utf-8
 
 module RecipesHelper
+
   def get_level_class(level)
     if level == 0
       
@@ -24,36 +25,6 @@ module RecipesHelper
   def get_mark_str(recipe)
     mark = get_mark(recipe);
     return mark != nil ? mark.to_s : "žádné";
-  end
-
-  def get_ingrediences_ary_from_params(recipe_id)
-    ret = Array.new
-    if params[:ingrediences] != nil
-      for ingredience in params[:ingrediences]
-        tmp = ingredience.split("|");
-        
-        #najdu existujici vazbu pro recept x ingredience (pokud uz recept existoval)
-        if recipe_id != nil
-          irc = IngredienceRecipeConnector.where(:recipe_id => recipe_id).where(:ingredience_id => tmp[0].to_i).first
-          if irc != nil
-            irc.update_attribute(:quantity, tmp[1].to_f)
-            irc.update_attribute(:importance, tmp[1].to_i)
-          end
-        end
-        # a pokud jsem vazbu nenasel, vytvarim novou (je to tadz, aby v DB nehnily stary zaznamy)
-        if irc == nil
-          irc = IngredienceRecipeConnector.new
-          #nasetuju potrebne promenne
-          irc.ingredience_id = tmp[0].to_i
-          irc.quantity = tmp[1].to_f
-          irc.importance = tmp[2].to_i
-        end
-
-        #pridam do vystupu
-        ret << irc
-      end
-    end
-    return ret
   end
 
   def get_recipe_koef_for_fridge(recipe, p, ingrediences)

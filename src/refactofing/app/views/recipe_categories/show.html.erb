@@ -3,7 +3,7 @@
     <h2><%= @recipe_category.name %></h2>
     <div class="spacer">
       <p>
-        <%= @recipe_category.description %>
+        <%= simple_format @recipe_category.description %>
       </p>
       <div class="btn-group">
         <% if recipe_categories_filter("edit", nil, @recipe_category) %>

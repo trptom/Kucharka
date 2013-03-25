@@ -1,3 +1,5 @@
+<script type="text/javascript" src="<%= asset_path "pages/recipes_show.js" %>"></script>
+
 <input type="hidden" id="recipe_id" value="<%= @recipe.id %>" />
 <div class="span3">
   <div class="well">
@@ -7,10 +9,10 @@
         <span>
           <%= link_to subrecipe.subrecipe.name, recipe_path(subrecipe.subrecipe) %>
           <% if recipes_filter("edit", nil, @recipe) %>
-            <% form_for(subrecipe, :action => "/recipes/"+@recipe.id.to_s+"/remove_subrecipe") do |f| %>
-              <% f.hidden_field :id  %>
-              <% f.submit :class => "btn", :value => "X" %>
-            <% end %>
+            <form action="/recipes/<%= @recipe.id.to_s %>/remove_subrecipe" method="GET">
+              <input type="hidden" name="subrecipe" value="<%= subrecipe.subrecipe.id.to_s %>" />
+              <input type="submit" value="X" class="btn" />
+            </form>
           <% end %>
           <br />
         </span>
@@ -21,8 +23,8 @@
       </span>
     </ul>
     <% if recipes_filter("edit", nil, @recipe) %>
-      <form action="/recipes/<%= @recipe.id.to_s %>/add_subrecipe" method="get">
-        <input name="new_item_url" type="text" />
+      <form action="/recipes/<%= @recipe.id.to_s %>/add_subrecipe" method="get" onsubmit="return Subrecipes.validateForm()">
+        <input name="subrecipe" id="new_subrecipe_url" type="text" />
         <input type="submit" class="btn" value="Přidat podpostup" />
       </form>
     <% end %>
@@ -33,10 +35,10 @@
         <span>
           <%= link_to article.title, article_path(article) %>
           <% if recipes_filter("edit", nil, @recipe) %>
-            <% form_for(article, :action => "/recipes/"+@recipe.id.to_s+"/remove_connected_article") do |f| %>
-              <% f.hidden_field :id  %>
-              <% f.submit :class => "btn", :value => "X" %>
-            <% end %>
+            <form action="/recipes/<%= @recipe.id.to_s %>/remove_connected_article" method="GET">
+              <input type="hidden" name="article" value="<%= article.id.to_s %>" />
+              <input type="submit" value="X" class="btn" />
+            </form>
           <% end %>
           <br />
         </span>
@@ -47,10 +49,21 @@
     </ul>
     <% if recipes_filter("edit", nil, @recipe) %>
       <form action="/recipes/<%= @recipe.id.to_s %>/add_connected_article" method="get">
-        <input name="new_item_url" type="text" />
+        <input name="article" type="text" />
         <input type="submit" class="btn" value="Přidat článek" />
       </form>
     <% end %>
+  </div>
+
+  <div class="well">
+    <legend>Podat žádost na ingredienci</legend>
+    <input id="ingredience_request_name" type="text" placeholder="Název" />
+    <input id="ingredience_request_units" type="text" placeholder="Jednotky" />
+    <label>Anotace</label>
+    <textarea id="ingredience_request_annotation" cols="" rows="3" class="input-block-level"></textarea>
+    <label>Popis</label>
+    <textarea id="ingredience_request_content" cols="" rows="5" class="input-block-level"></textarea>
+    <button class="btn" onclick="IngredienceRequest.submit()">Podat žádost</button>
   </div>
 </div>
 
@@ -73,11 +86,52 @@
             <dd>
               <%= ingredienceConn.quantity %>
               <%= ingredienceConn.ingredience.units %>
+              <% if recipes_filter("edit", nil, @recipe) %>
+                (důležitost: <%= ingredienceConn.importance %>)
+              <% end %>
+              <% if recipes_filter("remove_ingredience", nil, @recipe) %>
+                <%= link_to "(smazat)", "/recipes/"+@recipe.id.to_s+"/remove_ingredience?connector_id="+ingredienceConn.id.to_s %>
+              <% end %>
             </dd>
           <% end %>
         </dl>
       </div>
     </div>
+
+    <% if recipes_filter("edit", nil, @recipe) %>
+      <legend class="spacer"></legend>
+
+      <div class="spacer">
+        <% if recipes_filter("add_ingredience", nil, @recipe) %>
+          <div>
+            <form action="/recipes/<%= @recipe.id %>/add_ingredience" method="GET" onsubmit="return RecipeIngredience.validateForm()">
+              <select name="ingredience" id="new_ingredience_list">
+                <optgroup label="Schválené" id="new_ingredience_list_accepted"></optgroup>
+                <optgroup label="Neschválené" id="new_ingredience_list_pending"></optgroup>
+              </select>
+              <input type="text" name="quantity" id="new_ingredience_quantity" class="input-small" placeholder="množství" />
+              <input type="text" name="importance" id="new_ingredience_importance" class="input-small" placeholder="důležitost" />
+              <input type="submit" value="Přidat ingredienci" />
+            </form>
+          </div>
+        <% end %>
+        <% if recipes_filter("add_category", nil, @recipe) %>
+          <div>
+            <form action="/recipes/<%= @recipe.id %>/add_category" method="GET">
+              <select name="category" id="new_category_list">
+                <% for category in RecipeCategory.order(:name).all %>
+                  <option value="<%= category.id %>"><%= category.name %></option>
+                <% end %>
+              </select>
+              <input type="submit" value="Přidat kategorii" />
+            </form>
+          </div>
+        <% end %>
+      </div>
+
+      <legend class="spacer"></legend>
+    <% end %>
+
     <div class="spacer">
       <p><b>Složitost:</b>
         <span class="badge <%= LEVEL_CLASS[@recipe.level] %>"><%= LEVEL_TEXT[@recipe.level] %></span>
@@ -87,12 +141,23 @@
         <b>Kategorie:</b>
         <% for category in @recipe.recipeCategories %>
           <%= category.name + (category != @recipe.recipeCategories.last ? ", " : "") %>
+          <% if recipes_filter("remove_category", nil, @recipe) %>
+            <%= link_to "(smazat)", "/recipes/"+@recipe.id.to_s+"/remove_category?category="+category.id.to_s %>
+          <% end %>
         <% end %>
       </p>
-      <p><%= @recipe.annotation %></p>
-      <p><%= @recipe.content %></p>
     </div>
-    <div>
+
+    <legend class="spacer"></legend>
+
+    <div class="spacer">
+      <p><%= @recipe.annotation %></p>
+      <p><%= simple_format @recipe.content %></p>
+    </div>
+
+    <legend class="spacer"></legend>
+
+    <div class="spacer">
       <% if marks_filter("show", nil, nil) %>
         <h5>
           Hodnocení: <span id="recipe_mark"><%= get_mark_str @recipe %></span>

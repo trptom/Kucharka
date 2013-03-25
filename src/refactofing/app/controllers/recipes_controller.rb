@@ -1,5 +1,7 @@
 # coding:utf-8
 
+require 'cgi'
+
 class RecipesController < ApplicationController
   before_filter :user_rights_filter
 
@@ -43,21 +45,8 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(params[:recipe])
     @recipe.user = current_user
 
-    @saved = false
-    ActiveRecord::Base.transaction do
-      #upraveni kategorii
-      if params[:categories]
-        for category in params[:categories]
-          @recipe.recipeCategories << RecipeCategory.find(category.to_i)
-        end
-      end
-      # upraveni ingredienci
-      @recipe.ingredienceRecipeConnectors = get_ingrediences_ary_from_params(nil)
-      @saved = @recipe.save
-    end
-
-    if @saved
-      redirect_to @recipe, notice: 'Recipe was successfully created.'
+    if @recipe.save
+      redirect_to @recipe, notice: 'Recept byl úspěšně vytvořen.'
     else
       @errors = @recipe.errors
       render action: "new"
@@ -67,27 +56,8 @@ class RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
 
-    @saved = true
-    ActiveRecord::Base.transaction do
-      if !@recipe.update_attributes(params[:recipe])
-        @saved = false;
-      end
-      #upraveni kategorii
-      for category in params[:categories]
-        tmp = @recipe.recipeCategories.where(:id => category.to_i)
-        if tmp.length == 0
-          @recipe.recipeCategories << RecipeCategory.find(category.to_i)
-        end
-      end
-      # upraveni ingredienci
-      @recipe.ingredienceRecipeConnectors = get_ingrediences_ary_from_params(@recipe.id)
-      if !@recipe.save
-        @saved = false;
-      end
-    end
-
-    if @saved
-      redirect_to @recipe, notice: 'Recipe was successfully updated.'
+    if @recipe.update_attributes(params[:recipe])
+      redirect_to @recipe, notice: 'Recept byl úspěšně upraven.'
     else
       @errors = @recipe.errors
       render action: "edit"
@@ -107,7 +77,158 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @recipe.destroy
 
-    redirect_to recipes_url
+    redirect_to "/"
+  end
+
+  def add_ingredience
+    @recipe = Recipe.find(params[:id])
+
+    if params[:importance] && params[:quantity] && params[:ingredience]
+      if @recipe.ingrediences.where(:id => params[:ingredience]).length == 0
+        @new_item = IngredienceRecipeConnector.new
+        @new_item.importance = params[:importance].to_i
+        @new_item.quantity = params[:quantity].to_i
+        @new_item.recipe = @recipe
+        @new_item.ingredience_id = params[:ingredience]
+        @new_item.save
+      else
+        @item = @recipe.ingredienceRecipeConnectors.where(:ingredience_id => params[:ingredience]).first
+        @item.quantity += params[:quantity].to_i
+        @item.importance = params[:importance].to_i
+        @item.save
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @recipe }
+      format.json {
+        render json: @recipe.ingrediences
+      }
+    end
+  end
+
+  def remove_ingredience
+    @recipe = Recipe.find(params[:id])
+
+    if params[:connector_id]
+      @to_remove = IngredienceRecipeConnector.find(params[:connector_id])
+      @to_remove.destroy
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @recipe }
+      format.json {
+        render json: @recipe.ingrediences
+      }
+    end
+  end
+
+  def add_category
+    @recipe = Recipe.find(params[:id])
+
+    if params[:category] && @recipe.recipeCategories.where(:id => params[:category]).length == 0
+      @recipe.recipeCategories << RecipeCategory.find(params[:category])
+      @recipe.save
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @recipe }
+      format.json {
+        render json: @recipe.categories
+      }
+    end
+  end
+
+  def remove_category
+    @recipe = Recipe.find(params[:id])
+
+    if params[:category]
+      @recipe.recipeCategories.delete(RecipeCategory.find(params[:category]))
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @recipe }
+      format.json {
+        render json: @recipe.recipeCategories
+      }
+    end
+  end
+
+  def add_subrecipe
+    @recipe = Recipe.find(params[:id])
+
+    if params[:subrecipe]
+      @tmp = params[:subrecipe].split(/http.?\:\/\/[^\/]+\/recipes\//)
+      if @tmp.length == 2
+        @msg = @tmp
+        @id = @tmp[1].to_i
+        if @id && @recipe.subrecipes.where(:id => @id).length == 0
+          @new_item = RecipeRecipeConnector.new
+          @new_item.recipe_id = params[:id]
+          @new_item.subrecipe_id = @id
+          @new_item.save
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @recipe }
+      format.json {
+        render json: @recipe.subrecipes
+      }
+    end
+  end
+
+  def remove_subrecipe
+    @recipe = Recipe.find(params[:id])
+
+    if params[:subrecipe]
+      RecipeRecipeConnector.where(:recipe_id => params[:id]).where(:subrecipe_id => params[:subrecipe]).all? { |e| e.delete }
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @recipe }
+      format.json {
+        render json: @recipe.subrecipes
+      }
+    end
+  end
+
+  def add_connected_article
+    @recipe = Recipe.find(params[:id])
+
+    if params[:article]
+      @tmp = params[:article].split(/http.?\:\/\/[^\/]+\/articles\//)
+      if @tmp.length == 2
+        @msg = @tmp
+        @id = @tmp[1].to_i
+        if @id && @recipe.articles.where(:id => @id).length == 0
+          @recipe.articles << Article.find(@id)
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @recipe }
+      format.json {
+        render json: @recipe.articles
+      }
+    end
+  end
+
+  def remove_connected_article
+    @recipe = Recipe.find(params[:id])
+
+    if params[:article]
+      @recipe.articles.delete(Article.find(params[:article]))
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @recipe }
+      format.json {
+        render json: @recipe.articles
+      }
+    end
   end
 
   def fridge
@@ -124,87 +245,6 @@ class RecipesController < ApplicationController
 
   def newest
     @recipes = Recipe.get_recipes_sorted_by_date(params[:count] == nil ? 10 : params[:count].to_i)
-  end
-
-  def add_subrecipe
-    @msg = "false";
-
-    if params[:id] != nil && params[:recipe_id] != nil
-      @recipe = Recipe.find(params[:id])
-      @subrecipe = Recipe.find(params[:recipe_id])
-      if (@recipe != nil && @subrecipe != nil)
-        @connector = RecipeRecipeConnector.new
-        @connector.recipe = @recipe;
-        @connector.subrecipe = @subrecipe;
-        @recipe.subrecipes << @connector
-        if @recipe.save
-          @msg = "true\n" + @subrecipe.id.to_s + "\n" + @subrecipe.name
-        end
-      end
-    end
-
-    redirect_to "/home/plain_message", notice: @msg
-  end
-
-  def remove_subrecipe
-    @msg = "false";
-
-    if params[:id] != nil && params[:recipe_id] != nil
-      @recipe = Recipe.find(params[:id])
-      @connector = @recipe.subrecipes.find_by_subrecipe_id(params[:recipe_id]);
-      if @connector
-        if @recipe.subrecipes.delete(@connector);
-          @msg = "true"
-        end
-      end
-    end
-
-    redirect_to "/home/plain_message", notice: @msg
-  end
-
-  def add_connected_article
-    uri = URI.parse(params[:new_item_url])
-    uri_params = CGI.parse(uri.query)
-
-    @article = Article.find(uri_params[:id])
-    @recipe = Recipe.find(params[:id])
-
-    @recipe.articles << @article
-    @recipe.save
-
-    redirect_to @recipe
-
-#    @msg = "false";
-#
-#    if params[:id] != nil && params[:article_id] != nil
-#      @recipe = Recipe.find(params[:id])
-#      @article = Article.find(params[:article_id])
-#      if (@recipe != nil && @article != nil)
-#        @recipe.articles << @article
-#        if @recipe.save
-#          @msg = "true\n" + @article.id.to_s + "\n" + @article.title
-#        end
-#      end
-#    end
-#
-#    redirect_to "/home/plain_message", notice: @msg
-  end
-
-  def remove_connected_article
-    @msg = "false";
-
-    if params[:id] != nil && params[:article_id] != nil
-      @recipe = Recipe.find(params[:id])
-      @article = Article.find(params[:article_id])
-      if @recipe != nil && @article != nil
-        @recipe.articles.delete(@article)
-        if @recipe.save
-          @msg = "true"
-        end
-      end
-    end
-
-    redirect_to "/home/plain_message", notice: @msg
   end
 
   def search

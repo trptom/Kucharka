@@ -7,7 +7,7 @@
         <%= link_to @article.user.username, @article.user %>
       </p>
       <p><%= @article.annotation %></p>
-      <p><%= @article.content %></p>
+      <p><%= simple_format @article.content %></p>
     </div>
 
     <div class="row-fluid">

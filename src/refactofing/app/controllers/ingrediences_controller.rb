@@ -6,6 +6,16 @@ class IngrediencesController < ApplicationController
   def index
     @ingrediences_accepted = Ingredience.where(:activation_state => 1).order(:name).all
     @ingrediences_pending = Ingredience.where(:activation_state => 0).order(:name).all
+
+    respond_to do |format|
+      format.html
+      format.json {
+        @tmp = Array.new
+        @tmp << @ingrediences_accepted
+        @tmp << @ingrediences_pending
+        render json: @tmp
+      }
+    end
   end
 
   # GET /ingrediences/1

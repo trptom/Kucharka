@@ -1,5 +1,6 @@
 CookBook::Application.routes.draw do
   # resources
+  resources :users
   resources :user_sessions
   resources :articles
   resources :ingredience_categories
@@ -8,13 +9,24 @@ CookBook::Application.routes.draw do
   
   resources :recipes do
     member do
+      get "add_ingredience"
+      get "remove_ingredience"
+      get "add_category"
+      get "remove_category"
+      get "add_connected_article"
+      get "remove_connected_article"
+      get "add_subrecipe"
+      get "remove_subrecipe"
+    end
+
+    collection do
       get "fridge"
       get "newest"
     end
   end
   
   resources :ingrediences do
-    member do
+    collection do
       get "new_request"
       get "plain_list"
     end
@@ -41,10 +53,6 @@ CookBook::Application.routes.draw do
   match 'my_recipes' => 'users#recipes'
   match 'my_articles' => 'users#articles'
 
-  match 'recipes/:id/add_subrecipe' => 'recipes#add_subrecipe'
-  match 'recipes/:id/remove_subrecipe' => 'recipes#remove_subrecipe'
-  match 'recipes/:id/add_connected_article' => 'recipes#add_connected_article'
-  match 'recipes/:id/remove_connected_article' => 'recipes#remove_connected_article'
   match 'users/:id/recipes' => 'users#recipes'
   match 'users/:id/articles' => 'users#articles'
   match 'users/:id/block' => 'users#block'
