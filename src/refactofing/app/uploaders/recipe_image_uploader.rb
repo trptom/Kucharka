@@ -35,22 +35,22 @@ class RecipeImageUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
-  process :resize_to_fit => [600, 600]
+  process :resize_to_fit => [300, 300]
 
   version :thumb do
-    process :resize_to_fit => [50,50]
+    process :resize_to_fit => [80,80]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list
-    %w(jpg jpeg gif png)
+    %w(jpg jpeg)
   end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+  def filename
+    "icon.jpg" if original_filename
+  end
 
 end

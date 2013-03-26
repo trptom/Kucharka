@@ -73,7 +73,7 @@
     <div class="row-fluid spacer">
       <% if @recipe.image != nil %>
         <div class="span6">
-          <img src="<%= @recipe.image %>" class="img-rounded" alt="Náhled" />
+          <%= get_icon(@recipe) %>
         </div>
       <% end %>
       <div class="span6">
@@ -111,7 +111,7 @@
               </select>
               <input type="text" name="quantity" id="new_ingredience_quantity" class="input-small" placeholder="množství" />
               <input type="text" name="importance" id="new_ingredience_importance" class="input-small" placeholder="důležitost" />
-              <input type="submit" value="Přidat ingredienci" />
+              <input type="submit" value="Přidat ingredienci" class="btn" />
             </form>
           </div>
         <% end %>
@@ -123,7 +123,7 @@
                   <option value="<%= category.id %>"><%= category.name %></option>
                 <% end %>
               </select>
-              <input type="submit" value="Přidat kategorii" />
+              <input type="submit" value="Přidat kategorii" class="btn" />
             </form>
           </div>
         <% end %>

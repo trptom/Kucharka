@@ -9,7 +9,7 @@
       <h3>Nejnovější recepty</h3>
       <% @newest.each do |item| %>
         <div class="spacer">
-          <img src="<%=asset_path "minisandwich.png" %>" alt=""/>
+          <%= get_thumb_icon(item) %>
           <h5><%= item.name %></h5>
           <p><%= item.annotation %></p>
           <p>Přidáno: <%= l item.created_at %><%#= t :hello %></p>
@@ -22,7 +22,7 @@
       <h3>Náhodné recepty</h3>
       <% @random.each do |item| %>
         <div class="spacer">
-          <img src="<%=asset_path "minisandwich.png" %>" alt=""/>
+          <%= get_thumb_icon(item) %>
           <h5><%= item.name %></h5>
           <p><%= item.annotation %></p>
           <%= link_to "Zobrazit recept", recipe_path(item.id) %>
@@ -34,7 +34,7 @@
       <h3>Nejlepší recepty</h3>
       <% @best.each do |item| %>
         <div class="spacer">
-          <img src="<%=asset_path "minisandwich.png" %>" alt=""/>
+          <%= get_thumb_icon(item) %>
           <h5><%= item.name %></h5>
           <p><%= item.annotation %></p>
           <p>Známka: <%= item.avg_value %></p>

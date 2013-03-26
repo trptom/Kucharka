@@ -3,7 +3,7 @@
   <% if @recipes != nil %>
     <% @recipes.each do |recipe| %>
       <div class="spacer">
-        <img src="" alt="TODO" />
+        <%= get_thumb_icon(recipe) %>
         <h5>
           <%= recipe.name %> -
           <%= link_to recipe.user.username, user_path(recipe.user) %> -

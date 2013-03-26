@@ -1,4 +1,22 @@
+# coding:utf-8
+
 module ApplicationHelper
+  def get_icon(recipe)
+    url = "/uploads/recipe/image/" + recipe.id.to_s + "/icon.jpg"
+    if !File.exist?("public/" + url)
+      return nil
+    end
+    return image_tag(url, :alt => "Obrázek receptu")
+  end
+
+  def get_thumb_icon(recipe)
+    url = "/uploads/recipe/image/" + recipe.id.to_s + "/thumb_icon.jpg"
+    if !File.exist?("public/" + url)
+      url = asset_path("no_photo_small.jpg")
+    end
+    return image_tag(url, :alt => "Náhled")
+  end
+
   def is_activated(user)
     return user.activation_state == "active"
   end

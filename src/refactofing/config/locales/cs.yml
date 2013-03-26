@@ -3,6 +3,10 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 cs:
+  errors:
+    messages:
+      extension_white_list_error: Obrázek má neplatnou příponu. Lze nahrávat pouze JPG/JPEG obrázky.
+
   date:
     formats:
       default: "%d.%m.%Y"
