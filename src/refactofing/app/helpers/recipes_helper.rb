@@ -34,7 +34,7 @@ module RecipesHelper
       sum += recipe_ingredience.importance
       for ingredience in p
         if (ingredience[:id] == recipe_ingredience.ingredience_id)
-          koef += [1, ingredience[:quantity]/recipe_ingredience.quantity].min * recipe_ingredience.importance
+          koef += [1, (ingredience[:quantity] ? ingredience[:quantity]/recipe_ingredience.quantity : 1)].min * recipe_ingredience.importance
         end
       end
     end

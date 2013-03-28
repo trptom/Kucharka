@@ -44,6 +44,8 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
+    @user.self_ruleset = RULES_SELF_DEFAULT
+    @user.others_ruleset = RULES_OTHERS_DEFAULT
 
     if @user.save
       UserMailer.activation_needed_email(@user).deliver

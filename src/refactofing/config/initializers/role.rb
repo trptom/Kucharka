@@ -47,3 +47,22 @@ ROLE['recipeCategories']['edit'] =   1 << 25
 
 ROLE['ingredienceCategories']['create_delete'] = 1 << 26
 ROLE['ingredienceCategories']['edit'] = 1 << 27
+
+RULES_SELF_DEFAULT =
+  ROLE['users']['show'] |
+  ROLE['users']['edit'] |
+  ROLE['recipes']['create'] |
+  ROLE['recipes']['edit'] |
+  ROLE['recipes']['delete'] |
+  ROLE['articles']['create'] |
+  ROLE['articles']['edit'] |
+  ROLE['articles']['delete'] |
+  ROLE['comments']['create'] |
+  ROLE['comments']['edit'] |
+  ROLE['comments']['delete'] |
+  ROLE['marks']['create'] |
+  ROLE['marks']['show']
+
+RULES_OTHERS_DEFAULT =
+  ROLE['users']['show'] |
+  ROLE['marks']['show']

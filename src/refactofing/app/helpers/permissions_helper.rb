@@ -323,10 +323,9 @@ module PermissionsHelper
       end
     end
 
-    # jen pokud muze delat nejakou akci
+    # vzdy
     if action == "index"
-      return has_permission_one(ROLE['ingrediences']['create_delete']) ||
-          has_permission_one(ROLE['ingrediences']['edit'])
+      return true
     end
 
     if action == "create" || action == "new"

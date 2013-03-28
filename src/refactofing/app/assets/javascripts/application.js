@@ -11,5 +11,5 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require_tree ./application
 //= require_tree ./bootstrap
+//= require_tree ./application

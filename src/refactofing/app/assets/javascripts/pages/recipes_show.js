@@ -40,7 +40,7 @@ var RecipeIngredience = {
                 RecipeIngredience.setItems(response[0], response[1]);
             },
             error: function(response) {
-                alert(response);
+                alert("err: " + response);
             }
         });
     },
