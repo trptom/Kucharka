@@ -15,6 +15,7 @@ FridgeExtendedFilterComponent.prototype.init = function(id, units, quantity, nam
 
     this.detailSpan = document.createElement("span");
     this.detailSpan.innerHTML = quantity ? name + " (" + quantity + " " + units + ")" : name + " (množství neuvedeno)";
+    this.detailSpan.className = "span2";
 
     this.deleteButton = document.createElement("input");
     this.deleteButton.type = "button";

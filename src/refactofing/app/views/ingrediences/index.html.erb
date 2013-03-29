@@ -15,7 +15,7 @@
           <tr>
             <td><%= ingredience.id %></td>
             <td><%= ingredience.name %></td>
-            <td><%= ingredience.user.username %></td>
+            <td><%= ingredience.user ? ingredience.user.username : nil %></td>
             <td>
               <%= ingrediences_filter("show", nil, ingredience) ? link_to('Zobrazit', ingredience, :method => :get, :class => "btn") : nil %>
               <%= ingrediences_filter("edit", nil, ingredience) ? link_to('Editovat', edit_ingredience_path(ingredience), :method => :get, :class => "btn") : nil %>
@@ -40,7 +40,7 @@
           <tr>
             <td><%= ingredience.id %></td>
             <td><%= ingredience.name %></td>
-            <td><%= ingredience.user.username %></td>
+            <td><%= ingredience.user ? ingredience.user.username : nil %></td>
             <td>
               <%= ingrediences_filter("show", nil, ingredience) ? link_to('Zobrazit', ingredience, :method => :get, :class => "btn") : nil %>
               <%= ingrediences_filter("edit", nil, ingredience) ? link_to('Editovat', edit_ingredience_path(ingredience), :method => :get, :class => "btn") : nil %>
