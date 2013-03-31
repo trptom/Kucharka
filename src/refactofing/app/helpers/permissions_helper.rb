@@ -448,7 +448,7 @@ module PermissionsHelper
       if (p[:id] == nil)
         return false
       else
-        entity = RecipeCategory.find(p[:id])
+        entity = Mark.find(p[:id])
       end
       # zadna entita s danym id neexistuje
       if entity == nil

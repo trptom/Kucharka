@@ -54,6 +54,11 @@ CookBook::Application.routes.draw do
   get "user_sessions/create"
   get "user_sessions/destroy"
 
+  # marks
+  get "marks/index"
+  get "marks/create"
+  get "marks/destroy"
+
   #mapping
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
@@ -69,6 +74,7 @@ CookBook::Application.routes.draw do
   match 'fridge' => 'recipes#fridge'
   match 'filter' => 'recipes#filter'
   match 'search' => 'home#search'
+  match 'marks' => 'marks#index'
 
   # ROOT
   root :to => 'home#index'

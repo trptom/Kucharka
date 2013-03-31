@@ -1,3 +1,56 @@
+var Recipe = {
+    getId: function() {
+        return document.getElementById("recipe_id").value;
+    }
+}
+
+/*******************************************************************************
+ * ZNAMKY
+ ******************************************************************************/
+
+var RecipeMark = {
+    component: {
+        totalSpan: null,
+        wrapperSpan: null,
+        mySpan: null,
+        deleteButton: null
+    },
+    recipeId: 0,
+    init: function() {
+        RecipeMark.component.totalSpan = document.getElementById("recipe_mark");
+        RecipeMark.component.wrapperSpan = document.getElementById("recipe_my_mark_wrapper");
+        RecipeMark.component.mySpan = document.getElementById("recipe_my_mark");
+        RecipeMark.component.deleteButton = document.getElementById("recipe_delete_mark");
+    },
+    submit: function(value) {
+        $.ajax({
+            url: "/marks/create/",
+            type: "GET",
+            dataType: "json",
+            data: "recipe=" + encodeURIComponent(Recipe.getId()) +
+                "&value=" + encodeURIComponent(value),
+            success: function(response) {
+                RecipeMark.component.totalSpan.innerHTML = response["total"];
+                if (response["my"] === "") {
+                    $(RecipeMark.component.wrapperSpan).addClass("hidden");
+                    $(RecipeMark.component.deleteButton).addClass("hidden");
+                } else {
+                    RecipeMark.component.mySpan.innerHTML = response["my"];
+                    $(RecipeMark.component.wrapperSpan).removeClass("hidden");
+                    $(RecipeMark.component.deleteButton).removeClass("hidden");
+                }
+            },
+            error: function() {
+                alert("Známku se nepodeřilo odeslat (AJAX chyba)!");
+            }
+        });
+    }
+}
+
+$(document).ready(function() {
+    RecipeMark.init();
+});
+
 /*******************************************************************************
  * INGREDIENCE
  ******************************************************************************/

@@ -161,24 +161,28 @@
       <% if marks_filter("show", nil, nil) %>
         <h5>
           Hodnocení: <span id="recipe_mark"><%= get_mark_str @recipe %></span>
-          <% if @my_mark != nil %>
-          (moje: <span id="recipe_mark_2"><%= @my_mark.value %></span>)
-          <% end %>
+          <span id="recipe_my_mark_wrapper" class="<%= @my_mark ? nil : "hidden" %>">
+            (moje hodnocení:
+            <span id="recipe_my_mark">
+              <%= @my_mark ? @my_mark.value : nil %>
+            </span>
+            )
+          </span>
         </h5>
       <% end %>
       <% if marks_filter("create", nil, nil) %>
         <div id="star">
-          <div id="star1" class="btn btn-small" onclick="Mark.submit(1)"><i class="icon-star"></i></div>
-          <div id="star2" class="btn btn-small" onclick="Mark.submit(2)"><i class="icon-star"></i></div>
-          <div id="star3" class="btn btn-small" onclick="Mark.submit(3)"><i class="icon-star"></i></div>
-          <div id="star4" class="btn btn-small" onclick="Mark.submit(4)"><i class="icon-star"></i></div>
-          <div id="star5" class="btn btn-small" onclick="Mark.submit(5)"><i class="icon-star"></i></div>
+          <div id="star1" class="btn btn-small" onclick="RecipeMark.submit(1)"><i class="icon-star"></i></div>
+          <div id="star2" class="btn btn-small" onclick="RecipeMark.submit(2)"><i class="icon-star"></i></div>
+          <div id="star3" class="btn btn-small" onclick="RecipeMark.submit(3)"><i class="icon-star"></i></div>
+          <div id="star4" class="btn btn-small" onclick="RecipeMark.submit(4)"><i class="icon-star"></i></div>
+          <div id="star5" class="btn btn-small" onclick="RecipeMark.submit(5)"><i class="icon-star"></i></div>
         </div>
       <% end %>
 
       <label></label>
 
-      <%= @my_mark != nil && marks_filter("delete", nil, @my_mark) ? button_to("Smazat mojí známku", { :controller => "marks", :action => "destroy", :id => @my_mark.id }, { :method => :get, :class => "btn"}) : nil %>
+      <%#= marks_filter("delete", nil, @my_mark) ? button_to("Smazat mojí známku", "/marks/destroy?id="+@my_mark.id.to_s, { :method => :get, :id => "recipe_delete_mark", :class => "btn" + (@my_mark ? "" : " hidden")}) : nil %>
       <%= recipes_filter("edit", nil, @recipe) ? button_to("Upravit recept", { :controller => "recipes", :action => "edit", :id => @recipe.id}, { :method => :get, :class => "btn"}) : nil %>
     </div>
 
