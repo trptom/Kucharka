@@ -8,7 +8,7 @@
 
 
 header {
-    background-image: url(<%=asset_path "collage.jpg"%>);
+    background-image: url("/assets/collage.jpg");
     background-repeat: repeat-x;
     -webkit-box-shadow: inset 600px 20px 100px 20px rgba(0, 0, 0, 0.8);
     box-shadow: inset 600px 20px 100px 20px rgba(0, 0, 0, 0.8);
@@ -41,4 +41,10 @@ body {
 
 }
 
-
+.fridge-ingredience-line .btn {
+    position: relative;
+    top: -5px;
+}
+.fridge-ingredience-line.highlight {
+    font-weight: bold;
+}

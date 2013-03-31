@@ -4,20 +4,25 @@
   <div class="well">
     <h2>Filtr</h2>
     <div id="filter-previous-request" style="display: none">
-      <% for param in params[:ingrediences] %>
-        <span><%= param %></span>
+      <% if params[:ingrediences] %>
+        <% for param in params[:ingrediences] %>
+          <span><%= param %></span>
+        <% end %>
       <% end %>
     </div>
     <div>
       <h5>Seznam ingrediencí</h5>
       <div>
         <div>
-          <div class="span2">Filtr:</div>
-          <input id="filter-new-ingredience-filter" type="text" />
+          <div class="span3">Filtr:</div>
+          <div class="input-append">
+            <input id="filter-new-ingredience-filter" class="span2" type="text" />
+            <button id="filter-new-ingredience-button-search" class="btn" type="button" onclick="FridgeExtendedFilter.reloadList()">Vyfiltrovat ingredience</button>
+          </div>
         </div>
         <div>
-          <div class="span2">Vybraná ingredience</div>
-          <select id="filter-new-ingredience-name">
+          <div class="span3">Vybraná ingredience</div>
+          <select id="filter-new-ingredience-name" onchange="FridgeExtendedFilter.ingredienceChanged()">
             <optgroup id="filter-new-ingredience-name-allowed" label="Schválené">
               <% if @ingrediences[:accepted].length > 0 %>
                 <% for ingredience in @ingrediences[:accepted] %>
@@ -37,17 +42,19 @@
               <% end %>
             </optgroup>
           </select>
-          <input id="filter-new-ingredience-quantity" type="number" min="0.001" max="1000000" />
+          <input id="filter-new-ingredience-quantity" class="input-small" type="number" min="0" max="999999.999" />
           <span id="filter-new-ingredience-units"></span>
-        </div>
-        <div>
-          <input id="filter-new-ingredience-add" type="button" class="btn" value="Přidat" />
+          <input id="filter-new-ingredience-add" type="button" class="btn pull-right" value="Přidat" onclick="FridgeExtendedFilter.addClicked()" />
         </div>
       </div>
       <form action="/fridge" method="get" onsubmit="//return FridgeExtendedFilter.validateSubmit()">
         <h5>Co máte doma</h5>
         <div id="filter-ingrediences-home"></div>
-        <button class="btn">Vyhledat recept</button>
+        <div class="spacer"></div>
+        <div>
+          <legend class="spacer"></legend>
+          <button class="btn">Vyhledat recept</button>
+        </div>
       </form>
     </div>
   </div>

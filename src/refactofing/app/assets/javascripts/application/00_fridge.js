@@ -1,4 +1,4 @@
-var FridgeIngredience = function(id, units, name, quantity) {
+/*var FridgeIngredience = function(id, units, name, quantity) {
     this.id = id;
     this.units = units;
     this.name = name;
@@ -102,6 +102,106 @@ var Fridge = new function() {
     this.validateSubmit = function() {
         if (this.hidden.options.length == 0) {
             alert("Musí být vybrána alespoň 1 ingredience.");
+            return false;
+        }
+        return true;
+    }
+}*/
+
+var Fridge = {
+    component: {
+        listSelect: null,
+        selectedSelect: null,
+        hiddenField: null,
+        searchInput: null,
+        button: {
+            add: null,
+            remove:null,
+            submit: null,
+            search: null
+        }
+    },
+    ingrediencesOptions: new Array(),
+    init: function() {
+        Fridge.component.listSelect = document.getElementById("fridge_list");
+        Fridge.component.selectedSelect = document.getElementById("fridge_selected");
+        Fridge.component.hiddenField = document.getElementById("fridge_hidden");
+        Fridge.component.searchInput = document.getElementById("fridge_search");
+        Fridge.component.button.add = document.getElementById("fridge_button-add");
+        Fridge.component.button.remove = document.getElementById("fridge_button-remove");
+        Fridge.component.button.submit = document.getElementById("fridge_button-submit");
+        Fridge.component.button.search = document.getElementById("fridge_button-search");
+
+        for (var a=0; a<Fridge.component.listSelect.options.length; a++) {
+            Fridge.ingrediencesOptions[Fridge.ingrediencesOptions.length] = Fridge.component.listSelect.options[a];
+        }
+    },
+    addSelected: function() {
+        for (var a=0; a<Fridge.component.listSelect.options.length; a++) {
+            if (Fridge.component.listSelect.options[a].selected) {
+                Fridge.component.listSelect.options[a].selected = false;
+                if (!Fridge.isSelected(Fridge.component.listSelect.options[a].value)) {
+                    // appending to list of selected
+                    var elem = document.createElement("option");
+                    elem.text = Fridge.component.listSelect.options[a].text;
+                    elem.value = Fridge.component.listSelect.options[a].value;
+                    Fridge.component.selectedSelect.appendChild(elem);
+                    // appending to form to submit
+                    var hidden = document.createElement("input");
+                    hidden.type = "hidden";
+                    hidden.name = "ingrediences[]";
+                    hidden.value = Fridge.component.listSelect.options[a].value;
+                    Fridge.component.hiddenField.appendChild(hidden);
+                }
+            }
+        }
+    },
+    isSelected: function(value) {
+        for (var a=0; a<Fridge.component.selectedSelect.options.length; a++) {
+            if (Fridge.component.selectedSelect.options[a].value === value) {
+                return true;
+            }
+        }
+        return false;
+    },
+    removeSelected: function() {
+        var removeList = new Array();
+        for (var a=0; a<Fridge.component.selectedSelect.options.length; a++) {
+            if (Fridge.component.selectedSelect.options[a].selected) {
+                removeList[removeList.length] = Fridge.component.selectedSelect.options[a];
+            }
+        }
+        for (var index in removeList) {
+            Fridge.removeFromHidden(removeList[index].value);
+            Fridge.component.selectedSelect.removeChild(removeList[index]);
+        }
+    },
+    removeFromHidden: function(value) {
+        for (var a=0; a<Fridge.component.hiddenField.childNodes.length; a++) {
+            if (Fridge.component.hiddenField.childNodes[a].value === value) {
+                Fridge.component.hiddenField.removeChild(Fridge.component.hiddenField.childNodes[a]);
+                return true;
+            }
+        }
+        return false;
+    },
+    filterIngrediences: function(byValue) {
+        byValue = byValue ? byValue : Fridge.component.searchInput.value;
+        while (Fridge.component.listSelect.childNodes.length > 0) {
+            Fridge.component.listSelect.removeChild(Fridge.component.listSelect.firstChild);
+        }
+        for (var a=0; a<Fridge.ingrediencesOptions.length; a++) {
+            if (!byValue || byValue === "" ||
+                    Fridge.ingrediencesOptions[a].innerHTML.indexOf(byValue) >= 0) {
+                Fridge.component.listSelect.appendChild(Fridge.ingrediencesOptions[a]);
+            } else {
+                Fridge.ingrediencesOptions[a].selected = false;
+            }
+        }
+    },
+    validate: function() {
+        if (Fridge.component.selectedSelect.options.length == 0) {
+            alert("Musíte vybrat alespoň jednu ingredienci.");
             return false;
         }
         return true;

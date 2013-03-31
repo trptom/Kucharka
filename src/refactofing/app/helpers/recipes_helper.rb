@@ -126,13 +126,15 @@ module RecipesHelper
     inStr = "" # string pro WHERE ? IN (.....)
 
 
-    for str in p[:ingrediences].each
-      tmp = str.split("|");
-      parsedP << { :id => tmp[0].to_i, :quantity => tmp[1].to_f }
-      if (inStr != "")
-        inStr += ","
+    if p[:ingrediences]
+      for str in p[:ingrediences].each
+        tmp = str.split("|");
+        parsedP << { :id => tmp[0].to_i, :quantity => tmp[1].to_f }
+        if (inStr != "")
+          inStr += ","
+        end
+        inStr += tmp[0] # tohle je string, tak abych to nemusel znova prevedet, neberu z parsedP
       end
-      inStr += tmp[0] # tohle je string, tak abych to nemusel znova prevedet, neberu z parsedP
     end
 
     # TODO - yatim neimplementuju dostupnost ingredienci

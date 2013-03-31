@@ -14,15 +14,16 @@ FridgeExtendedFilterComponent.prototype.init = function(id, units, quantity, nam
     this.input.value = quantity ? (id + "|" + quantity) : id+"";
 
     this.detailSpan = document.createElement("span");
-    this.detailSpan.innerHTML = quantity ? name + " (" + quantity + " " + units + ")" : name + " (množství neuvedeno)";
-    this.detailSpan.className = "span3";
+    this.detailSpan.innerHTML = quantity ? name + " (" + quantity + " " + units + ")" : name;
+    this.detailSpan.className = "span4";
 
     this.deleteButton = document.createElement("input");
     this.deleteButton.type = "button";
-    this.deleteButton.className = "btn";
+    this.deleteButton.className = "btn pull-right";
     this.deleteButton.value = "Odstranit";
 
     this.component = document.createElement("div");
+    this.component.className = "fridge-ingredience-line";
 
     this.component.appendChild(this.input);
     this.component.appendChild(this.detailSpan);
@@ -32,16 +33,27 @@ FridgeExtendedFilterComponent.prototype.init = function(id, units, quantity, nam
 
     this.component.isIngredience = true;
 
+    this.deleteButton.onmouseover = function() {
+        $(_this.component).addClass("highlight");
+    }
+
+    this.deleteButton.onmouseout = function() {
+        $(_this.component).removeClass("highlight");
+    }
+
     this.component.getId = function() {
         return id;
     }
 
     this.component.addQuantity = function(quantity_appended) {
+        if (quantity_appended === "") {
+            return;
+        }
         if (typeof quantity_appended != "number") {
-            quantity_appended = parseInt(quantity_appended, 10);
+            quantity_appended = parseFloat(quantity_appended);
         }
         var tmp = _this.input.value.split("|");
-        var newQuantity = tmp[1] ? parseInt(tmp[1], 10)+quantity_appended : quantity_appended;
+        var newQuantity = tmp[1] ? parseFloat(tmp[1], 10)+quantity_appended : quantity_appended;
         _this.input.value = id + "|" + newQuantity;
         _this.detailSpan.innerHTML = name + " (" + newQuantity + " " + units + ")";
     }
@@ -89,12 +101,8 @@ var FridgeExtendedFilter = {
             this.newIngredience.options.notAllowed[this.newIngredience.options.notAllowed.length] = tmp[a];
         }
 
-        this.newIngredience.filterInput.onchange = this.reloadList;
-        this.newIngredience.nameSelect.onchange = this.ingredienceChanged;
-        this.newIngredience.addButton.onclick = this.addClicked;
-
         this.reloadList();
-
+        this.ingredienceChanged();
         this.initPrevious();
     },
     reloadList: function() {
@@ -118,11 +126,15 @@ var FridgeExtendedFilter = {
         }
     },
     ingredienceChanged: function() {
-        var data = this.value.split("|");
-
+        var data = FridgeExtendedFilter.newIngredience.nameSelect.component.value.split("|");
         FridgeExtendedFilter.newIngredience.unitsSpan.innerHTML = data[1];
     },
     addClicked: function() {
+        if (FridgeExtendedFilter.newIngredience.quantityInput.value !== "" &&
+            !(FridgeExtendedFilter.newIngredience.quantityInput.value > 0)) {
+            alert("Množství není desetinné číslo > 0.\n(Zkontrolujte, zda jste jako desetinný oddělovač použil(a) čárku)")
+            return;
+        }
         var div = FridgeExtendedFilter.getAddedIngredienceDiv(parseInt(FridgeExtendedFilter.newIngredience.nameSelect.component.value.split("|")[0], 10));
         if (div) {
             div.addQuantity(FridgeExtendedFilter.newIngredience.quantityInput.value);
