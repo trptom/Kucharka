@@ -9,14 +9,11 @@ class Article < ActiveRecord::Base
   attr_accessible :title, :annotation, :content
 
   validates :title,
-    :length => { :minimum => 3, :maximum => 50, :message => "špatná délka titulku (3-50)" },
-  :if => :title
+    :length => { :minimum => 3, :maximum => 50, :message => "špatná délka titulku (3-50)" }
 
   validates :annotation,
-    :length => { :minimum => 50, :maximum => 255, :message => "špatná délka anotace (50-255)" },
-  :if => :annotation
+    :length => { :minimum => 50, :maximum => 255, :message => "špatná délka anotace (50-255)" }
 
   validates :content,
-    :length => { :minimum => 100, :message => "špatná délka obsahu (alespoň 100 znaků)" },
-  :if => :content
+    :length => { :minimum => 100, :message => "špatná délka obsahu (alespoň 100 znaků)" }
 end

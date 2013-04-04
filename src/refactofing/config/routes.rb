@@ -10,6 +10,10 @@ CookBook::Application.routes.draw do
   resources :users do
     member do
       get :activate
+      get :recipes
+      get :articles
+      get :block
+      get :unblock
     end
   end
 
@@ -67,10 +71,6 @@ CookBook::Application.routes.draw do
   match 'my_recipes' => 'users#recipes'
   match 'my_articles' => 'users#articles'
 
-  match 'users/:id/recipes' => 'users#recipes'
-  match 'users/:id/articles' => 'users#articles'
-  match 'users/:id/block' => 'users#block'
-  match 'users/:id/unblock' => 'users#unblock'
   match 'fridge' => 'recipes#fridge'
   match 'filter' => 'recipes#filter'
   match 'search' => 'home#search'

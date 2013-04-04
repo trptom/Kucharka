@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 #one:
-#  user:
+#  ingredience:
 #  recipe:
-#  value: 1
+#  quantity: 1
+#  importance: 1
 #
 #two:
-#  user:
+#  ingredience:
 #  recipe:
-#  value: 1
+#  quantity: 1
+#  importance: 1

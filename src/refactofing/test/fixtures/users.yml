@@ -1,13 +1,24 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  username: MyString
-  email: MyString
-  crypted_password: MyString
-  salt: MyString
+admin:
+  id: 1
+  username: admin
+  email: kucharka-root@email.cz
+  salt: <%= salt = "asdasdastr4325234324sdfds" %>
+  crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt("root", salt) %>
+  activation_state: active
+  active: 1
+  self_ruleset: -1
+  others_ruleset: -1
 
-two:
-  username: MyString
-  email: MyString
-  crypted_password: MyString
-  salt: MyString
+
+one:
+  id: 2
+  username: one
+  email: send-no@email.cz
+  salt: <%= salt = "asdasdastr4325234324sdfds" %>
+  crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt("password", salt) %>
+  activation_state: active
+  active: 1
+  self_ruleset: <%= RULES_SELF_DEFAULT %>
+  others_ruleset: <%= RULES_OTHERS_DEFAULT %>

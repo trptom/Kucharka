@@ -5,7 +5,7 @@ class IngredienceCategory < ActiveRecord::Base
 
   belongs_to :user
 
-  attr_accessible :name, :description, :category_type, :user
+  attr_accessible :name, :description, :category_type, :user, :user_id
 
   validates :name,
     :length => { :minimum => 3, :maximum => 255, :message => "špatná délka názvu (3-255)" },
@@ -17,6 +17,11 @@ class IngredienceCategory < ActiveRecord::Base
   :if => :description
 
   validates :category_type,
-    :numericality => { :only_integer => true, :greater_than_or_equal_to => 0, :message => "chybný věk (musí být v rozmezí 1-100)" },
+    :numericality => { :only_integer => true, :greater_than_or_equal_to => 0, :message => "chybná kategorie (musí být > 0)" },
   :if => :category_type
+
+  validates :user_id,
+    :presence => { :message => "chybný uživatel" },
+    :numericality => { :only_integer => true, :greater_than => 0, :message => "chybný uživatel" }
+  validates :user, :associated => { :message => "chybný uživatel" }
 end

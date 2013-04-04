@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  name: MyString
-  annotation: MyText
-  content: MyText
-  user: 
-
-two:
-  name: MyString
-  annotation: MyText
-  content: MyText
-  user: 
+#one:
+#  name: MyString
+#  annotation: MyText
+#  content: MyText
+#  user:
+#
+#two:
+#  name: MyString
+#  annotation: MyText
+#  content: MyText
+#  user:

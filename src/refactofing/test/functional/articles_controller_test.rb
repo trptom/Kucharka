@@ -2,13 +2,12 @@ require 'test_helper'
 
 class ArticlesControllerTest < ActionController::TestCase
   setup do
-    @article = articles(:one)
+    @article = Article.first
+    login_user users(:admin)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:articles)
+  teardown do
+    logout_user
   end
 
   test "should get new" do
@@ -18,7 +17,15 @@ class ArticlesControllerTest < ActionController::TestCase
 
   test "should create article" do
     assert_difference('Article.count') do
-      post :create, article: { annotation: @article.annotation, content: @article.content, title: @article.title }
+      post :create, article: {
+        annotation: "123456789 123456789 123456789 123456789 123456789 ",
+        content: "
+          123456789 123456789 123456789 123456789 123456789 
+          123456789 123456789 123456789 123456789 123456789 
+          123456789 123456789 123456789 123456789 123456789 
+          123456789 123456789 123456789 123456789 123456789 
+          123456789 123456789 123456789 123456789 123456789 ",
+        title: "test-func"}
     end
 
     assert_redirected_to article_path(assigns(:article))
@@ -35,8 +42,17 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should update article" do
-    put :update, id: @article, article: { annotation: @article.annotation, content: @article.content, title: @article.title }
-    assert_redirected_to article_path(assigns(:article))
+    put :update, id: @article, article: {
+        annotation: "123456789 123456789 123456789 123456789 123456789 new",
+        content: "
+          123456789 123456789 123456789 123456789 123456789 
+          123456789 123456789 123456789 123456789 123456789 
+          123456789 123456789 123456789 123456789 123456789 
+          123456789 123456789 123456789 123456789 123456789 
+          123456789 123456789 123456789 123456789 123456789 new",
+        title: "test-func-new"
+    }
+    assert_redirected_to @article
   end
 
   test "should destroy article" do
@@ -44,6 +60,6 @@ class ArticlesControllerTest < ActionController::TestCase
       delete :destroy, id: @article
     end
 
-    assert_redirected_to articles_path
+    assert_redirected_to "/my_articles"
   end
 end

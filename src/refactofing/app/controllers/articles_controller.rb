@@ -60,6 +60,6 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.destroy
 
-    redirect_to articles_url
+    redirect_to "/my_articles"
   end
 end
