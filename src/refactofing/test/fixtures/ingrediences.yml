@@ -1,15 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-#one:
-#  name: MyString
-#  annotation: MyText
-#  content: MyText
-#  avaliability: 1
-#  user:
-#
-#two:
-#  name: MyString
-#  annotation: MyText
-#  content: MyText
-#  avaliability: 1
-#  user:
+one:
+  name: Cukr
+  annotation: 123456789 123456789 123456789 123456789 123456789x
+  content: 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789x
+  avaliability: 1
+  user_id: 1
+  activation_state: 1
+  units: kg
+
+two:
+  name: Cibule - hlávka
+  annotation: 123456789 123456789 123456789 123456789 123456789x
+  content: 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789x
+  avaliability: 1
+  user_id: 1
+  activation_state: 0
+  units: ks

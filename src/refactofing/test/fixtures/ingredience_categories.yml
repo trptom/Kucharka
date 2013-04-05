@@ -2,7 +2,7 @@
 
 one:
   id: 1
-  name: Prvni ingredience
+  name: Prvni kategorie
   description:
     hustodemonskykrutoprisne dlouhej obsah blablabla blablabla blablabla
     blablabla blablabla blablabla blablabla blablabla blablabla blablabla
@@ -10,7 +10,7 @@ one:
 
 two:
   id: 2
-  name: Druha ingredience
+  name: Druha kategorie
   description:
     hustodemonskykrutoprisne dlouhej obsah blablabla blablabla blablabla
     blablabla blablabla blablabla blablabla blablabla blablabla blablabla

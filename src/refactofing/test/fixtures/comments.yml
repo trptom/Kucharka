@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-#one:
-#  title: MyString
-#  content: MyText
-#  user:
-#  recipe:
-#  ingredience:
-#
-#two:
-#  title: MyString
-#  content: MyText
-#  user:
-#  recipe:
-#  ingredience:
+one:
+  content: MyText
+  comment_type: <%= COMMENT_TYPE['articles'] %>
+  user_id: 1<%#= users(:admin) %>
+  article_id: 1<%#= articles(:one) %>
+
+two:
+  content: MyText
+  comment_type: <%= COMMENT_TYPE['recipes'] %>
+  user_id: 1<%#= users(:admin) %>
+
+three:
+  content: MyText
+  comment_type: <%= COMMENT_TYPE['ingrediences'] %>
+  user_id: 1<%#= users(:admin) %>

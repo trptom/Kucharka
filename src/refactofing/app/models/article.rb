@@ -6,7 +6,7 @@ class Article < ActiveRecord::Base
   has_many :comments
   has_and_belongs_to_many :recipes
 
-  attr_accessible :title, :annotation, :content
+  attr_accessible :title, :annotation, :content, :user_id, :user
 
   validates :title,
     :length => { :minimum => 3, :maximum => 50, :message => "špatná délka titulku (3-50)" }
@@ -16,4 +16,9 @@ class Article < ActiveRecord::Base
 
   validates :content,
     :length => { :minimum => 100, :message => "špatná délka obsahu (alespoň 100 znaků)" }
+
+  validates :user_id,
+    :presence => { :message => "chybný uživatel" },
+    :numericality => { :only_integer => true, :greater_than => 0, :message => "chybný uživatel" }
+  validates :user, :associated => { :message => "chybný uživatel" }
 end

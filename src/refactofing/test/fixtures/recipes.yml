@@ -1,13 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-#one:
-#  name: MyString
-#  annotation: MyText
-#  content: MyText
-#  user:
-#
-#two:
-#  name: MyString
-#  annotation: MyText
-#  content: MyText
-#  user:
+one:
+  name: Recipe 1
+  annotation: 123456789 123456789 123456789 123456789 123456789 123456789 x
+  content:
+    123456789 123456789 123456789 123456789 123456789 123456789 123456789
+    123456789 123456789 123456789 123456789 123456789 123456789 123456789
+  user_id: 1
+
+two:
+  name: Recipe 2
+  annotation: 123456789 123456789 123456789 123456789 123456789 123456789 x
+  content: MyText
+    123456789 123456789 123456789 123456789 123456789 123456789 123456789
+    123456789 123456789 123456789 123456789 123456789 123456789 123456789
+  user_id: 1

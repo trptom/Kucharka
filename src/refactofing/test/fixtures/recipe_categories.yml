@@ -2,12 +2,16 @@
 
 one:
   id: 1
-  name: Prvni ingredience
-  description: hustodemonskykrutoprisne dlouhej obsah blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+  name: Prvni kategorie
+  description:
+    hustodemonskykrutoprisne dlouhej obsah blablabla blablabla blablabla
+    blablabla blablabla blablabla blablabla blablabla blablabla blablabla
   user_id: 1
 
 two:
   id: 2
-  name: Druha ingredience
-  description: hustodemonskykrutoprisne dlouhej obsah blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+  name: Druha kategorie
+  description:
+    hustodemonskykrutoprisne dlouhej obsah blablabla blablabla blablabla
+    blablabla blablabla blablabla blablabla blablabla blablabla blablabla
   user_id: 1

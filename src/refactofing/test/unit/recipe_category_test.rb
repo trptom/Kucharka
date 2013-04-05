@@ -1,15 +1,15 @@
 # coding:utf-8
 
 require 'test_helper'
-require 'ingredience_category'
+require 'recipe_category'
 
-class IngredienceCategoryTest < ActiveSupport::TestCase
+class RecipeCategoryTest < ActiveSupport::TestCase
 
   ##############################################################################
 
   def test_create
     # vychazi z ni ostatni testy, tak abych vedel, ze to pada i bez uprav
-    @newItem = IngredienceCategory.new(
+    @newItem = RecipeCategory.new(
       :name => "test",
       :description => "popisek ingredience o delce alespon 20",
       :category_type => 0,
@@ -18,7 +18,7 @@ class IngredienceCategoryTest < ActiveSupport::TestCase
   end
 
   def test_description_validation
-    @newIngredience = ingredience_categories(:one)
+    @newIngredience = recipe_categories(:one)
 
     @newIngredience.description = ""
     assert(@newIngredience.save, "Pokus o ulozeni prazdneho popisu")
@@ -31,7 +31,7 @@ class IngredienceCategoryTest < ActiveSupport::TestCase
   end
 
   def test_category_validation
-    @newIngredience = ingredience_categories(:one)
+    @newIngredience = recipe_categories(:one)
 
     @newIngredience.category_type = 0
     assert(@newIngredience.save, "Pokus o ulozeni spravne kategorie")
@@ -41,7 +41,7 @@ class IngredienceCategoryTest < ActiveSupport::TestCase
   end
 
   def test_user_validation
-    @newIngredience = ingredience_categories(:one)
+    @newIngredience = recipe_categories(:one)
 
     @newIngredience.user_id = 1
     assert(@newIngredience.save, "Pokus o ulozeni uzivatele s ID 1")
