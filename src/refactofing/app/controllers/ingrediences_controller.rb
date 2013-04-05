@@ -23,11 +23,10 @@ class IngrediencesController < ApplicationController
     @ingredience = Ingredience.find(params[:id])
 
     # seznam komentaru pro clanek
-    @comments = Comment.where(:comment_type => COMMENT_TYPE['ingrediences'], :ingredience_id => @ingredience.id)
+    @comments = Comment.where(:ingredience_id => @ingredience.id)
 
     # entita na pridani noveho komentare
     @comment = Comment.new
-    @comment.comment_type = COMMENT_TYPE['ingrediences']
     @comment.user = current_user
     @comment.ingredience = @ingredience
   end

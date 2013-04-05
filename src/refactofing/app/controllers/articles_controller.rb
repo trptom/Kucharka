@@ -7,11 +7,10 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
 
     # seznam komentaru pro clanek
-    @comments = Comment.where(:comment_type => COMMENT_TYPE['articles'], :article_id => @article.id)
+    @comments = Comment.where(:article_id => @article.id)
 
     # entita na pridani noveho komentare
     @comment = Comment.new
-    @comment.comment_type = COMMENT_TYPE['articles']
     @comment.user = current_user
     @comment.article = @article
   end

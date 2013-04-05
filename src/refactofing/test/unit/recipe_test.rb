@@ -37,10 +37,10 @@ class RecipeTest < ActiveSupport::TestCase
     @item = recipes(:one)
 
     @item.annotation = nil
-    assert(!@item.save, "Pokus o ulozeni null anotace")
+    assert(@item.save, "Pokus o ulozeni null anotace")
 
     @item.annotation = ""
-    assert(!@item.save, "Pokus o ulozeni prazdne anotace")
+    assert(@item.save, "Pokus o ulozeni prazdne anotace")
 
     @item.annotation = "short"
     assert(!@item.save, "Pokus o ulozeni kratke anotace")

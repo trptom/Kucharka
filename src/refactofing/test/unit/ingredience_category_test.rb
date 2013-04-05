@@ -20,6 +20,9 @@ class IngredienceCategoryTest < ActiveSupport::TestCase
   def test_description_validation
     @newIngredience = ingredience_categories(:one)
 
+    @newIngredience.description = nil
+    assert(@newIngredience.save, "Pokus o ulozeni null popisu")
+
     @newIngredience.description = ""
     assert(@newIngredience.save, "Pokus o ulozeni prazdneho popisu")
 
@@ -37,7 +40,10 @@ class IngredienceCategoryTest < ActiveSupport::TestCase
     assert(@newIngredience.save, "Pokus o ulozeni spravne kategorie")
 
     @newIngredience.category_type = -1
-    assert(!@newIngredience.save, "Pokus o ulozeni popisu delky 10")
+    assert(!@newIngredience.save, "Pokus o ulozeni typu kategorie < 0")
+
+    @newIngredience.category_type = nil
+    assert(!@newIngredience.save, "Pokus o ulozeni null typu kategorie")
   end
 
   def test_user_validation

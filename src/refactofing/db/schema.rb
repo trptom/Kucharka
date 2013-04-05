@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130102002000) do
+ActiveRecord::Schema.define(:version => 20130405002001) do
 
   create_table "articles", :force => true do |t|
     t.string   "title",      :null => false
-    t.text     "annotation", :null => false
+    t.text     "annotation"
     t.text     "content",    :null => false
     t.integer  "user_id",    :null => false
     t.datetime "created_at", :null => false
@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(:version => 20130102002000) do
   create_table "comments", :force => true do |t|
     t.text     "content",        :null => false
     t.integer  "user_id",        :null => false
-    t.integer  "comment_type",   :null => false
     t.integer  "recipe_id"
     t.integer  "ingredience_id"
     t.integer  "article_id"
@@ -50,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20130102002000) do
 
   create_table "ingredience_categories", :force => true do |t|
     t.string   "name",                         :null => false
-    t.text     "description",                  :null => false
+    t.text     "description"
     t.integer  "category_type", :default => 0, :null => false
     t.integer  "user_id",                      :null => false
     t.datetime "created_at",                   :null => false
@@ -73,8 +72,8 @@ ActiveRecord::Schema.define(:version => 20130102002000) do
 
   create_table "ingrediences", :force => true do |t|
     t.string   "name",                            :null => false
-    t.text     "annotation",                      :null => false
-    t.text     "content",                         :null => false
+    t.text     "annotation"
+    t.text     "content"
     t.integer  "avaliability",     :default => 1, :null => false
     t.string   "units",                           :null => false
     t.integer  "user_id",                         :null => false
@@ -98,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20130102002000) do
 
   create_table "recipe_categories", :force => true do |t|
     t.string   "name",                         :null => false
-    t.text     "description",                  :null => false
+    t.text     "description"
     t.integer  "category_type", :default => 0, :null => false
     t.integer  "user_id",                      :null => false
     t.datetime "created_at",                   :null => false
@@ -122,7 +121,7 @@ ActiveRecord::Schema.define(:version => 20130102002000) do
 
   create_table "recipes", :force => true do |t|
     t.string   "name",                           :null => false
-    t.text     "annotation",                     :null => false
+    t.text     "annotation"
     t.text     "content",                        :null => false
     t.integer  "level",          :default => 0,  :null => false
     t.integer  "estimated_time", :default => 60, :null => false

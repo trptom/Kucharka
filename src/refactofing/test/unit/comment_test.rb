@@ -9,7 +9,6 @@ class CommentTest < ActiveSupport::TestCase
     # vychazi z ni ostatni testy, tak abych vedel, ze to pada i bez uprav
     @newItem = Comment.new(
       :content => "comment content",
-      :comment_type => COMMENT_TYPE['articles'],
       :user_id => users(:admin).id)
     assert(@newItem.save, "Pokus o ulozeni noveho komentare")
   end

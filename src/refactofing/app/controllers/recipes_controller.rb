@@ -18,11 +18,10 @@ class RecipesController < ApplicationController
     end
 
     # seznam komentaru pto recept
-    @comments = Comment.where(:comment_type => COMMENT_TYPE['recipes'], :recipe_id => @recipe.id)
+    @comments = Comment.where(:recipe_id => @recipe.id)
 
     # entita na pridani noveho komentare
     @comment = Comment.new
-    @comment.comment_type = COMMENT_TYPE['recipes']
     @comment.user = current_user
     @comment.recipe = @recipe
 

@@ -12,7 +12,9 @@ class Article < ActiveRecord::Base
     :length => { :minimum => 3, :maximum => 50, :message => "špatná délka titulku (3-50)" }
 
   validates :annotation,
-    :length => { :minimum => 50, :maximum => 255, :message => "špatná délka anotace (50-255)" }
+    :length => { :minimum => 50, :maximum => 255, :message => "špatná délka anotace (50-255)" },
+    :allow_blank => true,
+    :allow_nil => true
 
   validates :content,
     :length => { :minimum => 100, :message => "špatná délka obsahu (alespoň 100 znaků)" }
