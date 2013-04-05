@@ -1,6 +1,7 @@
 # coding:utf-8
 
 require 'cgi'
+include RecipesHelper
 
 class RecipesController < ApplicationController
   before_filter :user_rights_filter
@@ -236,7 +237,9 @@ class RecipesController < ApplicationController
     @ingrediences[:accepted] = Ingredience.where(:activation_state => 1).order(:name).all
     @ingrediences[:not_accepted] = Ingredience.where(:activation_state => 0).order(:name).all
 
-    @recipes = get_recipes_by_fridge(params)
+    @fridge_result = get_recipes_by_fridge(params)
+    @recipes = @fridge_result[:recipes]
+    @badges = @fridge_result[:badges]
   end
 
   def filter

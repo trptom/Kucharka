@@ -5,7 +5,10 @@
       <div class="spacer">
         <%= get_thumb_icon(recipe) %>
         <h5>
-          <%= recipe.name %> -
+          <%= recipe.name %>
+          <% if @badges && @badges[recipe.id] %>
+            <span class="badge <%= @badges[recipe.id]['class'] %>"><%= @badges[recipe.id]['title'] %></span>
+          <% end %>-
           <%= link_to recipe.user.username, user_path(recipe.user) %> -
           <%= recipe.created_at %>
         </h5>

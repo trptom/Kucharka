@@ -27,14 +27,20 @@ module RecipesHelper
     return mark != nil ? mark.to_s : "žádné";
   end
 
-  def get_recipe_koef_for_fridge(recipe, p, ingrediences)
+  def get_recipe_koef_for_fridge(recipe, p)
     koef = 0.0;
     sum = 0.0;
+    # pokud nemam u receptu zadne ingredience, vrati se mi s nejnizsim moznym
+    # vysledkem tak, aby byl zahrnut do vysledku, ale az na posledni pozici
+    if recipe.ingredienceRecipeConnectors.length == 0
+      return MIN_KOEF_FOR_FRIDGE_RESULT
+    end
+    # pokud ingredience mam, pocitam
     for recipe_ingredience in recipe.ingredienceRecipeConnectors
       sum += recipe_ingredience.importance
       for ingredience in p
         if (ingredience[:id] == recipe_ingredience.ingredience_id)
-          koef += [1, (ingredience[:quantity] ? ingredience[:quantity]/recipe_ingredience.quantity : 1)].min * recipe_ingredience.importance
+          koef += [1, ingredience[:quantity] ? (ingredience[:quantity]/recipe_ingredience.quantity) : 1].min * recipe_ingredience.importance
         end
       end
     end
@@ -129,7 +135,7 @@ module RecipesHelper
     if p[:ingrediences]
       for str in p[:ingrediences].each
         tmp = str.split("|");
-        parsedP << { :id => tmp[0].to_i, :quantity => tmp[1].to_f }
+        parsedP << { :id => tmp[0].to_i, :quantity => tmp[1] ? tmp[1].to_f : nil }
         if (inStr != "")
           inStr += ","
         end
@@ -144,14 +150,15 @@ module RecipesHelper
     # pocitani koeficienu
     list = Array.new
     for recipe in recipes
-      koef = get_recipe_koef_for_fridge(recipe, parsedP, nil)
-      if (koef >= 0.5)
+      koef = get_recipe_koef_for_fridge(recipe, parsedP)
+      if (koef >= MIN_KOEF_FOR_FRIDGE_RESULT)
         list << { :recipe => recipe, :koef => koef}
       end
     end
 
     #razeni
     ret = Array.new
+    badges = Hash.new
     while list.length > 0
       max_item = nil
       for item in list
@@ -159,10 +166,24 @@ module RecipesHelper
           max_item = item
         end
       end
+      badges[max_item[:recipe].id] = Hash.new
+      if max_item[:koef] > 0.9
+        badges[max_item[:recipe].id]['class'] = "badge-success"
+        badges[max_item[:recipe].id]['title'] = "doporučujeme"
+      else if max_item[:koef] > 0.8
+        badges[max_item[:recipe].id]['class'] = nil
+        badges[max_item[:recipe].id]['title'] = "možná uvaříte"
+      else if max_item[:koef] > 0.6
+        badges[max_item[:recipe].id]['class'] = "badge-waring"
+        badges[max_item[:recipe].id]['title'] = "s drobným nákupem"
+      else
+        badges[max_item[:recipe].id]['class'] = "badge-important"
+        badges[max_item[:recipe].id]['title'] = "něco vám chybí"
+      end end end
       ret << max_item[:recipe]
       list.delete(max_item)
     end
 
-    return ret
+    return { :recipes => ret, :badges => badges }
   end
 end

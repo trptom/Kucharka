@@ -30,3 +30,6 @@ COMMENT_TYPE_TEXT[COMMENT_TYPE['users']] = "uživatel"
 COMMENT_TYPE_TEXT[COMMENT_TYPE['recipes']] = "recept"
 COMMENT_TYPE_TEXT[COMMENT_TYPE['ingrediences']] = "ingredience"
 COMMENT_TYPE_TEXT[COMMENT_TYPE['articles']] = "článek"
+
+# lednicka
+MIN_KOEF_FOR_FRIDGE_RESULT = 0.5

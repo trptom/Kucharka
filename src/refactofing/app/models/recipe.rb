@@ -1,6 +1,8 @@
 # coding:utf-8
 
 class Recipe < ActiveRecord::Base
+  @badge = nil
+
   belongs_to :user
 
   has_many :comments
