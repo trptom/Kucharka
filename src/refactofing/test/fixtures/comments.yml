@@ -1,14 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  id: 1
   content: MyText
   user_id: 1<%#= users(:admin) %>
   article_id: 1<%#= articles(:one) %>
 
 two:
+  id: 2
   content: MyText
   user_id: 1<%#= users(:admin) %>
 
 three:
+  id: 3
   content: MyText
   user_id: 1<%#= users(:admin) %>

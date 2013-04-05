@@ -3,6 +3,7 @@ require 'test_helper'
 class RecipeCategoriesControllerTest < ActionController::TestCase
   setup do
     @recipe_category = recipe_categories(:one)
+    login_user users(:admin)
   end
 
   test "should get index" do

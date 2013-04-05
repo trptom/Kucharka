@@ -2,41 +2,21 @@ require 'test_helper'
 
 class CommentsControllerTest < ActionController::TestCase
   setup do
+    request.env["HTTP_REFERER"] = "some_page_i_came_from"
     @comment = comments(:one)
-  end
-
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:comments)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
+    login_user users(:admin)
   end
 
   test "should create comment" do
     assert_difference('Comment.count') do
-      post :create, comment: { content: @comment.content, title: @comment.title }
+      post :create, comment: {
+        content: "nejaky obsah o delce alespon 50 znaku 123456789 123456789 123456789",
+        user_id: users(:admin).id,
+        article_id: articles(:one)
+      }
     end
 
-    assert_redirected_to comment_path(assigns(:comment))
-  end
-
-  test "should show comment" do
-    get :show, id: @comment
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @comment
-    assert_response :success
-  end
-
-  test "should update comment" do
-    put :update, id: @comment, comment: { content: @comment.content, title: @comment.title }
-    assert_redirected_to comment_path(assigns(:comment))
+    assert_redirected_to "some_page_i_came_from"
   end
 
   test "should destroy comment" do
@@ -44,6 +24,6 @@ class CommentsControllerTest < ActionController::TestCase
       delete :destroy, id: @comment
     end
 
-    assert_redirected_to comments_path
+    assert_redirected_to "some_page_i_came_from"
   end
 end

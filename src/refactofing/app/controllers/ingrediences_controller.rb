@@ -73,25 +73,4 @@ class IngrediencesController < ApplicationController
 
     redirect_to ingrediences_url
   end
-
-  def new_request
-    @ingredience = Ingredience.new
-    @ingredience.name = params[:name]
-    @ingredience.units = params[:units]
-    @ingredience.annotation = params[:annotation]
-    @ingredience.content = params[:content]
-    @ingredience.user = current_user
-
-    if @ingredience.save
-      @msg = "true"
-    else
-      @msg = "false"
-    end
-
-    redirect_to "/home/plain_message", notice: @msg
-  end
-
-  def plain_list
-    @ingrediences = Ingredience.order(:name).all
-  end
 end

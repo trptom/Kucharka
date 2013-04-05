@@ -3,19 +3,18 @@
 class MarksController < ApplicationController
   before_filter :user_rights_filter
 
-  # GET /marks
-  # GET /marks.json
   def index
     @marks = Mark.all
   end
 
   def create
-    @mark = Mark.where(:recipe_id => params["recipe"]).where(:user_id => current_user.id).first;
+    @recipe = Recipe.find(params["recipe"])
+    @mark = @recipe.marks.where(:user_id => current_user.id).first;
     
-    if (@mark == nil)
+    if !@mark
       @mark = Mark.new
-      @mark.recipe_id = params["recipe"].to_i
-      @mark.user_id = current_user.id
+      @mark.recipe = @recipe
+      @mark.user = current_user
       @mark.value = params["value"].to_i
       @mark.save
     else
@@ -32,10 +31,10 @@ class MarksController < ApplicationController
         render json: @res
       }
     end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to "/home/error"#, notice: "Recept s daným ID neexistuje"
   end
 
-  # DELETE /marks/1
-  # DELETE /marks/1.json
   def destroy
     @mark = Mark.find(params[:id])
     @recipe = @mark.recipe

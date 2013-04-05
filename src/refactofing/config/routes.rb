@@ -38,7 +38,6 @@ CookBook::Application.routes.draw do
   resources :ingrediences do
     collection do
       get "new_request"
-      get "plain_list"
     end
   end
 
@@ -50,7 +49,6 @@ CookBook::Application.routes.draw do
   get "home/search"
   get "home/success"
   get "home/error"
-  get "home/plain_message"
   get "index/home"
 
   # user sessions

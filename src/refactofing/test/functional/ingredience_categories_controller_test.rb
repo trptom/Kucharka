@@ -3,6 +3,7 @@ require 'test_helper'
 class IngredienceCategoriesControllerTest < ActionController::TestCase
   setup do
     @ingredience_category = ingredience_categories(:one)
+    login_user users(:admin)
   end
 
   test "should get index" do

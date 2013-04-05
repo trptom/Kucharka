@@ -12,8 +12,8 @@
 <% @marks.each do |mark| %>
   <tr>
     <td><%= mark.id %></td>
-    <td><%= mark.user.username %></td>
-    <td><%= mark.recipe.name %></td>
+    <td><%= link_to mark.user.username, mark.user %></td>
+    <td><%= link_to mark.recipe.name, mark.recipe %></td>
     <td><%= mark.value %></td>
     <td><%= link_to 'Destroy', 'marks/destroy?id='+mark.id.to_s, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
