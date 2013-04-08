@@ -6,10 +6,6 @@ include RecipesHelper
 class RecipesController < ApplicationController
   before_filter :user_rights_filter
 
-  def index
-    @recipes = Recipe.all
-  end
-
   def show
     @recipe = Recipe.find(params[:id])
 
@@ -77,23 +73,23 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @recipe.destroy
 
-    redirect_to "/"
+    redirect_to "/my_recipes"
   end
 
   def add_ingredience
     @recipe = Recipe.find(params[:id])
 
-    if params[:importance] && params[:quantity] && params[:ingredience]
+    if params[:importance] && params[:quantity] && params[:quantity].to_f > 0 && params[:ingredience]
       if @recipe.ingrediences.where(:id => params[:ingredience]).length == 0
         @new_item = IngredienceRecipeConnector.new
         @new_item.importance = params[:importance].to_i
-        @new_item.quantity = params[:quantity].to_i
+        @new_item.quantity = params[:quantity].to_f
         @new_item.recipe = @recipe
         @new_item.ingredience_id = params[:ingredience]
         @new_item.save
       else
         @item = @recipe.ingredienceRecipeConnectors.where(:ingredience_id => params[:ingredience]).first
-        @item.quantity += params[:quantity].to_i
+        @item.quantity += params[:quantity].to_f
         @item.importance = params[:importance].to_i
         @item.save
       end
@@ -158,7 +154,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
 
     if params[:subrecipe]
-      @tmp = params[:subrecipe].split(/http.?\:\/\/[^\/]+\/recipes\//)
+      @tmp = params[:subrecipe].split(/http.?\:\/\/[^\/]+\/recipes?\//)
       if @tmp.length == 2
         @msg = @tmp
         @id = @tmp[1].to_i
@@ -198,7 +194,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
 
     if params[:article]
-      @tmp = params[:article].split(/http.?\:\/\/[^\/]+\/articles\//)
+      @tmp = params[:article].split(/http.?\:\/\/[^\/]+\/articles?\//)
       if @tmp.length == 2
         @msg = @tmp
         @id = @tmp[1].to_i
@@ -237,8 +233,8 @@ class RecipesController < ApplicationController
     @ingrediences[:not_accepted] = Ingredience.where(:activation_state => 0).order(:name).all
 
     @fridge_result = get_recipes_by_fridge(params)
-    @recipes = @fridge_result[:recipes]
-    @badges = @fridge_result[:badges]
+    @recipes = @fridge_result ? @fridge_result[:recipes] : []
+    @badges = @fridge_result ? @fridge_result[:badges] : []
   end
 
   def filter
@@ -247,9 +243,5 @@ class RecipesController < ApplicationController
 
   def newest
     @recipes = Recipe.get_recipes_sorted_by_date(params[:count] == nil ? 10 : params[:count].to_i)
-  end
-
-  def search
-    
   end
 end

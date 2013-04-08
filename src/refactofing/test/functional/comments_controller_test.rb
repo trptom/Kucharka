@@ -7,7 +7,11 @@ class CommentsControllerTest < ActionController::TestCase
     login_user users(:admin)
   end
 
-  test "should create comment" do
+  teardown do
+    logout_user
+  end
+
+  test "create" do
     assert_difference('Comment.count') do
       post :create, comment: {
         content: "nejaky obsah o delce alespon 50 znaku 123456789 123456789 123456789",
@@ -19,7 +23,7 @@ class CommentsControllerTest < ActionController::TestCase
     assert_redirected_to "some_page_i_came_from"
   end
 
-  test "should destroy comment" do
+  test "destroy" do
     assert_difference('Comment.count', -1) do
       delete :destroy, id: @comment
     end

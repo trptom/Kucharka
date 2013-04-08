@@ -18,10 +18,6 @@ module RecipesHelper
     return count > 0 ? (sum/count).round(1) : nil;
   end
 
-  def xxx
-    
-  end
-
   def get_mark_str(recipe)
     mark = get_mark(recipe);
     return mark != nil ? mark.to_s : "žádné";

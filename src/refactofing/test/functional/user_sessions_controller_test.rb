@@ -1,19 +1,25 @@
 require 'test_helper'
 
 class UserSessionsControllerTest < ActionController::TestCase
-  test "should get new" do
-    get :new
-    assert_response :success
+
+  test "should create" do
+    post :create, username: "admin", password: "root"
+    assert_redirected_to "/"
   end
 
-  test "should get create" do
-    get :create
-    assert_response :success
+  test "should destroy" do
+    login_user users(:admin)
+
+    post :destroy
+    assert_redirected_to "/"
+
+    logout_user
   end
 
-  test "should get destroy" do
-    get :destroy
-    assert_response :success
+  test "create without params" do
+    # melo bz vratit home/error, ne spadnout
+    post :create
+    assert_redirected_to "/home/error"
   end
 
 end

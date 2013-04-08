@@ -6,18 +6,22 @@ class RecipeCategoriesControllerTest < ActionController::TestCase
     login_user users(:admin)
   end
 
-  test "should get index" do
+  teardown do
+    logout_user
+  end
+
+  test "index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:recipe_categories)
   end
 
-  test "should get new" do
+  test "new" do
     get :new
     assert_response :success
   end
 
-  test "should create recipe_category" do
+  test "create" do
     assert_difference('RecipeCategory.count') do
       post :create, recipe_category: { description: @recipe_category.description, name: @recipe_category.name }
     end
@@ -25,22 +29,22 @@ class RecipeCategoriesControllerTest < ActionController::TestCase
     assert_redirected_to recipe_category_path(assigns(:recipe_category))
   end
 
-  test "should show recipe_category" do
+  test "show" do
     get :show, id: @recipe_category
     assert_response :success
   end
 
-  test "should get edit" do
+  test "edit" do
     get :edit, id: @recipe_category
     assert_response :success
   end
 
-  test "should update recipe_category" do
+  test "update" do
     put :update, id: @recipe_category, recipe_category: { description: @recipe_category.description, name: @recipe_category.name }
     assert_redirected_to recipe_category_path(assigns(:recipe_category))
   end
 
-  test "should destroy recipe_category" do
+  test "destroy" do
     assert_difference('RecipeCategory.count', -1) do
       delete :destroy, id: @recipe_category
     end

@@ -15,3 +15,10 @@ two:
     hustodemonskykrutoprisne dlouhej obsah blablabla blablabla blablabla
     blablabla blablabla blablabla blablabla blablabla blablabla blablabla
   user_id: 1
+
+nowhere_used:
+  name: Nepouzita kategorie
+  description:
+    hustodemonskykrutoprisne dlouhej obsah blablabla blablabla blablabla
+    blablabla blablabla blablabla blablabla blablabla blablabla blablabla
+  user_id: 1

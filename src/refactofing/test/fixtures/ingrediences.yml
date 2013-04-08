@@ -19,3 +19,11 @@ two:
   user_id: 1
   activation_state: 0
   units: ks
+
+nowhere_used:
+  name: WeardIngredience
+  content: 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789x
+  avaliability: 1
+  user_id: 1
+  activation_state: 0
+  units: ks

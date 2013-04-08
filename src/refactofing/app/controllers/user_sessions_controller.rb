@@ -1,15 +1,12 @@
 # coding:utf-8
 
 class UserSessionsController < ApplicationController
-  skip_before_filter :require_login, :except => [:destroy]
-
-  def new
-    @user = User.new
-  end
+  before_filter :require_login, :only => [:destroy]
 
   def create
     respond_to do |format|
-      if @user = login(params[:username],params[:password])
+      if params[:username] && params[:password] &&
+          @user = login(params[:username],params[:password])
         format.html { redirect_back_or_to("/", :notice => 'Pčihlašování proběhlo úspěšně.') }
         format.xml { render :xml => @user, :status => :created, :location => @user }
       else

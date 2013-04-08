@@ -10,12 +10,12 @@ class ArticlesControllerTest < ActionController::TestCase
     logout_user
   end
 
-  test "should get new" do
+  test "new" do
     get :new
     assert_response :success
   end
 
-  test "should create article" do
+  test "create" do
     assert_difference('Article.count') do
       post :create, article: {
         annotation: "123456789 123456789 123456789 123456789 123456789 ",
@@ -31,17 +31,17 @@ class ArticlesControllerTest < ActionController::TestCase
     assert_redirected_to article_path(assigns(:article))
   end
 
-  test "should show article" do
+  test "show" do
     get :show, id: @article
     assert_response :success
   end
 
-  test "should get edit" do
+  test "edit" do
     get :edit, id: @article
     assert_response :success
   end
 
-  test "should update article" do
+  test "update" do
     put :update, id: @article, article: {
         annotation: "123456789 123456789 123456789 123456789 123456789 new",
         content: "
@@ -55,7 +55,7 @@ class ArticlesControllerTest < ActionController::TestCase
     assert_redirected_to @article
   end
 
-  test "should destroy article" do
+  test "destroy" do
     assert_difference('Article.count', -1) do
       delete :destroy, id: @article
     end
