@@ -1,21 +1,26 @@
-<h1>Listing marks</h1>
+<div class="span10 offset1">
+  <div class="well">
+    <h2>Seznam známek</h2>
+    <table class="table table-hower spacer">
+      <tr>
+        <th>ID</th>
+        <th>Uživatel</th>
+        <th>Recept</th>
+        <th>Hodnota</th>
+        <th>Akce</th>
+      </tr>
 
-<table>
-  <tr>
-    <th>ID</th>
-    <th>User</th>
-    <th>Recipe</th>
-    <th>Value</th>
-    <th></th>
-  </tr>
-
-<% @marks.each do |mark| %>
-  <tr>
-    <td><%= mark.id %></td>
-    <td><%= link_to mark.user.username, mark.user %></td>
-    <td><%= link_to mark.recipe.name, mark.recipe %></td>
-    <td><%= mark.value %></td>
-    <td><%= link_to 'Destroy', 'marks/destroy?id='+mark.id.to_s, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+      <% @marks.each do |mark| %>
+        <tr>
+          <td><%= mark.id %></td>
+          <td><%= link_to mark.user.username, mark.user %></td>
+          <td><%= link_to mark.recipe.name, mark.recipe %></td>
+          <td><%= mark.value %></td>
+          <td>
+            <%= link_to 'Smazat', 'marks/destroy?id='+mark.id.to_s, method: :delete, data: { confirm: 'Jste si jistý(á)?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

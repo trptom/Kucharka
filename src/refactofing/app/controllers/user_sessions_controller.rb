@@ -3,11 +3,15 @@
 class UserSessionsController < ApplicationController
   before_filter :require_login, :only => [:destroy]
 
+  def new
+    @user = User.new
+  end
+
   def create
     respond_to do |format|
       if params[:username] && params[:password] &&
           @user = login(params[:username],params[:password])
-        format.html { redirect_back_or_to("/", :notice => 'Pčihlašování proběhlo úspěšně.') }
+        format.html { redirect_to("/", :notice => 'Prihlašování proběhlo úspěšně.') }
         format.xml { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { redirect_to( "/home/error", :notice => "Přihlašování selhalo.") }
@@ -18,6 +22,6 @@ class UserSessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to( "/", :notice => 'Logged out!')
+    redirect_to( "/", :notice => 'Uživatel byl úspěšne odhlášen!')
   end
 end
