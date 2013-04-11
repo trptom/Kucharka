@@ -52,7 +52,6 @@ CookBook::Application.routes.draw do
   get "index/home"
 
   # user sessions
-  get "user_sessions/new"
   get "user_sessions/create"
   get "user_sessions/destroy"
 
@@ -62,7 +61,7 @@ CookBook::Application.routes.draw do
   get "marks/destroy"
 
   #mapping
-  match 'login' => 'user_sessions#new', :as => :login
+  match 'login' => 'user_sessions#create', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
 
   match 'my_profile' => 'users#show'
