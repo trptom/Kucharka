@@ -69,12 +69,23 @@ class RecipesControllerTest < ActionController::TestCase
     @connector.save
 
     assert_difference('IngredienceRecipeConnector.count', 0) do
-      get :add_ingredience, id: @connector.recipe_id, ingredience: @connector.ingredience_id, quantity: 10, importance: 1
+      get :add_ingredience, id: @connector.recipe_id, ingredience: @connector.ingredience_id, quantity: "1.1", importance: 1
     end
     
     # musim nacist znova, protoze activerecord neaktualizuje automaticky hodnoty z DB
     @connector = IngredienceRecipeConnector.find(@connector.id)
-    assert @connector.quantity == 11
+    assert @connector.quantity == 2.1
+
+    assert_redirected_to @recipe
+
+    # jeste to vyskousim pro des. cislo s carkou
+    assert_difference('IngredienceRecipeConnector.count', 0) do
+      get :add_ingredience, id: @connector.recipe_id, ingredience: @connector.ingredience_id, quantity: "1,1", importance: 1
+    end
+
+    # musim nacist znova, protoze activerecord neaktualizuje automaticky hodnoty z DB
+    @connector = IngredienceRecipeConnector.find(@connector.id)
+    assert @connector.quantity == 3.2
 
     assert_redirected_to @recipe
   end

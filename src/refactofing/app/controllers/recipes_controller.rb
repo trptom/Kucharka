@@ -78,6 +78,7 @@ class RecipesController < ApplicationController
 
   def add_ingredience
     @recipe = Recipe.find(params[:id])
+    params[:quantity] = params[:quantity].gsub ",", "."
 
     if params[:importance] && params[:quantity] && params[:quantity].to_f > 0 && params[:ingredience]
       if @recipe.ingrediences.where(:id => params[:ingredience]).length == 0
