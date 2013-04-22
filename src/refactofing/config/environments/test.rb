@@ -34,4 +34,10 @@ CookBook::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Webrat
+  require "webrat"
+  Webrat.configure do |config|
+    config.mode = :rails
+  end
 end

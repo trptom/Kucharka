@@ -20,3 +20,6 @@ LEVEL_CLASS[5] = "badge-inverse";
 
 # lednicka
 MIN_KOEF_FOR_FRIDGE_RESULT = 0.5
+
+# search
+MAX_SEARCH_RESULTS = 100 # maximalni pocet vysledku kledani pro dany typ (clanek / recept)

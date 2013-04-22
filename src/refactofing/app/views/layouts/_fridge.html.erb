@@ -1,4 +1,4 @@
-<div id="lednicka" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mylednicka" aria-hidden="true">
+<div id="lednicka" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3>Lednička</h3>
@@ -29,7 +29,7 @@
         <button class="btn" id="fridge_button-remove" type="button" onclick="Fridge.removeSelected()">Odebrat ingredience</button>
       </div>
     </div>
-    <legend class="spacer"></legend>
+    <hr />
     <form action="/fridge" method="get" onsubmit="return Fridge.validate()">
       <div id="fridge_hidden" class="hidden"></div>
       <button id="fridge_button-submit" class="btn">Vyhledat recept</button>

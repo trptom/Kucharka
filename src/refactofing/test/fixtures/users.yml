@@ -7,7 +7,7 @@ admin:
   salt: <%= salt = "asdasdastr4325234324sdfds" %>
   crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt("root", salt) %>
   activation_state: active
-  active: 1
+  active: true
   self_ruleset: -1
   others_ruleset: -1
 
@@ -19,6 +19,6 @@ one:
   salt: <%= salt = "asdasdastr4325234324sdfds" %>
   crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt("password", salt) %>
   activation_state: active
-  active: 1
+  active: true
   self_ruleset: <%= RULES_SELF_DEFAULT %>
   others_ruleset: <%= RULES_OTHERS_DEFAULT %>

@@ -7,7 +7,7 @@ gem 'rails', '3.2.8'
 
 #databaze - na produkci je postgreSQL, na vyvoji SQLite
 gem 'pg'
-gem 'sqlite3'
+#gem 'sqlite3'
 # autentizace
 gem 'sorcery'
 # uploading obrazku

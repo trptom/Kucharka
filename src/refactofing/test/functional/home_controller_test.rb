@@ -31,12 +31,22 @@ class HomeControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "search with no resilts" do
+  test "search with no results" do
     get :search, search_query: "somestringwhichshouldntbefoundindatabase";
     @articles = assigns :articles
     @recipes = assigns :recipes
     assert_equal(0, @articles.count)
     assert_equal(0, @recipes.count)
+    assert_response :success
+  end
+
+  test "search with empty string" do
+    get :search, search_query: "" # mam pripravene vysledky ve fixtures - melo by najit 1 clanek a 1 recept
+    @articles = assigns :articles
+    @recipes = assigns :recipes
+    assert_equal(0, @articles.count) # nemelo by nejit nic - neplatny vyraz
+    assert_equal(0, @recipes.count)
+
     assert_response :success
   end
 

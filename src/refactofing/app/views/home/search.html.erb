@@ -20,7 +20,7 @@
     <% else # recipes.length == 0 %>
       <div class="spacer">
         <h5>
-          Žádné recepty
+          <%= @recipes_note ? @recipes_note : "Žádné recepty" %>
         </h5>
       </div>
     <% end %>
@@ -42,7 +42,7 @@
     <% else # articles.length == 0 %>
       <div class="spacer">
         <h5>
-          Žádné články
+          <%= @articles_note ? @articles_note : "Žádné články" %>
         </h5>
       </div>
     <% end %>

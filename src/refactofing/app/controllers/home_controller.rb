@@ -13,6 +13,15 @@ class HomeController < ApplicationController
   def search
     @recipes = get_recipes_by_search(params);
     @articles = get_articles_by_search(params);
+
+    if @recipes.is_a? String
+      @recipes_note = @recipes
+      @recipes = Array.new
+    end
+    if @articles.is_a? String
+      @articles_note = @articles
+      @articles = Array.new
+    end
   end
 
   def error
