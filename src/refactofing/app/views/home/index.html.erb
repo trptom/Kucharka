@@ -8,8 +8,10 @@
     <div class="span4 well">
       <h3>Nejnovější recepty</h3>
       <% @newest.each do |item| %>
-        <div class="spacer">
-          <%= get_thumb_icon(item) %>
+        <div class="spacer well">
+          <div class="pull-left">
+            <%= get_thumb_icon(item) %>
+          </div>
           <h5><%= item.name %></h5>
           <p><%= item.annotation %></p>
           <p>Přidáno: <%= l item.created_at %><%#= t :hello %></p>
@@ -21,8 +23,10 @@
     <div class="span4 well">
       <h3>Náhodné recepty</h3>
       <% @random.each do |item| %>
-        <div class="spacer">
-          <%= get_thumb_icon(item) %>
+        <div class="spacer well">
+          <div class="pull-left">
+            <%= get_thumb_icon(item) %>
+          </div>
           <h5><%= item.name %></h5>
           <p><%= item.annotation %></p>
           <%= link_to "Zobrazit recept", recipe_path(item.id) %>
@@ -33,11 +37,13 @@
     <div class="span4 well">
       <h3>Nejlepší recepty</h3>
       <% @best.each do |item| %>
-        <div class="spacer">
-          <%= get_thumb_icon(item) %>
+        <div class="spacer well">
+          <div class="pull-left">
+            <%= get_thumb_icon(item) %>
+          </div>
           <h5><%= item.name %></h5>
           <p><%= item.annotation %></p>
-          <p>Známka: <%= item.avg_value %></p>
+          <p>Známka: <%= item.avg_value.to_f.round(1).to_s %></p>
           <%= link_to "Zobrazit recept", recipe_path(item.id) %>
         </div>
       <% end %>
