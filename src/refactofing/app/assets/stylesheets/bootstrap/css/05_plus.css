@@ -48,3 +48,8 @@ body {
 .fridge-ingredience-line.highlight {
     font-weight: bold;
 }
+
+.well.active:hover {
+    background-color: #dddddd;
+    cursor: pointer;
+}

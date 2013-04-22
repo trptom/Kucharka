@@ -16,7 +16,7 @@ class Ingredience < ActiveRecord::Base
     :uniqueness => { :case_sensitive => false, :message => "ingredience s daným názvem již existuje" }
 
   validates :annotation,
-    :length => { :minimum => 50, :maximum => 255, :message => "špatná délka anotace (50-255)" },
+    :length => { :minimum => 50, :maximum => 255, :message => "špatná délka stručného popisu (prázdné nebo 50-255 znaků)" },
     :allow_blank => true,
     :allow_nil => true
 

@@ -1,5 +1,5 @@
 <li style="margin-right: 10px;">
-    <button id="d1" class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Uživatel <span class="caret"></span></button>
+    <button id="d1" class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <%= current_user.username %> <span class="caret"></span></button>
     <ul class="dropdown-menu" aria-labelledby="d1">
         <li>
           <% if users_filter("show", nil) %>
@@ -32,7 +32,7 @@
           </li>
           <li>
             <% if show_list_marks %>
-              <%= link_to "Známky", "/marks" %>
+              <%= link_to "Hodnocení", "/marks" %>
             <% end %>
           </li>
           <li>

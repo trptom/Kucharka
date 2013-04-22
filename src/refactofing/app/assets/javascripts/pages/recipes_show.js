@@ -41,7 +41,7 @@ var RecipeMark = {
                 }
             },
             error: function() {
-                alert("Známku se nepodeřilo odeslat (AJAX chyba)!");
+                alert("Hodnocení se nepodeřilo odeslat (AJAX chyba)!");
             }
         });
     }

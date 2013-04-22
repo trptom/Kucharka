@@ -60,7 +60,7 @@
       <legend>Podat žádost na ingredienci</legend>
       <input id="ingredience_request_name" type="text" placeholder="Název" />
       <input id="ingredience_request_units" type="text" placeholder="Jednotky" />
-      <label>Anotace</label>
+      <label>Stručný popis</label>
       <textarea id="ingredience_request_annotation" cols="" rows="3" class="input-block-level"></textarea>
       <label>Popis</label>
       <textarea id="ingredience_request_content" cols="" rows="5" class="input-block-level"></textarea>
@@ -184,7 +184,7 @@
 
       <label></label>
 
-      <%#= marks_filter("delete", nil, @my_mark) ? button_to("Smazat mojí známku", "/marks/destroy?id="+@my_mark.id.to_s, { :method => :get, :id => "recipe_delete_mark", :class => "btn" + (@my_mark ? "" : " hidden")}) : nil %>
+      <%#= marks_filter("delete", nil, @my_mark) ? button_to("Smazat moje hodnocení", "/marks/destroy?id="+@my_mark.id.to_s, { :method => :get, :id => "recipe_delete_mark", :class => "btn" + (@my_mark ? "" : " hidden")}) : nil %>
       <%= recipes_filter("edit", nil, @recipe) ? button_to("Upravit recept", { :controller => "recipes", :action => "edit", :id => @recipe.id}, { :method => :get, :class => "btn"}) : nil %>
     </div>
 

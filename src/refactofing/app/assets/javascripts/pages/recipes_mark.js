@@ -22,12 +22,12 @@ var Mark = new function() {
                 Mark.markSpan2.innerHTML = tmp[2];
             }
         } else {
-            alert("Známku se nepodařilo přidat!");
+            alert("Hodnocení se nepodařilo přidat!");
         }
     }
 
     this.onError = function(request) {
-        alert("Známku se nepodařilo přidat (AJAX chyba)!");
+        alert("Hodnocení se nepodařilo přidat (AJAX chyba)!");
     }
 }
 

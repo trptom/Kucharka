@@ -1,4 +1,4 @@
-<div class="span10 offset1">
+<div class="span10 offset1 home-index">
   <div class="well">
     <h2>Vítejte</h2>
     <p>On-line aplikace <strong>Kuchařka</strong> slouží ke sdílení a vyhledávání receptů. Jejím cílem je tyto činnosti co nejvíce zjednodušit svou přehledností. Díky funkci <strong>Lednička</strong> lze recepty vyhledávat i podle toho, jaké suroviny máte zrovna k dispozici.</p>
@@ -8,14 +8,15 @@
     <div class="span4 well">
       <h3>Nejnovější recepty</h3>
       <% @newest.each do |item| %>
-        <div class="spacer well">
-          <div class="pull-left">
+        <div class="spacer well active" onclick="window.location = '<%= recipe_path(item.id) %>'">
+          <div class="span3">
             <%= get_thumb_icon(item) %>
           </div>
-          <h5><%= item.name %></h5>
-          <p><%= item.annotation %></p>
-          <p>Přidáno: <%= l item.created_at %><%#= t :hello %></p>
-          <%= link_to "Zobrazit recept", recipe_path(item.id) %>
+          <div class="offset3">
+            <h5><%= item.name %></h5>
+            <p><%= item.annotation %></p>
+            <p>Přidáno: <%= l item.created_at %></p>
+          </div>
         </div>
       <% end %>
     </div>
@@ -23,13 +24,14 @@
     <div class="span4 well">
       <h3>Náhodné recepty</h3>
       <% @random.each do |item| %>
-        <div class="spacer well">
-          <div class="pull-left">
+        <div class="spacer well active" onclick="window.location = '<%= recipe_path(item.id) %>'">
+          <div class="span3">
             <%= get_thumb_icon(item) %>
           </div>
-          <h5><%= item.name %></h5>
-          <p><%= item.annotation %></p>
-          <%= link_to "Zobrazit recept", recipe_path(item.id) %>
+          <div class="offset3">
+            <h5><%= item.name %></h5>
+            <p><%= item.annotation %></p>
+          </div>
         </div>
       <% end %>
     </div>
@@ -37,14 +39,15 @@
     <div class="span4 well">
       <h3>Nejlepší recepty</h3>
       <% @best.each do |item| %>
-        <div class="spacer well">
-          <div class="pull-left">
+        <div class="spacer well active" onclick="window.location = '<%= recipe_path(item.id) %>'">
+          <div class="span3">
             <%= get_thumb_icon(item) %>
           </div>
-          <h5><%= item.name %></h5>
-          <p><%= item.annotation %></p>
-          <p>Známka: <%= item.avg_value.to_f.round(1).to_s %></p>
-          <%= link_to "Zobrazit recept", recipe_path(item.id) %>
+          <div class="offset3">
+            <h5><%= item.name %></h5>
+            <p><%= item.annotation %></p>
+            <p>Hodnocení: <%= item.avg_value.to_f.round(1).to_s %></p>
+          </div>
         </div>
       <% end %>
     </div>
