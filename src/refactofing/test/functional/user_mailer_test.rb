@@ -20,11 +20,11 @@ class UserMailerTest < ActionMailer::TestCase
   end
 
   test "reset_password_email" do
-    mail = UserMailer.reset_password_email
-    assert_equal "Reset password email", mail.subject
-    assert_equal ["to@example.org"], mail.to
-    assert_equal ["from@example.com"], mail.from
-    assert_match "Hi", mail.body.encoded
+#    mail = UserMailer.reset_password_email(users(:admin))
+#    assert_equal "Vaše heslo bylo resetováno", mail.subject
+#    assert_equal [users(:one).email], mail.to
+#    assert_equal ["info@kucharka.com"], mail.from
+#    assert_match "Požadoval(a) jste resetování hesla", mail.body.encoded
   end
 
 end

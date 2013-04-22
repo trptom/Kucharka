@@ -66,11 +66,6 @@ CookBook::Application.routes.draw do
   get "marks/create"
   get "marks/destroy"
 
-  # password reset
-  get "password_resets/create"
-  get "password_resets/edit"
-  get "password_resets/update"
-
   #mapping
   match 'login' => 'user_sessions#create', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
