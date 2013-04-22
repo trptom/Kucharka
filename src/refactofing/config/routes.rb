@@ -1,6 +1,7 @@
 CookBook::Application.routes.draw do
   # resources
-  
+
+  resources :password_resets
   resources :user_sessions
   resources :articles
   resources :ingredience_categories
@@ -14,6 +15,11 @@ CookBook::Application.routes.draw do
       get :articles
       get :block
       get :unblock
+      put :change_password
+    end
+    
+    collection do
+      get "reset_password"
     end
   end
 
@@ -59,6 +65,11 @@ CookBook::Application.routes.draw do
   get "marks/index"
   get "marks/create"
   get "marks/destroy"
+
+  # password reset
+  get "password_resets/create"
+  get "password_resets/edit"
+  get "password_resets/update"
 
   #mapping
   match 'login' => 'user_sessions#create', :as => :login

@@ -1,45 +1,46 @@
-<div class="span10 offset1">
-  <div class="well">
-    <p>Detail uživatele</p>
+<div class="span10 offset1 well pagination-centered">
+  <h2>Detail uživatele</h2>
+  <p>
+    <b>Username:</b>
+    <%= @user.username %>
+  </p>
 
-    <p>
-      <b>Username:</b>
-      <%= @user.username %>
-    </p>
+  <p>
+    <b>Email:</b>
+    <%= @user.email %>
+  </p>
 
-    <p>
-      <b>Email:</b>
-      <%= @user.email %>
-    </p>
+  <p>
+    <b>Jméno:</b>
+    <%= (@user.first_name ? @user.first_name : "") + " " + (@user.second_name ? @user.second_name : "") %>
+  </p>
 
-    <p>
-      <b>Jméno:</b>
-      <%= (@user.first_name ? @user.first_name : "") + " " + (@user.second_name ? @user.second_name : "") %>
-    </p>
+  <p>
+    <b>Typ uživatele (dle oprávnění)</b>
+    <%= @user.self_ruleset == RULES_SELF_DEFAULT && @user.others_ruleset == RULES_OTHERS_DEFAULT ? "Běžný uživatel" : "Uživatel s upravenými pravomocemi"%>
+  </p>
 
-    <p>
-      <b>Poznámka</b>
-      <%= get_att_str(@user.note) %>
-    </p>
+  <p>
+    <b>Aktivní:</b>
+    <%= print_bool(:bool => @user.active) %>
+  </p>
 
-    <p>
-      <b>Práva</b>
-      <%= @user.self_ruleset %>
-      ,
-      <%= @user.others_ruleset %>
-    </p>
+  <hr />
 
-    <p>
-      <b>Aktivní</b>
-      <%= print_bool(:bool => @user.active) %>
-    </p>
+  <p>
+    <b>Poznámka</b>
+  </p>
+  <p>
+    <%= @user.note ? @user.note : "žádná" %>
+  </p>
 
-    <br />
+  <hr />
 
-    <p>
-      <% get_action_buttons(@user).each do |button| %>
-        <%= button %>
-      <% end %>
-    </p>
-  </div>
+  <div class="spacer"></div>
+
+  <p>
+    <% get_action_buttons(@user).each do |button| %>
+      <%= button %>
+    <% end %>
+  </p>
 </div>

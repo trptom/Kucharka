@@ -150,4 +150,27 @@ class UsersController < ApplicationController
 
     redirect_to users_path, notice: state
   end
+
+  def change_password
+    @user = User.find(params[:id])
+    if (@user && User.authenticate(@user.username, params[:user][:old_password]))
+      @user.password_confirmation = params[:user][:password_confirmation]
+      # the next line clears the temporary token and updates the password
+      if @user.change_password!(params[:user][:password])
+        redirect_to(@user, :notice => 'Heslo úspěšně změněno.')
+      else
+        @user.errors.add(:password, "Heslo se nepodařilo změnit!" )
+        @errors = @user.errors
+        render :action => "edit"
+      end
+    else
+      @user.errors.add(:old_password, "Staré heslo je chybné!" )
+      @errors = @user.errors
+      render :action => "edit"
+    end
+  end
+
+  def reset_password
+    # jen renderuju formular
+  end
 end
