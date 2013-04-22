@@ -55,16 +55,18 @@
     <% end %>
   </div>
 
-  <div class="well">
-    <legend>Podat žádost na ingredienci</legend>
-    <input id="ingredience_request_name" type="text" placeholder="Název" />
-    <input id="ingredience_request_units" type="text" placeholder="Jednotky" />
-    <label>Anotace</label>
-    <textarea id="ingredience_request_annotation" cols="" rows="3" class="input-block-level"></textarea>
-    <label>Popis</label>
-    <textarea id="ingredience_request_content" cols="" rows="5" class="input-block-level"></textarea>
-    <button class="btn" onclick="IngredienceRequest.submit()">Podat žádost</button>
-  </div>
+  <% if recipes_filter("edit", nil, @recipe) %>
+    <div class="well">
+      <legend>Podat žádost na ingredienci</legend>
+      <input id="ingredience_request_name" type="text" placeholder="Název" />
+      <input id="ingredience_request_units" type="text" placeholder="Jednotky" />
+      <label>Anotace</label>
+      <textarea id="ingredience_request_annotation" cols="" rows="3" class="input-block-level"></textarea>
+      <label>Popis</label>
+      <textarea id="ingredience_request_content" cols="" rows="5" class="input-block-level"></textarea>
+      <button class="btn" onclick="IngredienceRequest.submit()">Podat žádost</button>
+    </div>
+  <% end %>
 </div>
 
 <div class="span8">

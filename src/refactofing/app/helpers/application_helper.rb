@@ -7,7 +7,7 @@ module ApplicationHelper
   end
 
   def get_thumb_icon(recipe)
-    return nil
+    return image_tag (asset_path "thumb_icon.jpg", :alt => "Náhled")
 #    return image_tag(recipe.image_url(:thumb), :alt => "Náhled")
   end
 
