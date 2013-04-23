@@ -1,19 +1,21 @@
-<div class="span2"></div>
-<div class="span8">
+<div class="span8 offset2 home-search">
   <div class="well">
     <h2>Výsledky hledání - recepty</h2>
     <% if @recipes.length > 0 %>
       <% @recipes.each do |item| %>
         <% if recipes_filter("show", nil, item) %>
-          <div class="spacer">
-            <%= get_thumb_icon(item) %>
-            <h5>
-              <%= item.name %> -
-              <%= link_to item.user.username, user_path(item.user) %> -
-              <%= item.created_at %>
-            </h5>
-            <p><%= item.annotation %></p>
-            <%= link_to "Dále >>", recipe_path(item.id) %>
+          <div class="spacer well active" onclick="window.location = '<%= recipe_path(item.id) %>'">
+            <div class="pull-left">
+              <%= get_thumb_icon(item) %>
+            </div>
+            <div>
+              <h5>
+                <%= item.name %> -
+                <%= link_to item.user.username, user_path(item.user) %>
+              </h5>
+              <p><%= item.annotation %></p>
+              <p><%= l item.created_at %></p>
+            </div>
           </div>
         <% end %>
       <% end %>
@@ -28,14 +30,13 @@
     <% if @articles.length > 0 %>
       <% @articles.each do |item| %>
         <% if articles_filter("show", nil, item) %>
-          <div class="spacer">
+          <div class="spacer well active" onclick="window.location = '<%= article_path(item.id) %>'">
             <h5>
               <%= item.title %> -
-              <%= link_to item.user.username, user_path(item.user) %> -
-              <%= item.created_at %>
+              <%= link_to item.user.username, user_path(item.user) %>
             </h5>
             <p><%= item.annotation %></p>
-            <%= link_to "Dále >>", article_path(item.id) %>
+            <p><%= l item.created_at %></p>
           </div>
         <% end %>
       <% end %>

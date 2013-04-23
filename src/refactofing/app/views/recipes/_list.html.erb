@@ -1,19 +1,22 @@
-<div class="well">
+<div class="well recipes-list">
   <h2>Výsledky hledání</h2>
   <% if @recipes != nil %>
     <% @recipes.each do |recipe| %>
-      <div class="spacer">
-        <%= get_thumb_icon(recipe) %>
-        <h5>
-          <%= recipe.name %>
-          <% if @badges && @badges[recipe.id] %>
-            <span class="badge <%= @badges[recipe.id]['class'] %>"><%= @badges[recipe.id]['title'] %></span>
-          <% end %>-
-          <%= link_to recipe.user.username, user_path(recipe.user) %> -
-          <%= recipe.created_at %>
-        </h5>
-        <p><%= recipe.annotation %></p>
-        <%= link_to "Dále >>", recipe_path(recipe.id) %>
+      <div class="spacer well active" onclick="window.location = '<%= recipe_path(recipe.id) %>'">
+        <div class="pull-left">
+          <%= get_thumb_icon(recipe) %>
+        </div>
+        <div>
+          <h5>
+            <%= recipe.name %>
+            <% if @badges && @badges[recipe.id] %>
+              <span class="badge <%= @badges[recipe.id]['class'] %>"><%= @badges[recipe.id]['title'] %></span>
+            <% end %>-
+            <%= link_to recipe.user.username, user_path(recipe.user) %> -
+            <%= recipe.created_at %>
+          </h5>
+          <p><%= recipe.annotation %></p>
+        </div>
       </div>
     <% end %>
   <% end %>

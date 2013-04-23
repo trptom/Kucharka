@@ -1,0 +1,7 @@
+.recipes-list .well.active {
+    min-height: 80px;
+}
+
+.recipes-list .well.active .pull-left {
+    margin-right: 10px;
+}
