@@ -1,25 +1,23 @@
-<div class="span10 offset1">
-  <div class="well">
-    <h2>Moje recepty</h2>
-    <div class="row-fluid spacer">
-      <div class="span5">
-        <legend>Napsané recepty</legend>
-        <ul class="unstyled">
-          <% @recipes.each do |recipe| %>
-            <li><%= link_to recipe.name, recipe_path(recipe) %> - <%= recipe.created_at  %></li>
-          <% end %>
-        </ul>
-        <a class="btn spacer" href="<%= new_recipe_path %> "><i class="icon-pencil"></i> Napsat nový recept</a>
-      </div>
+<div class="span8 offset2 well">
+  <h2>Moje recepty</h2>
+  <div class="row-fluid spacer">
+    <div class="span5">
+      <legend>Napsané recepty</legend>
+      <ul class="unstyled">
+        <% @recipes.each do |recipe| %>
+          <li><%= link_to recipe.name, recipe_path(recipe) %> - <%= recipe.created_at  %></li>
+        <% end %>
+      </ul>
+      <a class="btn spacer" href="<%= new_recipe_path %> "><i class="icon-pencil"></i> Napsat nový recept</a>
+    </div>
 
-      <div class="span6 pull-right">
-        <legend>Hodnocené a komentované recepty</legend>
-        <ul class="unstyled">
-          <% @splitted.each do |splitted| %>
-            <li><%= link_to splitted.name, recipe_path(splitted) %></li>
-          <% end %>
-        </ul>
-      </div>
+    <div class="span6 pull-right">
+      <legend>Hodnocené a komentované recepty</legend>
+      <ul class="unstyled">
+        <% @splitted.each do |splitted| %>
+          <li><%= link_to splitted.name, recipe_path(splitted) %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </div>
