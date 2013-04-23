@@ -1,0 +1,7 @@
+.home-search .well.active {
+    min-height: 80px;
+}
+
+.home-search .well.active .pull-left {
+    margin-right: 10px;
+}
