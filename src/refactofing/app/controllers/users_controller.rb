@@ -8,9 +8,9 @@ class UsersController < ApplicationController
   def index
     filter = get_filter("username")
     if (filter != nil)
-      @users = User.where("username like ?", "%" + filter +"%").all
+      @users = User.where("username like ?", "%" + filter +"%").order(:username).all
     else
-      @users = User.all
+      @users = User.order(:username).all
     end
   end
 
