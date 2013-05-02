@@ -25,7 +25,7 @@ class UserMailer < ActionMailer::Base
   #
   def reset_password_email(user)
     @user = user
-    @url  = edit_password_reset_url(user.reset_password_token, :host => "http://kucharka-pilot.herokuapp.com")
+    @url  = edit_password_reset_url(user.reset_password_token, :host => "kucharka-pilot.herokuapp.com")
     mail(:to => user.email,
          :subject => "Vaše heslo bylo resetováno")
   end
