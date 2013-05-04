@@ -32,6 +32,7 @@ class PasswordResetsController < ApplicationController
     if @user.change_password!(params[:user][:password])
       redirect_to("/home/success", :notice => 'Heslo bylo úspěšně změněno.')
     else
+      @errors = @user.errors
       render :action => "edit"
     end
   end

@@ -1,5 +1,5 @@
 <div class="well recipes-list">
-  <h2>Výsledky hledání</h2>
+  <h2><%= @results_title ? @results_title : "Výsledky hledání" %></h2>
   <% if @recipes != nil %>
     <% @recipes.each do |recipe| %>
       <div class="spacer well active" onclick="window.location = '<%= recipe_path(recipe.id) %>'">
@@ -12,7 +12,7 @@
             <% if @badges && @badges[recipe.id] %>
               <span class="badge <%= @badges[recipe.id]['class'] %>"><%= @badges[recipe.id]['title'] %></span>
             <% end %>-
-            <%= link_to recipe.user.username, user_path(recipe.user) %> -
+            <%= users_filter("show", recipe.user.id) ? link_to(recipe.user.username, user_path(recipe.user)) : recipe.user.username %> -
             <%= recipe.created_at %>
           </h5>
           <p><%= recipe.annotation %></p>

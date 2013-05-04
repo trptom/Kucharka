@@ -12,6 +12,14 @@ class HomeControllerTest < ActionController::TestCase
   test "index" do
     get :index
     assert_response :success
+
+    @res1 = assigns :newest
+    @res2 = assigns :random
+    @res3 = assigns :best
+
+    assert @res1.length <= 5
+    assert @res2.length <= 5
+    assert @res3.length <= 5
   end
 
   test "search no query" do

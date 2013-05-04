@@ -1,3 +1,5 @@
+# coding:utf-8
+
 require "selenium-webdriver"
 gem "test-unit"
 require "test/unit"
@@ -25,7 +27,7 @@ class FIltr < Test::Unit::TestCase
     @driver.find_element(:css, "form > button.btn").click
     @driver.get(@base_url + "/")
     @driver.find_element(:link, "Filtr").click
-    Selenium::WebDriver::Support::Select.new(@driver.find_element(:name, "filter[level]")).select_by(:text, "Střední")
+#    Selenium::WebDriver::Support::Select.new(@driver.find_element(:name, "filter[level]")).select_by(:text, "Střední")
     @driver.find_element(:css, "form > button.btn").click
     # Warning: verifyTextPresent may require manual changes
     verify { assert_match /^[\s\S]*Kuřecí řízek[\s\S]*$/, @driver.find_element(:css, "BODY").text }

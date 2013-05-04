@@ -2,7 +2,7 @@ require "selenium-webdriver"
 gem "test-unit"
 require "test/unit"
 
-class Test < Test::Unit::TestCase
+class BasicTest < Test::Unit::TestCase
 
   def setup
     @driver = Selenium::WebDriver.for :firefox

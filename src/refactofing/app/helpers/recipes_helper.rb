@@ -65,15 +65,15 @@ module RecipesHelper
         Recipe.where("created_at LIKE "+date).limit(count).all
   end
 
-  def get_recipes_by_random(count)
-    @id = Recipe.last
-    @ret = Recipe.find(:all).shuffle
+  def get_recipes_sorted_by_random(count)
+    return count == nil ?
+        Recipe.order("random()").all :
+        Recipe.order("random()").limit(count).all
 
     return @ret
   end
 
-  def get_recipes_by_mark(count)
-    @id = Recipe.last
+  def get_recipes_sorted_by_mark(count)
     @ret = Recipe.all(
       :select => "
         recipes.*,
@@ -84,7 +84,7 @@ module RecipesHelper
       :group => 'recipes.id'
     )
 
-    return @ret
+    return count == nil ? @ret : @ret.first(count)
   end
 
   def get_recipes_by_filter(filter)

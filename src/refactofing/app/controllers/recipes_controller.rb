@@ -243,6 +243,7 @@ class RecipesController < ApplicationController
   end
 
   def newest
+    @results_title = "Nejnovější recepty"
     @recipes = Recipe.get_recipes_sorted_by_date(params[:count] == nil ? 10 : params[:count].to_i)
   end
 end

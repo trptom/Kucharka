@@ -42,22 +42,23 @@ module UsersHelper
   def get_change_state_button(user)
     if (is_admin(user) || is_current_user(user))
       if users_filter("block", :id => user.id)
-        return button_to "Zablokovat", users_path, {:method => "get", :class => "btn disabled", :disabled => true}
+        return nil # zatim neni implementovano
+#        return link_to "Zablokovat", users_path, {:method => "get", :class => "btn"}
       end
     end
 
     if !is_activated(user)
       if users_filter("activate", :id => user.id)
-        return button_to "Aktivovat", { :controller => 'users', :action => 'activate', :id => "#{user.activation_token}", :redirect => "/users"}, {:method => "get", :class => "btn"}
+        return link_to "Aktivovat", { :controller => 'users', :action => 'activate', :id => "#{user.activation_token}", :redirect => "/users"}, {:method => "get", :class => "btn"}
       end
     else
       if user.active
         if users_filter("block", :id => user.id)
-          return button_to "Zablokovat", { :controller => 'users', :action => 'block', :id => user.id}, {:method => "get", :class => "btn"}
+          return link_to "Zablokovat", { :controller => 'users', :action => 'block', :id => user.id}, {:method => "get", :class => "btn"}
         end
       else
         if users_filter("unblock", :id => user.id)
-          return button_to "Odblokovat", { :controller => 'users', :action => 'unblock', :id => user.id}, {:method => "get", :class => "btn"}
+          return link_to "Odblokovat", { :controller => 'users', :action => 'unblock', :id => user.id}, {:method => "get", :class => "btn"}
         end
       end
     end
@@ -67,7 +68,7 @@ module UsersHelper
 
   def get_edit_button(user)
     if users_filter("edit", :id => user.id)
-      return button_to "Editovat", { :controller => 'users', :action => 'edit', :id => user.id}, {:method => "get", :class => "btn"}
+      return link_to "Editovat", { :controller => 'users', :action => 'edit', :id => user.id}, {:method => "get", :class => "btn"}
     else
       return nil
     end
@@ -75,7 +76,8 @@ module UsersHelper
 
   def get_destroy_button(user)
     if users_filter("destroy", :id => user.id)
-      return button_to "Smazat", { :controller => 'users', :action => 'destroy', :id => user.id}, {:method => "get", :class => "btn", :title => "Akce je zatím zablokovaná, protože není implementované čištění DB po smazaném uživateli (resp. ošetřeny nullpointery).", :disabled => true}
+      return nil; # zatim neni implementovano
+#      return link_to "Smazat", { :controller => 'users', :action => 'destroy', :id => user.id}, {:method => "get", :class => "btn" }
     else
       return nil
     end

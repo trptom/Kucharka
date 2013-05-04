@@ -30,7 +30,7 @@
           <td><%= user.second_name %></td>
           <td><%= user.first_name %></td>
           <td><%= user.activation_state %></td>
-          <td>
+          <td class="btn-group">
             <% get_action_buttons(user).each do |button| %>
               <%= button %>
             <% end %>

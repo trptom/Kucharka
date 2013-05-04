@@ -36,8 +36,16 @@ CookBook::Application.configure do
   config.active_support.deprecation = :stderr
 
   # Webrat
-  require "webrat"
+#  require "webrat"
+#  Webrat.configure do |config|
+#    config.mode = :rails
+#  end
+
+  require 'webrat'
+  require 'webrat/core/matchers'
+
   Webrat.configure do |config|
-    config.mode = :rails
+    config.mode = :rack
+    config.open_error_files = false
   end
 end

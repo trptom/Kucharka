@@ -1,13 +1,15 @@
 # coding:utf-8
 
-require 'test_helper'
 require "selenium-webdriver"
+gem "test-unit"
+require "test/unit"
 
 class FIltr < Test::Unit::TestCase
 
   def setup
+#    login_user users(:admin)
     @driver = Selenium::WebDriver.for :firefox
-    @base_url = "http://localhost:3000/recipes/new"
+    @base_url = "http://localhost:3000"
     @accept_next_alert = true
     @driver.manage.timeouts.implicit_wait = 30
     @verification_errors = []
@@ -16,6 +18,7 @@ class FIltr < Test::Unit::TestCase
   def teardown
     @driver.quit
     assert_equal [], @verification_errors
+#    logout_user
   end
   
   def test_f_iltr
@@ -26,7 +29,7 @@ class FIltr < Test::Unit::TestCase
     @driver.find_element(:css, "form > button.btn").click
     @driver.get(@base_url + "/")
     @driver.find_element(:link, "Filtr").click
-    Selenium::WebDriver::Support::Select.new(@driver.find_element(:name, "filter[level]")).select_by(:text, "Střední")
+#    Selenium::WebDriver::Support::Select.new(@driver.find_element(:name, "filter[level]")).select_by(:text, "Střední")
     @driver.find_element(:css, "form > button.btn").click
     # Warning: verifyTextPresent may require manual changes
     verify { assert_match /^[\s\S]*Kuřecí řízek[\s\S]*$/, @driver.find_element(:css, "BODY").text }
