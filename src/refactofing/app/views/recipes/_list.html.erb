@@ -12,7 +12,7 @@
             <% if @badges && @badges[recipe.id] %>
               <span class="badge <%= @badges[recipe.id]['class'] %>"><%= @badges[recipe.id]['title'] %></span>
             <% end %>-
-            <%= users_filter("show", recipe.user.id) ? link_to(recipe.user.username, user_path(recipe.user)) : recipe.user.username %> -
+            <%= users_filter("show", {:id => recipe.user.id.to_s }) ? link_to(recipe.user.username, user_path(recipe.user)) : recipe.user.username %> -
             <%= recipe.created_at %>
           </h5>
           <p><%= recipe.annotation %></p>
