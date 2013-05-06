@@ -131,7 +131,7 @@ class RecipesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @recipe }
       format.json {
-        render json: @recipe.categories
+        render json: @recipe.recipeCategories
       }
     end
   end

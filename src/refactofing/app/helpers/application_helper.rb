@@ -40,13 +40,6 @@ module ApplicationHelper
     return user.id == current_user.id
   end
 
-  def get_att_str(att)
-    if (att != nil)
-      return att.to_s
-    end
-    return 'neuvedeno'
-  end
-
   def print_bool(bool)
     return (bool ? "ano" : "ne")
   end

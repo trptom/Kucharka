@@ -31,6 +31,17 @@ class ArticlesControllerTest < ActionController::TestCase
     assert_redirected_to article_path(assigns(:article))
   end
 
+  test "create with wrong atts" do
+    assert_difference('Article.count', 0) do
+      post :create, article: {
+        annotation: "0",
+        content: "0",
+        title: "0"
+      }
+    end
+    assert_response :success
+  end
+
   test "show" do
     get :show, id: @article
     assert_response :success
@@ -54,6 +65,16 @@ class ArticlesControllerTest < ActionController::TestCase
     }
     assert_redirected_to @article
   end
+
+  test "update with wrong atts" do
+    put :update, id: @article, article: {
+        annotation: "0",
+        content: "0",
+        title: "0"
+    }
+    assert_response :success
+  end
+
 
   test "destroy" do
     assert_difference('Article.count', -1) do

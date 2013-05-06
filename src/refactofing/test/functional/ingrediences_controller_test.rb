@@ -17,6 +17,18 @@ class IngrediencesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:ingrediences_pending)
   end
 
+  test "index json" do
+    get :index, format: :json
+    assert_response :success
+
+    @accepted = assigns(:ingrediences_accepted)
+    @pending = assigns(:ingrediences_pending)
+    assert_not_nil @accepted
+    assert_not_nil @pending
+
+    assert_equal Ingredience.all.length, @accepted.length + @pending.length
+  end
+
   test "new" do
     get :new
     assert_response :success
@@ -36,6 +48,20 @@ class IngrediencesControllerTest < ActionController::TestCase
     assert_redirected_to ingredience_path(assigns(:ingredience))
   end
 
+  test "create with wrong atts" do
+    assert_difference('Ingredience.count', 0) do
+      post :create, ingredience: {
+        annotation: @ingredience.annotation,
+        avaliability: -10,
+        content: @ingredience.content,
+        name: "test-func",
+        units: @ingredience.units
+      }
+    end
+
+    assert_response :success
+  end
+
   test "show" do
     get :show, id: @ingredience
     assert_response :success
@@ -47,8 +73,23 @@ class IngrediencesControllerTest < ActionController::TestCase
   end
 
   test "update" do
-    put :update, id: @ingredience, ingredience: { annotation: @ingredience.annotation, avaliability: @ingredience.avaliability, content: @ingredience.content, name: @ingredience.name }
+    put :update, id: @ingredience, ingredience: {
+      annotation: @ingredience.annotation,
+      avaliability: @ingredience.avaliability,
+      content: @ingredience.content,
+      name: @ingredience.name
+    }
     assert_redirected_to ingredience_path(assigns(:ingredience))
+  end
+
+  test "update with wrong atts" do
+    put :update, id: @ingredience, ingredience: {
+      annotation: @ingredience.annotation,
+      avaliability: -1,
+      content: @ingredience.content,
+      name: @ingredience.name
+    }
+    assert_response :success
   end
 
   test "destroy" do

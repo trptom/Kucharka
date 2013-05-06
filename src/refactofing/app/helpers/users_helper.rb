@@ -9,12 +9,6 @@ module UsersHelper
     return user.active ? "" : "error"
   end
 
-  def index_get_username(user)
-    return users_filter("show", :id => user.id) ?
-      link_to(user.username, user_path(user)) :
-      user.username
-  end
-
   def get_action_buttons(user)
     ret = Array.new;
 
@@ -42,8 +36,7 @@ module UsersHelper
   def get_change_state_button(user)
     if (is_admin(user) || is_current_user(user))
       if users_filter("block", :id => user.id)
-        return nil # zatim neni implementovano
-#        return link_to "Zablokovat", users_path, {:method => "get", :class => "btn"}
+        return link_to "Zablokovat", users_path, {:method => "get", :class => "btn"}
       end
     end
 

@@ -10,8 +10,10 @@ two:
   id: 2
   content: MyText
   user_id: 1<%#= users(:admin) %>
+  recipe_id: 1
 
 three:
   id: 3
   content: MyText
   user_id: 1<%#= users(:admin) %>
+  ingredience_id: 1

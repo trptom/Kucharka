@@ -1,13 +1,6 @@
 # coding:utf-8
 
 module RecipesHelper
-
-  def get_level_class(level)
-    if level == 0
-      
-    end
-  end
-
   def get_mark(recipe)
     sum = 0
     count = 0
@@ -95,12 +88,12 @@ module RecipesHelper
     ret = Recipe.order(:name);
 
     if (filter[:text] && filter[:text] != "")
-      tmp = "(name like '%#{filter[:text]}%')"
+      tmp = "(name LIKE :filter)"
       if filter[:text_type] == "1"
-        tmp += "OR(annotation LIKE \"%" + filter[:text] + "%\")"
-        tmp += "OR(content LIKE \"%" + filter[:text] + "%\")"
+        tmp += "OR(annotation LIKE :filter)"
+        tmp += "OR(content LIKE :filter)"
       end
-      ret = ret.where(tmp)
+      ret = ret.where(tmp, :filter => '%' + filter[:text] + '%')
     end
 
     if (filter[:level] && filter[:level] != "")

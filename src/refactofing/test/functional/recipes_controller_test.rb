@@ -33,11 +33,28 @@ class RecipesControllerTest < ActionController::TestCase
     assert_redirected_to recipe_path(assigns(:recipe))
   end
 
+  test "create with wrong atts" do
+    assert_difference('Recipe.count', 0) do
+      post :create, recipe: {
+        :name => ""
+      }
+    end
+
+    assert_response :success
+  end
+
   test "update" do
-    put :update, id: @recipe, article: {
-        title: "test-func-new"
+    put :update, id: @recipe, recipe: {
+        :name => "test-func-new"
     }
     assert_redirected_to @recipe
+  end
+
+  test "update with wrong atts" do
+    put :update, id: @recipe, recipe: {
+        :name => ""
+    }
+    assert_response :success
   end
 
   test "edit" do
@@ -55,12 +72,22 @@ class RecipesControllerTest < ActionController::TestCase
 
   test "add_ingredience new" do
     assert_difference('@recipe.ingrediences.count', 1) do
-      get :add_ingredience, id: @recipe.id, ingredience: ingrediences(:nowhere_used).id, quantity: 10, importance: 1
+      get :add_ingredience, id: @recipe.id, ingredience: ingrediences(:nowhere_used).id, quantity: "10", importance: 1
     end
 
     # kontrola nastaveni spravneho mnozstvi
     assert @recipe.ingredienceRecipeConnectors.where(:ingredience_id => ingrediences(:nowhere_used).id).first.quantity == 10
     assert_redirected_to @recipe
+  end
+
+  test "add_ingredience new json" do
+    assert_difference('@recipe.ingrediences.count', 1) do
+      get :add_ingredience, id: @recipe.id, ingredience: ingrediences(:nowhere_used).id, quantity: "10", importance: 1, format: :json
+    end
+
+    # kontrola nastaveni spravneho mnozstvi
+    assert @recipe.ingredienceRecipeConnectors.where(:ingredience_id => ingrediences(:nowhere_used).id).first.quantity == 10
+    assert_response :success
   end
 
   test "add_ingredience existing" do
@@ -101,6 +128,17 @@ class RecipesControllerTest < ActionController::TestCase
     assert_redirected_to @recipe
   end
 
+  test "remove_ingredience json" do
+    @connector = IngredienceRecipeConnector.first # vyberu nahodne connector
+    @recipe = @connector.recipe # zapamatuju si recept, kam mam vyt presmerovan
+
+    assert_difference('IngredienceRecipeConnector.count', -1) do
+      get :remove_ingredience, id: @recipe.id, connector_id: @connector.id, format: :json
+    end
+
+    assert_response :success
+  end
+
   test "add and remove category" do
     # pridam novou
     assert_difference('@recipe.recipeCategories.count', 1) do
@@ -113,6 +151,20 @@ class RecipesControllerTest < ActionController::TestCase
       get :remove_category, id: @recipe.id, category: recipe_categories(:nowhere_used)
     end
     assert_redirected_to @recipe
+  end
+
+  test "add and remove category json" do
+    # pridam novou
+    assert_difference('@recipe.recipeCategories.count', 1) do
+      get :add_category, id: @recipe.id, category: recipe_categories(:nowhere_used), format: :json
+    end
+    assert_response :success
+
+    # smazu pridanou
+    assert_difference('@recipe.recipeCategories.count', -1) do
+      get :remove_category, id: @recipe.id, category: recipe_categories(:nowhere_used), format: :json
+    end
+    assert_response :success
   end
 
   test "add and remove subrecipe" do
@@ -129,6 +181,20 @@ class RecipesControllerTest < ActionController::TestCase
     assert_redirected_to @recipe
   end
 
+  test "add and remove subrecipe json" do
+    # pridam novou
+    assert_difference('@recipe.subrecipes.count', 1) do
+      get :add_subrecipe, id: @recipe.id, subrecipe: "http://xxx.com/recipes/"+recipes(:nowhere_used).id.to_s, format: :json#recipe_path(recipes(:nowhere_used))
+    end
+    assert_response :success
+
+    # smazu pridanou
+    assert_difference('@recipe.subrecipes.count', -1) do
+      get :remove_subrecipe, id: @recipe.id, subrecipe: recipes(:nowhere_used), format: :json
+    end
+    assert_response :success
+  end
+
   test "add and remove article" do
     # pridam novou
     assert_difference('@recipe.articles.count', 1) do
@@ -141,6 +207,20 @@ class RecipesControllerTest < ActionController::TestCase
       get :remove_connected_article, id: @recipe.id, article: articles(:nowhere_used)
     end
     assert_redirected_to @recipe
+  end
+
+  test "add and remove article json" do
+    # pridam novou
+    assert_difference('@recipe.articles.count', 1) do
+      get :add_connected_article, id: @recipe.id, article: "http://xxx.com/articles/"+articles(:nowhere_used).id.to_s, format: :json#article_path(articles(:nowhere_used))
+    end
+    assert_response :success
+
+    # smazu pridanou
+    assert_difference('@recipe.articles.count', -1) do
+      get :remove_connected_article, id: @recipe.id, article: articles(:nowhere_used), format: :json
+    end
+    assert_response :success
   end
 
   test "fridge empty" do
@@ -170,7 +250,11 @@ class RecipesControllerTest < ActionController::TestCase
 
   test "filter with data" do
     get :filter, filter: {
-      :text => "rec"
+      :text => "rec",
+      :text_type => 1,
+      :level => 0,
+      :time_min => 0,
+      :time_max => 1000
     }
     assigns(:recipes)
     assert_response :success

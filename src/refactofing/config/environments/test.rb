@@ -41,11 +41,11 @@ CookBook::Application.configure do
 #    config.mode = :rails
 #  end
 
-  require 'webrat'
-  require 'webrat/core/matchers'
-
-  Webrat.configure do |config|
-    config.mode = :rack
-    config.open_error_files = false
-  end
+#  require 'webrat'
+#  require 'webrat/core/matchers'
+#
+#  Webrat.configure do |config|
+#    config.mode = :rack
+#    config.open_error_files = false
+#  end
 end

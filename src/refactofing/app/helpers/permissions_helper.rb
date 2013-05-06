@@ -288,10 +288,6 @@ module PermissionsHelper
       return has_permission(ROLE['comments']['create'], nil)
     end
 
-    if action == "update"
-      return has_permission_self_other(entity.user_id, ROLE['comments']['update'])
-    end
-
     if action == "destroy"
       return has_permission_self_other(entity.user_id, ROLE['comments']['delete'])
     end

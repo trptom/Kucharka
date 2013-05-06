@@ -23,6 +23,18 @@ class CommentsControllerTest < ActionController::TestCase
     assert_redirected_to "some_page_i_came_from"
   end
 
+  test "create with wrong atts" do
+    assert_difference('Comment.count', 0) do
+      post :create, comment: {
+        content: "",
+        user_id: 0,
+        article_id: 0
+      }
+    end
+
+    assert_response :redirect
+  end
+
   test "destroy" do
     assert_difference('Comment.count', -1) do
       delete :destroy, id: @comment

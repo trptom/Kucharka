@@ -25,6 +25,7 @@ end
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'capybara/rails'
 
 include Sorcery::TestHelpers::Rails
 
@@ -38,17 +39,7 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 end
 
-class SeleniumTestCase < Test::Unit::TestCase
-  def setup
-    @driver = Selenium::WebDriver.for :firefox
-    @base_url = "http://localhost:3000/recipes/new"
-    @accept_next_alert = true
-    @driver.manage.timeouts.implicit_wait = 30
-    @verification_errors = []
-  end
-
-  def teardown
-    @driver.quit
-    assert_equal [], @verification_errors
-  end
+class ActionDispatch::IntegrationTest
+  # Make the Capybara DSL available in all integration tests
+  include Capybara::DSL
 end

@@ -29,6 +29,14 @@ class RecipeCategoriesControllerTest < ActionController::TestCase
     assert_redirected_to recipe_category_path(assigns(:recipe_category))
   end
 
+  test "create with wrong atts" do
+    assert_difference('RecipeCategory.count', 0) do
+      post :create, recipe_category: { description: "", name: "" }
+    end
+
+    assert_response :success
+  end
+
   test "show" do
     get :show, id: @recipe_category
     assert_response :success
@@ -42,6 +50,14 @@ class RecipeCategoriesControllerTest < ActionController::TestCase
   test "update" do
     put :update, id: @recipe_category, recipe_category: { description: @recipe_category.description, name: @recipe_category.name }
     assert_redirected_to recipe_category_path(assigns(:recipe_category))
+  end
+
+  test "update with wrong atts" do
+    put :update, id: @recipe_category, recipe_category: {
+      description: "",
+      name: ""
+    }
+    assert_response :success
   end
 
   test "destroy" do

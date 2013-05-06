@@ -14,10 +14,11 @@ gem 'sorcery'
 gem 'carrierwave'
 gem 'cloudinary'
 # testy
-gem 'webrat'
-gem 'selenium-webdriver'
-gem 'test-unit'
+#gem 'webrat'
+gem 'selenium-webdriver', :require => false, :group => :test
+gem 'test-unit', :require => false, :group => :test
 gem 'simplecov', :require => false, :group => :test
+gem 'capybara', :require => false, :group => :test
 
 # Gems used only for assets and not required
 # in production environments by default.

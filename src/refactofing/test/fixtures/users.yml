@@ -22,3 +22,36 @@ one:
   active: true
   self_ruleset: <%= RULES_SELF_DEFAULT %>
   others_ruleset: <%= RULES_OTHERS_DEFAULT %>
+
+inactive:
+  username: inactive
+  email: inactive@kucharka.cz
+  salt: <%= salt = "asdasdastr4325234324sdfds" %>
+  crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt("password", salt) %>
+  activation_state: pending
+  active: true
+  self_ruleset: <%= RULES_SELF_DEFAULT %>
+  others_ruleset: <%= RULES_OTHERS_DEFAULT %>
+  activation_token: "aaaaaaaaaaaaaaaaaaaa"
+
+blocked:
+  username: blocked
+  email: blocked@kucharka.cz
+  salt: <%= salt = "asdasdastr4325234324sdfds" %>
+  crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt("password", salt) %>
+  activation_state: pending
+  active: false
+  self_ruleset: <%= RULES_SELF_DEFAULT %>
+  others_ruleset: <%= RULES_OTHERS_DEFAULT %>
+  activation_token: "aaaaaaaaaaaaaaaaaaaa"
+
+user_with_full_rights:
+  username: user_with_full_rights
+  email: user_with_full_rights@kucharka.cz
+  salt: <%= salt = "asdasdastr4325234324sdfds" %>
+  crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt("password", salt) %>
+  activation_state: pending
+  active: false
+  self_ruleset: -1
+  others_ruleset: -1
+  activation_token: "aaaaaaaaaaaaaaaaaaaa"
