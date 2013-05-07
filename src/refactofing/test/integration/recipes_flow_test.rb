@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class UsersFlowTest < ActionDispatch::IntegrationTest
+class RecipesFlowTest < ActionDispatch::IntegrationTest
   def test_create_and_delete
     login :username => "one", :password => "password"
 
