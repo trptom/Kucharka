@@ -72,6 +72,10 @@ class ActionDispatch::IntegrationTest
     click_on 'Odhlášení'
   end
 
+  def setup
+    page.driver.browser.manage.window.maximize
+  end
+
   def teardown
     if page.has_content?('Odhlášení')
       logout

@@ -40,7 +40,7 @@
           <td><%= ingredience.id %></td>
           <td><%= ingredience.name %></td>
           <td><%= ingredience.user ? ingredience.user.username : nil %></td>
-          <td>
+          <td class="btn-group">
             <%= ingrediences_filter("show", nil, ingredience) ? link_to('Zobrazit', ingredience, :method => :get, :class => "btn") : nil %>
             <%= ingrediences_filter("edit", nil, ingredience) ? link_to('Editovat', edit_ingredience_path(ingredience), :method => :get, :class => "btn") : nil %>
             <%= ingrediences_filter("destroy", nil, ingredience) ? link_to('Smazat',ingredience, :class => "btn", method: :delete, data: { confirm: 'Jste si jistý(á)?' }) : nil %>

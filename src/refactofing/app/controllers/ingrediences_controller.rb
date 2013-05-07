@@ -73,4 +73,25 @@ class IngrediencesController < ApplicationController
 
     redirect_to ingrediences_url
   end
+
+  def new_request
+    @ingredience = Ingredience.new
+    @ingredience.name = params[:name]
+    @ingredience.units = params[:units]
+    @ingredience.annotation = params[:annotation]
+    @ingredience.content = params[:content]
+    @ingredience.user = current_user
+
+    if @ingredience.save
+      @msg = "true"
+    else
+      @msg = "false"
+    end
+
+    respond_to do |format|
+      format.json {
+        render json: @msg
+      }
+    end
+  end
 end

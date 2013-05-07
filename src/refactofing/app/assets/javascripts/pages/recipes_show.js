@@ -162,9 +162,10 @@ var IngredienceRequest = {
         var validationResult = IngredienceRequest.validateForm();
         if (validationResult === true) {
             $.ajax({
-                url: "/ingrediences/new_request/",
+                url: "/ingrediences/new_request.json",
                 type: "GET",
                 dataType: "text",
+                async: false,
                 data: "name=" + encodeURIComponent(IngredienceRequest.component.name.value) +
                     "&units=" + encodeURIComponent(IngredienceRequest.component.units.value) +
                     "&annotation=" + encodeURIComponent(IngredienceRequest.component.annotation.value) +

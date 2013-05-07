@@ -26,7 +26,7 @@
         <% end %>
 
         <% if ingrediences_filter("destroy", nil, @ingredience) %>
-          <%= link_to('Smazat', { :controller => 'ingrediences', :action => 'destroy', :id => @ingredience.id}, data: { confirm: 'Jste si jistý(á)?' }, :class => "btn") %>
+          <%= link_to('Smazat', @ingredience, :class => "btn", method: :delete, data: { confirm: 'Jste si jistý(á)?' }) %>
         <% end %>
 
         <% if ingrediences_filter("index", nil, @ingredience) %>
