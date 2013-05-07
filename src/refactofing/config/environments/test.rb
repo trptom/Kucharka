@@ -35,17 +35,7 @@ CookBook::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
-  # Webrat
-#  require "webrat"
-#  Webrat.configure do |config|
-#    config.mode = :rails
-#  end
-
-#  require 'webrat'
-#  require 'webrat/core/matchers'
-#
-#  Webrat.configure do |config|
-#    config.mode = :rack
-#    config.open_error_files = false
-#  end
+  # Nastaveni capybara frameworku pro integracni testy
+  require 'capybara/rails'
+  Capybara.default_driver = :selenium
 end

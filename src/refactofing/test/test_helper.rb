@@ -22,24 +22,49 @@ SimpleCov.start do
   end
 end
 
+# nastaveni prostredi a defaultni requires
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-require 'capybara/rails'
 
+# helper pro prihlasovani/odhlasovani pri funkcnich testech - jinak bz vetsina
+# akci nefungovala, protoze by na ne neprihlaseny uzivatel nemel pristup
 include Sorcery::TestHelpers::Rails
 
+# Trida pro jednotkove a funkcni testy
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
-  #
-  # Note: You'll currently still have to declare fixtures explicitly in integration tests
-  # -- they do not yet inherit this setting
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
 end
 
+# trida pro integracni testy (vyuziva gem capybara s driverem selenium)
 class ActionDispatch::IntegrationTest
-  # Make the Capybara DSL available in all integration tests
+  fixtures :all
   include Capybara::DSL
+
+  def assert_uri(uri)
+    current = URI.parse(current_url)
+    "#{current.path}?#{current.query}".should == uri
+  end
+
+  def login (atts)
+    username = atts && atts[:username] ? atts[:username] : "admin"
+    password = atts && atts[:password] ? atts[:password] : "root"
+    page = atts && atts[:page] ? atts[:page] : "/"
+
+    visit page
+    click_on 'Přihlášení'
+    fill_in "username", :with => username
+    fill_in "password", :with => password
+    click_on 'Přihlásit se'
+
+    assert_equal page, current_path
+    assert page.has_content?(username)
+  end
+
+  def logout
+    click_on 'd1'
+    click_on 'Odhlášení'
+  end
 end
