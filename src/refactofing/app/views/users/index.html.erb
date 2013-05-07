@@ -3,7 +3,7 @@
 
   <label class="spacer">Vyhledat uživatele: </label>
   <div class="input-append">
-    <form action="/users">
+    <form id="users-filter" action="/users">
       <input type="text" name="filter[username]" placeholder="Uživatelské jméno" value="<%= get_filter "username" %>" />
       <button class="btn" type="submit">Vyhledat</button>
     </form>
