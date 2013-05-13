@@ -33,7 +33,7 @@ class Recipe < ActiveRecord::Base
     :numericality => { :only_integer => true, :greater_than_or_equal_to => 0, :less_than  => LEVEL_TEXT.length, :message => "level není celé číslo 0.."+(LEVEL_TEXT.length-1).to_s }
 
   validates :estimated_time,
-    :numericality => { :only_integer => true, :greater_than => 0, :message => "level není celé číslo > 0" }
+    :numericality => { :only_integer => true, :greater_than => 0, :message => "odhadovaný čas není celé číslo > 0" }
 
   validates :user_id,
     :presence => { :message => "chybný uživatel" },
