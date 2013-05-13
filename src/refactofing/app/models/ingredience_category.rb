@@ -8,17 +8,17 @@ class IngredienceCategory < ActiveRecord::Base
   attr_accessible :name, :description, :category_type, :user, :user_id
 
   validates :name,
-    :length => { :minimum => 3, :maximum => 255, :message => "špatná délka názvu (3-255)" }
+    :length => { :minimum => 3, :maximum => 255, :message => VALIDATION_ERROR_MESSAGE[:ingredience_category][:name] }
 
   validates :description,
-    :length => { :minimum => 20, :message => "špatná délka popisu (>= 20)" },
+    :length => { :minimum => 20, :message => VALIDATION_ERROR_MESSAGE[:ingredience_category][:description] },
     :allow_blank => true
 
   validates :category_type,
-    :numericality => { :only_integer => true, :greater_than_or_equal_to => 0, :message => "chybná kategorie (musí být > 0)" }
+    :numericality => { :only_integer => true, :greater_than_or_equal_to => 0, :message => VALIDATION_ERROR_MESSAGE[:ingredience_category][:category_type] }
 
   validates :user_id,
-    :presence => { :message => "chybný uživatel" },
-    :numericality => { :only_integer => true, :greater_than => 0, :message => "chybný uživatel" }
-  validates :user, :associated => { :message => "chybný uživatel" }
+    :presence => { :message => VALIDATION_ERROR_MESSAGE[:ingredience_category][:user_id] },
+    :numericality => { :only_integer => true, :greater_than => 0, :message => VALIDATION_ERROR_MESSAGE[:ingredience_category][:user_id] }
+  validates :user, :associated => { :message => VALIDATION_ERROR_MESSAGE[:ingredience_category][:user_id] }
 end

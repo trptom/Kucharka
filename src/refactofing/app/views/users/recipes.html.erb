@@ -5,7 +5,7 @@
       <legend>Napsané recepty</legend>
       <ul class="unstyled">
         <% @recipes.each do |recipe| %>
-          <li><%= link_to recipe.name, recipe_path(recipe) %> - <%= recipe.created_at  %></li>
+          <li><%= link_to recipe.name, recipe_path(recipe) %> - <%= l recipe.created_at  %></li>
         <% end %>
       </ul>
       <a class="btn spacer" href="<%= new_recipe_path %> "><i class="icon-pencil"></i> Napsat nový recept</a>
