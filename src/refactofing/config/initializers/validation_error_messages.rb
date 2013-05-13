@@ -1,6 +1,6 @@
 # coding:utf-8
 
-VALIDATION_ERROR_MESSAGE = YAML::load_file(Rails.root.join('config/validation_error_messages.yml'))
+VALIDATION_ERROR_MESSAGE = YAML::load_file(File.open(Rails.root.join('config', 'validation_error_messages.yml')))
 #
 #VALIDATION_ERROR_MESSAGE = {
 #  :article => {
