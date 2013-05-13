@@ -16,7 +16,7 @@ class Recipe < ActiveRecord::Base
 
   mount_uploader :image, RecipeImageUploader
 
-  attr_accessible :name, :annotation, :content, :level, :estimated_time, :created_at, :image, :recipeCategories, :articles, :user, :user_id
+  attr_accessible :name, :annotation, :content, :level, :estimated_time, :created_at, :image, :image_cache, :recipeCategories, :articles, :user, :user_id
 
   validates :name,
     :length => { :minimum => 3, :maximum => 50, :message => "špatná délka názvu (3-50)" }

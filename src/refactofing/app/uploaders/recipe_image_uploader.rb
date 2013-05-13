@@ -34,7 +34,7 @@ class RecipeImageUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
-#  process :convert => 'jpg'
+  process :convert => 'png'
 
   version :standard do
     process :resize_to_fit => [300, 300]

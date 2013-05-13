@@ -2,13 +2,15 @@
 
 module ApplicationHelper
   def get_icon(recipe)
-    return nil
-#    return image_tag(recipe.image_url(:standard), :alt => "Obrázek receptu")
+    return recipe.image_url(:standard) ?
+      image_tag(recipe.image_url(:standard), :alt => "Obrázek receptu") :
+      nil
   end
 
   def get_thumb_icon(recipe)
-    return image_tag (asset_path "thumb_icon.jpg", :alt => "Náhled")
-#    return image_tag(recipe.image_url(:thumb), :alt => "Náhled")
+    return recipe.image_url(:thumb) ?
+      image_tag(recipe.image_url(:thumb), :alt => "Náhled") :
+      image_tag(asset_path "thumb_icon.jpg", :alt => "Náhled")
   end
 
   def is_activated(user)
