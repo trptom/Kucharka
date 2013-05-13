@@ -65,25 +65,6 @@ var RecipeIngredience = {
         quantity: null,
         importance: null
     },
-    validateForm: function() {
-        var msg = "";
-
-        if (!RecipeIngredience.component.quantity.value.match(/^([0-9]+\.)?[0-9]+$/) ||
-                parseFloat(RecipeIngredience.component.quantity.value) <= 0) {
-            msg += "Množství musí být celé číslo > 0!\n";
-        }
-
-        if (!RecipeIngredience.component.importance.value.match(/^[0-9]+$/) ||
-                parseInt(RecipeIngredience.importance.quantity.value) <= 0) {
-            msg += "Důležitost musí být celé číslo > 0!\n";
-        }
-
-        if (msg !== "") {
-            alert(msg);
-        }
-
-        return msg === "";
-    },
     reloadList: function() {
         $.ajax({
             url: "/ingrediences.json",
@@ -147,19 +128,11 @@ var IngredienceRequest = {
         annotation: null,
         content: null
     },
-    validateForm: function() {
-        var ret = "";
-        if (IngredienceRequest.component.name.value === "") {
-            ret += "Musíte uvést název ingredience!\n";
-        }
-        if (IngredienceRequest.component.units.value === "") {
-            ret += "Musíte uvést jednotky ingredience!\n";
-        }
-
-        return (ret === "") ? true : ret;
-    },
     submit: function() {
-        var validationResult = IngredienceRequest.validateForm();
+        var validationResult = Validator.validate({
+            group: "ingredience_request_form",
+            errorsElementId: "ingredience-request-form-errors"
+        });
         if (validationResult === true) {
             $.ajax({
                 url: "/ingrediences/new_request.json",
@@ -188,8 +161,6 @@ var IngredienceRequest = {
                     alert("Požadavek na přídání ingredience se nepodeřilo odeslat (AJAX chyba)!");
                 }
             });
-        } else {
-            alert(validationResult);
         }
     },
     init: function() {
@@ -201,5 +172,67 @@ var IngredienceRequest = {
 }
 
 $(document).ready(function() {
+    setValidations();
     IngredienceRequest.init();
 });
+
+function setValidations() {
+    Validator.addValidation("new_subrecipe_url", Validator.METHOD.TEXT, {
+        minLength: 1,
+        minLengthErrorMessage: "URL musí být vyplněná"
+    }, "subrecipe_form");
+
+    Validator.addValidation("new_article_url", Validator.METHOD.TEXT, {
+        minLength: 1,
+        minLengthErrorMessage: "URL musí být vyplněná"
+    }, "article_form");
+
+    Validator.addValidation("ingredience_request_name", Validator.METHOD.TEXT, {
+        minLength: 3,
+        minLengthErrorMessage: ValidatorMessages.ingredience.name.length,
+        maxLength: 50,
+        maxLengthErrorMessage: ValidatorMessages.ingredience.name.length
+    }, "ingredience_request_form");
+    Validator.addValidation("ingredience_request_units", Validator.METHOD.TEXT, {
+        minLength: 1,
+        minLengthErrorMessage: ValidatorMessages.ingredience.units,
+        maxLength: 20,
+        maxLengthErrorMessage: ValidatorMessages.ingredience.units
+    }, "ingredience_request_form");
+    Validator.addValidation("ingredience_request_annotation", Validator.METHOD.TEXT, {
+        minLength: 50,
+        minLengthErrorMessage: ValidatorMessages.ingredience.annotation,
+        maxLength: 255,
+        maxLengthErrorMessage: ValidatorMessages.ingredience.annotation,
+        emptyAllowed: true,
+        nullAllowed: true
+    }, "ingredience_request_form");
+    Validator.addValidation("ingredience_request_content", Validator.METHOD.TEXT, {
+        minLength: 100,
+        minLengthErrorMessage: ValidatorMessages.ingredience.content,
+        emptyAllowed: true,
+        nullAllowed: true
+    }, "ingredience_request_form");
+
+    Validator.addValidation("new_ingredience_list", Validator.METHOD.INTEGER, {
+        min: 0,
+        minErrorMessage: "není vybrána žádná ingredience",
+        notANumberErrorMessage: "není vybrána žádná ingredience"
+    }, "add_ingredience_form");
+    Validator.addValidation("new_ingredience_quantity", Validator.METHOD.DECIMAL, {
+        min: 0,
+        minErrorMessage: ValidatorMessages.ingredience_recipe_connector.quantity,
+        notANumberErrorMessage: ValidatorMessages.ingredience_recipe_connector.quantity
+    }, "add_ingredience_form");
+    Validator.addValidation("new_ingredience_importance", Validator.METHOD.INTEGER, {
+        min: 0,
+        minErrorMessage: ValidatorMessages.ingredience_recipe_connector.importance,
+        notANumberErrorMessage: ValidatorMessages.ingredience_recipe_connector.importance
+    }, "add_ingredience_form");
+
+    Validator.addValidation("new_category_list", Validator.METHOD.INTEGER, {
+        min: 0,
+        minErrorMessage: "není vybrána žádná kategorie",
+        notANumberErrorMessage: "není vybrána žádná kategorie"
+    }, "add_category_form");
+}

@@ -22,8 +22,15 @@
         <br />
       </span>
     </ul>
+    <span id="subrecipe-form-errors"><!-- error hlasky pro podrecept --></span>
     <% if recipes_filter("edit", nil, @recipe) %>
-      <form action="/recipes/<%= @recipe.id.to_s %>/add_subrecipe" method="get" onsubmit="return Subrecipes.validateForm()">
+      <form action="/recipes/<%= @recipe.id.to_s %>/add_subrecipe"
+            method="get"
+            onsubmit="
+              return Validator.validate({
+                group: 'subrecipe_form',
+                errorsElementId: 'subrecipe-form-errors'
+              })">
         <input name="subrecipe" id="new_subrecipe_url" type="text" />
         <input type="submit" class="btn" value="Přidat podpostup" />
       </form>
@@ -47,9 +54,16 @@
         <span>Žádné<br /></span>
       <% end %>
     </ul>
+    <span id="article-form-errors"><!-- error hlasky pro clanek --></span>
     <% if recipes_filter("edit", nil, @recipe) %>
-      <form action="/recipes/<%= @recipe.id.to_s %>/add_connected_article" method="get">
-        <input name="article" type="text" />
+      <form action="/recipes/<%= @recipe.id.to_s %>/add_connected_article"
+            method="get"
+            onsubmit="
+              return Validator.validate({
+                group: 'article_form',
+                errorsElementId: 'article-form-errors'
+              })">
+        <input name="article" id="new_article_url" type="text" />
         <input type="submit" class="btn" value="Přidat článek" />
       </form>
     <% end %>
@@ -57,6 +71,7 @@
 
   <% if recipes_filter("edit", nil, @recipe) %>
     <div class="well">
+      <span id="ingredience-request-form-errors"><!-- error hlasky pro clanek --></span>
       <legend>Podat žádost na ingredienci</legend>
       <input id="ingredience_request_name" type="text" placeholder="Název" />
       <input id="ingredience_request_units" type="text" placeholder="Jednotky" />
@@ -106,7 +121,14 @@
       <div class="spacer">
         <% if recipes_filter("add_ingredience", nil, @recipe) %>
           <div>
-            <form action="/recipes/<%= @recipe.id %>/add_ingredience" method="GET" onsubmit="return RecipeIngredience.validateForm()">
+            <span id="add-ingredience-form-errors"><!-- error hlasky pro clanek --></span>
+            <form action="/recipes/<%= @recipe.id %>/add_ingredience"
+                  method="GET"
+                  onsubmit="
+                    return Validator.validate({
+                      group: 'add_ingredience_form',
+                      errorsElementId: 'add-ingredience-form-errors'
+                    })">
               <select name="ingredience" id="new_ingredience_list">
                 <optgroup label="Schválené" id="new_ingredience_list_accepted"></optgroup>
                 <optgroup label="Neschválené" id="new_ingredience_list_pending"></optgroup>
@@ -119,7 +141,14 @@
         <% end %>
         <% if recipes_filter("add_category", nil, @recipe) %>
           <div>
-            <form action="/recipes/<%= @recipe.id %>/add_category" method="GET">
+            <span id="add-category-form-errors"><!-- error hlasky pro clanek --></span>
+            <form action="/recipes/<%= @recipe.id %>/add_category"
+                  method="GET"
+                  onsubmit="
+                    return Validator.validate({
+                      group: 'add_category_form',
+                      errorsElementId: 'add-category-form-errors'
+                    })">
               <select name="category" id="new_category_list">
                 <% for category in RecipeCategory.order(:name).all %>
                   <option value="<%= category.id %>"><%= category.name %></option>

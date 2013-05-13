@@ -1,5 +1,9 @@
 $(document).ready(function() {
     // validace receptu
+    setValidations();
+});
+
+function setValidations() {
     Validator.addValidation("recipe_name", Validator.METHOD.TEXT, {
         minLength: 3,
         minLengthErrorMessage: ValidatorMessages.recipe.name,
@@ -30,4 +34,4 @@ $(document).ready(function() {
         minErrorMessage: ValidatorMessages.recipe.estimated_time,
         notANumberErrorMessage: ValidatorMessages.recipe.estimated_time
     }, "recipe_form");
-});
+}

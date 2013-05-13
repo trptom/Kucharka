@@ -5,13 +5,13 @@ function Validation(element, method, atts, group) {
     this.group = group;
 }
 
-Validation.prototype.validate = function() {
+Validation.prototype.validate = function(errorsElementId) {
     var value = null;
-    if (this.element.value) {
+    if (this.element.value !== undefined) {
         value = this.element.value;
-    } else if (this.element.selectedIndex) {
+    } else if (this.element.selectedIndex !== undefined) {
         value = this.element.selectedIndex.toString();
-    } else if (this.element.innerHTML) {
+    } else if (this.element.innerHTML !== undefined) {
         value = this.element.innerHTML;
     } else {
         return false;
@@ -27,7 +27,7 @@ Validation.prototype.validate = function() {
     if (result === true) {
         return true;
     } else {
-        Validator.addError(result)
+        Validator.addError(result, errorsElementId)
         return false;
     }
 }
@@ -48,32 +48,36 @@ var Validator = {
      * <li><b>showMessage</b>: pokud je true, zobrazi se alert s defaultni
      * zpravou, pokud je nastaven jiny objekt, je zobrazen alert s jeho toString
      * vysledkem.</li>
+     * <li><b>errorsElementId</b>: id elementu, do ktereho se pridavaji chybove
+     * hlasky. Je posilano jako parametr metody addError/clearErrors.</li>
      * </ul>
      * @return {Boolean} true, pokud byla validace uspecna (zadny z validatoru
      * nehlasi chybu), jinak false.
      */
     validate: function(atts) {
         atts = atts ? atts : {};
-        Validator.clearErrors();
+        Validator.clearErrors(atts.errorsElementId);
         var returnValue = true;
         for (var index in Validator.validations) {
             if (!atts.group || Validator.validations[index].group === atts.group) {
-                if (!Validator.validations[index].validate()) {
+                if (!Validator.validations[index].validate(atts.errorsElementId)) {
                     returnValue = false;
                 }
             }
         }
         if (!returnValue && atts.showMessage) {
-            alert(atts.showMessage == true ? Validator.DEFAULT_ERROR_MESSAGE : atts.showMessage);
+            alert(atts.showMessage === true ? Validator.DEFAULT_ERROR_MESSAGE : atts.showMessage);
         }
         return returnValue;
     },
     /**
      * Vymaze vsechny potomky DIV elementu, ktery ma obsahovat chybove hlaseni.
      * To v praxi znamena, ze ze stranky zmizi vsechny predchozi chybove hlasky.
+     * @param {String} errorsElementId id elementu, ktery ma byt vycisten.
+     * Pokud je null nebo neni uvedeno, cisti se defaultni.
      */
-    clearErrors: function() {
-        var errors = document.getElementById(Validator.ERRORS_DIV_ID);
+    clearErrors: function(errorsElementId) {
+        var errors = document.getElementById(errorsElementId ? errorsElementId : Validator.ERRORS_DIV_ID);
         if (errors) {
             while (errors.childNodes.length > 0) {
                 errors.removeChild(errors.firstChild);
@@ -86,11 +90,13 @@ var Validator = {
      * @param {Object|Array} lines obsah chybove hlasky. Muye byt pole nebo
      * objekt. Objekt je preveden na jednoprvkove pole. Vsechny polozky pole
      * jsou pak zobrazeny jako jednotlive radky.
+     * @param {String} errorsElementId id elementu, kam ma byt chyba pridana.
+     * Pokud je null nebo neni uvedeno, pridava se do defaultniho.
      * @return {Boolean} true, pokud byla chybova hlaska uspesne pridana, jinak
      * false.
      */
-    addError: function(lines) {
-        var errors = document.getElementById(Validator.ERRORS_DIV_ID);
+    addError: function(lines, errorsElementId) {
+        var errors = document.getElementById(errorsElementId ? errorsElementId : Validator.ERRORS_DIV_ID);
         if (errors) {
             var newElem = document.createElement("div");
             newElem.className = "alert alert-error";
@@ -208,14 +214,20 @@ var Validator = {
             var errors = [];
             if ($.isNumeric(value)) {
                 value = parseFloat(value);
-                if (atts.min && value < atts.min) {
-                    errors[errors.length] = (atts.name ? atts.name : value) + " není číslo >= " + atts.min;
+                if ($.isNumeric(atts.min) && value < atts.min) {
+                    errors[errors.length] = atts.minErrorMessage ?
+                            atts.minErrorMessage :
+                            (value + " není číslo >= " + atts.min);
                 }
-                if (atts.min && value < atts.min) {
-                    errors[errors.length] = (atts.name ? atts.name : value) + " není číslo >= " + atts.min;
+                if ($.isNumeric(atts.max) && value > atts.max) {
+                    errors[errors.length] = atts.minErrorMessage ?
+                            atts.maxErrorMessage :
+                            (value + " není číslo <= " + atts.max);
                 }
             } else {
-                errors[errors.length] = (atts.name ? atts.name : value) + " není číslo";
+                errors[errors.length] = atts.notANumberErrorMessage ?
+                        atts.notANumberErrorMessage :
+                        (value + " není číslo");
             }
 
             return errors.length > 0 ? errors : true;

@@ -1,7 +1,9 @@
+<script type="text/javascript" src="<%= asset_path "pages/comments_form.js" %>"></script>
 <% if comments_filter 'create', nil, nil %>
-  <%= form_for(@comment) do |f| %>
+  <%= form_for(@comment, :html => { :onsubmit => "return Validator.validate({ group: 'new_comment_form', errorsElementId: 'new-comment-errors'})" }) do |f| %>
     <%= render "layouts/errors" %>
     <div class="spacer">
+      <span id="new-comment-errors"><!-- error hlasky pro clanek --></span>
       <h4>Napsat komentář</h4>
       <%= f.hidden_field :recipe_id %>
       <%= f.hidden_field :article_id %>
