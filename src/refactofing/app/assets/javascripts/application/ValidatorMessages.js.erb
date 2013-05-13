@@ -1,4 +1,5 @@
 <%# coding:utf-8 %>
+<% VALIDATION_ERROR_MESSAGE = YAML::load_file(Rails.root.join('config/validation_error_messages.yml')) %>
 var ValidatorMessages = {
   <% VALIDATION_ERROR_MESSAGE.each_pair do |controller_key, controller_value| %>
     <%= controller_key %>: {
