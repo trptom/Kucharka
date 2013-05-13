@@ -48,7 +48,7 @@ class IngrediencesFlowTest < ActionDispatch::IntegrationTest
     assert_equal "/ingrediences", current_path
 
     visit "/ingrediences.json"
-    assert_equal "/ingrediences", current_path
+    assert_equal "/ingrediences.json", current_path
 
     visit edit_ingredience_path(ingrediences(:one))
     assert_equal "/home/error", current_path
