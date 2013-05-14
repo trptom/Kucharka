@@ -99,6 +99,10 @@ module PermissionsHelper
       has_access = ingredience_categories_filter(params[:action], params, nil)
     end
 
+    if params[:controller] == "logs"
+      has_access = is_admin(current_user) 
+    end
+
     if (!has_access)
       redirect_to "/home/error", notice: "Stránka neexistuje, nebo byl přístup na požadovanou stránku odepřen!"
     end
@@ -123,8 +127,13 @@ module PermissionsHelper
     end
 
     if action == "create" || action == "new"
-      # musi mit vytvareni a vzdycky vytvari ciziho
-      return has_permission(nil, ROLE['users']['create'])
+      if (current_user)
+        # musi mit vytvareni a vzdycky vytvari ciziho
+        return has_permission(nil, ROLE['users']['create'])
+      else
+        # registrace je mozna vzdy
+        return true;
+      end
     end
 
     if action == "index"

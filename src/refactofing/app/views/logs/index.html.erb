@@ -1,0 +1,11 @@
+<div class="span8 offset2 well">
+  <% for file in @files %>
+    <div class="span8 offset2 well">
+      <%= file %>
+      <div class="btn-group pull-right">
+        <%= link_to "Zobrazit", { :controller => "logs", :action => "show", :file => file }, :class => "btn" %>
+        <%= link_to "Stáhnout", { :controller => "logs", :action => "detail", :file => file }, :class => "btn" %>
+      </div>
+    </div>
+  <% end %>
+</div>

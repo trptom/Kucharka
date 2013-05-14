@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update_attributes(params[:user])
-      redirect_to @user, notice: 'User was successfully updated.'
+      redirect_to @user, notice: 'Uživatel byl úspěšně upraven.'
     else
       @errors = @user.errors
       render action: "edit"
@@ -83,7 +83,7 @@ class UsersController < ApplicationController
       @user.activate!
       UserMailer.activation_success_email(@user).deliver
       # presmeruju na seznam uzivatelu, pokud neni zdrojem aktivace email
-      redirect_to(params[:src] == "email" ? "/home/success" : "/users", :notice => 'User was successfully activated.')
+      redirect_to(params[:src] == "email" ? "/home/success" : "/users", :notice => 'Uživatel byl úspěšně aktivován.')
     else
       not_authenticated
     end

@@ -14,5 +14,6 @@ cs:
   time:
     formats:
       default: "%d.%m.%Y, %H:%M"
+      long: "%d.%m.%Y, %H:%M:%S"
 
   hello: "Ahoj světe"

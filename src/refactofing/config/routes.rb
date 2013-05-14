@@ -1,4 +1,8 @@
 CookBook::Application.routes.draw do
+  get "logs/index"
+  get "logs/show"
+  get "logs/detail"
+
   # resources
 
   resources :password_resets
