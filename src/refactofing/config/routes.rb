@@ -77,6 +77,8 @@ CookBook::Application.routes.draw do
   match 'fridge' => 'recipes#fridge'
   match 'filter' => 'recipes#filter'
   match 'search' => 'home#search'
+  
+  match 'logs' => 'logs#index'
 
   # ROOT
   root :to => 'home#index'

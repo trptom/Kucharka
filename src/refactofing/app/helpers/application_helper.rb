@@ -19,12 +19,12 @@ module ApplicationHelper
 
   def is_admin(user)
     if user.kind_of? User
-      return current_user.id == user.id
+      return user.username == "admin"
     end
     if user.kind_of? String
-      return current_user.id == user.to_i
+      return User.find(user.to_i).username == "admin"
     end
-    return user <= 1
+    return User.find(user).username == "admin"
   end
 
   def is_current_user(user)
@@ -64,7 +64,8 @@ module ApplicationHelper
         show_list_marks ||
         show_list_ingrediences ||
         show_list_recipe_categories ||
-        show_list_ingredience_categories
+        show_list_ingredience_categories ||
+        show_list_logs
   end
 
   def show_list_users
@@ -84,6 +85,10 @@ module ApplicationHelper
 
   def show_list_ingredience_categories
     return ingredience_categories_filter("index", nil, nil)
+  end
+
+  def show_list_logs
+    return logs_filter("index", nil)
   end
 
   ##############################################################################

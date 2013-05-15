@@ -100,7 +100,7 @@ module PermissionsHelper
     end
 
     if params[:controller] == "logs"
-      has_access = is_admin(current_user) 
+      has_access = logs_filter(params[:action], params)
     end
 
     if (!has_access)
@@ -477,5 +477,9 @@ module PermissionsHelper
     end
 
     return true;
+  end
+
+  def logs_filter(action, p)
+    return is_admin(current_user)
   end
 end

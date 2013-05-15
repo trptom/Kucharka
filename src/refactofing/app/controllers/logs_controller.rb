@@ -3,6 +3,7 @@ class LogsController < ApplicationController
 
   def index
     @files = Array.new
+#    @files << Rails.env + ".log"
     LOGGER.each_pair do |key, value|
       @files << (Rails.env + "_" + key.to_s + ".log")
     end
