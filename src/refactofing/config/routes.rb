@@ -11,7 +11,6 @@ CookBook::Application.routes.draw do
   resources :ingredience_categories
   resources :recipe_categories
   resources :comments
-  resources :marks
 
   resources :users do
     member do
@@ -66,6 +65,11 @@ CookBook::Application.routes.draw do
   get "user_sessions/create"
   get "user_sessions/destroy"
 
+  # marks
+  get "marks/create"
+  get "marks/index"
+  get "marks/destroy"
+
   #mapping
   match 'login' => 'user_sessions#create', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
@@ -79,6 +83,8 @@ CookBook::Application.routes.draw do
   match 'search' => 'home#search'
   
   match 'logs' => 'logs#index'
+
+  match 'marks' => 'marks#index'
 
   # ROOT
   root :to => 'home#index'

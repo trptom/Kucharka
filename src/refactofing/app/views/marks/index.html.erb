@@ -16,7 +16,7 @@
         <td><%= link_to mark.recipe.name, mark.recipe %></td>
         <td><%= mark.value %></td>
         <td>
-          <%= link_to 'Smazat', 'marks/destroy?id='+mark.id.to_s, method: :delete, data: { confirm: 'Jste si jistý(á)?' } %>
+          <%= link_to 'Smazat', 'marks/destroy?id='+mark.id.to_s, data: { confirm: 'Jste si jistý(á)?' }, :class => "btn" %>
         </td>
       </tr>
     <% end %>
