@@ -1,4 +1,6 @@
-<%= form_for(@ingredience_category) do |f| %>
+<script type="text/javascript" src="<%= asset_path "pages/ingredience_categories_form.js" %>"></script>
+
+<%= form_for(@ingredience_category, :html => { :onsubmit => "return Validator.validate({ group: \"ingredience_category_form\", showMessage: true })" }) do |f| %>
   <%= render "layouts/errors" %>
 
   <label>Název</label>

@@ -3,10 +3,6 @@
 class UserSessionsController < ApplicationController
   before_filter :require_login, :only => [:destroy]
 
-  def new
-    @user = User.new
-  end
-
   def create
     respond_to do |format|
       if params[:username] && params[:password] &&

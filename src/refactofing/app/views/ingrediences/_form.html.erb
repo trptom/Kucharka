@@ -1,4 +1,6 @@
-<%= form_for(@ingredience) do |f| %>
+<script type="text/javascript" src="<%= asset_path "pages/ingrediences_form.js" %>"></script>
+
+<%= form_for(@ingredience, :html => { :onsubmit => "return Validator.validate({ group: \"ingredience_form\", showMessage: true })" }) do |f| %>
   <%= render "layouts/errors" %>
 
   <div class="row-fluid spacer">
