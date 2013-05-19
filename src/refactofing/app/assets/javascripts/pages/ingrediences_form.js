@@ -20,7 +20,9 @@ function setValidations() {
     }, "ingredience_form");
     Validator.addValidation("ingredience_content", Validator.METHOD.TEXT, {
         minLength: 100,
-        minLengthErrorMessage: ValidatorMessages.ingredience.content
+        minLengthErrorMessage: ValidatorMessages.ingredience.content,
+        nullAllowed: true,
+        emptyAllowed: true
     }, "ingredience_form");
     Validator.addValidation("ingredience_avaliability", Validator.METHOD.INTEGER, {
         min: 1,

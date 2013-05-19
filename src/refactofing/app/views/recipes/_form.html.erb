@@ -3,7 +3,7 @@
 <div class="span8 offset2">
   <div class="well">
     <h2><%= @title %></h2>
-    <%= form_for(@recipe, :html => { :onsubmit => "return Validator.validate({ group: \"recipe_form\", showMessage: true })" }) do |f| %>
+    <%= form_for(@recipe, :html => { :onsubmit => "return Validator.validate({ group: \"recipe_form\", showMessage: false })" }) do |f| %>
       <%= render "layouts/errors" %>
 
       <h4>Název</h4>
