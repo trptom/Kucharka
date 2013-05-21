@@ -25,9 +25,10 @@
           <%= f.text_field :second_name %>
           <label>Věk</label>
           <%= f.number_field :age, :min => 1, :max => 100 %>
-          <%= f.submit "Registrovat", :class => "btn btn-large spacer btn-primary" %>
-          <%#*<a class="btn btn-large spacer btn-primary" href="#">Registrovat</a>%>
         </div>
+      </div>
+      <div class="row-fluid spacer">
+        <%= f.submit "Registrovat", :class => "btn btn-large spacer btn-primary" %>
       </div>
     <% end %>
   </div>
