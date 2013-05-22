@@ -23,7 +23,7 @@ FridgeExtendedFilterComponent.prototype.init = function(id, units, quantity, nam
     this.deleteButton.value = "Odstranit";
 
     this.component = document.createElement("div");
-    this.component.className = "fridge-ingredience-line";
+    this.component.className = "fridge-ingredience-line row-fluid";
 
     this.component.appendChild(this.input);
     this.component.appendChild(this.detailSpan);
